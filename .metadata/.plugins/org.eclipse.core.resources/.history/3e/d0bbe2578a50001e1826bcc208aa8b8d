@@ -1,0 +1,78 @@
+#include "7X_dma.h"
+
+int XAxiDma1_tx_rx(u16 DeviceId)
+{
+		XAxiDma_Config *CfgPtr;
+		int Status;
+		int value = 0;
+		int Index;
+		u64 *TxBufferPtr1;
+		u64 *RxBufferPtr1;
+		TxBufferPtr1 = (u64 *)TX_BUFFER_BASE1;
+		RxBufferPtr1 = (u64 *)RX_BUFFER_BASE1;
+		/* Initialize the XAxiDma device.
+		 */
+		CfgPtr = XAxiDma_LookupConfig(DeviceId);
+		if (!CfgPtr) {
+			xil_printf("No config found for %d\r\n", DeviceId);
+			return XST_FAILURE;
+		}
+
+		Status = XAxiDma_CfgInitialize(&AxiDma1, CfgPtr);
+		if (Status != XST_SUCCESS) {
+			xil_printf("Initialization failed %d\r\n", Status);
+			return XST_FAILURE;
+		}
+
+		if(XAxiDma_HasSg(&AxiDma1)){
+			xil_printf("Device configured as SG mode \r\n");
+			return XST_FAILURE;
+		}
+
+		Status = SetupIntrSystem(&Intc1, &AxiDma1, TX_INTR_ID, RX_INTR_ID);
+		if (Status != XST_SUCCESS) {
+			xil_printf("Failed intr setup\r\n");
+			return XST_FAILURE;
+		}
+
+		/* Disable interrupts, we use polling mode
+		 */
+		XAxiDma_IntrDisable(&AxiDma1, XAXIDMA_IRQ_ALL_MASK,
+							XAXIDMA_DEVICE_TO_DMA);
+		XAxiDma_IntrDisable(&AxiDma1, XAXIDMA_IRQ_ALL_MASK,
+							XAXIDMA_DMA_TO_DEVICE);
+
+
+		for(Index = 0; Index < 259; Index ++)
+		{
+			   TxBufferPtr1[Index]=(u64)0;
+			   TxBufferPtr1[Index]|=value++;
+		 }
+
+			   TxBufferPtr1[259]=0x123456783C3CBCBA;
+			   TxBufferPtr1[260]=0x000000103C3CBCBB;
+			   TxBufferPtr1[261]=0x000200003C3CBCBC;
+		/* Flush the SrcBuffer before the DMA transfer, in case the Data Cache
+		 * is enabled
+		 */
+			Xil_DCacheFlushRange((UINTPTR)TxBufferPtr1, MAX_PKT_LEN);
+		#ifdef __aarch64__
+			Xil_DCacheFlushRange((UINTPTR)RxBufferPtr, MAX_PKT_LEN);
+		#endif
+
+	//	for(Index = 0; Index < Tries; Index ++) {
+			Status = XAxiDma_SimpleTransfer(&AxiDma1,(UINTPTR) RxBufferPtr1,
+					2096, XAXIDMA_DEVICE_TO_DMA);
+
+			if (Status != XST_SUCCESS) {
+				return XST_FAILURE;
+			}
+
+			Status = XAxiDma_SimpleTransfer(&AxiDma1,(UINTPTR) TxBufferPtr1,
+					2096, XAXIDMA_DMA_TO_DEVICE);
+
+			if (Status != XST_SUCCESS) {
+				return XST_FAILURE;
+			}
+		return XST_SUCCESS;
+}

@@ -1,0 +1,310 @@
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "simple_dma.h"
+#include "cmd.h"
+
+#include "nhc_amba.h"
+#include "mem_test.h"
+#include "uart_get.h"
+#include "xllfifo_drv.h"
+#include "xstatus.h"
+
+#include "fat/ff.h"		/* Declarations of FatFs API */
+#include "fat/diskio.h"		/* Declarations of device I/O functions */
+#include "fat/ffconf.h"
+#include <wchar.h>
+/************2023.9.11 加**************/
+#include "7X_dma.h"
+#include "xparameters.h"
+
+/**********************FIFO有关参数设置*************************/
+u32 DestinationBuffer[MAX_DATA_BUFFER_SIZE * WORD_SIZE];
+u32 DestinationBuffer_1[MAX_DATA_BUFFER_SIZE * WORD_SIZE];
+/************************************************************/
+
+/**********************NVME控制器参数设置*************************/
+uint8_t   init_done = 0x0;
+uint32_t  freq_MHz = 250;
+uint32_t  timeout_sec;
+/************************************************************/
+
+/********************文件系统格式化与挂载有关参数*******************/
+static BYTE Buff[4096];  //与格式化空间大小有关
+FATFS fs;
+FIL fnew,fnew1;
+FRESULT fr;
+FILINFO fno;
+/************************************************************/
+
+/********************读盘存盘数据参数*******************/
+uint32_t  buff,buff_r;
+uint32_t  packnum;        // lyh 2023.8.28
+uint64_t  slba,slba_r;
+uint32_t  len;
+uint64_t  suba_r;
+uint32_t  recv_cmd_ack;
+uint64_t  write_slba = 0;
+int read_flag=0;
+uint32_t rw_count=0,r_count=0;
+/**************************************************/
+
+int Status;
+char input_string[10];
+uint fnum;
+BYTE WriteBuffer[4096];
+void DiskInit(void);
+int main()
+{
+	int ret;
+	init_platform();
+    xil_printf("UCAS Prj1079 \r\n");
+
+//  Status = XAxiDma1_tx_rx(XPAR_AXIDMA_1_DEVICE_ID);
+//	if (Status != XST_SUCCESS) {
+//			xil_printf("XAxiDma1 Failed\r\n");
+//			return XST_FAILURE;
+//	}
+
+    DiskInit();
+    SimpleDmaInit();
+	MsgQueryInit();
+	XLLFIFO_SysInit();      // 7x 读盘存盘fifo
+
+    #if 0//format the filesysterm
+    	ret = f_mkfs(
+    		" ",	/* Logical drive number */
+			0,			/* Format option  FM_EXFAT*/
+			Buff,			/* Pointer to working buffer (null: use heap memory) */
+			sizeof Buff			/* Size of working buffer [byte] */
+    		);
+    	if (ret != FR_OK) {
+    		xil_printf("f_mkfs  Failed! ret=%d\n", ret);
+    		return 0;
+    		}
+	#endif //format the filesysterm
+
+	/*** mount filesysterm ***/
+	ret = f_mount (&fs, " ", 1);
+	if (ret != FR_OK) {
+    xil_printf("f_mount  Failed! ret=%d\n", ret);
+		return 0;
+	}
+    xil_printf(" Init All ok!\r\n");
+
+#if 1 //recv
+    while(1)
+    {
+    	GetMessage(&CurMsg);
+
+    	switch(CurMsg.HandType)
+    			{
+    				case 0XA2:
+    					xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+    					switch( CurMsg.HandId)
+    					{
+    						case 0x1:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a201(&CurMsg);
+    						break;
+    						case 0x2:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a202(&CurMsg);
+    						break;
+    						case 0x4:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a204(&CurMsg);
+    						break;
+    						case 0x5:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a205(&CurMsg);
+    						break;
+    						default:
+    						break;
+    					}
+    					break;
+    				case 0XB2:
+    					xil_printf("%s %d  CurMsg.HandType:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType);
+    					run_cmd_b201(&CurMsg);
+    					break;
+    				case 0XD2:
+    					xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+    					switch( CurMsg.HandId)
+    					{
+    						case 0x1:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_d201(&CurMsg);
+    						break;
+//    						case 0x2:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d202(&CurMsg);
+//    						break;
+//    						case 0x3:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d203(&CurMsg);
+//    						break;
+    						case 0x4:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_d204(&CurMsg);
+    						break;
+//    						case 0x5:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d205(&CurMsg);
+//    						break;
+//    						case 0x6:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d206(&CurMsg);
+//    						break;
+    						case 0x7:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_reply_d207(&CurMsg);
+    						break;
+    						case 0x8:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_reply_d208(&CurMsg);
+    						break;
+    						default:
+    						break;
+    					}
+    					break;
+
+    				default:
+    					break;
+    			}
+
+//			ret = f_mount (NULL, "", 1);
+//			if (ret != FR_OK)
+//			{
+//				xil_printf("f_mount  Failed! ret=%d\n", ret);
+//				return 0;
+//			}
+    }
+#endif  //recv
+
+
+
+
+
+#if 0  //fs test
+
+	#if 1//format the filesysterm
+    	ret = f_mkfs(
+    		" ",	/* Logical drive number */
+			0,			/* Format option  FM_EXFAT*/
+			Buff,			/* Pointer to working buffer (null: use heap memory) */
+			sizeof Buff			/* Size of working buffer [byte] */
+    		);
+    	if (ret != FR_OK) {
+    		xil_printf("f_mkfs  Failed! ret=%d\n", ret);
+    		return 0;
+    		}
+	#endif//format the filesysterm
+
+	#if 1    //f_mount the filesysterm
+    	ret = f_mount (
+   		&fs,			/* Pointer to the filesystem object (NULL:unmount)*/
+		" ",	/* Logical drive number to be mounted/unmounted */
+   		1			/* Mode option 0:Do not mount (delayed mount), 1:Mount immediately */
+    	);
+    	if (ret != FR_OK) {
+	    xil_printf("f_mount  Failed! ret=%d\n", ret);
+   		return 0;
+    	}
+    	xil_printf("f_mount  ok!......\n");
+	#endif   //f_mount the filesysterm
+
+	#if 1  //f_mkdir
+	ret =f_mkdir("payload");
+	   if (ret != FR_OK) {
+	    xil_printf("f_mkdir  Failed! ret=%d\n", ret);
+   		return -1;
+	   }
+	   xil_printf("f_mkdir ok!....... ");
+	#endif//f_mkdir
+
+	#if 1   //f_open&write
+	   ret =f_open(&fnew, "payload/wfeng.txt", FA_CREATE_ALWAYS | FA_WRITE );
+	   if (ret != FR_OK) {
+	    xil_printf("f_open  Failed! ret=%d\n", ret);
+   		return -1;
+	   }
+	   xil_printf("f_open ok!..........\n");
+	   
+	   xil_printf("START f_WRITE 10MB DATA!.........\n");
+	   memset((BYTE *)(0x80000000),7,1048576*10);
+	   ret =f_write(&fnew,(BYTE *)(0x80000000),1048576*10,&fnum);
+	   if (ret != FR_OK) {
+	    xil_printf("f_write  Failed! ret=%d\n", ret);
+   		return -1;
+	   }
+	   xil_printf("END f_write 10MB DATA!,fnum = %d",fnum);
+
+	    f_close(&fnew);
+	#endif //f_open&write
+
+#endif  //fs test
+
+    cleanup_platform();
+    return 0;
+}
+
+void DiskInit()
+{
+	uint8_t   i;
+	//xil_printf("Configure Timeout Value in second (HEX-0x?): \0");
+	//mygets(input_string);
+	//timeout_sec = strtoul(input_string, NULL, 0);
+	timeout_sec = 1;
+    xil_printf("NVMe Host IP Core Initialization Starts....\r\n");
+
+    for(i=0;i<NHC_NUM;i++)
+    {
+		if(nhc_init(i,timeout_sec, freq_MHz) == 0x1) // 250MHz
+		{
+			xil_printf("NVMe Host IP Core #%1d Initialization Completes.\r\n",i);
+		}
+		else
+		{
+			xil_printf("NVMe Host IP Core #%1d Initialization Failed!\r\n",i);
+		}
+    }
+    // ---------------------------------------------------------------------------
+    // NHC Queue Configuration: 64-nodes depth and User mode
+    // ---------------------------------------------------------------------------
+    xil_printf("User Command Queue Configuration Starts....\r\n");
+    for(i=0;i<NHC_NUM;i++)
+    {
+		if(nhc_queue_init(i,63, 0) == 0x1)
+		{
+			xil_printf("Core #%1d User Command Queue Configuration Completes.\r\n",i);
+		}
+		else
+		{
+			xil_printf("Core #%1d User Command Queue Configuration Failed!\r\n",i);
+		}
+    }
+    // ---------------------------------------------------------------------------
+    // NHC Startup
+    // ---------------------------------------------------------------------------
+    xil_printf("NHC Startup Starts(Identification, I/O Queue, ...)....\r\n");
+    for(i=0;i<NHC_NUM;i++)
+    {
+		if(adm_startup(i) == 0x2)
+		{
+			xil_printf("NHC%1d Startup Completes.\r\n",i);
+		}
+		else
+		{
+			xil_printf("NHC%1d Startup Failed!\r\n",i);
+		}
+    }
+
+    init_done = 0xFF;
+    for(i=0;i<NHC_NUM;i++)
+    {
+    	io_monitor_enable(i);
+    }
+
+}
+

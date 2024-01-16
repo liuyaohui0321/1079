@@ -1,0 +1,6 @@
+1689141653603	Delete resource 'dmauart_bsp_xtmrctr_selftest_example_1'
+1689141660147	Delete resource 'dmauart_bsp_xtmrctr_polled_example_1'
+1689141665175	Delete resource 'dmauart_bsp_xtmrctr_low_level_example_1'
+1689144106301	Delete resource 'dmauart/src/timer.c'
+1689144112383	Delete resource 'dmauart/src/timer.h'
+1689144611761	Delete resource 'dmauart_bsp_xtmrctr_fast_intr_example_1'

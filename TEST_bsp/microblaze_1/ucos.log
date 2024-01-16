@@ -1,0 +1,9 @@
+TRACE   - Generating ucos_axiuartlite.
+TRACE   - ucos_get_intr_src: Finding interrupt source for peripheral axi_uartlite_0.
+TRACE   - ucos_get_intr_src: Found int driver axi_intc_0.
+INFO    - ucos_get_intr_src: Interrupt controller for peripheral axi_uartlite_0 : axi_intc_0.
+INFO    - ucos_get_intr_src: Interrupt source for peripheral axi_uartlite_0 : 1.
+TRACE   - ucos_get_intr_src: Finding interrupt source for peripheral mdm_0.
+TRACE   - ucos_get_intr_src: Found int driver axi_intc_0.
+INFO    - ucos_get_intr_src: Interrupt source for peripheral mdm_0 : -1.
+INFO    - ucos_get_intr_src: Interrupt source for peripheral mdm_0 not found

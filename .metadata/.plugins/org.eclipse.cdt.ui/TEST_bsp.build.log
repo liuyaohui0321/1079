@@ -1,0 +1,80 @@
+12:36:53 **** Build of project TEST_bsp ****
+make -k all 
+"Running Make include in microblaze_1/libsrc/axidma_v9_9/src"
+make -C microblaze_1/libsrc/axidma_v9_9/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/bram_v4_3/src"
+make -C microblaze_1/libsrc/bram_v4_3/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/cpu_v2_9/src"
+make -C microblaze_1/libsrc/cpu_v2_9/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/intc_v3_9/src"
+make -C microblaze_1/libsrc/intc_v3_9/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/llfifo_v5_3/src"
+make -C microblaze_1/libsrc/llfifo_v5_3/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/spi_v4_4/src"
+make -C microblaze_1/libsrc/spi_v4_4/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/standalone_v7_0/src"
+make -C microblaze_1/libsrc/standalone_v7_0/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/tmrctr_v4_5/src"
+make -C microblaze_1/libsrc/tmrctr_v4_5/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make include in microblaze_1/libsrc/ucos_axiuartlite_v1_45/src"
+make -C microblaze_1/libsrc/ucos_axiuartlite_v1_45/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Running Make libs in microblaze_1/libsrc/axidma_v9_9/src"
+make -C microblaze_1/libsrc/axidma_v9_9/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling axidma"
+mb-ar: creating ../../../lib/libxil.a
+"Running Make libs in microblaze_1/libsrc/bram_v4_3/src"
+make -C microblaze_1/libsrc/bram_v4_3/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling bram"
+"Running Make libs in microblaze_1/libsrc/cpu_v2_9/src"
+make -C microblaze_1/libsrc/cpu_v2_9/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling cpu"
+"Running Make libs in microblaze_1/libsrc/intc_v3_9/src"
+make -C microblaze_1/libsrc/intc_v3_9/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling intc"
+"Running Make libs in microblaze_1/libsrc/llfifo_v5_3/src"
+make -C microblaze_1/libsrc/llfifo_v5_3/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling llfifo"
+"Running Make libs in microblaze_1/libsrc/spi_v4_4/src"
+make -C microblaze_1/libsrc/spi_v4_4/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling spi"
+"Running Make libs in microblaze_1/libsrc/standalone_v7_0/src"
+make -C microblaze_1/libsrc/standalone_v7_0/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling standalone";
+In file included from inbyte.c:2:
+../../../include/ucos_axiuartlite.h:44:10: fatal error: lib_def.h: No such file or directory
+ #include <lib_def.h>
+          ^~~~~~~~~~~
+compilation terminated.
+In file included from outbyte.c:2:
+../../../include/ucos_axiuartlite.h:44:10: fatal error: lib_def.h: No such file or directory
+ #include <lib_def.h>
+          ^~~~~~~~~~~
+compilation terminated.
+microblaze_sleep.c:77:9: note: #pragma message: For the sleep routines, assembly instructions are used
+ #pragma message ("For the sleep routines, assembly instructions are used")
+         ^~~~~~~
+make[1]: *** [Makefile:58: standalone_libs] Error 1
+make[1]: Target 'libs' not remade because of errors.
+make: *** [Makefile:30: microblaze_1/libsrc/standalone_v7_0/src/make.libs] Error 2
+"Running Make libs in microblaze_1/libsrc/tmrctr_v4_5/src"
+make -C microblaze_1/libsrc/tmrctr_v4_5/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling tmrctr"
+"Running Make libs in microblaze_1/libsrc/ucos_axiuartlite_v1_45/src"
+make -C microblaze_1/libsrc/ucos_axiuartlite_v1_45/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra"
+"Compiling ucos_axiuartlite"
+ucos_axiuartlite_g.c:37:10: fatal error: ucos_bsp.h: No such file or directory
+ #include <ucos_bsp.h>
+          ^~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [Makefile:47: ucos_axiuartlite_g.o] Error 1
+ucos_axiuartlite.c:41:10: fatal error: ucos_bsp.h: No such file or directory
+ #include <ucos_bsp.h>
+          ^~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [Makefile:47: ucos_axiuartlite.o] Error 1
+make[1]: Target 'libs' not remade because of errors.
+make: *** [Makefile:30: microblaze_1/libsrc/ucos_axiuartlite_v1_45/src/make.libs] Error 2
+make: Target 'all' not remade because of errors.
+
+12:36:58 Build Finished (took 4s.853ms)
+

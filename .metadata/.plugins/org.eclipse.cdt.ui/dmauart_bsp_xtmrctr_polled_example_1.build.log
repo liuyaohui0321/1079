@@ -1,0 +1,21 @@
+13:46:26 **** Build of configuration Debug for project dmauart_bsp_xtmrctr_polled_example_1 ****
+make all 
+'Building file: ../src/xtmrctr_polled_example.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xtmrctr_polled_example.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/xtmrctr_polled_example.d" -MT"src/xtmrctr_polled_example.o" -o "src/xtmrctr_polled_example.o" "../src/xtmrctr_polled_example.c"
+'Finished building: ../src/xtmrctr_polled_example.c'
+' '
+'Building target: dmauart_bsp_xtmrctr_polled_example_1.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../dmauart_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "dmauart_bsp_xtmrctr_polled_example_1.elf"  ./src/xtmrctr_polled_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: dmauart_bsp_xtmrctr_polled_example_1.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size dmauart_bsp_xtmrctr_polled_example_1.elf  |tee "dmauart_bsp_xtmrctr_polled_example_1.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  10328	    728	   3160	  14216	   3788	dmauart_bsp_xtmrctr_polled_example_1.elf
+'Finished building: dmauart_bsp_xtmrctr_polled_example_1.elf.size'
+' '
+
+13:46:29 Build Finished (took 2s.952ms)
+

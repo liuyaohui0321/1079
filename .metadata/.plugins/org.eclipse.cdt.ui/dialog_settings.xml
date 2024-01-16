@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="Default C header template" key="LastUsedHeaderTemplate"/>
+	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
+		<item value="594" key="DIALOG_WIDTH"/>
+		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
+		<item value="684" key="DIALOG_HEIGHT"/>
+		<item value="674" key="DIALOG_X_ORIGIN"/>
+		<item value="65" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
+		<item value="306" key="size.height"/>
+		<item value="1120" key="size.width"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+	<section name="PDOMSearchPage">
+		<item value="false" key="caseSensitive"/>
+		<item value="227191" key="searchFlags"/>
+		<list key="previousPatterns">
+			<item value="uint16"/>
+			<item value="Nose"/>
+			<item value="BOOL"/>
+			<item value="f_size"/>
+			<item value="fsize"/>
+			<item value="BS_JmpBoot"/>
+			<item value="BPB"/>
+			<item value="RTC"/>
+			<item value="STDOUT_IS_16550"/>
+			<item value="CheckCode"/>
+			<item value="_dna"/>
+			<item value="dna"/>
+			<item value="get_fattime"/>
+			<item value="XPAR_AXIDMA_0_DEVICE_ID"/>
+			<item value="FR_OK"/>
+			<item value="XScuTimer_LookupConfig"/>
+			<item value="f_mkfs"/>
+			<item value="XAxiDma_ConfigXAxiDma_ConfigTable"/>
+			<item value="f_open"/>
+			<item value="disk_write"/>
+			<item value="XPAR_AXI_DMA_1_DEVICE_ID"/>
+			<item value="FR_NO_FILESYSTEM"/>
+			<item value="EB7690"/>
+			<item value="FM_EXFAT"/>
+			<item value="check_fs"/>
+			<item value="A0001000"/>
+			<item value="0xA0001000"/>
+			<item value="FF_USE_MKFS"/>
+			<item value="FatFsFF_VOLUMES"/>
+			<item value="FatFs"/>
+			<item value="FM_FAT"/>
+			<item value="disk_ioctl"/>
+			<item value="io_read"/>
+			<item value="SECTORSIZE"/>
+			<item value="_MAX_SS"/>
+			<item value="FIL"/>
+			<item value="FF_MIN_SS"/>
+			<item value="fat"/>
+			<item value="XLlFifo_ConfigTable"/>
+			<item value="XAxiDma_ConfigTable"/>
+			<item value="XIntc_VectorTableEntry"/>
+			<item value="XPAR_MIG7SERIES_0_BASEADDR"/>
+			<item value="RX_BUFFER_HIGH"/>
+			<item value="XPAR_AXIDMA_1_DEVICE_ID"/>
+			<item value="XPAR_INTC_0_DEVICE_ID"/>
+			<item value="fori"/>
+			<item value="cmd_write_cnt"/>
+			<item value="WriteBuffer"/>
+			<item value="Buff"/>
+			<item value="timeout_sec"/>
+			<item value="dir"/>
+			<item value="FRESULT"/>
+			<item value="TimerExpired"/>
+			<item value="TimerCounterHandler"/>
+			<item value="XTmrCtr_Start"/>
+		</list>
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+</section>

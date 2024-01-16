@@ -1,0 +1,32 @@
+12:36:58 **** Build of configuration Debug for project TEST ****
+make all 
+'Building file: ../src/helloworld.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/helloworld.o" -I../../TEST_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/helloworld.d" -MT"src/helloworld.o" -o "src/helloworld.o" "../src/helloworld.c"
+'Finished building: ../src/helloworld.c'
+' '
+'Building file: ../src/platform.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -I../../TEST_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/platform.d" -MT"src/platform.o" -o "src/platform.o" "../src/platform.c"
+'Finished building: ../src/platform.c'
+' '
+'Building target: TEST.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../TEST_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "TEST.elf"  ./src/helloworld.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/lib/le/crt0.o: in function `_vector_interrupt':
+(.vectors.interrupt+0x0): undefined reference to `_interrupt_handler'
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/lib/le/crt0.o: in function `_vector_hw_exception':
+(.vectors.hw_exception+0x0): undefined reference to `_hw_exception_handler'
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: ../../TEST_bsp/microblaze_1/lib\libgloss.a(print.o): in function `print':
+(.text+0x20): undefined reference to `outbyte'
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: ./src/platform.o: in function `enable_caches':
+E:\1079\v10_dma_uart\TEST\Debug/../src/platform.c:60: undefined reference to `microblaze_enable_icache'
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: E:\1079\v10_dma_uart\TEST\Debug/../src/platform.c:63: undefined reference to `microblaze_enable_dcache'
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: ./src/platform.o: in function `disable_caches':
+E:\1079\v10_dma_uart\TEST\Debug/../src/platform.c:73: undefined reference to `Xil_DCacheDisable'
+d:/vivado2019/sdk/2019.1/gnu/microblaze/nt/bin/../lib/gcc/microblaze-xilinx-elf/8.2.0/../../../../microblaze-xilinx-elf/bin/ld.exe: E:\1079\v10_dma_uart\TEST\Debug/../src/platform.c:76: undefined reference to `Xil_ICacheDisable'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:38: TEST.elf] Error 1
+
+12:36:58 Build Finished (took 475ms)
+

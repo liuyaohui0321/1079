@@ -1,0 +1,1752 @@
+#include "cmd.h"
+#include "string.h"
+#include "simple_dma.h"
+#include "fat/ff.h"		/* Declarations of FatFs API */
+#include "fat/ff.h"
+#include "xllfifo_drv.h"
+#include "nhc_amba.h"
+#include "mem_test.h"
+StructMsg			CurMsg;
+StructMsgQuery		MsgQuery;
+int result_a201=0x11;
+int result_a204=0x11;
+int result_a205=0x11;
+int result_a208=0x11;
+int result_b201=0x11;
+int result_d201=0x11;
+int result_f201=0x11;
+FIL file;
+DIR dir;
+
+/********************读盘存盘数据参数*******************/
+uint32_t  buff,buff_r;
+uint32_t  packnum;        // lyh 2023.8.28
+uint64_t  slba,slba_r;
+uint32_t  cmd_len,len;
+uint64_t  suba_r;
+uint32_t  recv_cmd_ack;
+uint64_t  write_slba = 0;
+int read_flag=0;
+uint32_t rw_count=0,r_count=0;
+uint32_t  cmd_write_cnt=0;
+/***************************************************/
+
+/**********************FIFO有关参数设置*************************/
+u32 DestinationBuffer[MAX_DATA_BUFFER_SIZE * WORD_SIZE];
+u32 DestinationBuffer_1[MAX_DATA_BUFFER_SIZE * WORD_SIZE];
+/************************************************************/
+void MsgQueryInit(void)
+{
+	memset( &MsgQuery, 0, sizeof(MsgQuery) );
+	MsgQuery.Start = 0;
+	MsgQuery.End = 0;
+	CurMsg.HandType = 0x00;
+	CurMsg.HandId = 0x00;
+}
+
+void GetMessage(StructMsg *pMsg)
+{
+	u32 i;
+	StructMsg	*p;
+
+	if((MsgQuery.Start>=MSG_QUERY)||(MsgQuery.End>=MSG_QUERY)) {
+		pMsg->HandType = MSG_WARNING;
+		pMsg->HandId = WARNING_MSG_OVERFLOW;
+		//xil_printf( "GetMessage High OverFlow\r\n" );
+	}
+	else
+	{
+		if(MsgQuery.Start!=MsgQuery.End)
+		{
+			p = &(MsgQuery.MsgQuery[MsgQuery.End]);
+			if(++MsgQuery.End >= MSG_QUERY)
+				MsgQuery.End = 0;
+		}
+		else
+		{
+			pMsg->HandType = MSG_NULL;
+			return;
+		}
+		pMsg->HandType  = p->HandType;
+		pMsg->HandId = p->HandId;
+		pMsg->DataLen = p->DataLen;
+		pMsg->PackNum= p->PackNum;
+		//xil_printf("%s %d   p->HandType:%u  p->HandId:%u  pMsg->DataLen:%u\n", __FUNCTION__, __LINE__,p->HandType,p->HandId,p->DataLen);
+		for( i=0; i<pMsg->DataLen; i++ )
+			pMsg->MsgData[i]  = p->MsgData[i];
+	}
+}
+
+void SendMessage(StructMsg *pMsg)
+{
+		u32 i;
+		StructMsg	*p;
+		xil_printf("%s %d   p->HandType:0x%x  p->HandId:0x%x  pMsg->DataLen:%u\r\n", __FUNCTION__, __LINE__,pMsg->HandType,pMsg->HandId,pMsg->DataLen);
+		if((MsgQuery.Start>=MSG_QUERY)||(MsgQuery.End>=MSG_QUERY))
+			return;
+			if((MsgQuery.Start==(MsgQuery.End-1))||
+				((MsgQuery.End==0)&&(MsgQuery.Start==(MSG_QUERY-1))))
+			{
+				p = &(MsgQuery.MsgQuery[MsgQuery.End]);
+				pMsg->HandType = MSG_WARNING;
+				pMsg->HandId = WARNING_MSG_OVERFLOW;
+				//xil_printf( "SendMessage High OverFlow\r\n" );
+			}
+			else
+			{
+				p = &(MsgQuery.MsgQuery[MsgQuery.Start]);  // 消息入队
+				if(++MsgQuery.Start >= MSG_QUERY)
+					MsgQuery.Start = 0;
+			}
+
+			p->HandType  = pMsg->HandType;
+			p->HandId = pMsg->HandId;
+			p->DataLen = pMsg->DataLen;
+			p->PackNum= pMsg->PackNum;
+			for( i=0; i< pMsg->DataLen; i++ )
+			{
+				p->MsgData[i]  = pMsg->MsgData[i];
+			}
+			xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+}
+
+int cmd_parse(void)
+{
+		StructMsg TMsg;
+		int i=0;
+		uint32_t a;
+		Xil_DCacheInvalidateRange((UINTPTR)CmdRxBufferPtr, CMD_PACK_LEN);
+		if(0x55555555 != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+			return -1;
+		i+=4;
+		if(SRC_ID != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+			return -1;
+		i+=4;
+		if(DEST_ID != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+			return -1;
+		i+=4;
+		TMsg.HandType = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+		i+=4;
+		TMsg.HandId = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+		i+=4;
+		TMsg.PackNum = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+		i+=4;
+		switch(TMsg.HandType)
+		{
+			case 0xa2:
+				switch(TMsg.HandId)
+				{
+					case 0x1:
+						xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+						i+=A201_DATA_LEN;
+					break;
+					case 0x2:
+						i+=A202_DATA_LEN;
+					break;
+					case 0x4:
+						i+=A204_DATA_LEN;
+					break;
+					case 0x5:
+						i+=A205_DATA_LEN;
+					break;
+					default:
+					break;
+				}
+			xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+			break;
+			case 0xb2:
+	//			RecvStructCmd.DataPack[0] = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+				i+=B201_DATA_LEN;
+			break;
+			case 0xd2:
+				switch(TMsg.HandId)
+				{
+					case 0x1:
+						i+=D201_DATA_LEN;
+					break;
+					case 0x2:
+						i+=D202_DATA_LEN;
+					break;
+					case 0x3:
+						i+=D203_DATA_LEN;
+					break;
+					case 0x4:
+						i+=D204_DATA_LEN;
+					break;
+					case 0x5:
+						i+=D205_DATA_LEN;
+					break;
+					case 0x6:
+						i+=D206_DATA_LEN;
+					break;
+					case 0x7:
+						i+=D207_DATA_LEN;
+					break;
+					case 0x8:
+						i+=D208_DATA_LEN;
+					break;
+					default:
+					break;
+				}
+			break;
+			default:
+			break;
+		}
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+//	    RecvStructCmd.CheckCode = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+//		i+=4;    //校验码功能加好之后，需要打开
+		a=CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+		if(0xAAAAAAAA != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+			return -1;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		cmd_type_id_parse(&TMsg);
+}
+
+void cmd_type_id_parse(StructMsg *pMsg)
+{
+		int i=0;
+		StructMsg TMsg;
+		TMsg.HandType=pMsg->HandType;
+		TMsg.HandId=pMsg->HandId;
+		TMsg.PackNum=pMsg->PackNum;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		switch(pMsg->HandType)
+			{
+				case 0xa2:
+					switch(pMsg->HandId)
+					{
+						case 0x1:
+							xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+							TMsg.DataLen = A201_DATA_LEN;
+							for(i=0; i < A201_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x2:
+							TMsg.DataLen = A202_DATA_LEN;
+							for(i=0; i < A202_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x4:
+							TMsg.DataLen = A204_DATA_LEN;
+							for(i=0; i < A204_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x5:
+							TMsg.DataLen = A205_DATA_LEN;
+							for(i=0; i < A205_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						default:
+							return 0;
+						break;
+					}
+				break;
+				case 0xb2:
+					TMsg.DataLen = B201_DATA_LEN;
+					for(i=0; i < B201_DATA_LEN; i++)
+					{
+						TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+					}
+
+				break;
+				case 0xd2:
+					switch(pMsg->HandId)
+					{
+						case 0x1:
+							TMsg.DataLen = D201_DATA_LEN;
+							for(i=0; i < D201_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x2:
+
+						break;
+						case 0x3:
+							TMsg.DataLen = D203_DATA_LEN;
+							for(i=0; i < D203_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x4:
+							TMsg.DataLen = D204_DATA_LEN;
+							for(i=0; i < D204_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x5:
+							TMsg.DataLen = D205_DATA_LEN;
+							for(i=0; i < D205_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x6:
+							TMsg.DataLen = D206_DATA_LEN;
+							for(i=0; i < D206_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x7:
+							TMsg.DataLen = D207_DATA_LEN;
+							for(i=0; i < D207_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						case 0x8:
+							TMsg.DataLen = D208_DATA_LEN;
+							for(i=0; i < D208_DATA_LEN; i++)
+							{
+								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+							}
+						break;
+						default:
+							return 0;
+						break;
+					}
+				break;
+
+				default:
+					return 0;
+				break;
+			}
+		//xil_printf("%s %d p->HandType:0x%x  p->HandId:0x%x\n", __FUNCTION__, __LINE__,TMsg.HandType,TMsg.HandId);
+		SendMessage( &TMsg );
+}
+
+int run_cmd_a201(StructMsg *pMsg)
+{
+	int ret=0,i=0,x = 0,temp=0;
+	u16 unicode_u16=0;
+	u32 file_cmd=0;
+	WCHAR cmd_str_1[1024],cmd_str_2[1024];
+	TCHAR *cmd_char_str1,*cmd_char_str2;  // 放单字节数据，由双字节数据转化   LYH 9.6改
+//	DIR dir;     // 9.8号改成全局变量 lyh
+//	FIL file;    // 9.8号改成全局变量 lyh
+	FRESULT fr1;
+	FILINFO fno1;
+
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	i=i+4;
+	temp=i;   // 9.7 LYH
+	xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,file_cmd);
+	for (x = 0; x < 1024; x++) {
+			unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+			cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+			if (cmd_str_1[x] == '\0'||i==(4+10)) break;
+	}
+	cmd_char_str1=(TCHAR *)malloc(sizeof(TCHAR)*(x+1));
+
+	for(int j=0;j<x+1;j++)
+	{
+		sprintf(cmd_char_str1+j,"%s",cmd_str_1+j);// 双字节改成单字节数据  LYH 9.4改
+	}
+	xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_char_str1);
+
+    switch(file_cmd)
+    {
+		case NEW_FILE:
+//			ret = f_open (&file, cmd_str_1, FA_CREATE_ALWAYS | FA_WRITE); // LYH 9.4
+			ret = f_open (&file, cmd_char_str1, FA_CREATE_ALWAYS | FA_WRITE);
+//			xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_1);
+			if (ret != FR_OK) {
+				xil_printf("f_open Failed! ret=%d\r\n", ret);
+				//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+			   	return -1;
+			}
+			f_close(&file);
+			if (ret != FR_OK) {
+				xil_printf("close file Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+		break;
+		case NEW_FOLDER:
+//			xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,cmd_str_1);
+//			ret =f_mkdir(cmd_str_1);				// LYH 9.4 改
+			xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,file_cmd);
+			ret =f_mkdir(cmd_char_str1);
+			if (ret != FR_OK) {
+				xil_printf("f_mkdir  Failed! ret=%d\r\n", ret);
+				if(ret==8) xil_printf("FR_EXIST\n");
+				return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+		break;
+		case DEL_FILE:
+//			fr1 = f_stat(cmd_str_1, &fno1);  //删除文件时，除了判断文件是否存在外，还需判断文件是否是只读属性
+			fr1 = f_stat(cmd_char_str1, &fno1);    //lyh 9.4改
+		    switch(fr1)
+		    {
+			    case FR_OK:
+                     if(fno1.fattrib & AM_RDO){
+                    	 xil_printf("FR_DENIED, the file's attribute is read-only\r\n");
+                         return 0;
+		        }
+//				ret = f_unlink (cmd_str_1);
+			    ret = f_unlink (cmd_char_str1); // LYH 2023.9.4
+				if (ret != FR_OK) {
+					xil_printf("Delete file  Failed! ret=%d\r\n", ret);
+					return -1;
+				}
+				cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			    break;
+			    case FR_NO_FILE:
+//			        xil_printf("\"%s\" is not exist.\r\n", cmd_str_1);
+			    	xil_printf("\"%s\" is not exist.\r\n", cmd_char_str1);// LYH 2023.9.4
+			        return -1;
+			    break;
+			    default:
+			    	xil_printf("An error occured. (%d)\r\n", fr1);
+			}
+
+			break;
+		case DEL_FOLDER:
+			ret = delete_dir(cmd_str_1);  // LYH 2023.8.15
+			if (ret != FR_OK) {
+				xil_printf("delete directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case RENAME_FILE:
+//			i=i+2048;      // 2023.8.15 LYH 加
+			i=temp+10;	   // 10 随文件名的字节数而变化  lyh 9.4
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+		    ret = f_open (&file, cmd_str_1, FA_CREATE_ALWAYS | FA_WRITE);
+			if (ret != FR_OK) {
+				xil_printf("open file Failed! ret=%d\r\n", ret);
+				return -1;
+			}
+			ret = f_rename (cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("rename file Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			f_close(&file);
+			if (ret != FR_OK) {
+				xil_printf("close file Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			f_mount(NULL,"",0);
+			break;
+		case RENAME_FOLDER:
+//			i=i+2048;      // 2023.8.15 LYH 加
+			i=temp+10;	   // 10 随文件名的字节数而变化  lyh 9.4
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+			ret = f_rename (cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("rename directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case MOVE_FOLDER:
+			i=i+2048;      // 2023.8.15 LYH 加
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+			ret = f_rename(cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("move directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case MOVE_FILE:
+			i=i+2048;      // 2023.8.15 LYH 加
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+			ret = f_rename(cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("move file  Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case OPEN_FILE:
+			ret = f_open (&file, cmd_str_1, FA_CREATE_ALWAYS | FA_WRITE);
+			if (ret != FR_OK) {
+				xil_printf("f_open  Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case CLOSE_FILE:
+			ret = f_close (&file);
+			if (ret != FR_OK) {
+				xil_printf("f_close  Failed! ret=%d\r\n", ret);
+//			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case COPY_FILE:   //最后的参数是0表示不覆盖存在的文件，1表示覆盖存在的文件
+			i=i+2048;      // 2023.8.15 LYH 加
+			for (x = 0; x < 1024; x++) {
+				  unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+			      cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+			      if (cmd_str_2[x] == '\0') break;
+		    }
+			ret =my_fcopy (cmd_str_1,cmd_str_2,0);
+			if (ret != FR_OK) {
+				xil_printf("Copy File Failed! ret=%d\r\n", ret);
+				return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case COPY_FOLDER:  //最后的参数是0表示不覆盖存在的文件，1表示覆盖存在的文件
+			i=i+2048;      // 2023.8.15 LYH 加
+			for (x = 0; x < 1024; x++) {
+				  unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+				  cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		          if (cmd_str_2[x] == '\0') break;
+			}
+            ret = mf_dcopy (cmd_str_1,cmd_str_2,0);
+			if (ret != FR_OK) {
+				xil_printf("Copy Directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case GET_DIR:
+			ret = scan_files(cmd_str_1);
+			if (ret != FR_OK) {
+				xil_printf("Copy Directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		default:
+			break;
+    }
+    free(cmd_char_str1);
+    return 0;
+}
+
+int run_cmd_a202(StructMsg *pMsg)
+{
+        //解析要问讯哪种（包括A2-01、A2-04、A2-05、A2-08、D2-01、D2-01）
+	    int ret=0,i=0;
+        u32 ack_HandType,ack_HandID,ack_PackNum;
+        ack_HandType=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+        i+=4;
+        ack_HandID=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+        i+=4;
+        ack_PackNum=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+
+        switch(ack_HandType)
+        {
+           case 0xA2:
+                 switch(ack_HandID)
+                {
+                     case  0x01:
+                    	 cmd_reply_a203_to_a201(ack_PackNum, ack_HandType, ack_HandID, result_a201);
+                    	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a201);
+                     break;
+
+                     case  0x04:
+                    	 cmd_reply_a203_to_a204(ack_PackNum, ack_HandType, ack_HandID, result_a204);
+                    	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a204);
+                     break;
+
+                     case  0x05:
+                      	 cmd_reply_a203_to_a205(ack_PackNum, ack_HandType, ack_HandID, result_a205);
+                      	xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a205);
+                     break;
+
+                     case  0x08:
+                    	 cmd_reply_a203_to_a208(ack_PackNum, ack_HandType, ack_HandID, result_a208);
+                    	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a208);
+                     break;
+
+                     default:
+                         return 0;
+                     break;
+                }
+           break;
+           case 0xD2:
+        	   switch(ack_HandID)
+			  {
+				   case  0x01:
+					    cmd_reply_a203_to_d201(ack_PackNum, ack_HandType, ack_HandID, result_d201);
+					    xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_d201);
+
+				   break;
+				   default:
+						return 0;
+				   break;
+			  }
+           break;
+           case 0xB2:
+        	   switch(ack_HandID)
+			  {
+				   case  0x01:
+					    cmd_reply_a203_to_b201(ack_PackNum, ack_HandType, ack_HandID, result_b201);
+					    xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_b201);
+				   break;
+				   default:
+						return 0;
+				   break;
+			  }
+           break;
+
+           default:
+        	   return 0;
+           break;
+        }
+      return 0;
+}
+
+int run_cmd_a204(StructMsg *pMsg)
+{
+	    int ret=0,i=0,x = 0,temp=0;
+		u16 unicode_u16=0;
+		u32 file_cmd=0,file_cmd2=0;
+		WCHAR cmd_str_1[1024],cmd_str_2[512];
+		WCHAR cmd_str_3[1024],cmd_str_4[512];
+		int x0=0,x1=0,x2=0,x3=0,x4=0,x5=0,x6=0,x7=0;
+		DIR dir;
+		FIL file;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+
+		file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i=i+4;
+		temp=i;
+		xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,file_cmd);
+
+		// 解析操作指令
+		x0=((file_cmd>>0)&0x1==1)?1:0;   //x0=1修改文件属性,x0=0不修改文件属性
+		x1=((file_cmd>>4)&0x1==1)?1:0;   //x1=1修改文件读写控制,x1=0不修改文件读写控制
+		x2=((file_cmd>>8)&0x1==1)?1:0;   //x2=1修改文件显示控制,x2=0不修改文件显示控制
+		x4=((file_cmd>>16)&0x1==1)?1:0;  //x4=1修改文件夹属性,x4=0不修改文件夹属性
+		x5=((file_cmd>>20)&0x1==1)?1:0;  //x5=1修改文件夹读写控制,x4=0不修改文件夹读写控制
+		x6=((file_cmd>>24)&0x1==1)?1:0;  //x6=1修改文件夹显示控制,x4=0不修改文件夹显示控制
+
+/////////////////////////////////////////////////////////////////////////
+	    for (x = 0; x < 1024; x++)
+	    {
+	    	unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+	    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+	        if (cmd_str_1[x] == '\0') break;
+	    }
+//	    for (x = 0; x < 1024; x++)
+//	    {
+//	    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+//	    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+//	        if (cmd_str_1[x] == '\0') break;
+//	    }                                                           // 旧文件名称
+        i=temp+2048;
+        temp=i;
+        // *****************   判断是否更改文件属性        *******************//
+        if(x0==1)
+        {
+        	for (x = 0; x < 512; x++)
+        	{
+        	   unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+        	   cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);  	// 新文件名称
+        	   if (cmd_str_2[x] == '\0') break;
+        	}
+        	f_rename(cmd_str_1,cmd_str_2);
+        }
+        // *****************                   *******************//
+        i=temp+1024;
+        file_cmd2 = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]); //文件新读写控制值
+        if((x1==1)&&(file_cmd2==1))
+        {
+        	if(x0==1)    //  用新文件名
+        	     f_chmod(cmd_str_2,AM_RDO,AM_RDO | AM_ARC);
+        	else         //  用旧文件名
+        		 f_chmod(cmd_str_1,AM_RDO,AM_RDO | AM_ARC);         //  文件设成只读
+        }
+        i+=4;
+        file_cmd2 = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);//文件新显示控制值
+        if((x2==1)&&(file_cmd2==1))
+        {
+        	if(x0==1)    //  用新文件夹名
+        	     f_chmod(cmd_str_2,AM_HID,AM_HID | AM_ARC);
+        	else                //  用旧文件夹名
+        	     f_chmod(cmd_str_1,AM_HID,AM_HID | AM_ARC);         //  文件设成隐藏
+        }
+        i+=4;
+        temp=i;
+        for (x = 0; x < 1024; x++)
+        {
+            unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+            cmd_str_3[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+            if (cmd_str_3[x] == '\0') break;
+        }                                         //  原文件夹名称
+        i=temp+2048;
+        temp=i;
+        // *****************   判断是否更改文件夹属性        *******************//
+        if(x4==1)
+        {
+            for (x = 0; x < 512; x++)
+            {
+                unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+                cmd_str_4[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+                if (cmd_str_4[x] == '\0') break;
+            }   //  新文件夹名称
+            f_rename(cmd_str_3,cmd_str_4);
+        }
+        // *****************                    *******************//
+        i=temp+1024;
+        file_cmd2 = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);//文件夹新读写控制值
+        if((x5==1)&&(file_cmd2==1))
+        {
+        	if(x4==1)           //  用新文件夹名
+           	     f_chmod(cmd_str_4,AM_RDO,AM_RDO | AM_ARC);
+        	else                //  用旧文件夹名
+        	     f_chmod(cmd_str_3,AM_RDO,AM_RDO | AM_ARC);	    //  文件夹设成只读
+        }
+        i+=4;
+        file_cmd2 = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);//文件夹新显示控制值
+        if((x6==1)&&(file_cmd2==1))
+        {
+        	if(x4==1)           //  用新文件夹名
+        	     f_chmod(cmd_str_4,AM_HID,AM_HID | AM_ARC);
+        	else                //  用旧文件夹名
+        	     f_chmod(cmd_str_3,AM_HID,AM_HID | AM_ARC);     //  文件夹设成隐藏
+        }
+        cmd_reply_a203_to_a204(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+}
+
+int run_cmd_a205(StructMsg *pMsg)
+{
+		 int file_cmd=0,ret=0,i=0,x = 0;
+		 u16 unicode_u16=0;
+		 WCHAR cmd_str_1[1024],cmd_str_2[1024];
+		 DIR dir;
+		 FIL file;
+		 file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		 i=i+4;
+
+		 switch(file_cmd)
+		 {
+			case FILE_ATTRIBUTE:
+				for (x = 0; x < 1024; x++)
+				{
+					 unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+					 cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+					 if (cmd_str_1[x] == '\0') break;
+				}
+				cmd_reply_a206(pMsg, cmd_str_1);
+				break;
+
+			case FOLDER_ATTRIBUTE:
+	//			i+=1024;    lyh   2023.8.11 改
+			    i+=2048;
+				for (x = 0; x < 1024; x++)
+				{
+					unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+					cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+					if (cmd_str_2[x] == '\0') break;
+				}
+				cmd_reply_a207(pMsg, cmd_str_2);
+				break;
+			default:       // 操作失败通过a203进行回复
+				cmd_reply_a203_to_a205(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+				break;
+		 }
+    return 0;
+}
+int run_cmd_b201(StructMsg *pMsg)
+{
+	int file_cmd=0,ret=0,i=0;
+	BYTE Buff[4096];
+	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	if(file_cmd == DISK_FORMAT)
+	{
+		ret = f_mkfs(
+				" ",	/* Logical drive number */
+				0,			/* Format option  FM_EXFAT*/
+				Buff,			/* Pointer to working buffer (null: use heap memory) */
+				sizeof Buff			/* Size of working buffer [byte] */
+				);
+		if (ret != FR_OK)
+		{
+				xil_printf("f_mkfs  Failed! ret=%d\r\n", ret);
+			//	cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+				return 0;
+		}
+		cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+	 }
+	//cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x00);
+	return 0;
+}
+
+int run_cmd_d201(StructMsg *pMsg)
+{
+		int file_cmd=0,ret=0,i=0,x=0;
+		int temp=0;
+		u16 unicode_u16=0;
+		WCHAR cmd_str_1[1024];
+		int32_t file_offset=0,file_seek=0;
+		FIL file;
+
+		for (x = 0; x < 1024; x++)
+		{
+			unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+			cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+			if (cmd_str_1[x] == '\0') break;
+		}              // 文件路径
+		i=temp+2048;  // lyh  2023.8.12  改
+		file_offset = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		  // 偏移量
+		i=i+4;
+		file_seek = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		  // 起始位置
+
+		ret =f_open(&file, cmd_str_1,  FA_WRITE | FA_READ );
+		if (ret != FR_OK)
+		{
+			xil_printf("f_open  Failed! ret=%d\r\n", ret);
+			return -1;
+		}         // 应该先打开文件
+		 switch(file_seek)
+		{
+			   case   SEEK_SET:
+			   ret =f_lseek(&file,SEEK_SET);
+			   if (ret != FR_OK)
+			   {
+				   switch(ret)
+				   {
+				       case FR_DISK_ERR:
+				    	   xil_printf("A hard error occurred in the low level disk I/O layer! ret=%d\r\n", ret);
+				    	   return FR_DISK_ERR;
+					   break;
+				       case FR_INT_ERR:
+				    	   xil_printf("Assertion failed! ret=%d\r\n", ret);
+				    	   return FR_INT_ERR;
+					   break;
+				       case FR_NOT_READY:
+				    	   xil_printf("The physical drive cannot work! ret=%d\r\n", ret);
+				    	   return FR_NOT_READY;
+					   break;
+				       case FR_INVALID_OBJECT:
+				    	   xil_printf("The file/directory object is invalid! ret=%d\r\n", ret);
+				    	   return FR_INVALID_OBJECT;
+					   break;
+				       default:
+				    	   xil_printf("f_lseek  Failed! ret=%d\r\n", ret);
+				    	   return -1;
+					   break;
+				   }
+			   }
+			   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+			   break;
+
+			   case   SEEK_CUR:
+			   ret =f_lseek(&file,SEEK_CUR);
+			   if (ret != FR_OK)
+			   {
+				   switch(ret)
+				   {
+					   case FR_DISK_ERR:
+						   xil_printf("A hard error occurred in the low level disk I/O layer! ret=%d\r\n", ret);
+						   return FR_DISK_ERR;
+					   break;
+					   case FR_INT_ERR:
+						   xil_printf("Assertion failed! ret=%d\r\n", ret);
+						   return FR_INT_ERR;
+					   break;
+					   case FR_NOT_READY:
+						   xil_printf("The physical drive cannot work! ret=%d\r\n", ret);
+						   return FR_NOT_READY;
+					   break;
+					   case FR_INVALID_OBJECT:
+						   xil_printf("The file/directory object is invalid! ret=%d\r\n", ret);
+						   return FR_INVALID_OBJECT;
+					   break;
+					   default:
+						   xil_printf("f_lseek  Failed! ret=%d\r\n", ret);
+						   return -1;
+					   break;
+				   }
+			   }
+			   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+			   break;
+
+			   case  SEEK_END:
+			   ret =f_lseek(&file,SEEK_END);
+			   if (ret != FR_OK)
+			   {
+				   switch(ret)
+				   {
+					   case FR_DISK_ERR:
+						   xil_printf("A hard error occurred in the low level disk I/O layer! ret=%d\r\n", ret);
+						   return FR_DISK_ERR;
+					   break;
+					   case FR_INT_ERR:
+						   xil_printf("Assertion failed! ret=%d\r\n", ret);
+						   return FR_INT_ERR;
+					   break;
+					   case FR_NOT_READY:
+						   xil_printf("The physical drive cannot work! ret=%d\r\n", ret);
+						   return FR_NOT_READY;
+					   break;
+					   case FR_INVALID_OBJECT:
+						   xil_printf("The file/directory object is invalid! ret=%d\r\n", ret);
+						   return FR_INVALID_OBJECT;
+					   break;
+					   default:
+						   xil_printf("f_lseek  Failed! ret=%d\r\n", ret);
+						   return -1;
+					   break;
+				   }
+			   }
+			   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+			   break;
+			   default:
+			   //cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+			   break;
+		}
+		 return 0;
+}
+
+// 包写入 （不用）
+int run_cmd_d202(StructMsg *pMsg)
+{
+//	    int ret=0,i=0,x=0;
+//		int temp=0;
+//		u16 unicode_u16=0;
+//		WCHAR cmd_str_1[1024];
+//        int Spsn;
+//		FIL file;
+//
+//	    for (x = 0; x < 1024; x++) {
+//	    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+//	    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+//	        if (cmd_str_1[x] == '\0') break;
+//	    }           // 文件路径
+//        i=temp;
+//		i+=2048;
+//		Spsn=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+//         //  子包序号 最后一包标识 有效数据长度
+	return 0;
+}
+
+// 流写入
+int run_cmd_d203(StructMsg *pMsg)
+{
+		int ret=0,i=0,x=0;
+		u16 unicode_u16=0;
+		int Status,bw;
+		uint8_t sts;
+		WCHAR cmd_str_1[1024];
+		FIL file;
+
+		for (x = 0; x < 1024; x++)
+		{
+			unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+			cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+			if (cmd_str_1[x] == '\0') break;
+		}
+
+		ret = f_open(&file, cmd_str_1, FA_OPEN_EXISTING | FA_WRITE);
+		if (ret != FR_OK)
+		{
+			xil_printf("f_open Failed! ret=%d\r\n", ret);
+			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+			return ret;
+		}
+
+		while (1)
+		{
+
+			if (RxReceive(DestinationBuffer,&cmd_len) == XST_SUCCESS)
+			{
+				packnum =DestinationBuffer[0];
+				buff =DestinationBuffer[1];  //地址
+				len  =DestinationBuffer[2];  //长度
+
+				ret = f_write(
+							&file,			/* Open file to be written */
+							buff,			/* Data to be written */
+							len,			/* Number of bytes to write */
+							&bw				/* Number of bytes written */
+				 );
+				 if (ret != FR_OK)
+				 {
+					 xil_printf("f_write Failed! ret=%d\r\n", ret);
+					 //cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+					 return ret;
+				 }
+			}
+			else
+			{
+
+				for(i=0;i<NHC_NUM;i++)
+				{
+					do {
+							sts = nhc_cmd_sts(i);
+						}while(sts == 0x01);
+				}
+			}
+
+			for(i=0;i<NHC_NUM;i++)
+			{
+				while (nhc_queue_ept(i) == 0)
+				{
+					do {
+						sts = nhc_cmd_sts(i);
+					}while(sts == 0x01);
+				}
+			}
+			if(cmd_write_cnt>100)
+			{
+				xil_printf("I/O Write Finish!\r\n");
+				xil_printf("w_count = %u\r\n",cmd_write_cnt);
+				for(i=0;i<NHC_NUM;i++)
+				{
+					while (nhc_queue_ept(i) == 0)
+					{
+						do {
+							sts = nhc_cmd_sts(i);
+						}while(sts == 0x01);
+					}
+				}
+				return 0;       // 2023.8.21
+			}
+		 }   // while
+		 fclose(&file);
+	return 0;
+}
+
+//////*****读文件命令*******/////////
+int run_cmd_d204(StructMsg *pMsg)
+{
+     int temp=0,ret=0,i=0,x=0;
+	 int Read_mode,Read_speed;
+	 u16 unicode_u16=0;
+	 WCHAR cmd_str_1[1024];
+	 FIL file;
+
+     for (x = 0; x < 1024; x++) {
+      	 unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+    	 cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+         if (cmd_str_1[x] == '\0') break;
+    }         // 文件路径
+    i=temp;
+	i+=2048;
+	Read_mode=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	i+=4;
+	Read_speed=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	switch(Read_mode)
+	{
+        case 0x0:    // 分包读取
+        	switch(Read_mode)
+        	{
+
+//        	        case 0x0:    // 0.5Gbps
+//
+//        			break;
+//
+//        	        case 0x1:    // 1Gbps
+//
+//        			break;
+//
+//        			case 0x2:    // 2Gbps
+//
+//        			break;
+//
+//        	        case 0x3:    // 3Gbps
+//
+//        			break;
+//
+//        			case 0x4:    // 4Gbps
+//
+//        			break;
+//
+//        	        case 0x5:    // 5Gbps
+//
+//        			break;
+//        	        default:
+//
+//        	        break;
+        	}
+//          run_cmd_d205(StructMsg *pMsg);
+		break;
+//
+//        case 0x1:    // 流式读取
+//        	switch(Read_mode)
+//           {
+//        	        case 0x0:    // 0.5Gbps
+//
+//        	        break;
+//
+//        	        case 0x1:    // 1Gbps
+//
+//        	        break;
+//
+//        	        case 0x2:    // 2Gbps
+//
+//        	        break;
+//
+//        	        case 0x3:    // 3Gbps
+//
+//        	        break;
+//
+//        	        case 0x4:    // 4Gbps
+//
+//        	        break;
+//
+//        	        case 0x5:    // 5Gbps
+//
+//        	        break;
+//        	        default:
+//        	        break;
+//           }
+//         run_cmd_d206(StructMsg *pMsg);
+//		break;
+	}
+	return 0;
+}
+
+/*****************分包读取文件命令*******************/
+int run_cmd_d205(StructMsg *pMsg)
+{
+	 int i=0,x=0,Status,ret;
+	 u16 unicode_u16=0;
+	 WCHAR cmd_str_1[1024];
+	 FIL file;
+
+     for (x = 0; x < 1024; x++)
+     {
+      	 unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+    	 cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+         if (cmd_str_1[x] == '\0') break;
+	 }      // 文件路径
+            //  分包数据传输
+     Status = XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
+	 if (Status != XST_SUCCESS)
+	 {
+		 xil_printf("XAxiDma1 Failed\r\n");
+		 return XST_FAILURE;
+	 }
+     while(1)
+     {
+    	 ret=f_open(&file, cmd_str_1, FA_OPEN_ALWAYS | FA_READ);
+		 if (ret != FR_OK)
+		 {
+			xil_printf("f_open Failed! ret=%d\r\n", ret);
+			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+			return ret;
+		 }
+
+    	 ret=f_read (
+    			&file, 	/* Open file to be read */
+    	 	void* buff,	/* Data buffer to store the read data */
+    	 	UINT btr,	/* Number of bytes to read */
+    	 	UINT* br	/* Number of bytes read */
+    	 )
+    	 len= U_BLK_SIZE;
+		 if(io_read(NHC_NUM, 0x1, buff_r, slba_r, len, 0x0) != 0x02)
+		 {
+			xil_printf("I/O Read Failed!\r\n");
+		 }
+		 slba_r += U_BLK_SIZE;
+		 if (buff_r < (DDR3_END_ADDR-U_BLK_SIZE/2))
+			buff_r += U_BLK_SIZE/2;
+		 else
+			buff_r = MEM_DDR3_BASE+(512*1024*1024);
+		 do
+		 {
+			RxReceive_1(DestinationBuffer_1,&cmd_len);
+
+		 }	while(!(0xaa55aa55 == DestinationBuffer_1[0]));
+		 recv_cmd_ack = recv_cmd_ack + 1;
+		 r_count++;
+     }
+
+
+
+
+
+
+
+
+	 return 0;
+}
+
+////////*****流式读取文件命令*******/////////
+//int run_cmd_d206(StructMsg *pMsg)
+//{
+////	 int i=0,x=0;
+////	 u16 unicode_u16=0;
+////	 WCHAR cmd_str_1[1024];
+////	 FIL file;
+////
+////     for (x = 0; x < 1024; x++) {
+////      	 unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+////    	 cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+////         if (cmd_str_1[x] == '\0') break;
+////    }         // 文件路径
+////           //  流式写入
+//	return 0;
+//}
+
+//*********文件写入校验错误反馈报文结构*********//
+int run_reply_d207(StructMsg *pMsg)
+{
+	    int i=0,x=0;
+		u16 unicode_u16=0;
+		WCHAR cmd_str_1[1024];
+		FIL file;
+		int32_t reply_Handpocket_num;          //包序列号
+		int32_t reply_HandType;
+		int32_t reply_HandId;
+		int32_t reply_Content;
+		reply_Handpocket_num=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i+=4;
+		reply_HandType=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i+=4;
+		reply_HandId=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i+=4;
+		reply_Content=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	    switch(reply_Content)
+	    {
+	        case 0x01:
+
+	    	break;
+
+	    }
+	return 0;
+}
+
+
+//*********文件读取校验错误反馈报文结构*********//
+int run_reply_d208(StructMsg *pMsg)
+{
+		int i=0,x=0;
+		u16 unicode_u16=0;
+		WCHAR cmd_str_1[1024];
+		FIL file;
+		int32_t reply_Handpocket_num;          //包序列号
+		int32_t reply_HandType;
+		int32_t reply_HandId;
+		int32_t reply_Content;
+		reply_Handpocket_num=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i+=4;
+		reply_HandType=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i+=4;
+		reply_HandId=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		i+=4;
+		reply_Content=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+		switch(reply_Content)
+		{
+			case 0x01:
+
+
+			break;
+		}
+		   return 0;
+}
+
+int cmd_reply_a203_to_a201(u32 packnum, u32 type, u32 id, u32 result)
+{
+		int Status;
+		StructA203Ack ReplyStructA203Ack;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;   //need change
+
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+	/***************lyh 2023.8.15 改******************************/
+		if(result_a201==result)
+			ReplyStructA203Ack.AckResult = result_a201;
+		else
+			result_a201=result;
+			ReplyStructA203Ack.AckResult = result_a201;
+	/************************************************************/
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+//		CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)CmdTxBufferPtr,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		xil_printf("%s %d result:0x%x\r\n", __FUNCTION__, __LINE__,result_a201);
+
+		return 0;
+}
+
+int cmd_reply_a203_to_a204(u32 packnum, u32 type, u32 id, u32 result)
+{
+	    int Status;
+		StructA203Ack ReplyStructA203Ack;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;   //need change
+
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+	/***************lyh 2023.8.15 改******************************/
+		if(result_a204==result)
+		    ReplyStructA203Ack.AckResult = result_a204;
+		else
+		    result_a204=result;
+		    ReplyStructA203Ack.AckResult = result_a204;
+	/************************************************************/
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+		CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+		Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+
+
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		return 0;
+}
+
+int cmd_reply_a203_to_a205(u32 packnum, u32 type, u32 id, u32 result)
+{
+		int Status;
+		StructA203Ack ReplyStructA203Ack;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;   //need change
+
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+	/***************lyh 2023.8.15 改******************************/
+		if(result_a205==result)
+			ReplyStructA203Ack.AckResult = result_a205;
+		else
+			result_a205=result;
+			ReplyStructA203Ack.AckResult = result_a205;
+	/************************************************************/
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+		CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+		Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		return 0;
+}
+
+int cmd_reply_a203_to_a208(u32 packnum, u32 type, u32 id, u32 result)
+{
+		int Status;
+		StructA203Ack ReplyStructA203Ack;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;   //need change
+
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+	/***************lyh 2023.8.15 改******************************/
+		if(result_a208==result)
+			ReplyStructA203Ack.AckResult = result_a208;
+		else
+			result_a208=result;
+			ReplyStructA203Ack.AckResult = result_a208;
+	/************************************************************/
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+		CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+		Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		return 0;
+}
+
+int cmd_reply_a203_to_b201(u32 packnum, u32 type, u32 id, u32 result)
+{
+		int Status;
+		StructA203Ack ReplyStructA203Ack;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;   //need change
+
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+	/***************lyh 2023.8.15 改******************************/
+		if(result_b201==result)
+			ReplyStructA203Ack.AckResult = result_b201;
+		else
+			result_b201=result;
+			ReplyStructA203Ack.AckResult = result_b201;
+	/************************************************************/
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+		CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+		Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		return 0;
+}
+
+int cmd_reply_a203_to_d201(u32 packnum, u32 type, u32 id, u32 result)
+{
+		int Status;
+		StructA203Ack ReplyStructA203Ack;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;   //need change
+
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+	/***************lyh 2023.8.15 改******************************/
+		if(result_d201==result)
+			ReplyStructA203Ack.AckResult = result_d201;
+		else
+			result_d201=result;
+			ReplyStructA203Ack.AckResult = result_d201;
+	/************************************************************/
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+		CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+		Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		return 0;
+}
+
+int cmd_reply_a203_to_f201(u32 packnum, u32 type, u32 id, u32 result)
+{
+		return 0;
+}
+
+int cmd_reply_a206(StructMsg *pMsg, const TCHAR* path)
+{
+	   int Status;
+	   FILINFO fno;
+	   FRESULT fr;
+	   StructA206Ack ReplyStructA206Ack;
+	   fr = f_stat(path, &fno);
+	   switch(fr)
+	   {
+		   case FR_OK:
+		   break;
+		   case FR_NO_FILE:
+				  xil_printf("\"%s\" is not exist.\r\n", path);
+				        return -1;
+		   break;
+           default:
+				  xil_printf("An error occured. (%d)\r\n", fr);
+	    }
+		ReplyStructA206Ack.Head = 0x55555555;
+		ReplyStructA206Ack.SrcId = SRC_ID;
+		ReplyStructA206Ack.DestId = DEST_ID;
+		ReplyStructA206Ack.HandType = 0xA2;
+		ReplyStructA206Ack.HandId = 0x6;
+	//	ReplyStructA206Ack.Name = fno.fname;
+		strcpy((char *)ReplyStructA206Ack.Name,(char *)fno.fname);
+		get_path_dname(path,ReplyStructA206Ack.Dir);
+		ReplyStructA206Ack.Size = fno.fsize;
+		sprintf(ReplyStructA206Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间
+
+		sprintf(ReplyStructA206Ack.ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间
+
+	//	ReplyStructA206Ack.CreateTime1 = ;
+	//	ReplyStructA206Ack.CreateTime2 = ;
+	//	ReplyStructA206Ack.ChangeTime1 = ;
+	//	ReplyStructA206Ack.ChangeTime2 = ;
+	//	ReplyStructA206Ack.AccessTime1 = ;
+	//	ReplyStructA206Ack.AccessTime2 = ;
+		if(fno.fattrib & AM_RDO == 0)
+			  ReplyStructA206Ack.RWCtrl = 0X0;
+		else
+			  ReplyStructA206Ack.RWCtrl = 0X1;
+		if(fno.fattrib & AM_HID == 0)
+			  ReplyStructA206Ack.DisplayCtrl = 0X0;
+		else
+			  ReplyStructA206Ack.DisplayCtrl = 0X1;
+
+		/****** CRC *****/
+	//	ReplyStructA206Ack.CheckCode = ReplyStructA206Ack.AckPackNum + \
+	//			ReplyStructA206Ack.AckHandType +ReplyStructA206Ack.AckHandId + \
+	//			ReplyStructA206Ack.AckResult;
+		ReplyStructA206Ack.Tail = 0xAAAAAAAA;
+
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA206Ack,
+					sizeof(StructA206Ack), XAXIDMA_DMA_TO_DEVICE);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		return 0;
+}
+
+int cmd_reply_a207(StructMsg *pMsg, const TCHAR* path)
+{
+		int Status;
+		FRESULT fr;
+		FILINFO fno;
+		int temp1, temp2;
+		int *nfile,*ndir;
+		StructA207Ack ReplyStructA207Ack;
+		fr = f_stat(path, &fno);
+		Num_of_Dir_and_File (path,nfile,ndir);
+		switch (fr)
+		{
+			case FR_OK:
+				break;
+
+			case FR_NO_PATH:
+				xil_printf("\"%s\" is not exist.\r\n", path);
+				return -1;
+				break;
+
+			default:
+				xil_printf("An error occured. (%d)\r\n", fr);
+		}
+		ReplyStructA207Ack.Head = 0x55555555;
+		ReplyStructA207Ack.SrcId = SRC_ID;
+		ReplyStructA207Ack.DestId = DEST_ID;
+		ReplyStructA207Ack.HandType = 0xA2;
+	//	ReplyStructA207Ack.HandId = 0x6;
+		ReplyStructA207Ack.HandId = 0x7;     // lyh 203.8.11改
+		strcpy((char *)ReplyStructA207Ack.Name, (char *)fno.fname);
+		get_path_dname(path,ReplyStructA207Ack.Dir);
+		ReplyStructA207Ack.Size =fno.fsize;
+		ReplyStructA207Ack.SubFolderNum =*ndir;
+		ReplyStructA207Ack.SubFileNum =*nfile;
+		sprintf(ReplyStructA207Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间
+
+		sprintf(ReplyStructA207Ack.ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间
+	//	ReplyStructA207Ack.CreateTime1 = ;
+	//	ReplyStructA207Ack.CreateTime2 = ;
+	//	ReplyStructA207Ack.ChangeTime1 = ;
+	//	ReplyStructA207Ack.ChangeTime2 = ;
+	//	ReplyStructA207Ack.AccessTime1 = ;
+	//	ReplyStructA207Ack.AccessTime2 = ;
+
+		if (fno.fattrib & AM_RDO == 0)
+			ReplyStructA207Ack.RWCtrl = 0X0;
+		else
+			ReplyStructA207Ack.RWCtrl = 0X1;
+
+		if (fno.fattrib & AM_HID == 0)
+			ReplyStructA207Ack.DisplayCtrl = 0X0;
+		else
+			ReplyStructA207Ack.DisplayCtrl = 0X1;
+
+		/****** CRC *****/
+	//	ReplyStructA207Ack.CheckCode = ReplyStructA206Ack.AckPackNum + \
+	//			ReplyStructA206Ack.AckHandType +ReplyStructA206Ack.AckHandId + \
+	//			ReplyStructA206Ack.AckResult;
+		ReplyStructA207Ack.Tail = 0xAAAAAAAA;
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA207Ack,
+					sizeof(StructA207Ack), XAXIDMA_DMA_TO_DEVICE);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		return 0;
+}
+
+//待定
+int cmd_reply_a208(StructMsg *pMsg,const TCHAR* path)
+{
+		int Status;
+		StructA208Ack ReplyStructA208Ack;
+		ReplyStructA208Ack.Head=0x55555555;
+		ReplyStructA208Ack.SrcId=SRC_ID;
+		ReplyStructA208Ack.DestId=DEST_ID;
+		ReplyStructA208Ack.HandType=0xA2;
+		ReplyStructA208Ack.HandId=0x08;
+		ReplyStructA208Ack.PackNum=0;
+
+
+		ReplyStructA208Ack.AckHandType=pMsg->HandType;
+		ReplyStructA208Ack.AckHandId=pMsg->HandId;
+//		ReplyStructA208Ack.FileNum
+//		ReplyStructA208Ack.DirNum
+//
+//		ReplyStructA208Ack.SubpackNum
+//		ReplyStructA208Ack.LastPack
+//		ReplyStructA208Ack.SubpackFileNum
+//		ReplyStructA208Ack.SubpackDirNum
+
+
+		StructA208Ack *arr=malloc(sizeof(StructA208Ack));
+		arr->SubpackFileNum=ReplyStructA208Ack.FileNum;
+		arr->SubpackDirNum=ReplyStructA208Ack.SubpackDirNum;
+//		arr->message=malloc(sizeof(arr->SubpackFileNum)+sizeof(arr->SubpackDirNum));
+
+		StructOfSingleFileOrDir* a=(StructOfSingleFileOrDir*)malloc(sizeof(StructOfSingleFileOrDir)*arr->SubpackFileNum);
+
+//		ReplyStructA208Ack.CheckCode
+        ReplyStructA208Ack.Tail=0xAAAAAAAA;
+
+        Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA208Ack,
+        					sizeof(StructA208Ack), XAXIDMA_DMA_TO_DEVICE);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		return 0;
+}
+
+int cmd_reply_health_f201( )
+{
+		int Status;
+		StructHealthStatus SendStructHealthStatus;
+
+		Storage_state1(&SendStructHealthStatus.TotalCap,&SendStructHealthStatus.UsedCap,
+				&SendStructHealthStatus.RemainCap,&SendStructHealthStatus.FileNum);
+		Storage_state2(&SendStructHealthStatus.WorkStatus,&SendStructHealthStatus.WorkTemp,
+				&SendStructHealthStatus.Power,&SendStructHealthStatus.PowerUpNum);
+		SendStructHealthStatus.Head = 0x55555555;
+		SendStructHealthStatus.SrcId = SRC_ID;
+		SendStructHealthStatus.DestId = DEST_ID;
+		SendStructHealthStatus.HandType = 0xF2;
+		SendStructHealthStatus.HandId = 0x1;
+	//	SendStructHealthStatus.PackNum = ;
+	//	SendStructHealthStatus.TotalCap = ;
+	//	SendStructHealthStatus.UsedCap = ;
+	//	SendStructHealthStatus.RemainCap = ;
+	//	SendStructHealthStatus.FileNum = ;
+	//	SendStructHealthStatus.WorkStatus = ;
+	//	SendStructHealthStatus.WorkTemp = ;
+	//	SendStructHealthStatus.Power = ;
+	//	SendStructHealthStatus.UpNum = ;
+		SendStructHealthStatus.CheckCode = SendStructHealthStatus.TotalCap + \
+				SendStructHealthStatus.UsedCap + SendStructHealthStatus.RemainCap + \
+				SendStructHealthStatus.FileNum + SendStructHealthStatus.WorkStatus + \
+				SendStructHealthStatus.WorkTemp + SendStructHealthStatus.Power + \
+				SendStructHealthStatus.PowerUpNum;
+		SendStructHealthStatus.Tail = 0xAAAAAAAA;
+
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &SendStructHealthStatus,
+					sizeof(SendStructHealthStatus), XAXIDMA_DMA_TO_DEVICE);
+
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+		return 0;
+}

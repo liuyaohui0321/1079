@@ -1,0 +1,745 @@
+#include "cmd.h"
+#include "string.h"
+#include "simple_dma.h"
+#include "fat/ff.h"		/* Declarations of FatFs API */
+
+StructMsg			CurMsg;
+StructMsgQuery		MsgQuery;
+
+void MsgQueryInit(void)
+{
+	memset( &MsgQuery, 0, sizeof(MsgQuery) );
+	MsgQuery.Start = 0;
+	MsgQuery.End = 0;
+	CurMsg.HandType = 0x00;
+	CurMsg.HandId = 0x00;
+}
+
+void GetMessage(StructMsg *pMsg)
+{
+	u32 i;
+	StructMsg	*p;
+
+	if((MsgQuery.Start>=MSG_QUERY)||(MsgQuery.End>=MSG_QUERY)) {
+		pMsg->HandType = MSG_WARNING;
+		pMsg->HandId = WARNING_MSG_OVERFLOW;
+		//xil_printf( "GetMessage High OverFlow\r\n" );
+	}
+	else
+	{
+		if(MsgQuery.Start!=MsgQuery.End)
+		{
+			p = &(MsgQuery.MsgQuery[MsgQuery.End]);
+			if(++MsgQuery.End >= MSG_QUERY)
+				MsgQuery.End = 0;
+		}
+		else
+		{
+			pMsg->HandType = MSG_NULL;
+			return;
+		}
+		pMsg->HandType  = p->HandType;
+		pMsg->HandId = p->HandId;
+		pMsg->DataLen = p->DataLen;
+		pMsg->PackNum= p->PackNum;
+		//xil_printf("%s %d   p->HandType:%u  p->HandId:%u  pMsg->DataLen:%u\n", __FUNCTION__, __LINE__,p->HandType,p->HandId,p->DataLen);
+		for( i=0; i<pMsg->DataLen; i++ )
+			pMsg->MsgData[i]  = p->MsgData[i];
+	}
+}
+
+void SendMessage(StructMsg *pMsg)
+{
+	u32 i;
+	StructMsg	*p;
+	xil_printf("%s %d   p->HandType:0x%x  p->HandId:0x%x  pMsg->DataLen:%u\r\n", __FUNCTION__, __LINE__,pMsg->HandType,pMsg->HandId,pMsg->DataLen);
+	if((MsgQuery.Start>=MSG_QUERY)||(MsgQuery.End>=MSG_QUERY))
+		return;
+
+
+		if((MsgQuery.Start==(MsgQuery.End-1))||
+			((MsgQuery.End==0)&&(MsgQuery.Start==(MSG_QUERY-1))))
+		{
+			p = &(MsgQuery.MsgQuery[MsgQuery.End]);
+			pMsg->HandType = MSG_WARNING;
+			pMsg->HandId = WARNING_MSG_OVERFLOW;
+			//xil_printf( "SendMessage High OverFlow\r\n" );
+		}
+		else
+		{
+			p = &(MsgQuery.MsgQuery[MsgQuery.Start]);
+			if(++MsgQuery.Start >= MSG_QUERY)
+				MsgQuery.Start = 0;
+		}
+
+	p->HandType  = pMsg->HandType;
+	p->HandId = pMsg->HandId;
+	p->DataLen = pMsg->DataLen;
+	p->PackNum= pMsg->PackNum;
+	for( i=0; i< pMsg->DataLen; i++ )
+		p->MsgData[i]  = pMsg->MsgData[i];
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+}
+
+int cmd_parse(void)
+{
+	StructMsg TMsg;
+	int i=0;
+	Xil_DCacheInvalidateRange((UINTPTR)CmdRxBufferPtr, CMD_PACK_LEN);
+	if(0x55555555 != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+		return -1;
+	i+=4;
+	if(SRC_ID != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+		return -1;
+	i+=4;
+	if(DEST_ID != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+		return -1;
+	i+=4;
+	TMsg.HandType = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+	i+=4;
+	TMsg.HandId = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+	i+=4;
+	TMsg.PackNum = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+	i+=4;
+	switch(TMsg.HandType)
+	{
+		case 0xa2:
+			switch(TMsg.HandId)
+			{
+				case 0x1:
+					xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+					i+=A201_DATA_LEN;
+				break;
+				case 0x2:
+					i+=A202_DATA_LEN;
+				break;
+				case 0x4:
+					i+=A204_DATA_LEN;
+				break;
+				case 0x5:
+					i+=A205_DATA_LEN;
+				break;
+				default:
+				break;
+			}
+		break;
+		case 0xb2:
+
+//			RecvStructCmd.DataPack[0] = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+			i+=B201_DATA_LEN;
+		break;
+		case 0xd2:
+			switch(TMsg.HandId)
+			{
+				case 0x1:
+					i+=D201_DATA_LEN;
+				break;
+				case 0x2:
+					i+=D202_DATA_LEN;
+				break;
+				case 0x3:
+					i+=D203_DATA_LEN;
+				break;
+				case 0x4:
+					i+=D204_DATA_LEN;
+				break;
+				case 0x5:
+					i+=D205_DATA_LEN;
+				break;
+				case 0x6:
+					i+=D206_DATA_LEN;
+				break;
+				case 0x7:
+					i+=D207_DATA_LEN;
+				break;
+				case 0x8:
+					i+=D208_DATA_LEN;
+				break;
+				default:
+				break;
+			}
+		break;
+		default:
+		break;
+	}
+
+//	RecvStructCmd.CheckCode = CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]);
+	i+=4;
+	if(0xaaaaaaaa != CW32(CmdRxBufferPtr[i+0],CmdRxBufferPtr[i+1],CmdRxBufferPtr[i+2],CmdRxBufferPtr[i+3]))
+		return -1;
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	cmd_type_id_parse(&TMsg);
+}
+
+void cmd_type_id_parse(StructMsg *pMsg)
+{
+	int i=0;
+	StructMsg TMsg;
+	TMsg.HandType=pMsg->HandType;
+	TMsg.HandId=pMsg->HandId;
+	TMsg.PackNum=pMsg->PackNum;
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	switch(pMsg->HandType)
+		{
+			case 0xa2:
+				switch(pMsg->HandId)
+				{
+					case 0x1:
+						xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+						TMsg.DataLen = A201_DATA_LEN;
+						for(i=0; i < A201_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x2:
+						TMsg.DataLen = A202_DATA_LEN;
+						for(i=0; i < A202_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x4:
+						TMsg.DataLen = A204_DATA_LEN;
+						for(i=0; i < A204_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x5:
+						TMsg.DataLen = A205_DATA_LEN;
+						for(i=0; i < A205_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					default:
+						return 0;
+					break;
+				}
+			break;
+			case 0xb2:
+				TMsg.DataLen = B201_DATA_LEN;
+				for(i=0; i < B201_DATA_LEN; i++)
+				{
+					TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+				}
+
+			break;
+			case 0xd2:
+				switch(pMsg->HandId)
+				{
+					case 0x1:
+						TMsg.DataLen = D201_DATA_LEN;
+						for(i=0; i < D201_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x2:
+
+					break;
+					case 0x3:
+						TMsg.DataLen = D203_DATA_LEN;
+						for(i=0; i < D203_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x4:
+						TMsg.DataLen = D204_DATA_LEN;
+						for(i=0; i < D204_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x5:
+						TMsg.DataLen = D205_DATA_LEN;
+						for(i=0; i < D205_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x6:
+						TMsg.DataLen = D206_DATA_LEN;
+						for(i=0; i < D206_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x7:
+						TMsg.DataLen = D207_DATA_LEN;
+						for(i=0; i < D207_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					case 0x8:
+						TMsg.DataLen = D208_DATA_LEN;
+						for(i=0; i < D208_DATA_LEN; i++)
+						{
+							TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+						}
+					break;
+					default:
+						return 0;
+					break;
+				}
+			break;
+
+			default:
+				return 0;
+			break;
+		}
+	//xil_printf("%s %d p->HandType:0x%x  p->HandId:0x%x\n", __FUNCTION__, __LINE__,TMsg.HandType,TMsg.HandId);
+	SendMessage( &TMsg );
+}
+
+int run_cmd_a201(StructMsg *pMsg)
+{
+	int ret=0,i=0,x = 0;
+	u16 unicode_u16=0;
+	u32 file_cmd=0;
+	WCHAR cmd_str_1[1024],cmd_str_2[1024];
+	DIR dir;
+	FIL file;
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	i=i+4;
+	xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,file_cmd);
+    for (x = 0; x < 1024; x++) {
+    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+        if (cmd_str_1[x] == '\0') break;
+    }
+
+    switch(file_cmd)
+    {
+		case NEW_FILE:
+			ret = f_open (&file, cmd_str_1[0], FA_CREATE_ALWAYS | FA_WRITE);
+			if (ret != FR_OK) {
+				xil_printf("wfeng f_open  Failed! ret=%d\r\n", ret);
+//			   	return -1;
+			}
+			xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+		break;
+		case NEW_FOLDER:
+			ret =f_mkdir(cmd_str_1);
+			if (ret != FR_OK) {
+				xil_printf("f_mkdir  Failed! ret=%d\r\n", ret);
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+		break;
+		case DEL_FILE:
+			ret = f_unlink (cmd_str_1);
+			if (ret != FR_OK) {
+				xil_printf("delete file  Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case DEL_FOLDER:
+			ret = f_unlink (cmd_str_1);
+			if (ret != FR_OK) {
+				xil_printf("delete directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case RENAME_FILE:
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);  // ʹ�ñ��� ANSI ����
+		        if (cmd_str_2[x] == '\0') break;  // ת������
+		    }
+			ret = f_rename (cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("rename file Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case RENAME_FOLDER:
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+			ret = f_rename (cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("rename directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case MOVE_FOLDER:
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+			ret = f_rename (cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("move directory Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case MOVE_FILE:
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+			ret = f_rename (cmd_str_1, cmd_str_2);
+			if (ret != FR_OK) {
+				xil_printf("move file  Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case OPEN_FILE:
+			ret = f_open (&file, cmd_str_1, FA_CREATE_ALWAYS | FA_WRITE);
+			if (ret != FR_OK) {
+				xil_printf("f_open  Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case CLOSE_FILE:
+			ret = f_close (&file);
+			if (ret != FR_OK) {
+				xil_printf("f_close  Failed! ret=%d\r\n", ret);
+//			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		case COPY_FILE:
+			break;
+		case COPY_FOLDER:
+			break;
+		case GET_DIR:
+			ret = f_close (&file);
+			if (ret != FR_OK) {
+				xil_printf("f_open  Failed! ret=%d\r\n", ret);
+			   	return -1;
+			}
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			break;
+		default:
+			break;
+    }
+}
+
+int run_cmd_a202(StructMsg *pMsg)
+{
+
+}
+
+int run_cmd_a204(StructMsg *pMsg)
+{
+
+}
+
+int run_cmd_a205(StructMsg *pMsg)
+{
+	int file_cmd=0,ret=0,i=0,x = 0;
+	u16 unicode_u16=0;
+	WCHAR cmd_str_1[1024],cmd_str_2[1024];
+	DIR dir;
+	FIL file;
+	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	i=i+4;
+
+    switch(file_cmd)
+    {
+		case FILE_ATTRIBUTE:
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_1[x] == '\0') break;
+		    }
+		    cmd_reply_a206(&pMsg, cmd_str_1);
+			break;
+
+		case FOLDER_ATTRIBUTE:
+			i+=1024;
+		    for (x = 0; x < 1024; x++) {
+		    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+		    	cmd_str_2[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+		        if (cmd_str_2[x] == '\0') break;
+		    }
+
+		   cmd_reply_a207(&pMsg, cmd_str_2);
+			break;
+		default:
+			break;
+    }
+}
+int run_cmd_b201(StructMsg *pMsg)
+{
+	int file_cmd=0,ret=0,i=0;
+	BYTE Buff[4096];
+	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	if(file_cmd == DISK_FORMAT)
+	{
+	    ret = f_mkfs(
+	    		" ",	/* Logical drive number */
+				0,			/* Format option  FM_EXFAT*/
+				Buff,			/* Pointer to working buffer (null: use heap memory) */
+				sizeof Buff			/* Size of working buffer [byte] */
+	    		);
+	   	if (ret != FR_OK) {
+	    		xil_printf("f_mkfs  Failed! ret=%d\r\n", ret);
+	    		return 0;
+	    	}
+	}
+	return 0;
+}
+
+int run_cmd_d201(StructMsg *pMsg)
+{
+	int file_cmd=0,ret=0,i=0,x=0;
+	u16 unicode_u16=0;
+	WCHAR cmd_str_1[1024];
+	int32_t file_offset=0,file_seek=0;
+//	DIR dir;
+	FIL file;
+
+    for (x = 0; x < 1024; x++) {
+    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+        if (cmd_str_1[x] == '\0') break;
+    }
+	file_offset = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	i=i+4;
+	file_seek = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+	i=i+4;
+
+	ret =f_open(&file, cmd_str_1,  FA_WRITE | FA_READ );
+		if (ret != FR_OK) {
+		xil_printf("f_open  Failed! ret=%d\r\n", ret);
+		return -1;
+		}
+
+	ret = f_lseek (
+		    &file,		/* Pointer to the file object */
+			file_offset		/* File pointer from top of file */
+		    );
+		if (ret != FR_OK) {
+		xil_printf("f_lseek  Failed! ret=%d\r\n", ret);
+		return -1;
+		}
+	return 0;
+}
+
+int run_cmd_d202(StructMsg *pMsg)
+{
+
+	return 0;
+}
+
+int run_cmd_d203(StructMsg *pMsg)
+{
+	int file_cmd=0,ret=0,i=0,x=0;
+	u16 unicode_u16=0;
+	WCHAR cmd_str_1[1024];
+	int32_t file_offset=0,file_seek=0;
+	FIL file;
+
+    for (x = 0; x < 1024; x++) {
+    	unicode_u16=(pMsg->MsgData[i++]<<8|pMsg->MsgData[i++]);
+    	cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+        if (cmd_str_1[x] == '\0') break;
+    }
+	return 0;
+}
+
+int run_cmd_d204(StructMsg *pMsg)
+{
+
+	return 0;
+}
+
+int run_cmd_d205(StructMsg *pMsg)
+{
+
+	return 0;
+}
+
+int run_cmd_d206(StructMsg *pMsg)
+{
+
+	return 0;
+}
+
+int run_cmd_d207(StructMsg *pMsg)
+{
+
+	return 0;
+}
+
+int run_cmd_d208(StructMsg *pMsg)
+{
+
+	return 0;
+}
+
+
+int cmd_reply_a203(u32 packnum, u32 type, u32 id, u32 result)
+{
+	int Status;
+	StructA203Ack ReplyStructA203Ack;
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	ReplyStructA203Ack.Head = 0x55555555;
+	ReplyStructA203Ack.SrcId = SRC_ID;
+	ReplyStructA203Ack.DestId = DEST_ID;
+	ReplyStructA203Ack.HandType = 0xA2;
+	ReplyStructA203Ack.HandId = 0x3;
+	ReplyStructA203Ack.PackNum = 0;   //need change
+	ReplyStructA203Ack.AckPackNum = packnum;
+	ReplyStructA203Ack.AckHandType = type;
+	ReplyStructA203Ack.AckHandId = id;
+	ReplyStructA203Ack.AckResult = result;
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+			ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+			ReplyStructA203Ack.AckResult;
+	ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+	CmdTxBufferPtr = (u8 *)&ReplyStructA203Ack;   //????wfeng
+	xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+	Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
+			sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+	return 0;
+}
+
+int cmd_reply_a206(StructMsg *pMsg, const TCHAR* path)
+{
+	int Status;
+	StructA206Ack ReplyStructA206Ack;
+
+	ReplyStructA206Ack.Head = 0x55555555;
+	ReplyStructA206Ack.SrcId = SRC_ID;
+	ReplyStructA206Ack.DestId = DEST_ID;
+	ReplyStructA206Ack.HandType = 0xA2;
+	ReplyStructA206Ack.HandId = 0x6;
+//	ReplyStructA206Ack.Name = ;
+//	ReplyStructA206Ack.Dir = ;
+//	ReplyStructA206Ack.Size = ;
+//	ReplyStructA206Ack.SubFolderNum = ;
+//	ReplyStructA206Ack.SubFileNum = ;
+//
+//	ReplyStructA206Ack.CreateTime1 = ;
+//	ReplyStructA206Ack.CreateTime2 = ;
+//	ReplyStructA206Ack.ChangeTime1 = ;
+//	ReplyStructA206Ack.ChangeTime2 = ;
+//	ReplyStructA206Ack.AccessTime1 = ;
+//	ReplyStructA206Ack.AccessTime2 = ;
+	ReplyStructA206Ack.RWCtrl = 0X0;
+	ReplyStructA206Ack.DisplayCtrl = 0X0;
+	/****** CRC *****/
+//	ReplyStructA206Ack.CheckCode = ReplyStructA206Ack.AckPackNum + \
+//			ReplyStructA206Ack.AckHandType +ReplyStructA206Ack.AckHandId + \
+//			ReplyStructA206Ack.AckResult;
+	ReplyStructA206Ack.Tail = 0xAAAAAAAA;
+
+	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA206Ack,
+				sizeof(StructA206Ack), XAXIDMA_DMA_TO_DEVICE);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	return 0;
+}
+
+int cmd_reply_a207(StructMsg *pMsg, const TCHAR* path)
+{
+	int Status;
+	StructA207Ack ReplyStructA207Ack;
+
+	ReplyStructA207Ack.Head = 0x55555555;
+	ReplyStructA207Ack.SrcId = SRC_ID;
+	ReplyStructA207Ack.DestId = DEST_ID;
+	ReplyStructA207Ack.HandType = 0xA2;
+	ReplyStructA207Ack.HandId = 0x6;
+
+//	ReplyStructA207Ack.Name = ;
+//	ReplyStructA207Ack.Dir = ;
+//	ReplyStructA207Ack.Size = ;
+//	ReplyStructA207Ack.SubFolderNum = ;
+//	ReplyStructA207Ack.SubFileNum = ;
+//
+//	ReplyStructA207Ack.CreateTime1 = ;
+//	ReplyStructA207Ack.CreateTime2 = ;
+//	ReplyStructA207Ack.ChangeTime1 = ;
+//	ReplyStructA207Ack.ChangeTime2 = ;
+//	ReplyStructA207Ack.AccessTime1 = ;
+//	ReplyStructA207Ack.AccessTime2 = ;
+
+	ReplyStructA207Ack.RWCtrl = 0X0;
+	ReplyStructA207Ack.DisplayCtrl = 0X0;
+	/****** CRC *****/
+//	ReplyStructA207Ack.CheckCode = ReplyStructA206Ack.AckPackNum + \
+//			ReplyStructA206Ack.AckHandType +ReplyStructA206Ack.AckHandId + \
+//			ReplyStructA206Ack.AckResult;
+	ReplyStructA207Ack.Tail = 0xAAAAAAAA;
+
+	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA207Ack,
+				sizeof(StructA207Ack), XAXIDMA_DMA_TO_DEVICE);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	return 0;
+}
+
+int cmd_reply_health_f201( )
+{
+	int Status;
+	StructHealthStatus SendStructHealthStatus;
+
+	SendStructHealthStatus.Head = 0x55555555;
+	SendStructHealthStatus.SrcId = SRC_ID;
+	SendStructHealthStatus.DestId = DEST_ID;
+	SendStructHealthStatus.HandType = 0xF2;
+	SendStructHealthStatus.HandId = 0x1;
+//	SendStructHealthStatus.PackNum = ;
+//	SendStructHealthStatus.TotalCap = ;
+//	SendStructHealthStatus.UsedCap = ;
+//	SendStructHealthStatus.RemainCap = ;
+//	SendStructHealthStatus.FileNum = ;
+//	SendStructHealthStatus.WorkStatus = ;
+//	SendStructHealthStatus.WorkTemp = ;
+//	SendStructHealthStatus.Power = ;
+//	SendStructHealthStatus.UpNum = ;
+	SendStructHealthStatus.CheckCode = SendStructHealthStatus.TotalCap + \
+			SendStructHealthStatus.UsedCap + SendStructHealthStatus.RemainCap + \
+			SendStructHealthStatus.FileNum + SendStructHealthStatus.WorkStatus + \
+			SendStructHealthStatus.WorkTemp + SendStructHealthStatus.Power + \
+			SendStructHealthStatus.UpNum;
+	SendStructHealthStatus.Tail = 0xAAAAAAAA;
+
+	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &SendStructHealthStatus,
+				sizeof(SendStructHealthStatus), XAXIDMA_DMA_TO_DEVICE);
+
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+

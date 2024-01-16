@@ -1,0 +1,396 @@
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "simple_dma.h"
+#include "cmd.h"
+
+#include "nhc_amba.h"
+#include "mem_test.h"
+#include "uart_get.h"
+#include "xllfifo_drv.h"
+#include "xstatus.h"
+
+#include "fat/ff.h"		/* Declarations of FatFs API */
+#include "fat/diskio.h"		/* Declarations of device I/O functions */
+#include "fat/ffconf.h"
+#include <wchar.h>
+#include "7x_dma.h"
+#include "xil_io.h"
+#include "xil_cache.h"
+/**********************NVME控制器参数设置*************************/
+uint8_t   init_done = 0x0;
+uint32_t  freq_MHz = 250;
+uint32_t  timeout_sec;
+/************************************************************/
+
+/********************文件系统格式化与挂载有关参数*******************/
+static BYTE Buff[4096];  //与格式化空间大小有关
+//FATFS fs;
+FATFS *fs;
+FIL fnew,fnew1;
+FRESULT fr;
+FILINFO fno;
+/************************************************************/
+
+
+int  Status;
+char input_string[10];
+uint fnum;
+BYTE WriteBuffer[4096];
+void DiskInit(void);
+int main()
+{
+		int ret;
+		init_platform();
+		xil_printf("UCAS Prj1079 \r\n");
+		DiskInit();
+		SimpleDmaInit();
+		MsgQueryInit();
+		XLLFIFO_SysInit();      // 7x 读盘存盘fifo
+		Dma1Init();             // 7x DMA1 9.12 LYH
+		BYTE rbuffer[4096] = {0};
+		BYTE wbuffer[4096] = {0};
+//#if 1   //disk_write
+//
+//			for(int index0 = 0;index0 < 4096;index0++)
+//			{
+////				wbuffer[index0] = index0%0xff;
+//				wbuffer[index0] = 0X88;
+//			}
+//			if((disk_write(fs->pdrv, wbuffer, 0, 1))== RES_OK)
+//			{
+//				xil_printf(" Debug : w success \r\n");
+//			}
+//
+////			for(int index0 = 0;index0 < 4096;index0++)
+////			{
+////				*(BYTE *)(0xA0001000+index0) = 0X99;
+////			}
+////			if((disk_write(fs->pdrv, (BYTE *)(0xA0001000), 0, 1))== RES_OK)
+////			{
+////				xil_printf(" Debug : w success \r\n");
+////			}
+//			if (disk_read(fs->pdrv, (BYTE *)(0xC0001000), 0, 1) == RES_OK)
+//			{
+//				memcpy(rbuffer,(BYTE *)(0xC0001000),SECTORSIZE*1);
+////					if((buffer[510]== 0x55) && (buffer[511] == 0xaa))
+////					{
+////						xil_printf(" Debug : r/w err i = %d !\r\n",i);
+////					}
+//				memset(rbuffer,0,SECTORSIZE*1);
+//				//memset((BYTE *)(0xA0001000),0,SECTORSIZE*1);
+//			}
+
+//#endif
+//#if  1  //  io_write
+//			for(int index0 = 0;index0 < 4096;index0++)
+//			{
+//				*(BYTE *)(0xA0001000+index0) = 0XAA;
+//			}
+//
+//			if((io_write(4,0x1, (BYTE *)(0xA0001000), 0, 4096,0X0))== 0x2)
+//			{
+//				xil_printf(" Debug : w success \r\n");
+//			}
+//			delay();
+//
+//			if (io_read(4,0x1, 0xC0001000, 0, 4096,0X0) == 0x2)
+//			{
+//				memcpy(rbuffer,(BYTE *)(0xc0001000),SECTORSIZE*1);
+////					if((buffer[510]== 0x55) && (buffer[511] == 0xaa))
+////					{
+////						xil_printf(" Debug : r/w err i = %d !\r\n",i);
+////					}
+//				memset(rbuffer,0,SECTORSIZE*1);
+//				//memset((BYTE *)(0xA0001000),0,SECTORSIZE*1);
+//			}
+//
+////				if (disk_read(fs->pdrv, (BYTE *)(0xA0001000), 0x3f, 1) == RES_OK)
+////				{
+////					memcpy(buffer,(BYTE *)(0xA0001000),SECTORSIZE*1);
+////					memset((BYTE *)(0xA0001000),0,SECTORSIZE*1);
+////					memset(buffer,0,SECTORSIZE*1);
+////					if(buffer[]!= 0xAA && buffer[]!= 0xAA)
+////					{
+////						xil_printf(" err!\r\n");
+////					}
+////				}
+//
+//#endif
+
+		#if  0//format the filesysterm
+			ret = f_mkfs(
+				" ",	/* Logical drive number */
+				0,			/* Format option  FM_EXFAT*/
+				Buff,			/* Pointer to working buffer (null: use heap memory) */
+				sizeof Buff			/* Size of working buffer [byte] */
+				);
+			if (ret != FR_OK) {
+				xil_printf("f_mkfs  Failed! ret=%d\n", ret);
+				return 0;
+				}
+		#endif //format the filesysterm
+#if  1  //  io_write
+			for(int index0 = 0;index0 < 4096;index0++)
+			{
+				*(BYTE *)(0xA0001000+index0) = 0X99;
+			}
+
+			if((io_write(4,0x1, (BYTE *)(0xA0001000), 0, 4096,0X0))== 0x2)
+			{
+				xil_printf(" Debug : w success \r\n");
+			}
+			delay();
+
+			if (io_read(4,0x1, 0x90001000, 0, 4096,0X0) == 0x2)
+			{
+				Xil_L1DCacheFlush();
+//				Xil_L2CacheFlushRange(0xC0001000, 4096);
+				memcpy(rbuffer,(BYTE *)(0x90001000),SECTORSIZE*1);
+//					if((buffer[510]== 0x55) && (buffer[511] == 0xaa))
+//					{
+//						xil_printf(" Debug : r/w err i = %d !\r\n",i);
+//					}
+				memset(rbuffer,0,SECTORSIZE*1);
+				//memset((BYTE *)(0xA0001000),0,SECTORSIZE*1);
+			}
+
+//				if (disk_read(fs->pdrv, (BYTE *)(0xA0001000), 0x3f, 1) == RES_OK)
+//				{
+//					memcpy(buffer,(BYTE *)(0xA0001000),SECTORSIZE*1);
+//					memset((BYTE *)(0xA0001000),0,SECTORSIZE*1);
+//					memset(buffer,0,SECTORSIZE*1);
+//					if(buffer[]!= 0xAA && buffer[]!= 0xAA)
+//					{
+//						xil_printf(" err!\r\n");
+//					}
+//				}
+
+#endif
+
+
+		/*** mount filesysterm ***/
+//		disk_read(fs.pdrv, (BYTE *)(0xA0001000), 0, 1);
+//		memset((BYTE *)(0xA0001000),0,SECTORSIZE*1);
+//		disk_read(fs->pdrv, (BYTE *)(0xA0001000), 0X3F, 1);
+//		u32 a=Xil_In32((uint32_t *)(0xA0001000+510));
+		ret = f_mount (&fs, " ", 1);
+		if (ret != FR_OK) {
+		xil_printf("f_mount  Failed! ret=%d\n", ret);
+			return 0;
+		}
+		xil_printf(" Init All ok!\r\n");
+
+	#if 1 //recv
+		while(1)
+		{
+			GetMessage(&CurMsg);
+
+			switch(CurMsg.HandType)
+			{
+    				case 0XA2:
+    					xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+    					switch( CurMsg.HandId)
+    					{
+    						case 0x1:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a201(&CurMsg);
+    						break;
+    						case 0x2:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a202(&CurMsg);
+    						break;
+    						case 0x4:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a204(&CurMsg);
+    						break;
+    						case 0x5:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_a205(&CurMsg);
+    						break;
+    						default:
+    						break;
+    					}
+    					break;
+    				case 0XB2:
+    					xil_printf("%s %d  CurMsg.HandType:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType);
+    					run_cmd_b201(&CurMsg);
+    					break;
+    				case 0XD2:
+    					xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+    					switch( CurMsg.HandId)
+    					{
+    						case 0x1:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_cmd_d201(&CurMsg);
+    						break;
+//    						case 0x2:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d202(&CurMsg);
+//    						break;
+    						case 0x3:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d203(&CurMsg);
+    						break;
+//    						case 0x4:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d204(&CurMsg);
+//    						break;
+//    						case 0x5:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d205(&CurMsg);
+    						break;
+//    						case 0x6:
+//    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//    							run_cmd_d206(&CurMsg);
+//    						break;
+    						case 0x7:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_reply_d207(&CurMsg);
+    						break;
+    						case 0x8:
+    							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+    							run_reply_d208(&CurMsg);
+    						break;
+    						default:
+    						break;
+    					}
+    					break;
+
+    				default:
+    					break;
+			}
+
+//			ret = f_mount (NULL, "", 1);
+//			if (ret != FR_OK)
+//			{
+//				xil_printf("f_mount  Failed! ret=%d\n", ret);
+//				return 0;
+//			}
+    }
+#endif  //recv
+
+
+#if 0  //fs test
+
+	#if 1//format the filesysterm
+    	ret = f_mkfs(
+    		" ",	/* Logical drive number */
+			0,			/* Format option  FM_EXFAT*/
+			Buff,			/* Pointer to working buffer (null: use heap memory) */
+			sizeof Buff			/* Size of working buffer [byte] */
+    		);
+    	if (ret != FR_OK) {
+    		xil_printf("f_mkfs  Failed! ret=%d\n", ret);
+    		return 0;
+    		}
+	#endif//format the filesysterm
+
+	#if 1    //f_mount the filesysterm
+    	ret = f_mount (
+   		&fs,			/* Pointer to the filesystem object (NULL:unmount)*/
+		" ",	/* Logical drive number to be mounted/unmounted */
+   		1			/* Mode option 0:Do not mount (delayed mount), 1:Mount immediately */
+    	);
+    	if (ret != FR_OK) {
+	    xil_printf("f_mount  Failed! ret=%d\n", ret);
+   		return 0;
+    	}
+    	xil_printf("f_mount  ok!......\n");
+	#endif   //f_mount the filesysterm
+
+	#if 1  //f_mkdir
+	ret =f_mkdir("payload");
+	   if (ret != FR_OK) {
+	    xil_printf("f_mkdir  Failed! ret=%d\n", ret);
+   		return -1;
+	   }
+	   xil_printf("f_mkdir ok!....... ");
+	#endif//f_mkdir
+
+	#if 1   //f_open&write
+	   ret =f_open(&fnew, "payload/wfeng.txt", FA_CREATE_ALWAYS | FA_WRITE );
+	   if (ret != FR_OK) {
+	    xil_printf("f_open  Failed! ret=%d\n", ret);
+   		return -1;
+	   }
+	   xil_printf("f_open ok!..........\n");
+	   
+	   xil_printf("START f_WRITE 10MB DATA!.........\n");
+	   memset((BYTE *)(0x80000000),7,1048576*10);
+	   ret =f_write(&fnew,(BYTE *)(0x80000000),1048576*10,&fnum);
+	   if (ret != FR_OK) {
+	    xil_printf("f_write  Failed! ret=%d\n", ret);
+   		return -1;
+	   }
+	   xil_printf("END f_write 10MB DATA!,fnum = %d",fnum);
+
+	    f_close(&fnew);
+	#endif //f_open&write
+
+#endif  //fs test
+
+    cleanup_platform();
+    return 0;
+}
+
+void DiskInit()
+{
+	uint8_t   i;
+	//xil_printf("Configure Timeout Value in second (HEX-0x?): \0");
+	//mygets(input_string);
+	//timeout_sec = strtoul(input_string, NULL, 0);
+	timeout_sec = 1;
+    xil_printf("NVMe Host IP Core Initialization Starts....\r\n");
+
+    for(i=0;i<NHC_NUM;i++)
+    {
+		if(nhc_init(i,timeout_sec, freq_MHz) == 0x1) // 250MHz
+		{
+			xil_printf("NVMe Host IP Core #%1d Initialization Completes.\r\n",i);
+		}
+		else
+		{
+			xil_printf("NVMe Host IP Core #%1d Initialization Failed!\r\n",i);
+		}
+    }
+    // ---------------------------------------------------------------------------
+    // NHC Queue Configuration: 64-nodes depth and User mode
+    // ---------------------------------------------------------------------------
+    xil_printf("User Command Queue Configuration Starts....\r\n");
+    for(i=0;i<NHC_NUM;i++)
+    {
+		if(nhc_queue_init(i,63, 0) == 0x1)
+		{
+			xil_printf("Core #%1d User Command Queue Configuration Completes.\r\n",i);
+		}
+		else
+		{
+			xil_printf("Core #%1d User Command Queue Configuration Failed!\r\n",i);
+		}
+    }
+    // ---------------------------------------------------------------------------
+    // NHC Startup
+    // ---------------------------------------------------------------------------
+    xil_printf("NHC Startup Starts(Identification, I/O Queue, ...)....\r\n");
+    for(i=0;i<NHC_NUM;i++)
+    {
+		if(adm_startup(i) == 0x2)
+		{
+			xil_printf("NHC%1d Startup Completes.\r\n",i);
+		}
+		else
+		{
+			xil_printf("NHC%1d Startup Failed!\r\n",i);
+		}
+    }
+
+    init_done = 0xFF;
+    for(i=0;i<NHC_NUM;i++)
+    {
+    	io_monitor_enable(i);
+    }
+
+}
+
