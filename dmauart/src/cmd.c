@@ -759,7 +759,6 @@ int run_cmd_a201(StructMsg *pMsg)
 	ChangeTimeNode ChangeTimenode;
 	AccessTimeNode AccessTimenode;
 	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
-//	i=i+4; //1.11¼Ó  by lyh
 	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
 	i=i+4;
 	temp=i;   // 9.7 LYH

@@ -49,6 +49,7 @@ uint32_t  packnum;
 int main()
 {
 		int ret;
+		uint8_t inputcmd=0;
 		init_platform();
 		xil_printf("UCAS Prj1079 \r\n");
 		DiskInit();
@@ -77,7 +78,15 @@ mount:	ret = f_mount (&fs, "", 1);
 			if(ret==FR_NO_FILESYSTEM)
 			{
 				//是否重新格式化代码
-				goto Re_MKFS;
+				xil_printf("if reformat the filesysterm? '1:yes/2:no' \r\n");
+				xil_printf("Command: \0");
+				mygets(input_string);
+				inputcmd=strtoul(input_string, NULL,0);
+				if(0x1==inputcmd)
+				{
+					goto Re_MKFS;
+				}
+				return 0;
 			}
 //			return 0;
 		}
@@ -113,13 +122,13 @@ mount:	ret = f_mount (&fs, "", 1);
     						case 0x4:
     							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
     							xil_printf("------Start executing commands!------\r\n");
-    							run_cmd_a204(&CurMsg);
+//    							run_cmd_a204(&CurMsg);
     							xil_printf("------commands executing complete!------\r\n");
     						break;
     						case 0x5:
     							xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
     							xil_printf("------Start executing commands!------\r\n");
-    							run_cmd_a205(&CurMsg);
+//    							run_cmd_a205(&CurMsg);
     							xil_printf("------commands executing complete!------\r\n");
     						break;
     						case 0x8:

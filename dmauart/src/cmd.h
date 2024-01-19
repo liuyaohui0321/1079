@@ -252,17 +252,25 @@ typedef struct
 	u32		HandType;
 	u32		HandId;
 	u32		PackNum;
-	u8		Name[1024];
-	u8		Dir[1024];
+//	u8		Name[1024];
+//	u8		Dir[1024];
+	u16		Name[512];
+	u16		Dir[512];
 	u64		Size;
 //	u32		SubFolderNum;
 //	u32		SubFileNum;
-	u8		CreateTime1[48];
-	u8		CreateTime2[48];
-	u8		ChangeTime1[48];
-	u8		ChangeTime2[48];
-	u8		AccessTime1[48];
-	u8		AccessTime2[48];
+//	u8		CreateTime1[48];
+//	u8		CreateTime2[48];
+//	u8		ChangeTime1[48];
+//	u8		ChangeTime2[48];
+//	u8		AccessTime1[48];
+//	u8		AccessTime2[48];
+	u16		CreateTime1[24];
+	u16		CreateTime2[24];
+	u16		ChangeTime1[24];
+	u16		ChangeTime2[24];
+	u16		AccessTime1[24];
+	u16		AccessTime2[24];
 	u32		RWCtrl;
 	u32		DisplayCtrl;
 	u32		CheckCode;
@@ -277,17 +285,25 @@ typedef struct
 	u32		HandType;
 	u32		HandId;
 	u32		PackNum;
-	u8		Name[1024];
-	u8		Dir[1024];
+//	u8		Name[1024];
+//	u8		Dir[1024];
+	u16		Name[512];
+	u16		Dir[512];
 	u64		Size;
 	u32		SubFolderNum;
 	u32		SubFileNum;
-	u8		CreateTime1[48];
-	u8		CreateTime2[48];
-	u8		ChangeTime1[48];
-	u8		ChangeTime2[48];
-	u8		AccessTime1[48];
-	u8		AccessTime2[48];
+//	u8		CreateTime1[48];
+//	u8		CreateTime2[48];
+//	u8		ChangeTime1[48];
+//	u8		ChangeTime2[48];
+//	u8		AccessTime1[48];
+//	u8		AccessTime2[48];
+	u16		CreateTime1[24];
+	u16		CreateTime2[24];
+	u16		ChangeTime1[24];
+	u16		ChangeTime2[24];
+	u16		AccessTime1[24];
+	u16		AccessTime2[24];
 	u32		RWCtrl;
 	u32		DisplayCtrl;
 	u32		CheckCode;
@@ -348,8 +364,8 @@ typedef struct
 #define CW16(a,b) ( (uint16_t)((((uint16_t)(a))<<8) | ((uint16_t)b)) )			//改之前
 //#define CW16(a,b) ( (uint16_t)((((uint16_t)(a))) | ((uint16_t)b)<<8))			//改之后
 
-#define CW32(a,b,c,d) ((uint32_t)((((uint32_t)(a))<<24) | (((uint32_t)b)<<16)| (((uint32_t)c)<<8)| ((uint32_t)d)))     //改之前
-//#define CW32(a,b,c,d) ((uint32_t)((((uint32_t)(a))) | (((uint32_t)b)<<8)| (((uint32_t)c)<<16)| ((uint32_t)d)<<24))   //改之后
+//#define CW32(a,b,c,d) ((uint32_t)((((uint32_t)(a))<<24) | (((uint32_t)b)<<16)| (((uint32_t)c)<<8)| ((uint32_t)d)))     //改之前
+#define CW32(a,b,c,d) ((uint32_t)((((uint32_t)(a))) | (((uint32_t)b)<<8)| (((uint32_t)c)<<16)| ((uint32_t)d)<<24))   //改之后
 #define SW16(x) ((uint16_t)((((uint16_t)(x)&0x00ffU)<<8) | \
 							(((uint16_t)(x)&0xff00U)>>8) ))
 

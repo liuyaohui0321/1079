@@ -346,8 +346,8 @@ typedef struct
 {
 	u32  type;
 	u64  size;
-	u8   name[1024];
-	u8	 ChangeTime1[48];
+	u16  name[512];
+	u16	 ChangeTime1[24];
 }__attribute__((__packed__))SingleFileOrDir;
 
 //Á´±í½Úµã
