@@ -7620,7 +7620,62 @@ void DestroyList(LinkedList List)
 	//头结点指针置空
 	List = NULL;
 }
-//记录扫描到的文件文件夹结构信息
+
+////记录扫描到的文件文件夹结构信息 显示目录下所有内容
+//FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
+//{
+//	FRESULT res;
+//	DIR dir;
+//	UINT i;
+//	static FILINFO fno;
+//	char filename[1024]={0};
+//	Node node;
+//
+//	res = f_opendir(&dir, path);                       /* Open the directory */
+//	if (res == FR_OK) {
+//		for (;;) {
+//			memset(&node,0,sizeof(Node));
+//			res = f_readdir(&dir, &fno);                   /* Read a directory item */
+//			if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
+//			if (fno.fattrib & AM_DIR) {                    /* It is a directory */
+//				i = strlen(path);
+//				sprintf(&path[i], "/%s", fno.fname);
+//#if 1   		// 之前用动态链表存储的方法，缺点：占用堆空间，后来用内存池存放动态数据
+//				//节点赋值
+//				node.data.type=1;		//文件：0，文件夹：1
+//				get_Dir_size(path,&node.data.size);
+//				strcpy(node.data.name,path);
+////				node.data.ChangeTime1
+//
+//				//节点入队
+//				List_TailInsert(LinkList,node);
+//#endif
+//				res = record_struct_of_Dir_and_File(path,LinkList);  /* Enter the directory */
+//				if (res != FR_OK) break;
+////				printf("directory name is:%s\n", path);
+//				path[i] = 0;
+//			}
+//			else {                                       /* It is a file. */
+////				printf("file name is:%s/%s\n", path, fno.fname);
+//				sprintf(filename,"%s/%s", path, fno.fname);
+//#if 1   		//之前用动态链表存储的方法，缺点：占用堆空间，后来用内存池存放动态数据
+//				//节点赋值
+//				node.data.type=0;		//文件：0，文件夹：1
+//				node.data.size=fno.fsize;
+//				strcpy(node.data.name,filename);
+////				node.data.ChangeTime1
+//
+//				//节点入队
+//				List_TailInsert(LinkList,node);
+//#endif
+//			}
+//		}
+//		f_closedir(&dir);
+//	}
+//	return res;
+//}
+
+//记录扫描到的文件文件夹结构信息 显示目录下 一层内容
 FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 {
 	FRESULT res;
@@ -7649,10 +7704,10 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 				//节点入队
 				List_TailInsert(LinkList,node);
 #endif
-				res = record_struct_of_Dir_and_File(path,LinkList);  /* Enter the directory */
-				if (res != FR_OK) break;
+//				res = record_struct_of_Dir_and_File(path,LinkList);  /* Enter the directory */
+//				if (res != FR_OK) break;
 //				printf("directory name is:%s\n", path);
-				path[i] = 0;
+//				path[i] = 0;
 			}
 			else {                                       /* It is a file. */
 //				printf("file name is:%s/%s\n", path, fno.fname);
@@ -7722,8 +7777,8 @@ FRESULT get_Dir_size(BYTE *path,uint64_t*size)
 	return res;
 }
 
-//获取目录中的文件和文件夹数量
-FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num)
+//获取目录中的文件和文件夹数量 	mode:0表示递归获取所有层内容  mode:1表示获取单层内容
+FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode)
 {
     FRESULT res;
     DIR dir;
@@ -7738,10 +7793,12 @@ FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num)
 			if (fno.fattrib & AM_DIR) {                    /* It is a directory */
 				i = strlen(path);
 				sprintf(&path[i], "/%s", fno.fname);
-
-				res = Num_of_Dir_and_File(path,file_num,dir_num);  /* Enter the directory */
-				if (res != FR_OK) break;
-				// printf("directory name is:%s\n", path);
+				if(!mode)
+				{
+					res = Num_of_Dir_and_File(path,file_num,dir_num,mode);  /* Enter the directory */
+					if (res != FR_OK) break;
+					// printf("directory name is:%s\n", path);
+				}
 				(*dir_num)++;
 				path[i] = 0;
 			}
@@ -7797,7 +7854,7 @@ FRESULT Storage_state1(QWORD* totalcap,QWORD* usedcap,QWORD* freecap,DWORD* file
 	 Used_Cap = Total_Cap-Free_Cap;                    				// B
 	 xil_printf("Used_Cap=%llu\r\n", Used_Cap);
 
-	 res=Num_of_Dir_and_File ("",&file_num,&dir_num);
+	 res=Num_of_Dir_and_File ("",&file_num,&dir_num,0);
 	 if (res != FR_OK)
 	 {
 	 	  xil_printf("file_num get Failed! ret=%d\r\n", res);

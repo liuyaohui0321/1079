@@ -1148,7 +1148,7 @@ int run_cmd_a201(StructMsg *pMsg)
 				return -1;
 			}
 			nf=0,nd=0;
-			ret =Num_of_Dir_and_File(cmd_str_11,&nf,&nd);
+			ret =Num_of_Dir_and_File(cmd_str_11,&nf,&nd,0);
 			if (ret != FR_OK) {
 				xil_printf("Get Directory List Failed! ret=%d\r\n", ret);
 			   	return -1;
@@ -2033,7 +2033,7 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 		int nfile=0,ndir=0;
 		StructA207Ack ReplyStructA207Ack={0};
 		fr = f_stat(path, &fno);
-		Num_of_Dir_and_File (path,&nfile,&ndir);
+		Num_of_Dir_and_File (path,&nfile,&ndir,0);
 		switch (fr)
 		{
 			case FR_OK:
@@ -2149,6 +2149,7 @@ static LinkedList InitList(void)
 	 
 	 return List;
 }
+
 // 返回目录中的文件和子目录列表 	存储组件->主控组件
 int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
 {
@@ -2174,7 +2175,7 @@ int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
 		ReplyStructA208Ack.AckHandType=0;
 		ReplyStructA208Ack.AckHandId=0;
 
-		Status = Num_of_Dir_and_File(path,&TotalFileNum,&TotaldirNum);
+		Status = Num_of_Dir_and_File(path,&TotalFileNum,&TotaldirNum,1);
 		if (Status != FR_OK) {
 			xil_printf("Count Failed! ret=%d\r\n",Status);
 			return -1;
@@ -2191,7 +2192,9 @@ int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
 		ReplyStructA208Ack.SubpackDirNum;	//子包文件夹个数（N个）
 #endif
 		// 循环N个单个文件或文件夹目录信息
+		// 1.19号之前的代码，客户不想展示每一层文件夹下的内容，只想显示一层，因此1.19号之后用另一套代码
 		record_struct_of_Dir_and_File(path,LinkList);
+
 //		ReplyStructA208Ack.message=(SingleFileOrDir  *)wjq_malloc_t(sizeof(SingleFileOrDir)*(sum+1));// 定义存储单个文件或文件夹目录信息结构体数组
 		ReplyStructA208Ack.message=(SingleFileOrDir  *)wjq_malloc_m(sizeof(SingleFileOrDir)*(sum+1));// 定义存储单个文件或文件夹目录信息结构体数组
 		LinkedList r=LinkList;
@@ -2221,6 +2224,7 @@ int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
 		return 0;
 
 }
+
 
 int run_cmd_b201(StructMsg *pMsg)
 {
