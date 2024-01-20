@@ -57,9 +57,6 @@ int main()
 		MsgQueryInit();         // Queue初始化
 		InitTimeList();
 
-		int writebuff[10]={0,1,2,3,4,5,6,7,8,9};
-		int readbuff[10]={0};
-		int btw=8,bw=0,btr=16,br=0;
 
 #if   0//format the filesysterm
 		ret = f_mkfs(
@@ -96,44 +93,6 @@ mount:	ret = f_mount (&fs, "", 1);
 		}
 		xil_printf(" Init All ok!\r\n");
 #endif
-		ret=f_open(&file,"abc",FA_READ|FA_WRITE|FA_CREATE_ALWAYS);
-		if (ret != FR_OK) {
-			xil_printf("f_open  Failed! ret=%d\n", ret);
-			return 0;
-		}
-
-		ret=f_write1(&file,writebuff,btw,&bw);
-		if (ret != FR_OK) {
-			xil_printf("f_write  Failed! ret=%d\n", ret);
-			return 0;
-		}
-
-		ret=f_close(&file);
-		if (ret != FR_OK) {
-			xil_printf("f_close  Failed! ret=%d\n", ret);
-			return 0;
-		}
-
-		ret=f_open(&file,"abc",FA_READ|FA_WRITE|FA_OPEN_EXISTING);
-		if (ret != FR_OK) {
-			xil_printf("f_open  Failed! ret=%d\n", ret);
-			return 0;
-		}
-
-		ret=f_read1(&file,readbuff,btr,&br);
-		if (ret != FR_OK) {
-			xil_printf("f_read  Failed! ret=%d\n", ret);
-			return 0;
-		}
-
-		ret=f_close(&file);
-		if (ret != FR_OK) {
-			xil_printf("f_close  Failed! ret=%d\n", ret);
-			return 0;
-		}
-
-
-
 
 #if  1
    #if  1 //recv

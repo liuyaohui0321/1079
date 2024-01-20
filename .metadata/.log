@@ -19310,3 +19310,49 @@ Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.]. Thread: Worker-25
 
 !ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 18:58:10.258
 !MESSAGE XSCT command with result: [disconnect tcfchan#6], Result: [null, ]. Thread: Thread-825
+!SESSION 2024-01-19 19:04:26.628 -----------------------------------------------
+eclipse.buildId=2019.1
+java.version=1.8.0_112
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2024-01-19 19:04:29.897
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-19 19:04:29.898
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2024-01-19 19:04:31.173
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-19 19:04:31.173
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.597
+!MESSAGE XSCT Command: [set sdk::sdk_chan tcfchan#0], Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.597
+!MESSAGE XSCT Command: [::hsi::utils::init_repo], Thread: Worker-8
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.622
+!MESSAGE XSCT command with result: [set sdk::sdk_chan tcfchan#0], Result: [null, tcfchan#0]. Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.625
+!MESSAGE XSCT Command: [setws C:/Users/liuyaohui/Desktop/0115_1x], Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.805
+!MESSAGE XSCT command with result: [::hsi::utils::init_repo], Result: [null, ]. Thread: Worker-8
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.807
+!MESSAGE XSCT command with result: [setws C:/Users/liuyaohui/Desktop/0115_1x], Result: [null, ]. Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.816
+!MESSAGE XSCT Command: [::hsi::utils::add_repo ""], Thread: Worker-8
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.839
+!MESSAGE XSCT command with result: [::hsi::utils::add_repo ""], Result: [null, ]. Thread: Worker-8
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:40.856
+!MESSAGE XSCT Command: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: Worker-7
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-19 19:04:44.246
+!MESSAGE XSCT command with result: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, ]. Thread: Worker-7
