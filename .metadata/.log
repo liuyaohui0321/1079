@@ -8647,6 +8647,7 @@ java.net.SocketException: Connection reset
 	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:186)
 	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:85)
 	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:328)
+<<<<<<< HEAD
 >>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
 !SESSION 2024-01-21 13:27:03.627 -----------------------------------------------
 eclipse.buildId=2019.1
@@ -14063,3 +14064,6 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY com.xilinx.sdk.utils 0 0 2024-01-21 13:33:16.750
 !MESSAGE XSCT command with result: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, ]. Thread: Worker-0
+=======
+>>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba

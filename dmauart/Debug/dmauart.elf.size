@@ -1,2 +1,6 @@
    text	   data	    bss	    dec	    hex	filename
+<<<<<<< HEAD
  444684	   1988	 206800	 653472	  9f8a0	dmauart.elf
+=======
+ 442756	   1956	 206796	 651508	  9f0f4	dmauart.elf
+>>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102

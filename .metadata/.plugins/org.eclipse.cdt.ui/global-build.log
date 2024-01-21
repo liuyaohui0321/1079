@@ -12363,6 +12363,7 @@ mb-size dmauart.elf  |tee "dmauart.elf.size"
  442756	   1956	 206796	 651508	  9f0f4	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
+<<<<<<< HEAD
 13:27:35 **** Incremental Build of configuration Debug for project dmauart ****
 make all 
 'Building target: dmauart.elf'
@@ -12586,3 +12587,5 @@ mb-size dmauart.elf  |tee "dmauart.elf.size"
  444684	   1988	 206800	 653472	  9f8a0	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
+=======
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba

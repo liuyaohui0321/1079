@@ -21028,6 +21028,7 @@ con
 15:49:31 INFO  : XSCT server has started successfully.
 15:49:31 INFO  : Successfully done setting XSCT server connection channel  
 15:49:31 INFO  : Successfully done setting SDK workspace  
+<<<<<<< HEAD
 >>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
 13:27:11 INFO  : Registering command handlers for SDK TCF services
 13:27:12 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
@@ -21084,3 +21085,6 @@ con
 13:33:14 INFO  : Restoring global repository preferences: 
 		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
 13:33:14 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+=======
+>>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
