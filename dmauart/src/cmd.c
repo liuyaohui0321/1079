@@ -2390,6 +2390,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 
           // 获取并解析从DMA0传过来的文件路径
 		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+//		ret = f_open(&file,"B", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -2397,6 +2398,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 			return ret;
 		}
 		xil_printf(" Open ok!\r\n");
+		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
 		while (1)
 		{
 			if (RxReceive(DestinationBuffer,&cmd_len) == XST_SUCCESS)
@@ -2418,7 +2420,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 					 return ret;
 				}
 				cmd_write_cnt += 1;
-//				xil_printf("buff:0x%lx \r\n",(buff-buff1)*2+MEM_DDR3_BASE);
+//				xil_printf("buff:0x%lx \r\n",buff);
 			}
 			else
 			{

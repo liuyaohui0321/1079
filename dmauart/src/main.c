@@ -56,7 +56,7 @@ int main()
 		SimpleDmaInit();        // 1x DMA0
 		MsgQueryInit();         // Queue初始化
 		InitTimeList();
-
+		XLLFIFO_SysInit();
 
 #if   0//format the filesysterm
 		ret = f_mkfs(
