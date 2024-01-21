@@ -12363,3 +12363,22 @@ mb-size dmauart.elf  |tee "dmauart.elf.size"
  442756	   1956	 206796	 651508	  9f0f4	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
+<<<<<<< HEAD
+=======
+13:27:35 **** Incremental Build of configuration Debug for project dmauart ****
+make all 
+'Building target: dmauart.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../dmauart_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "dmauart.elf"  ./src/fat/diskio.o ./src/fat/ff.o ./src/fat/ffsystem.o ./src/fat/ffunicode.o  ./src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./src/7x_dma.o ./src/alloc.o ./src/check.o ./src/cmd.o ./src/main.o ./src/malloc.o ./src/mem_test.o ./src/nhc_amba.o ./src/platform.o ./src/simple_dma.o ./src/sys.o ./src/time.o ./src/uart.o ./src/uart_get.o ./src/xllfifo_polling_example.o ./src/xuartlite_intr_example.o ./src/xuartlite_polled_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: dmauart.elf'
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size dmauart.elf  |tee "dmauart.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 444684	   1988	 206800	 653472	  9f8a0	dmauart.elf
+'Finished building: dmauart.elf.size'
+' '
+13:27:50 **** Incremental Build of configuration Debug for project dmauart ****
+make all 
+make: Nothing to be done for 'all'.
+>>>>>>> 4bb324d (1.21下午保存一版，与上一般没区别)

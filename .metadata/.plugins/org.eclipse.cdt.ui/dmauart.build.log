@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 13:05:43 **** Auto Build of configuration Debug for project dmauart ****
 =======
 16:12:44 **** Auto Build of configuration Debug for project dmauart ****
@@ -2484,4 +2485,11 @@ mb-size dmauart.elf  |tee "dmauart.elf.size"
 
 16:12:45 Build Finished (took 1s.45ms)
 >>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
+=======
+13:27:50 **** Incremental Build of configuration Debug for project dmauart ****
+make all 
+make: Nothing to be done for 'all'.
+
+13:27:50 Build Finished (took 304ms)
+>>>>>>> 4bb324d (1.21下午保存一版，与上一般没区别)
 
