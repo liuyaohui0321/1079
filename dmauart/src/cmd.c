@@ -2388,7 +2388,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 
-          // 获取并解析从DMA1传过来的文件路径
+          // 获取并解析从DMA0传过来的文件路径
 		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
@@ -2401,14 +2401,13 @@ int run_cmd_d20A(StructMsg *pMsg)
 		{
 			if (RxReceive(DestinationBuffer,&cmd_len) == XST_SUCCESS)
 			{
-				packnum =DestinationBuffer[0];
-				buff =DestinationBuffer[1];  // 保存写入数据的DDR地址
-				len  =DestinationBuffer[2];  // 写入数据的长度
 
-				buff1=(buff<0x90000000?MEM_DDR3_BASE:0x90000000);
+				buff =DestinationBuffer[0];  // 保存写入数据的DDR地址
+				len  =DestinationBuffer[1];  // 写入数据的长度
+
 				ret = f_write1(
 					&file,			/* Open file to be written */
-					(buff-buff1)*2+MEM_DDR3_BASE,			/* Data to be written */
+					buff,			/* Data to be written */
 					len,			/* Number of bytes to write */
 					&bw				/* Number of bytes written */
 				);
@@ -2458,7 +2457,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 			}
 		 }   // while
 		 fclose(&file);
-		 cleanup_platform();
+//		 cleanup_platform();
 		 return 0;
 }
 
