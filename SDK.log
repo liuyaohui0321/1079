@@ -21076,3 +21076,11 @@ con
 
 13:28:14 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
 13:28:33 INFO  : Disconnected from the channel tcfchan#1.
+13:33:12 INFO  : Registering command handlers for SDK TCF services
+13:33:13 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+13:33:14 INFO  : XSCT server has started successfully.
+13:33:14 INFO  : Successfully done setting XSCT server connection channel  
+13:33:14 INFO  : Successfully done setting SDK workspace  
+13:33:14 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+13:33:14 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
