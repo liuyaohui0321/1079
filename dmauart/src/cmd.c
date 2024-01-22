@@ -291,7 +291,7 @@ void cmd_type_id_parse(StructMsg *pMsg)
 		SendMessage( &TMsg );
 }
 
-void convert(u16 *str1,u8 *str2)		//add by lyh on 1.22
+void convert(u16 *str1,u8 *str2)	//add by lyh on 1.22  单字节字符的ASCLL码后补零凑成16位,16位GB2312保持不变
 {
 		int x=0,h=0;
 		for (x = 0; x < 256; x++)
@@ -314,7 +314,7 @@ void convert(u16 *str1,u8 *str2)		//add by lyh on 1.22
 		}
 }
 
-void reverse_u16(u16 *str1,u16 *str2)	//双字节数据按字节导致
+void reverse_u16(u16 *str1,u16 *str2)	//数组中,双字节数据按字节倒置     例如0xB7D6->0xD6B7
 {
 	int i=0;
 	u8  STR;
@@ -326,6 +326,22 @@ void reverse_u16(u16 *str1,u16 *str2)	//双字节数据按字节导致
 		STR=(str1[i]>>8);
 		str2[i]|=STR;
 		if(str1[i+1]=='\0') break;
+	}
+}
+
+void ConvertReverse(u16 *str)   // 数组里类似0x3000的数,转换成0x0030
+{
+	int x=0;
+	u8 STR=0;
+	for(x=0;;x++)
+	{
+		STR=str[x]>>8;
+		if(STR<=0x7E)
+		{
+			//按字节倒置
+			str[x]>>=8;
+		}
+		if(str[x+1]=='\0')  break;
 	}
 }
 
@@ -1991,6 +2007,12 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 	   int Status;
 	   FILINFO fno;
 	   FRESULT fr;
+	   u8 CreateTime1[48]={0};
+	   u8 CreateTime2[48]={0};
+	   u8 ChangeTime1[48]={0};
+	   u8 ChangeTime2[48]={0};
+	   u8 AccessTime1[48]={0};
+	   u8 AccessTime2[48]={0};
 	   StructA206Ack ReplyStructA206Ack={0};
 	   fr = f_stat(path, &fno);
 	   switch(fr)
@@ -2016,17 +2038,47 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 
 		get_path_dname(path,ReplyStructA206Ack.Dir);
 		ReplyStructA206Ack.Size = fno.fsize;
-		sprintf(ReplyStructA206Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+//		sprintf(ReplyStructA206Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+//				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+//				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间   // 11.21 tested by lyh: have some problems
+//
+//		sprintf(ReplyStructA206Ack.ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+//				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+//				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+//
+//		sprintf(ReplyStructA206Ack.AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+//				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+//				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+
+		sprintf(CreateTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
-				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间   // 11.21 tested by lyh: have some problems
+				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间
+		convert(ReplyStructA206Ack.CreateTime1,CreateTime1);
 
-		sprintf(ReplyStructA206Ack.ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间
+		convert(ReplyStructA206Ack.CreateTime2,CreateTime2);
+
+		sprintf(ChangeTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA206Ack.ChangeTime1,ChangeTime1);
 
-		sprintf(ReplyStructA206Ack.AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA206Ack.ChangeTime2,ChangeTime2);
+
+		sprintf(AccessTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA206Ack.AccessTime1,AccessTime1);
+
+		sprintf(AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA206Ack.AccessTime2,AccessTime2);
 
 		if((fno.fattrib & AM_RDO) == 0)
 		{
@@ -2070,7 +2122,12 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 		FILINFO fno;
 		int temp1, temp2;
 		int nfile=0,ndir=0;
-//		u16 a[100]={0};
+		u8 CreateTime1[48]={0};
+		u8 CreateTime2[48]={0};
+		u8 ChangeTime1[48]={0};
+		u8 ChangeTime2[48]={0};
+		u8 AccessTime1[48]={0};
+		u8 AccessTime2[48]={0};
 		StructA207Ack ReplyStructA207Ack={0};
 		fr = f_stat(path, &fno);
 		Num_of_Dir_and_File (path,&nfile,&ndir,0);
@@ -2100,20 +2157,43 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 		get_Dir_size(ReplyStructA207Ack.Name,&ReplyStructA207Ack.Size);
 		convert(ReplyStructA207Ack.Name,fno.fname);     //add   by lyh on the 1.22
 //		reverse_u16(ReplyStructA207Ack.Name,a);
+//		ConvertReverse(ReplyStructA207Ack.Name);
 
 		ReplyStructA207Ack.SubFolderNum =ndir;
 		ReplyStructA207Ack.SubFileNum =nfile;
-		sprintf(ReplyStructA207Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+//		sprintf(ReplyStructA207Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+//				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+//				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
+		sprintf(CreateTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
-				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     // 11.21 tested by lyh: have some problems
+				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
+		convert(ReplyStructA207Ack.CreateTime1,CreateTime1);
+//		ConvertReverse(ReplyStructA207Ack.CreateTime1);
 
-		sprintf(ReplyStructA207Ack.ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
+		convert(ReplyStructA207Ack.CreateTime2,CreateTime2);
+
+		sprintf(ChangeTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA207Ack.ChangeTime1,ChangeTime1);
 
-		sprintf(ReplyStructA207Ack.AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA207Ack.ChangeTime2,ChangeTime2);
+
+		sprintf(AccessTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA207Ack.AccessTime1,AccessTime1);
+
+		sprintf(AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
+				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
+		convert(ReplyStructA207Ack.AccessTime2,AccessTime2);
 
 		if ((fno.fattrib & AM_RDO) == 0)
 		{

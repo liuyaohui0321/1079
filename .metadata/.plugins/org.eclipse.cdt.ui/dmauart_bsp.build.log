@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-09:40:54 **** Build of project dmauart_bsp ****
-=======
-<<<<<<< HEAD
-12:58:20 **** Build of project dmauart_bsp ****
-=======
-15:49:33 **** Auto Build of project dmauart_bsp ****
-<<<<<<< HEAD
->>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
-=======
->>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
->>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
->>>>>>> be3e6dd1b150becdbe4067936bc8e1a3bc1fef6f
+17:08:42 **** Build of project dmauart_bsp ****
 make -k all 
 "Running Make include in microblaze_1/libsrc/axidma_v9_9/src"
 make -C microblaze_1/libsrc/axidma_v9_9/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra -g"
@@ -63,17 +51,5 @@ make -C microblaze_1/libsrc/uartlite_v3_2/src -s libs  "SHELL=CMD" "COMPILER=mb-
 "Compiling uartlite"
 'Finished building libraries'
 
-<<<<<<< HEAD
-09:41:04 Build Finished (took 10s.632ms)
-=======
-<<<<<<< HEAD
-12:58:26 Build Finished (took 6s.81ms)
-=======
-15:49:39 Build Finished (took 6s.36ms)
-<<<<<<< HEAD
->>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
-=======
->>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
->>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
->>>>>>> be3e6dd1b150becdbe4067936bc8e1a3bc1fef6f
+17:08:54 Build Finished (took 12s.220ms)
 
