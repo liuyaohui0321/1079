@@ -24,7 +24,6 @@ extern uint32_t  cmd_len;
 extern uint32_t  len;
 extern uint32_t  buff,buff_r,buff1;
 extern uint32_t  packnum;
-
 ///********************读盘存盘数据参数*******************/
 //uint32_t  buff,buff_r;
 //uint32_t  packnum;        // lyh 2023.8.28
@@ -290,6 +289,44 @@ void cmd_type_id_parse(StructMsg *pMsg)
 		//xil_printf("%s %d p->HandType:0x%x  p->HandId:0x%x\n", __FUNCTION__, __LINE__,TMsg.HandType,TMsg.HandId);
 
 		SendMessage( &TMsg );
+}
+
+void convert(u16 *str1,u8 *str2)		//add by lyh on 1.22
+{
+		int x=0,h=0;
+		for (x = 0; x < 256; x++)
+		{
+				u8 name=str2[x];
+				if(name<=0x7E)
+				{
+					str1[h]=name;
+					str1[h]<<=8;
+				}
+				else
+				{
+					str1[h]=name;
+					str1[h]<<=8;
+					name=str2[++x];
+					str1[h]|=name;
+				}
+				h++;
+				if(str2[x+1]=='\0')  break;
+		}
+}
+
+void reverse_u16(u16 *str1,u16 *str2)	//双字节数据按字节导致
+{
+	int i=0;
+	u8  STR;
+	for(i=0;;i++)
+	{
+		STR=str1[i];
+		str2[i]=STR;
+		str2[i]<<=8;
+		STR=(str1[i]>>8);
+		str2[i]|=STR;
+		if(str1[i+1]=='\0') break;
+	}
 }
 
 void InitTimeList(void)
@@ -1974,8 +2011,10 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 		ReplyStructA206Ack.HandType = 0xA2;
 		ReplyStructA206Ack.HandId = 0x6;
 //		sprintf(ReplyStructA206Ack.Name,"%s",(char *)fno.fname);
-		strcpy((u8 *)ReplyStructA206Ack.Name,(char *)fno.fname);
-		get_path_dname(path,ReplyStructA206Ack.Dir);  // 11.21 annoted by lyh: have some problems
+//		strcpy((u8 *)ReplyStructA206Ack.Name,(char *)fno.fname);  //noted by lyh on the 1.22
+		convert(ReplyStructA206Ack.Name,fno.fname);				  //add   by lyh on the 1.22
+
+		get_path_dname(path,ReplyStructA206Ack.Dir);
 		ReplyStructA206Ack.Size = fno.fsize;
 		sprintf(ReplyStructA206Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
@@ -2031,6 +2070,7 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 		FILINFO fno;
 		int temp1, temp2;
 		int nfile=0,ndir=0;
+//		u16 a[100]={0};
 		StructA207Ack ReplyStructA207Ack={0};
 		fr = f_stat(path, &fno);
 		Num_of_Dir_and_File (path,&nfile,&ndir,0);
@@ -2053,10 +2093,14 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 		ReplyStructA207Ack.HandType = 0xA2;
 	//	ReplyStructA207Ack.HandId = 0x6;
 		ReplyStructA207Ack.HandId = 0x7;     // lyh 203.8.11改
+
 		strcpy((char *)ReplyStructA207Ack.Name, (char *)fno.fname);
-		get_path_dname(path,ReplyStructA207Ack.Dir);// 11.21 tested by lyh: have some problems
+		get_path_dname(path,ReplyStructA207Ack.Dir);
 //		ReplyStructA207Ack.Size =fno.fsize;
 		get_Dir_size(ReplyStructA207Ack.Name,&ReplyStructA207Ack.Size);
+		convert(ReplyStructA207Ack.Name,fno.fname);     //add   by lyh on the 1.22
+//		reverse_u16(ReplyStructA207Ack.Name,a);
+
 		ReplyStructA207Ack.SubFolderNum =ndir;
 		ReplyStructA207Ack.SubFileNum =nfile;
 		sprintf(ReplyStructA207Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",

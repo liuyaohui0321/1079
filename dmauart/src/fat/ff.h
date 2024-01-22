@@ -337,7 +337,6 @@ FRESULT f_mkfs (const TCHAR* path, const MKFS_PARM* opt, void* work, UINT len);	
 FRESULT f_fdisk (BYTE pdrv, const LBA_t ptbl[], void* work);		/* Divide a physical drive into some partitions */
 FRESULT f_setcp (WORD cp);											/* Set current code page */
 
-
 /*--------------------------------------------------------------*/
 /* 					MY Application Interface             	    */
 /*--------------------------------------------------------------*/

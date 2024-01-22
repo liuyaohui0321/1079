@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-12:58:20 **** Build of project dmauart_bsp ****
-=======
-15:49:33 **** Auto Build of project dmauart_bsp ****
-<<<<<<< HEAD
->>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
-=======
->>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
->>>>>>> 4bb324d (1.21下午保存一版，与上一般没区别)
+09:40:54 **** Build of project dmauart_bsp ****
 make -k all 
 "Running Make include in microblaze_1/libsrc/axidma_v9_9/src"
 make -C microblaze_1/libsrc/axidma_v9_9/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra -g"
@@ -29,6 +21,7 @@ make -C microblaze_1/libsrc/uartlite_v3_2/src -s include  "SHELL=CMD" "COMPILER=
 "Running Make libs in microblaze_1/libsrc/axidma_v9_9/src"
 make -C microblaze_1/libsrc/axidma_v9_9/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra -g"
 "Compiling axidma"
+mb-ar: creating ../../../lib/libxil.a
 "Running Make libs in microblaze_1/libsrc/bram_v4_3/src"
 make -C microblaze_1/libsrc/bram_v4_3/src -s libs  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra -g"
 "Compiling bram"
@@ -58,13 +51,5 @@ make -C microblaze_1/libsrc/uartlite_v3_2/src -s libs  "SHELL=CMD" "COMPILER=mb-
 "Compiling uartlite"
 'Finished building libraries'
 
-<<<<<<< HEAD
-12:58:26 Build Finished (took 6s.81ms)
-=======
-15:49:39 Build Finished (took 6s.36ms)
-<<<<<<< HEAD
->>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
-=======
->>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
->>>>>>> 4bb324d (1.21下午保存一版，与上一般没区别)
+09:41:04 Build Finished (took 10s.632ms)
 
