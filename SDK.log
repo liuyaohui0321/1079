@@ -21029,6 +21029,7 @@ con
 15:49:31 INFO  : Successfully done setting XSCT server connection channel  
 15:49:31 INFO  : Successfully done setting SDK workspace  
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
 =======
 >>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
@@ -23488,3 +23489,64 @@ con
 
 16:46:27 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
 16:50:01 INFO  : Disconnected from the channel tcfchan#17.
+=======
+>>>>>>> 4dfd0f2 (修改了流写入指令接收sfifo部分的代码)
+13:27:11 INFO  : Registering command handlers for SDK TCF services
+13:27:12 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+13:27:14 INFO  : XSCT server has started successfully.
+13:27:14 INFO  : Successfully done setting XSCT server connection channel  
+13:27:14 INFO  : Successfully done setting SDK workspace  
+13:27:14 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+13:27:14 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+13:27:36 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+13:27:45 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+13:27:50 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+13:27:51 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+13:27:51 INFO  : 'jtag frequency' command is executed.
+13:27:51 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+13:28:08 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0119.bit"
+13:28:08 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+13:28:08 INFO  : Context for processor 'microblaze_1' is selected.
+13:28:09 INFO  : System reset is completed.
+13:28:12 INFO  : 'after 3000' command is executed.
+13:28:12 INFO  : Context for processor 'microblaze_1' is selected.
+13:28:14 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+13:28:14 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0119.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+13:28:14 INFO  : Memory regions updated for context PA
+13:28:14 INFO  : Memory regions updated for context PA
+13:28:14 INFO  : Context for processor 'microblaze_1' is selected.
+13:28:14 INFO  : 'con' command is executed.
+13:28:14 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+13:28:14 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+13:28:33 INFO  : Disconnected from the channel tcfchan#1.
+13:33:12 INFO  : Registering command handlers for SDK TCF services
+13:33:13 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+13:33:14 INFO  : XSCT server has started successfully.
+13:33:14 INFO  : Successfully done setting XSCT server connection channel  
+13:33:14 INFO  : Successfully done setting SDK workspace  
+13:33:14 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+13:33:14 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+=======
+>>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
+>>>>>>> be3e6dd1b150becdbe4067936bc8e1a3bc1fef6f

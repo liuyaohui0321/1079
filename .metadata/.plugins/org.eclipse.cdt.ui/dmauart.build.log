@@ -1,16 +1,70 @@
+<<<<<<< HEAD
 16:49:05 **** Auto Build of configuration Debug for project dmauart ****
+=======
+<<<<<<< HEAD
+13:33:51 **** Auto Build of configuration Debug for project dmauart ****
+=======
+<<<<<<< HEAD
+13:05:43 **** Auto Build of configuration Debug for project dmauart ****
+=======
+16:12:44 **** Auto Build of configuration Debug for project dmauart ****
+>>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
+>>>>>>> be3e6dd1b150becdbe4067936bc8e1a3bc1fef6f
 make all 
-'Building file: ../src/cmd.c'
+'Building file: ../src/main.c'
 'Invoking: MicroBlaze gcc compiler'
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/cmd.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/cmd.d" -MT"src/cmd.o" -o "src/cmd.o" "../src/cmd.c"
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
 In file included from ../src/cmd.h:4,
-                 from ../src/cmd.c:1:
+                 from ../src/main.c:6:
 ../../dmauart_bsp/microblaze_1/include/xbasic_types.h:120:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
  #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
   ^~~~~~~
 ../../dmauart_bsp/microblaze_1/include/xbasic_types.h:121:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
  #warning  Please refer the Standalone BSP UG647 for further details
   ^~~~~~~
+<<<<<<< HEAD
+In file included from ../src/main.c:18:
+../src/7x_dma.h:31: warning: "MAX_PKT_LEN" redefined
+ #define MAX_PKT_LEN  0x100
+ 
+In file included from ../src/main.c:5:
+../src/simple_dma.h:166: note: this is the location of the previous definition
+ #define MAX_PKT_LEN   6196  //0x1834
+ 
+../src/main.c:45:18: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+ uint32_t  buff = (void *)(MEM_DDR3_BASE);
+                  ^
+../src/main.c:46:18: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+ uint32_t  buff_r=(void *)(MEM_DDR3_BASE+(3*512*1024*1024));
+                  ^
+../src/main.c:47:18: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+ uint32_t  buff1= (void *)(MEM_DDR3_BASE);
+                  ^
+../src/main.c: In function 'main':
+../src/main.c:191:12: warning: implicit declaration of function 'run_cmd_d20A'; did you mean 'run_cmd_d206'? [-Wimplicit-function-declaration]
+            run_cmd_d20A(&CurMsg);
+            ^~~~~~~~~~~~
+            run_cmd_d206
+In file included from ../src/main.c:18:
+../src/main.c: At top level:
+../src/7x_dma.h:42:13: warning: 'TxIntrHandler1' declared 'static' but never defined [-Wunused-function]
+ static void TxIntrHandler1(void *Callback);
+             ^~~~~~~~~~~~~~
+../src/7x_dma.h:43:13: warning: 'RxIntrHandler1' declared 'static' but never defined [-Wunused-function]
+ static void RxIntrHandler1(void *Callback);
+             ^~~~~~~~~~~~~~
+../src/7x_dma.h:44:12: warning: 'SetupIntrSystem1' declared 'static' but never defined [-Wunused-function]
+ static int SetupIntrSystem1(XIntc * IntcInstancePtr,XAxiDma * AxiDmaPtr, u16 TxIntrId, u16 RxIntrId);
+            ^~~~~~~~~~~~~~~~
+../src/7x_dma.h:34:14: warning: 'Intc1' defined but not used [-Wunused-variable]
+ static XIntc Intc1;
+              ^~~~~
+../src/7x_dma.h:33:16: warning: 'AxiDma1' defined but not used [-Wunused-variable]
+ static XAxiDma AxiDma1;
+                ^~~~~~~
+In file included from ../src/main.c:5:
+=======
 ../src/cmd.c: In function 'SendMessage':
 ../src/cmd.c:91:3: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
    if((MsgQuery.Start>=MSG_QUERY)||(MsgQuery.End>=MSG_QUERY))
@@ -1819,10 +1873,11 @@ In file included from ../src/simple_dma.h:88,
  ^
 In file included from ../src/cmd.c:3:
 At top level:
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
 ../src/simple_dma.h:218:13: warning: 'Intc' defined but not used [-Wunused-variable]
  static INTC Intc; /* Instance of the Interrupt Controller */
              ^~~~
-'Finished building: ../src/cmd.c'
+'Finished building: ../src/main.c'
 ' '
 'Building target: dmauart.elf'
 'Invoking: MicroBlaze gcc linker'
@@ -1836,5 +1891,20 @@ mb-size dmauart.elf  |tee "dmauart.elf.size"
 'Finished building: dmauart.elf.size'
 ' '
 
+<<<<<<< HEAD
 16:49:07 Build Finished (took 2s.66ms)
+=======
+<<<<<<< HEAD
+13:33:52 Build Finished (took 1s.163ms)
+=======
+13:05:45 Build Finished (took 1s.793ms)
+=======
+ 442756	   1956	 206796	 651508	  9f0f4	dmauart.elf
+'Finished building: dmauart.elf.size'
+' '
+
+16:12:45 Build Finished (took 1s.45ms)
+>>>>>>> 4dfd0f2bc4026ba0d0315f612f7022a8bea71102
+>>>>>>> ee80d1ff80a11b184054f37e30b5232c93d7beba
+>>>>>>> be3e6dd1b150becdbe4067936bc8e1a3bc1fef6f
 
