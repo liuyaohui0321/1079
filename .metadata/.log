@@ -7427,3 +7427,1716 @@ Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.]. Thread: Worker-37
 
 !ENTRY com.xilinx.sdk.utils 0 0 2024-01-22 19:30:22.524
 !MESSAGE XSCT command with result: [disconnect tcfchan#8], Result: [null, ]. Thread: Thread-1428
+!SESSION 2024-01-24 15:12:21.538 -----------------------------------------------
+eclipse.buildId=2019.1
+java.version=1.8.0_112
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2024-01-24 15:12:23.942
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-24 15:12:23.942
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2024-01-24 15:12:24.405
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-24 15:12:24.405
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.383
+!MESSAGE XSCT Command: [set sdk::sdk_chan tcfchan#0], Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.384
+!MESSAGE XSCT Command: [::hsi::utils::init_repo], Thread: Worker-3
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.487
+!MESSAGE XSCT command with result: [::hsi::utils::init_repo], Result: [null, ]. Thread: Worker-3
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.487
+!MESSAGE XSCT command with result: [set sdk::sdk_chan tcfchan#0], Result: [null, tcfchan#0]. Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.489
+!MESSAGE XSCT Command: [setws C:/Users/liuyaohui/Desktop/0115_1x], Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.491
+!MESSAGE XSCT command with result: [setws C:/Users/liuyaohui/Desktop/0115_1x], Result: [null, ]. Thread: Thread-14
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.509
+!MESSAGE XSCT Command: [::hsi::utils::add_repo ""], Thread: Worker-3
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.524
+!MESSAGE XSCT command with result: [::hsi::utils::add_repo ""], Result: [null, ]. Thread: Worker-3
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:28.540
+!MESSAGE XSCT Command: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: Worker-11
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:12:30.892
+!MESSAGE XSCT command with result: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, ]. Thread: Worker-11
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.135
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.core.CommandLauncher.printCommandLine(CommandLauncher.java:287)
+	at org.eclipse.cdt.core.CommandLauncher.waitAndRead(CommandLauncher.java:250)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.build(BuildRunnerHelper.java:273)
+	at org.eclipse.cdt.make.core.MakeBuilder.invokeMake(MakeBuilder.java:219)
+	at org.eclipse.cdt.make.core.MakeBuilder.build(MakeBuilder.java:108)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.166
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.168
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.260
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.262
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.321
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.323
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.363
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.366
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.447
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.450
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.552
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.555
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.628
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.632
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.892
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.894
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.993
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:31.996
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:32.095
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:32.098
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:32.149
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:32.741
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:32.743
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:32.770
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.128
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.131
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.167
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.281
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.283
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.310
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.734
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.736
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:33.763
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:34.036
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:34.039
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:34.064
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:34.538
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:34.542
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:34.586
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:35.672
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:35.672
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:35.673
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:36.341
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:36.343
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:36.370
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:36.821
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:36.823
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:36.851
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:37.242
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.processLine(ConsoleOutputSniffer.java:178)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.access$0(ConsoleOutputSniffer.java:174)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.checkLine(ConsoleOutputSniffer.java:99)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.write(ConsoleOutputSniffer.java:58)
+	at java.io.OutputStream.write(OutputStream.java:75)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.run(ProcessClosure.java:57)
+
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-24 15:12:37.278
+!MESSAGE Error
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer.closeConsoleOutputStream(ConsoleOutputSniffer.java:160)
+	at org.eclipse.cdt.internal.core.ConsoleOutputSniffer$ConsoleOutputStream.close(ConsoleOutputSniffer.java:68)
+	at org.eclipse.cdt.internal.core.ProcessClosure$ReaderThread.close(ProcessClosure.java:98)
+	at org.eclipse.cdt.internal.core.ProcessClosure.isAlive(ProcessClosure.java:193)
+	at org.eclipse.cdt.core.CommandLauncher.waitAndRead(CommandLauncher.java:259)
+	at org.eclipse.cdt.internal.core.BuildRunnerHelper.build(BuildRunnerHelper.java:273)
+	at org.eclipse.cdt.make.core.MakeBuilder.invokeMake(MakeBuilder.java:219)
+	at org.eclipse.cdt.make.core.MakeBuilder.build(MakeBuilder.java:108)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:40.942
+!MESSAGE XSCT Command: [::hsi::utils::get_design_properties -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:40.944
+!MESSAGE XSCT command with result: [::hsi::utils::get_design_properties -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"device": "7vx690t",
+"family": "virtex7",
+"timestamp": "Wed Jan 17 17:23:06 2024",
+"vivado_version": "2019.1",
+"part": "xc7vx690tffg1927-2",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:40.947
+!MESSAGE XSCT Command: [::hsi::utils::get_all_periphs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:40.954
+!MESSAGE XSCT command with result: [::hsi::utils::get_all_periphs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"axi_bram_ctrl_0": {"hier_name": "axi_bram_ctrl_0",
+"type": "axi_bram_ctrl",
+"version": "4.1",
+"ip_type": "MEMORY_CNTLR",
+},
+"axi_dma_0": {"hier_name": "axi_dma_0",
+"type": "axi_dma",
+"version": "7.1",
+"ip_type": "PERIPHERAL",
+},
+"axi_dma_1": {"hier_name": "axi_dma_1",
+"type": "axi_dma",
+"version": "7.1",
+"ip_type": "PERIPHERAL",
+},
+"axi_fifo_mm_s_0": {"hier_name": "axi_fifo_mm_s_0",
+"type": "axi_fifo_mm_s",
+"version": "4.2",
+"ip_type": "PERIPHERAL",
+},
+"axi_fifo_mm_s_1": {"hier_name": "axi_fifo_mm_s_1",
+"type": "axi_fifo_mm_s",
+"version": "4.2",
+"ip_type": "PERIPHERAL",
+},
+"axi_intc_0": {"hier_name": "axi_intc_0",
+"type": "axi_intc",
+"version": "4.1",
+"ip_type": "INTERRUPT_CNTLR",
+},
+"axi_interconnect_1": {"hier_name": "axi_interconnect_1",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_interconnect_2": {"hier_name": "axi_interconnect_2",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_interconnect_3": {"hier_name": "axi_interconnect_3",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_quad_spi_0": {"hier_name": "axi_quad_spi_0",
+"type": "axi_quad_spi",
+"version": "3.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"axi_timer_0": {"hier_name": "axi_timer_0",
+"type": "axi_timer",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"axi_uartlite_0": {"hier_name": "axi_uartlite_0",
+"type": "axi_uartlite",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"mdm_0": {"hier_name": "mdm_0",
+"type": "mdm",
+"version": "3.2",
+"ip_type": "DEBUG",
+},
+"microblaze_1": {"hier_name": "microblaze_1",
+"type": "microblaze",
+"version": "11.0",
+"ip_type": "PROCESSOR",
+},
+"microblaze_1_local_memory_dlmb_bram_if_cntlr": {"hier_name": "microblaze_1_local_memory_dlmb_bram_if_cntlr",
+"type": "lmb_bram_if_cntlr",
+"version": "4.0",
+"ip_type": "MEMORY_CNTLR",
+},
+"microblaze_1_local_memory_dlmb_v10": {"hier_name": "microblaze_1_local_memory_dlmb_v10",
+"type": "lmb_v10",
+"version": "3.0",
+"ip_type": "BUS",
+},
+"microblaze_1_local_memory_ilmb_bram_if_cntlr": {"hier_name": "microblaze_1_local_memory_ilmb_bram_if_cntlr",
+"type": "lmb_bram_if_cntlr",
+"version": "4.0",
+"ip_type": "MEMORY_CNTLR",
+},
+"microblaze_1_local_memory_ilmb_v10": {"hier_name": "microblaze_1_local_memory_ilmb_v10",
+"type": "lmb_v10",
+"version": "3.0",
+"ip_type": "BUS",
+},
+"microblaze_1_local_memory_lmb_bram": {"hier_name": "microblaze_1_local_memory_lmb_bram",
+"type": "blk_mem_gen",
+"version": "8.4",
+"ip_type": "MEMORY",
+},
+"mig_7series_0": {"hier_name": "mig_7series_0",
+"type": "mig_7series",
+"version": "4.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"mig_7series_1": {"hier_name": "mig_7series_1",
+"type": "mig_7series",
+"version": "4.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"rst_clk_wiz_0_100M": {"hier_name": "rst_clk_wiz_0_100M",
+"type": "proc_sys_reset",
+"version": "5.0",
+"ip_type": "PERIPHERAL",
+},
+"rst_mig_7series_0_200M": {"hier_name": "rst_mig_7series_0_200M",
+"type": "proc_sys_reset",
+"version": "5.0",
+"ip_type": "PERIPHERAL",
+},
+"system_ila_0": {"hier_name": "system_ila_0",
+"type": "system_ila",
+"version": "1.1",
+"ip_type": "MONITOR",
+},
+"uiFDMA_0": {"hier_name": "uiFDMA_0",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_1": {"hier_name": "uiFDMA_1",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_2": {"hier_name": "uiFDMA_2",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_3": {"hier_name": "uiFDMA_3",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"xlconcat_0": {"hier_name": "xlconcat_0",
+"type": "xlconcat",
+"version": "2.1",
+"ip_type": "PERIPHERAL",
+},
+"system_ila_0_g_inst": {"hier_name": "system_ila_0/system_ila_0_g_inst",
+"type": "gigantic_mux",
+"version": "1.0",
+"ip_type": "MONITOR",
+},
+"system_ila_0_ila_lib": {"hier_name": "system_ila_0/system_ila_0_ila_lib",
+"type": "ila",
+"version": "6.2",
+"ip_type": "PERIPHERAL",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:41.303
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_ENABLED], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:41.306
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_ENABLED], Result: [null, 1]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:41.307
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_PROFILE_SIZE], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:41.310
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_PROFILE_SIZE], Result: [null, 0]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:41.311
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_FREQ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:13:41.314
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_FREQ], Result: [null, 100000000]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.338
+!MESSAGE XSCT Command: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.341
+!MESSAGE XSCT command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.341
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.343
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"procname": "microblaze_1",
+"osname": "standalone",
+"osver": "7.0",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.381
+!MESSAGE XSCT Command: [::hsi::utils::get_config_params_for_sw -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.392
+!MESSAGE XSCT command with result: [::hsi::utils::get_config_params_for_sw -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"microblaze_1": {"archiver": {"category": "",
+"value": "mb-ar",
+"default": "mb-ar",
+"type": "string",
+"desc": "Archiver used to archive libraries for both BSP generation as well as for applications",
+"permit": "",
+"options": {},
+"range": "",
+},
+"compiler": {"category": "",
+"value": "mb-gcc",
+"default": "mb-gcc",
+"type": "string",
+"desc": "Compiler used to compile both BSP/Libraries and Applications.",
+"permit": "",
+"options": {},
+"range": "",
+},
+"compiler_flags": {"category": "",
+"value": "-mlittle-endian -mxl-soft-mul -mcpu=v11.0",
+"default": "-O2 -c",
+"type": "string",
+"desc": "Compiler flags used in BSP and library generation. '-c' flag stands for 'compile and assemble, but do not link'. Without this flag, gcc tries to link the code, which will fail bacause there is no application involved during libgen. '-O2' can be overwritten by extra compiler flags",
+"permit": "none",
+"options": {},
+"range": "",
+},
+"extra_compiler_flags": {"category": "",
+"value": "-ffunction-sections -fdata-sections -Wall -Wextra -g",
+"default": "-ffunction-sections -fdata-sections -Wall -Wextra",
+"type": "string",
+"desc": "Extra compiler flags used in BSP and library generation.",
+"permit": "",
+"options": {},
+"range": "",
+},
+"xmdstub_peripheral": {"category": "",
+"value": "none",
+"default": "none",
+"type": "peripheral_instance",
+"desc": "Debug peripheral to be used with xmdstub",
+"permit": "",
+"options": {},
+"range": "mdm_0",
+},
+},
+"standalone": {"enable_sw_intrusive_profiling": {"category": "sw_intrusive_profiling",
+"value": "false",
+"default": "false",
+"type": "bool",
+"desc": "Enable S/W Intrusive Profiling on Hardware Targets",
+"permit": "user",
+"options": {},
+"range": "",
+},
+"hypervisor_guest": {"category": "",
+"value": "false",
+"default": "false",
+"type": "bool",
+"desc": "Enable hypervisor guest support for A53 64bit EL1 Non-Secure. If hypervisor_guest is not selected, BSP will be built for EL3.",
+"permit": "user",
+"options": {},
+"range": "",
+},
+"lockstep_mode_debug": {"category": "",
+"value": "false",
+"default": "false",
+"type": "bool",
+"desc": "Enable debug logic in non-JTAG boot mode, when Cortex R5 is configured in lockstep mode",
+"permit": "user",
+"options": {},
+"range": "",
+},
+"microblaze_exceptions": {"category": "microblaze_exceptions",
+"value": "false",
+"default": "false",
+"type": "bool",
+"desc": "Enable MicroBlaze Exceptions",
+"permit": "user",
+"options": {},
+"range": "",
+},
+"predecode_fpu_exceptions": {"category": "microblaze_exceptions",
+"value": "false",
+"default": "false",
+"type": "bool",
+"desc": "(MicroBlaze) Predecode FPU exceptions and save operand info before invoking user registered exception handler.",
+"permit": "user",
+"options": {},
+"range": "",
+},
+"profile_timer": {"category": "sw_intrusive_profiling",
+"value": "none",
+"default": "none",
+"type": "peripheral_instance",
+"desc": "Specify the Timer to use for Profiling. For PowerPC system, specify none to use PIT timer. For ARM system, specify none to use SCU timer",
+"permit": "",
+"options": {},
+"range": "axi_timer_0",
+},
+"sleep_timer": {"category": "",
+"value": "none",
+"default": "none",
+"type": "peripheral_instance",
+"desc": "This parameter is used to select specific timer for sleep functionality",
+"permit": "user",
+"options": {},
+"range": "axi_timer_0",
+},
+"stdin": {"category": "",
+"value": "axi_uartlite_0",
+"default": "none",
+"type": "peripheral_instance",
+"desc": "stdin peripheral",
+"permit": "",
+"options": {},
+"range": "axi_uartlite_0 mdm_0",
+},
+"stdout": {"category": "",
+"value": "axi_uartlite_0",
+"default": "none",
+"type": "peripheral_instance",
+"desc": "stdout peripheral",
+"permit": "",
+"options": {},
+"range": "axi_uartlite_0 mdm_0",
+},
+"ttc_select_cntr": {"category": "",
+"value": "2",
+"default": "2",
+"type": "enum",
+"desc": "Selects the counter to be used in the repective module. Allowed range is 0-2",
+"permit": "user",
+"options": {"0": "0",
+"1": "1",
+"2": "2",
+},
+"range": "",
+},
+"zynqmp_fsbl_bsp": {"category": "",
+"value": "false",
+"default": "false",
+"type": "bool",
+"desc": "Disable or Enable Optimization for FSBL's BSP. ZynqMP FSBL will set this to true",
+"permit": "",
+"options": {},
+"range": "",
+},
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.443
+!MESSAGE XSCT Command: [hsi::utils::get_supported_os -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.450
+!MESSAGE XSCT command with result: [hsi::utils::get_supported_os -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"microblaze_1": {"freertos10_xilinx_v1_3": {"name": "freertos10_xilinx",
+"version": "1.3",
+"desc": "This Xilinx FreeRTOS port is based on FreeRTOS kernel version 10.1.1",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxil,-lfreertos,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/ThirdParty/bsp/freertos10_xilinx_v1_3",
+},
+"standalone_v7_0": {"name": "standalone",
+"version": "7.0",
+"desc": "Standalone is a simple, low-level software layer. It provides access to basic processor features such as caches, interrupts and exceptions as well as the basic features of a hosted environment, such as standard input and output, profiling, abort and exit.",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/bsp/standalone_v7_0",
+},
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.455
+!MESSAGE XSCT Command: [hsi::utils::get_all_libs -json], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.464
+!MESSAGE XSCT command with result: [hsi::utils::get_all_libs -json], Result: [null, {"libmetal_v2_0": {"name": "libmetal",
+"version": "2.0",
+"desc": "Libmetal Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxil,-lmetal,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/ThirdParty/sw_services/libmetal_v2_0",
+"os": "standalone freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"lwip211_v1_0": {"name": "lwip211",
+"version": "1.0",
+"desc": "lwip211 library: lwIP (light weight IP) is an open source TCP/IP stack configured for Xilinx hard and soft Ethernet MACs",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxil,-llwip4,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/ThirdParty/sw_services/lwip211_v1_0",
+"os": "standalone xilkernel freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"openamp_v1_5": {"name": "openamp",
+"version": "1.5",
+"desc": "OpenAmp Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxil,-lmetal,-lopen_amp,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/ThirdParty/sw_services/openamp_v1_5",
+"os": "standalone freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexr5",
+},
+"xilffs_v4_1": {"name": "xilffs",
+"version": "4.1",
+"desc": "Generic Fat File System Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilffs,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilffs_v4_1",
+"os": "standalone freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"xilflash_v4_6": {"name": "xilflash",
+"version": "4.6",
+"desc": "Xilinx Flash library for Intel/AMD CFI compliant parallel flash",
+"compilerflags": "",
+"linkerflags": "-lxilflash",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilflash_v4_6",
+"os": "standalone xilkernel freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"xilfpga_v5_0": {"name": "xilfpga",
+"version": "5.0",
+"desc": "XilFPGA library provides an interface to the Linux or bare-metal users for configuring the PL over PCAP from PS",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilfpga,-lxil,-lxilsecure,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilfpga_v5_0",
+"os": "standalone freertos10_xilinx",
+"proc": "psu_cortexa53 psu_cortexr5 psu_pmu",
+},
+"xilisf_v5_13": {"name": "xilisf",
+"version": "5.13",
+"desc": "Xilinx In-system and Serial Flash Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilisf,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilisf_v5_13",
+"os": "standalone xilkernel freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"xillibpm_v1_0": {"name": "xillibpm",
+"version": "1.0",
+"desc": "Xilinx Versal Platform Management Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxillibpm,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xillibpm_v1_0",
+"os": "standalone freertos10_xilinx",
+"proc": "psu_cortexa72 psu_cortexr5",
+},
+"xilloader_v1_0": {"name": "xilloader",
+"version": "1.0",
+"desc": "Xilinx Versal Platform Loader Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilloader,-lxillibpm,-lxilplmi,-lxilffs,-lxilpdi,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilloader_v1_0",
+"os": "standalone",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"xilmailbox_v1_0": {"name": "xilmailbox",
+"version": "1.0",
+"desc": "Xilinx IPI Mailbox Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilmailbox,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilmailbox_v1_0",
+"os": "standalone",
+"proc": "psu_cortexa72 psu_cortexa53 psu_cortexr5 psu_pmu",
+},
+"xilpdi_v1_0": {"name": "xilpdi",
+"version": "1.0",
+"desc": "Xilinx Programable Device Image (PDI) Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilpdi,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilpdi_v1_0",
+"os": "standalone",
+"proc": "psu_cortexa72 psu_cortexr5",
+},
+"xilplmi_v1_0": {"name": "xilplmi",
+"version": "1.0",
+"desc": "Xilinx versal Platform Loader and Manager Interface Library",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilplmi,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilplmi_v1_0",
+"os": "standalone",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"xilpm_v2_5": {"name": "xilpm",
+"version": "2.5",
+"desc": "Power Management API Library for ZynqMP",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilpm,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilpm_v2_5",
+"os": "standalone freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+"xilrsa_v1_5": {"name": "xilrsa",
+"version": "1.5",
+"desc": "Xilinx RSA Library to access RSA and SHA software algorithms on Zynq",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lrsa,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilrsa_v1_5",
+"os": "standalone freertos10_xilinx",
+"proc": "ps7_cortexa9",
+},
+"xilsecure_v4_0": {"name": "xilsecure",
+"version": "4.0",
+"desc": "Xilinx Secure Library provides interface to AES, RSA and SHA hardware engines on ZynqMP Soc and Versal",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilsecure,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilsecure_v4_0",
+"os": "standalone freertos10_xilinx",
+"proc": "psu_cortexa53 psu_cortexr5 psu_pmu psu_cortexa72 psv_cortexa72",
+},
+"xilskey_v6_7": {"name": "xilskey",
+"version": "6.7",
+"desc": "Xilinx Secure Key Library supports programming efuse and bbram",
+"compilerflags": "",
+"linkerflags": "-Wl,--start-group,-lxilskey,-lxil,-lgcc,-lc,--end-group",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/lib/sw_services/xilskey_v6_7",
+"os": "standalone freertos10_xilinx",
+"proc": "ps7_cortexa9 psu_cortexa53 psu_cortexr5 psv_cortexr5 psu_pmu microblaze psu_cortexa72 psv_cortexa72",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.466
+!MESSAGE XSCT Command: [::hsi::utils::get_libs_from_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.469
+!MESSAGE XSCT command with result: [::hsi::utils::get_libs_from_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.470
+!MESSAGE XSCT Command: [::hsi::utils::get_sw_libs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.473
+!MESSAGE XSCT command with result: [::hsi::utils::get_sw_libs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.572
+!MESSAGE XSCT Command: [::hsi::utils::get_drivers_for_sw -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.576
+!MESSAGE XSCT command with result: [::hsi::utils::get_drivers_for_sw -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"axi_bram_ctrl_0": {"name": "bram",
+"ver": "4.3",
+},
+"axi_dma_0": {"name": "axidma",
+"ver": "9.9",
+},
+"axi_fifo_mm_s_0": {"name": "llfifo",
+"ver": "5.3",
+},
+"axi_fifo_mm_s_1": {"name": "llfifo",
+"ver": "5.3",
+},
+"axi_intc_0": {"name": "intc",
+"ver": "3.9",
+},
+"axi_quad_spi_0": {"name": "spi",
+"ver": "4.4",
+},
+"axi_timer_0": {"name": "tmrctr",
+"ver": "4.5",
+},
+"axi_uartlite_0": {"name": "uartlite",
+"ver": "3.2",
+},
+"mdm_0": {"name": "uartlite",
+"ver": "3.2",
+},
+"microblaze_1_local_memory_dlmb_bram_if_cntlr": {"name": "bram",
+"ver": "4.3",
+},
+"microblaze_1_local_memory_ilmb_bram_if_cntlr": {"name": "bram",
+"ver": "4.3",
+},
+"mig_7series_0": {"name": "mig_7series",
+"ver": "2.1",
+},
+"mig_7series_1": {"name": "mig_7series",
+"ver": "2.1",
+},
+"microblaze_1": {"name": "cpu",
+"ver": "2.9",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.577
+!MESSAGE XSCT Command: [hsi::utils::get_drivers_for_hw -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.620
+!MESSAGE XSCT command with result: [hsi::utils::get_drivers_for_hw -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"axi_bram_ctrl_0": {"version": "4.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"bram_v4_3": {"name": "bram",
+"version": "4.3",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/bram_v4_3",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_dma_0": {"version": "7.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"axidma_v9_9": {"name": "axidma",
+"version": "9.9",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/axidma_v9_9",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_dma_1": {"version": "7.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"axidma_v9_9": {"name": "axidma",
+"version": "9.9",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/axidma_v9_9",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_fifo_mm_s_0": {"version": "4.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"llfifo_v5_3": {"name": "llfifo",
+"version": "5.3",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/llfifo_v5_3",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_fifo_mm_s_1": {"version": "4.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"llfifo_v5_3": {"name": "llfifo",
+"version": "5.3",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/llfifo_v5_3",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_intc_0": {"version": "4.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"intc_v3_9": {"name": "intc",
+"version": "3.9",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/intc_v3_9",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_interconnect_1": {"version": "2.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"axi_interconnect_2": {"version": "2.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"axi_interconnect_3": {"version": "2.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"axi_quad_spi_0": {"version": "3.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"spi_v4_4": {"name": "spi",
+"version": "4.4",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/spi_v4_4",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_timer_0": {"version": "2.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"tmrctr_v4_5": {"name": "tmrctr",
+"version": "4.5",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/tmrctr_v4_5",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"axi_uartlite_0": {"version": "2.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"uartlite_v3_2": {"name": "uartlite",
+"version": "3.2",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/uartlite_v3_2",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"mdm_0": {"version": "3.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"uartlite_v3_2": {"name": "uartlite",
+"version": "3.2",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/uartlite_v3_2",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"microblaze_1": {"version": "11.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"cpu_v2_9": {"name": "cpu",
+"version": "2.9",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/cpu_v2_9",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"microblaze_1_local_memory_dlmb_bram_if_cntlr": {"version": "4.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"bram_v4_3": {"name": "bram",
+"version": "4.3",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/bram_v4_3",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"microblaze_1_local_memory_dlmb_v10": {"version": "3.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"microblaze_1_local_memory_ilmb_bram_if_cntlr": {"version": "4.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"bram_v4_3": {"name": "bram",
+"version": "4.3",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/bram_v4_3",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"microblaze_1_local_memory_ilmb_v10": {"version": "3.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"microblaze_1_local_memory_lmb_bram": {"version": "8.4",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"mig_7series_0": {"version": "4.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"mig_7series_v2_1": {"name": "mig_7series",
+"version": "2.1",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/mig_7series_v2_1",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"mig_7series_1": {"version": "4.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+"mig_7series_v2_1": {"name": "mig_7series",
+"version": "2.1",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/mig_7series_v2_1",
+"compilerflags": "",
+"linkerflags": "",
+},
+},
+},
+"rst_clk_wiz_0_100M": {"version": "5.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"rst_mig_7series_0_200M": {"version": "5.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"system_ila_0": {"version": "1.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"uiFDMA_0": {"version": "2.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"uiFDMA_1": {"version": "2.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"uiFDMA_2": {"version": "2.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"uiFDMA_3": {"version": "2.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"xlconcat_0": {"version": "2.1",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"system_ila_0_g_inst": {"version": "1.0",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+"system_ila_0_ila_lib": {"version": "6.2",
+"driver_info": {"generic": {"name": "generic",
+"version": "2.0",
+"repo": "D:/vivado2019/SDK/2019.1/data/embeddedsw/XilinxProcessorIPLib/drivers/generic_v2_0",
+},
+},
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.631
+!MESSAGE XSCT Command: [::hsi::utils::get_connected_periphs C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:14.632
+!MESSAGE XSCT command with result: [::hsi::utils::get_connected_periphs C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1], Result: [null, axi_bram_ctrl_0 axi_dma_0 axi_dma_1 axi_fifo_mm_s_0 axi_fifo_mm_s_1 axi_intc_0 axi_quad_spi_0 axi_timer_0 axi_uartlite_0 mdm_0 microblaze_1_local_memory_dlmb_bram_if_cntlr microblaze_1_local_memory_ilmb_bram_if_cntlr mig_7series_0]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:19.328
+!MESSAGE XSCT Command: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:19.330
+!MESSAGE XSCT command with result: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:23.770
+!MESSAGE XSCT Command: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:23.774
+!MESSAGE XSCT command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:23.775
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:23.778
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"procname": "microblaze_1",
+"osname": "standalone",
+"osver": "7.0",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:23.778
+!MESSAGE XSCT Command: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:23.780
+!MESSAGE XSCT command with result: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.909
+!MESSAGE XSCT Command: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.912
+!MESSAGE XSCT command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.913
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.920
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"procname": "microblaze_1",
+"osname": "standalone",
+"osver": "7.0",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.962
+!MESSAGE XSCT Command: [::hsi::utils::lg_init C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.965
+!MESSAGE XSCT command with result: [::hsi::utils::lg_init C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, lg1]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.966
+!MESSAGE XSCT Command: [::hsi::utils::lg_get_memories -json], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.967
+!MESSAGE XSCT command with result: [::hsi::utils::lg_get_memories -json], Result: [null, {"microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem": {"base_addr": "0x0",
+"size": "0x80000",
+},
+"axi_bram_ctrl_0_Mem0": {"base_addr": "0x45000000",
+"size": "0x1000",
+},
+"mig_7series_0_memaddr": {"base_addr": "0x80000000",
+"size": "0x80000000",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.970
+!MESSAGE XSCT Command: [::hsi::utils::lg_get_sections -json], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:25.974
+!MESSAGE XSCT command with result: [::hsi::utils::lg_get_sections -json], Result: [null, {"code_sections": ".text:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+"data_sections": ".rodata:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sdata2:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sbss2:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .data:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sdata:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sbss:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .bss:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+"stack_section": "stack:0x400::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+"heap_section": "heap:0x800::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:32.983
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .text -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:32.985
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .text -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:32.986
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .rodata -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.002
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .rodata -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.003
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .sdata2 -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.005
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .sdata2 -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.005
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .sbss2 -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.019
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .sbss2 -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.020
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .data -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.022
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .data -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.022
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .sdata -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.035
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .sdata -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.036
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .sbss -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.038
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .sbss -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.039
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec .bss -mem mig_7series_0_memaddr], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.051
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec .bss -mem mig_7series_0_memaddr], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.052
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec heap -mem mig_7series_0_memaddr -size 1024], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.055
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec heap -mem mig_7series_0_memaddr -size 1024], Result: [null, 1024]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.055
+!MESSAGE XSCT Command: [::hsi::utils::lg_set_section_memory -sec stack -mem mig_7series_0_memaddr -size 1024], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.057
+!MESSAGE XSCT command with result: [::hsi::utils::lg_set_section_memory -sec stack -mem mig_7series_0_memaddr -size 1024], Result: [null, 1024]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.058
+!MESSAGE XSCT Command: [::hsi::utils::lg_generate C:/Users/liuyaohui/Desktop/0115_1x/dmauart/src/lscript.ld], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.068
+!MESSAGE XSCT command with result: [::hsi::utils::lg_generate C:/Users/liuyaohui/Desktop/0115_1x/dmauart/src/lscript.ld], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.172
+!MESSAGE XSCT Command: [::hsi::utils::lg_delete], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:14:33.173
+!MESSAGE XSCT command with result: [::hsi::utils::lg_delete], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.182
+!MESSAGE XSCT Command: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.186
+!MESSAGE XSCT command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.187
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.192
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"procname": "microblaze_1",
+"osname": "standalone",
+"osver": "7.0",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.193
+!MESSAGE XSCT Command: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.196
+!MESSAGE XSCT command with result: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, ]. Thread: main

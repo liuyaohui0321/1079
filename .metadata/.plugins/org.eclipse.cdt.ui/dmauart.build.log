@@ -1,5 +1,437 @@
-19:28:58 **** Auto Build of configuration Debug for project dmauart ****
+15:15:57 **** Auto Build of configuration Debug for project dmauart ****
 make all 
+'Building file: ../src/fat/diskio.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/fat/diskio.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/fat/diskio.d" -MT"src/fat/diskio.o" -o "src/fat/diskio.o" "../src/fat/diskio.c"
+../src/fat/diskio.c: In function 'disk_read':
+../src/fat/diskio.c:62:27: warning: passing argument 3 of 'io_read2' makes integer from pointer without a cast [-Wint-conversion]
+  if(io_read2(NHC_NUM,0x1, buff,slba, (uint32_t)len, 0x0) != 0x2)
+                           ^~~~
+In file included from ../src/fat/diskio.c:12:
+../src/fat/../nhc_amba.h:83:59: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ uint8_t io_read2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, uint32_t len, uint32_t dsm);
+                                                  ~~~~~~~~~^~~~
+../src/fat/diskio.c: In function 'disk_read1':
+../src/fat/diskio.c:84:5: warning: implicit declaration of function 'io_read3'; did you mean 'io_read2'? [-Wimplicit-function-declaration]
+  if(io_read3(NHC_NUM,0x1, buff,slba, (uint32_t)len, 0x0) != 0x2)
+     ^~~~~~~~
+     io_read2
+../src/fat/diskio.c: In function 'disk_write':
+../src/fat/diskio.c:107:28: warning: passing argument 3 of 'io_write2' makes integer from pointer without a cast [-Wint-conversion]
+  if(io_write2(NHC_NUM,0x1, buff,sector*SECTORSIZE, (uint32_t)(count*SECTORSIZE), 0x0) != 0x2)//lyh
+                            ^~~~
+In file included from ../src/fat/diskio.c:12:
+../src/fat/../nhc_amba.h:80:60: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
+ uint8_t io_write2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, uint32_t len, uint32_t dsm);
+                                                   ~~~~~~~~~^~~~
+../src/fat/diskio.c: In function 'disk_write1':
+../src/fat/diskio.c:122:28: warning: passing argument 3 of 'io_write2' makes integer from pointer without a cast [-Wint-conversion]
+  if(io_write2(NHC_NUM,0x1, buff,(uint32_t)(sector*SECTORSIZE), (uint32_t)(count*SECTORSIZE), 0x0) != 0x2)//wfeng
+                            ^~~~
+In file included from ../src/fat/diskio.c:12:
+../src/fat/../nhc_amba.h:80:60: note: expected 'uint32_t' {aka 'long unsigned int'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
+ uint8_t io_write2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, uint32_t len, uint32_t dsm);
+                                                   ~~~~~~~~~^~~~
+In file included from ../src/fat/diskio.c:11:
+../src/fat/diskio.c: In function 'disk_ioctl':
+../src/fat/diskio.h:12:30: warning: integer overflow in expression of type 'int' results in '-294148768' [-Woverflow]
+ #define NVME_SIZE (2000409264*2*512*2)  //4T wfeng
+                              ^
+../src/fat/diskio.h:16:26: note: in expansion of macro 'NVME_SIZE'
+ #define SECTORCNT       (NVME_SIZE / SECTORSIZE)
+                          ^~~~~~~~~
+../src/fat/diskio.c:155:20: note: in expansion of macro 'SECTORCNT'
+   *(QWORD *)buff = SECTORCNT; // 12.1 LYH∏ƒ
+                    ^~~~~~~~~
+../src/fat/diskio.c:142:6: warning: unused variable 'result' [-Wunused-variable]
+  int result;
+      ^~~~~~
+../src/fat/diskio.c:141:10: warning: variable 'res' set but not used [-Wunused-but-set-variable]
+  DRESULT res;
+          ^~~
+../src/fat/diskio.c:162:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+'Finished building: ../src/fat/diskio.c'
+' '
+'Building file: ../src/fat/ff.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/fat/ff.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/fat/ff.d" -MT"src/fat/ff.o" -o "src/fat/ff.o" "../src/fat/ff.c"
+../src/fat/ff.c: In function 'create_chain':
+../src/fat/ff.c:1624:5: warning: implicit declaration of function 'xil_printf'; did you mean 'f_printf'? [-Wimplicit-function-declaration]
+     xil_printf("wfeng: fun = %s, line = %d\n", __func__, __LINE__);
+     ^~~~~~~~~~
+     f_printf
+../src/fat/ff.c: In function 'f_mkfs':
+../src/fat/ff.c:6242:14: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [-Wint-conversion]
+   memcpy(buf,0x80000000,SECTORSIZE*1);
+              ^~~~~~~~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:31:9: note: expected 'const void * restrict' but argument is of type 'unsigned int'
+ void *  memcpy (void *__restrict, const void *__restrict, size_t);
+         ^~~~~~
+../src/fat/ff.c:6687:15: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [-Wint-conversion]
+    memcpy(buf,0x80000000,SECTORSIZE*1);
+               ^~~~~~~~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:31:9: note: expected 'const void * restrict' but argument is of type 'unsigned int'
+ void *  memcpy (void *__restrict, const void *__restrict, size_t);
+         ^~~~~~
+../src/fat/ff.c: In function 'my_fcopy':
+../src/fat/ff.c:7424:13: warning: implicit declaration of function 'wjq_malloc_m'; did you mean '_malloc_r'? [-Wimplicit-function-declaration]
+  fsrc=(FIL*)wjq_malloc_m(sizeof(FIL));//Áî≥ËØ∑ÂÜÖÂ≠ò
+             ^~~~~~~~~~~~
+             _malloc_r
+../src/fat/ff.c:7456:4: warning: implicit declaration of function 'wjq_free_m'; did you mean '_free_r'? [-Wimplicit-function-declaration]
+    wjq_free_m(fsrc);
+    ^~~~~~~~~~
+    _free_r
+../src/fat/ff.c: In function 'my_dcopy':
+../src/fat/ff.c:7496:20: warning: assignment to 'u8 *' {aka 'unsigned char *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+         srcpathname=wjq_malloc_m((FF_LFN_BUF+1)*2);        // Áî≥ËØ∑ srcpathnameÂÜÖÂ≠ò
+                    ^
+../src/fat/ff.c:7497:20: warning: assignment to 'u8 *' {aka 'unsigned char *'} from 'int' makes pointer from integer without a cast [-Wint-conversion]
+         dstpathname=wjq_malloc_m((FF_LFN_BUF+1)*2);        // Áî≥ËØ∑dstpathnameÂÜÖÂ≠ò
+                    ^
+../src/fat/ff.c:7509:34: warning: pointer targets in passing argument 1 of 'get_src_dname' differ in signedness [-Wpointer-sign]
+                 fn=get_src_dname(psrc);
+                                  ^~~~
+../src/fat/ff.c:7463:5: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'TCHAR *' {aka 'char *'}
+ u8* get_src_dname(BYTE* dpfn)
+     ^~~~~~~~~~~~~
+../src/fat/ff.c:7534:55: warning: pointer targets in passing argument 1 of 'my_dcopy' differ in signedness [-Wpointer-sign]
+                                 res=(FRESULT)my_dcopy(srcpathname,dstpathname,fwmode);         // Êã∑Ë¥ùÊñá‰ª∂Â§?
+                                                       ^~~~~~~~~~~
+../src/fat/ff.c:7478:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'u8 *' {aka 'unsigned char *'}
+ FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
+         ^~~~~~~~
+../src/fat/ff.c:7534:67: warning: pointer targets in passing argument 2 of 'my_dcopy' differ in signedness [-Wpointer-sign]
+                                 res=(FRESULT)my_dcopy(srcpathname,dstpathname,fwmode);         // Êã∑Ë¥ùÊñá‰ª∂Â§?
+                                                                   ^~~~~~~~~~~
+../src/fat/ff.c:7478:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'u8 *' {aka 'unsigned char *'}
+ FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
+         ^~~~~~~~
+../src/fat/ff.c:7539:42: warning: pointer targets in passing argument 1 of 'my_fcopy' differ in signedness [-Wpointer-sign]
+                                 my_fcopy(srcpathname,dstpathname,fwmode);         // Êã∑Ë¥ùÊñá‰ª∂Â§?
+                                          ^~~~~~~~~~~
+../src/fat/ff.c:7415:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'u8 *' {aka 'unsigned char *'}
+ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
+         ^~~~~~~~
+../src/fat/ff.c:7539:54: warning: pointer targets in passing argument 2 of 'my_fcopy' differ in signedness [-Wpointer-sign]
+                                 my_fcopy(srcpathname,dstpathname,fwmode);         // Êã∑Ë¥ùÊñá‰ª∂Â§?
+                                                      ^~~~~~~~~~~
+../src/fat/ff.c:7415:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'u8 *' {aka 'unsigned char *'}
+ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
+         ^~~~~~~~
+../src/fat/ff.c: In function 'scan_files':
+../src/fat/ff.c:7569:6: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+      sprintf(&path[i], "/%s", fno.fname);
+      ^~~~~~~
+../src/fat/ff.c:7569:6: warning: incompatible implicit declaration of built-in function 'sprintf'
+../src/fat/ff.c:7569:6: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../src/fat/ff.c:26:1:
++#include <stdio.h>
+ #define MAX_PATHNAME_DEPTH  512+1 //
+../src/fat/ff.c:7569:6:
+      sprintf(&path[i], "/%s", fno.fname);
+      ^~~~~~~
+../src/fat/ff.c:7572:6: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+      printf("directory name is:%s\n", path);
+      ^~~~~~
+../src/fat/ff.c:7572:6: warning: incompatible implicit declaration of built-in function 'printf'
+../src/fat/ff.c:7572:6: note: include '<stdio.h>' or provide a declaration of 'printf'
+../src/fat/ff.c:7576:6: warning: incompatible implicit declaration of built-in function 'printf'
+      printf("file name is:%s/%s\n", path, fno.fname);
+      ^~~~~~
+../src/fat/ff.c:7576:6: note: include '<stdio.h>' or provide a declaration of 'printf'
+../src/fat/ff.c: In function 'DestroyList':
+../src/fat/ff.c:7615:3: warning: implicit declaration of function 'wjq_free_t'; did you mean '_free_r'? [-Wimplicit-function-declaration]
+   wjq_free_t(curNode);
+   ^~~~~~~~~~
+   _free_r
+../src/fat/ff.c: In function 'record_struct_of_Dir_and_File':
+../src/fat/ff.c:7688:24: warning: pointer targets in passing argument 2 of 'f_opendir' differ in signedness [-Wpointer-sign]
+  res = f_opendir(&dir, path);                       /* Open the directory */
+                        ^~~~
+../src/fat/ff.c:4874:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ FRESULT f_opendir (
+         ^~~~~~~~~
+../src/fat/ff.c:7695:16: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+     i = strlen(path);
+                ^~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:41:9: note: expected 'const char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ size_t  strlen (const char *);
+         ^~~~~~
+../src/fat/ff.c:7696:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+     sprintf(&path[i], "/%s", fno.fname);
+     ^~~~~~~
+../src/fat/ff.c:7696:5: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../src/fat/ff.c:7696:13: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+     sprintf(&path[i], "/%s", fno.fname);
+             ^~~~~~~~
+../src/fat/ff.c:7696:13: note: expected 'char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+../src/fat/ff.c:7701:21: warning: passing argument 1 of 'strcpy' from incompatible pointer type [-Wincompatible-pointer-types]
+     strcpy(node.data.name,path);
+            ~~~~~~~~~^~~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u16 *' {aka 'short unsigned int *'}
+ char  *strcpy (char *__restrict, const char *__restrict);
+        ^~~~~~
+../src/fat/ff.c:7701:27: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+     strcpy(node.data.name,path);
+                           ^~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ char  *strcpy (char *__restrict, const char *__restrict);
+        ^~~~~~
+../src/fat/ff.c:7714:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+     sprintf(filename,"%s/%s", path, fno.fname);
+     ^~~~~~~
+../src/fat/ff.c:7714:5: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../src/fat/ff.c:7719:21: warning: passing argument 1 of 'strcpy' from incompatible pointer type [-Wincompatible-pointer-types]
+     strcpy(node.data.name,filename);
+            ~~~~~~~~~^~~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u16 *' {aka 'short unsigned int *'}
+ char  *strcpy (char *__restrict, const char *__restrict);
+        ^~~~~~
+../src/fat/ff.c: In function 'get_Dir_size':
+../src/fat/ff.c:7742:24: warning: pointer targets in passing argument 2 of 'f_opendir' differ in signedness [-Wpointer-sign]
+  res = f_opendir(&dir, path);                       /* Open the directory */
+                        ^~~~
+../src/fat/ff.c:4874:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ FRESULT f_opendir (
+         ^~~~~~~~~
+../src/fat/ff.c:7748:16: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+     i = strlen(path);
+                ^~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:41:9: note: expected 'const char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ size_t  strlen (const char *);
+         ^~~~~~
+../src/fat/ff.c:7749:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+     sprintf(&path[i], "/%s", fno.fname);
+     ^~~~~~~
+../src/fat/ff.c:7749:5: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../src/fat/ff.c:7749:13: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+     sprintf(&path[i], "/%s", fno.fname);
+             ^~~~~~~~
+../src/fat/ff.c:7749:13: note: expected 'char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+../src/fat/ff.c:7758:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+     sprintf(filename,"%s/%s", path, fno.fname);
+     ^~~~~~~
+../src/fat/ff.c:7758:5: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../src/fat/ff.c: In function 'Num_of_Dir_and_File':
+../src/fat/ff.c:7788:27: warning: pointer targets in passing argument 2 of 'f_opendir' differ in signedness [-Wpointer-sign]
+     res = f_opendir(&dir, path);                       /* Open the directory */
+                           ^~~~
+../src/fat/ff.c:4874:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ FRESULT f_opendir (
+         ^~~~~~~~~
+../src/fat/ff.c:7794:16: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+     i = strlen(path);
+                ^~~~
+In file included from ../src/fat/ff.c:22:
+d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:41:9: note: expected 'const char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+ size_t  strlen (const char *);
+         ^~~~~~
+../src/fat/ff.c:7795:5: warning: incompatible implicit declaration of built-in function 'sprintf'
+     sprintf(&path[i], "/%s", fno.fname);
+     ^~~~~~~
+../src/fat/ff.c:7795:5: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../src/fat/ff.c:7795:13: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+     sprintf(&path[i], "/%s", fno.fname);
+             ^~~~~~~~
+../src/fat/ff.c:7795:13: note: expected 'char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
+../src/fat/ff.c: In function 'get_path_dname':
+../src/fat/ff.c:7830:8: warning: pointer targets in assignment from 'char *' to 'u8 *' {aka 'unsigned char *'} differ in signedness [-Wpointer-sign]
+     des="";
+        ^
+../src/fat/ff.c: In function 'Storage_state1':
+../src/fat/ff.c:7844:17: warning: passing argument 2 of 'f_getfree' from incompatible pointer type [-Wincompatible-pointer-types]
+   f_getfree("", &free_clust, &fs);
+                 ^~~~~~~~~~~
+../src/fat/ff.c:5095:9: note: expected 'DWORD *' {aka 'long unsigned int *'} but argument is of type 'QWORD *' {aka 'long long unsigned int *'}
+  DWORD* nclst,  /* Pointer to a variable to return number of free clusters */
+  ~~~~~~~^~~~~
+../src/fat/ff.c:7857:28: warning: pointer targets in passing argument 1 of 'Num_of_Dir_and_File' differ in signedness [-Wpointer-sign]
+   res=Num_of_Dir_and_File ("",&file_num,&dir_num,0);
+                            ^~
+../src/fat/ff.c:7781:9: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'char *'
+ FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode)
+         ^~~~~~~~~~~~~~~~~~~
+../src/fat/ff.c:7857:31: warning: passing argument 2 of 'Num_of_Dir_and_File' from incompatible pointer type [-Wincompatible-pointer-types]
+   res=Num_of_Dir_and_File ("",&file_num,&dir_num,0);
+                               ^~~~~~~~~
+../src/fat/ff.c:7781:48: note: expected 'DWORD *' {aka 'long unsigned int *'} but argument is of type 'int *'
+ FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode)
+                                         ~~~~~~~^~~~~~~~
+../src/fat/ff.c:7857:41: warning: passing argument 3 of 'Num_of_Dir_and_File' from incompatible pointer type [-Wincompatible-pointer-types]
+   res=Num_of_Dir_and_File ("",&file_num,&dir_num,0);
+                                         ^~~~~~~~
+../src/fat/ff.c:7781:64: note: expected 'DWORD *' {aka 'long unsigned int *'} but argument is of type 'int *'
+ FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode)
+                                                         ~~~~~~~^~~~~~~
+../src/fat/ff.c: In function 'Storage_state2':
+../src/fat/ff.c:7874:10: warning: unused variable 'Fs' [-Wunused-variable]
+   FATFS *Fs=&fs;
+          ^~
+../src/fat/ff.c:7879:13: warning: 'Work_State' is used uninitialized in this function [-Wuninitialized]
+   *workstate=Work_State;
+   ~~~~~~~~~~^~~~~~~~~~~
+../src/fat/ff.c:7880:12: warning: 'Work_Temp' is used uninitialized in this function [-Wuninitialized]
+   *worktemp=Work_Temp;
+   ~~~~~~~~~^~~~~~~~~~
+../src/fat/ff.c:7881:9: warning: 'Power' is used uninitialized in this function [-Wuninitialized]
+   *power=Power;
+   ~~~~~~^~~~~~
+../src/fat/ff.c:7882:14: warning: 'PowerUpNum' is used uninitialized in this function [-Wuninitialized]
+   *powerupnum=PowerUpNum;
+   ~~~~~~~~~~~^~~~~~~~~~~
+'Finished building: ../src/fat/ff.c'
+' '
+'Building file: ../src/fat/ffsystem.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/fat/ffsystem.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/fat/ffsystem.d" -MT"src/fat/ffsystem.o" -o "src/fat/ffsystem.o" "../src/fat/ffsystem.c"
+'Finished building: ../src/fat/ffsystem.c'
+' '
+'Building file: ../src/fat/ffunicode.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/fat/ffunicode.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/fat/ffunicode.d" -MT"src/fat/ffunicode.o" -o "src/fat/ffunicode.o" "../src/fat/ffunicode.c"
+'Finished building: ../src/fat/ffunicode.c'
+' '
+'Building file: ../src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -MT"src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o" -o "src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o" "../src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
+'Finished building: ../src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.c'
+' '
+'Building file: ../src/7x_dma.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/7x_dma.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/7x_dma.d" -MT"src/7x_dma.o" -o "src/7x_dma.o" "../src/7x_dma.c"
+In file included from ../src/cmd.h:4,
+                 from ../src/7x_dma.h:14,
+                 from ../src/7x_dma.c:1:
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:120:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
+ #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
+  ^~~~~~~
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:121:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
+ #warning  Please refer the Standalone BSP UG647 for further details
+  ^~~~~~~
+../src/7x_dma.c:224:2: warning: "/*" within comment [-Wcomment]
+ //******************************************************************************/
+   
+../src/7x_dma.c: In function 'RxIntrHandler1':
+../src/7x_dma.c:280:2: warning: implicit declaration of function 'x7_parse'; did you mean 'cmd_parse'? [-Wimplicit-function-declaration]
+  x7_parse();
+  ^~~~~~~~
+  cmd_parse
+In file included from ../../dmauart_bsp/microblaze_1/include/xaxidma_bdring.h:82,
+                 from ../../dmauart_bsp/microblaze_1/include/xaxidma.h:488,
+                 from ../src/7x_dma.h:10,
+                 from ../src/7x_dma.c:1:
+../../dmauart_bsp/microblaze_1/include/xstatus.h:61:41: warning: 'return' with a value, in function returning void
+ #define XST_FAILURE                     1L
+                                         ^~
+../src/7x_dma.c:285:10: note: in expansion of macro 'XST_FAILURE'
+   return XST_FAILURE;
+          ^~~~~~~~~~~
+../src/7x_dma.c:225:13: note: declared here
+ static void RxIntrHandler1(void *Callback)
+             ^~~~~~~~~~~~~~
+../src/7x_dma.c: In function 'XAxiDma1_tx':
+../src/7x_dma.c:414:8: warning: variable 'RxBufferPtr1' set but not used [-Wunused-but-set-variable]
+   u64 *RxBufferPtr1;
+        ^~~~~~~~~~~~
+../src/7x_dma.c: In function 'x7_parse':
+../src/7x_dma.c:527:4: warning: implicit declaration of function 'x7_cmd_type_id_parse'; did you mean 'cmd_type_id_parse'? [-Wimplicit-function-declaration]
+    x7_cmd_type_id_parse(&TMsg);
+    ^~~~~~~~~~~~~~~~~~~~
+    cmd_type_id_parse
+../src/7x_dma.c: At top level:
+../src/7x_dma.c:559:6: warning: conflicting types for 'x7_cmd_type_id_parse'
+ void x7_cmd_type_id_parse(StructMsg *pMsg)
+      ^~~~~~~~~~~~~~~~~~~~
+../src/7x_dma.c:527:4: note: previous implicit declaration of 'x7_cmd_type_id_parse' was here
+    x7_cmd_type_id_parse(&TMsg);
+    ^~~~~~~~~~~~~~~~~~~~
+../src/7x_dma.c: In function 'x7_cmd_type_id_parse':
+../src/7x_dma.c:589:15: warning: 'return' with a value, in function returning void
+        return 0;
+               ^
+../src/7x_dma.c:559:6: note: declared here
+ void x7_cmd_type_id_parse(StructMsg *pMsg)
+      ^~~~~~~~~~~~~~~~~~~~
+../src/7x_dma.c:595:13: warning: 'return' with a value, in function returning void
+      return 0;
+             ^
+../src/7x_dma.c:559:6: note: declared here
+ void x7_cmd_type_id_parse(StructMsg *pMsg)
+      ^~~~~~~~~~~~~~~~~~~~
+../src/7x_dma.c: In function 'x7_parse':
+../src/7x_dma.c:557:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+'Finished building: ../src/7x_dma.c'
+' '
+'Building file: ../src/alloc.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/alloc.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/alloc.d" -MT"src/alloc.o" -o "src/alloc.o" "../src/alloc.c"
+In file included from ../src/alloc.h:4,
+                 from ../src/alloc.c:10:
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:120:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
+ #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
+  ^~~~~~~
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:121:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
+ #warning  Please refer the Standalone BSP UG647 for further details
+  ^~~~~~~
+../src/alloc.c: In function 'wjq_malloc_t':
+../src/alloc.c:238:5: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+     xil_printf("wujique malloc err!!\r\n");
+     ^~~~~~~~~~
+../src/alloc.c: In function 'wjq_calloc':
+../src/alloc.c:279:3: warning: implicit declaration of function 'memset' [-Wimplicit-function-declaration]
+   memset((char*) p, 0, n*size);
+   ^~~~~~
+../src/alloc.c:279:3: warning: incompatible implicit declaration of built-in function 'memset'
+../src/alloc.c:279:3: note: include '<string.h>' or provide a declaration of 'memset'
+../src/alloc.c:11:1:
++#include <string.h>
+ /*
+../src/alloc.c:279:3:
+   memset((char*) p, 0, n*size);
+   ^~~~~~
+../src/alloc.c: In function 'wjq_realloc':
+../src/alloc.c:323:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+  memcpy(bp, ap, newsize);
+  ^~~~~~
+../src/alloc.c:323:2: warning: incompatible implicit declaration of built-in function 'memcpy'
+../src/alloc.c:323:2: note: include '<string.h>' or provide a declaration of 'memcpy'
+../src/alloc.c:289:11: warning: unused variable 'aunits' [-Wunused-variable]
+  unsigned aunits;
+           ^~~~~~
+../src/alloc.c:286:21: warning: unused variable 'np' [-Wunused-variable]
+  ALLOC_HDR*bp, *p, *np;
+                     ^~
+../src/alloc.c:286:17: warning: unused variable 'p' [-Wunused-variable]
+  ALLOC_HDR*bp, *p, *np;
+                 ^
+../src/alloc.c: In function 'wjq_malloc_test':
+../src/alloc.c:392:2: warning: incompatible implicit declaration of built-in function 'memset'
+  memset(p, 0xf0, 1024);
+  ^~~~~~
+../src/alloc.c:392:2: note: include '<string.h>' or provide a declaration of 'memset'
+'Finished building: ../src/alloc.c'
+' '
+'Building file: ../src/check.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/check.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/check.d" -MT"src/check.o" -o "src/check.o" "../src/check.c"
+../src/check.c: In function 'CheckOutAll':
+../src/check.c:11:11: warning: implicit declaration of function 'xil_printf' [-Wimplicit-function-declaration]
+           xil_printf("error address1:0x%lx  0x%x  error address2:0x%lx  0x%x\r\n",write+i,*(write+i),read+i,*(read+i));
+           ^~~~~~~~~~
+'Finished building: ../src/check.c'
+' '
 'Building file: ../src/cmd.c'
 'Invoking: MicroBlaze gcc compiler'
 mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/cmd.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/cmd.d" -MT"src/cmd.o" -o "src/cmd.o" "../src/cmd.c"
@@ -1872,17 +2304,234 @@ At top level:
              ^~~~
 'Finished building: ../src/cmd.c'
 ' '
+'Building file: ../src/main.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+In file included from ../src/cmd.h:4,
+                 from ../src/main.c:6:
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:120:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
+ #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
+  ^~~~~~~
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:121:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
+ #warning  Please refer the Standalone BSP UG647 for further details
+  ^~~~~~~
+In file included from ../src/main.c:18:
+../src/7x_dma.h:31: warning: "MAX_PKT_LEN" redefined
+ #define MAX_PKT_LEN  0x100
+ 
+In file included from ../src/main.c:5:
+../src/simple_dma.h:166: note: this is the location of the previous definition
+ #define MAX_PKT_LEN   6196  //0x1834
+ 
+../src/main.c:45:18: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+ uint32_t  buff = (void *)(MEM_DDR3_BASE);
+                  ^
+../src/main.c:46:18: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+ uint32_t  buff_r=(void *)(MEM_DDR3_BASE+(3*512*1024*1024));
+                  ^
+../src/main.c:47:18: warning: initialization of 'uint32_t' {aka 'long unsigned int'} from 'void *' makes integer from pointer without a cast [-Wint-conversion]
+ uint32_t  buff1= (void *)(MEM_DDR3_BASE);
+                  ^
+../src/main.c: In function 'main':
+../src/main.c:192:12: warning: implicit declaration of function 'run_cmd_d20A'; did you mean 'run_cmd_d206'? [-Wimplicit-function-declaration]
+            run_cmd_d20A(&CurMsg);
+            ^~~~~~~~~~~~
+            run_cmd_d206
+In file included from ../src/main.c:18:
+../src/main.c: At top level:
+../src/7x_dma.h:42:13: warning: 'TxIntrHandler1' declared 'static' but never defined [-Wunused-function]
+ static void TxIntrHandler1(void *Callback);
+             ^~~~~~~~~~~~~~
+../src/7x_dma.h:43:13: warning: 'RxIntrHandler1' declared 'static' but never defined [-Wunused-function]
+ static void RxIntrHandler1(void *Callback);
+             ^~~~~~~~~~~~~~
+../src/7x_dma.h:44:12: warning: 'SetupIntrSystem1' declared 'static' but never defined [-Wunused-function]
+ static int SetupIntrSystem1(XIntc * IntcInstancePtr,XAxiDma * AxiDmaPtr, u16 TxIntrId, u16 RxIntrId);
+            ^~~~~~~~~~~~~~~~
+../src/7x_dma.h:34:14: warning: 'Intc1' defined but not used [-Wunused-variable]
+ static XIntc Intc1;
+              ^~~~~
+../src/7x_dma.h:33:16: warning: 'AxiDma1' defined but not used [-Wunused-variable]
+ static XAxiDma AxiDma1;
+                ^~~~~~~
+In file included from ../src/main.c:5:
+../src/simple_dma.h:218:13: warning: 'Intc' defined but not used [-Wunused-variable]
+ static INTC Intc; /* Instance of the Interrupt Controller */
+             ^~~~
+'Finished building: ../src/main.c'
+' '
+'Building file: ../src/malloc.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/malloc.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/malloc.d" -MT"src/malloc.o" -o "src/malloc.o" "../src/malloc.c"
+../src/malloc.c:41:1: warning: missing braces around initializer [-Wmissing-braces]
+ {
+ ^
+../src/malloc.c:44:5:
+     mem1base,           /* ƒ⁄¥Ê≥ÿ */
+     {       }
+     mem1mapbase,        /* ƒ⁄¥Êπ‹¿Ì◊¥Ã¨±Ì */
+     {          }
+     0,                  /* ƒ⁄¥Êπ‹¿ÌŒ¥æÕ–˜ */
+     {
+ };
+ }
+In file included from ../src/malloc.h:28,
+                 from ../src/malloc.c:25:
+../src/sys.h:85:13: warning: 'sys_nvic_priority_group_config' declared 'static' but never defined [-Wunused-function]
+ static void sys_nvic_priority_group_config(uint8_t group);                      /* …Ë÷√NVIC∑÷◊È */
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/malloc.c'
+' '
+'Building file: ../src/mem_test.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mem_test.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/mem_test.d" -MT"src/mem_test.o" -o "src/mem_test.o" "../src/mem_test.c"
+'Finished building: ../src/mem_test.c'
+' '
+'Building file: ../src/nhc_amba.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/nhc_amba.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/nhc_amba.d" -MT"src/nhc_amba.o" -o "src/nhc_amba.o" "../src/nhc_amba.c"
+../src/nhc_amba.c: In function 'io_write2':
+../src/nhc_amba.c:902:13: warning: unused variable 'j' [-Wunused-variable]
+  uint8_t  i,j;
+             ^
+../src/nhc_amba.c: In function 'io_read':
+../src/nhc_amba.c:963:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c: In function 'io_read1':
+../src/nhc_amba.c:1092:5: warning: implicit declaration of function 'send_axis_ack_1'; did you mean 'send_axis_ack'? [-Wimplicit-function-declaration]
+     send_axis_ack_1(0x02,addr,len/8192,sts);
+     ^~~~~~~~~~~~~~~
+     send_axis_ack
+../src/nhc_amba.c:1039:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c: In function 'io_read2':
+../src/nhc_amba.c:1113:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c:1112:13: warning: unused variable 'j' [-Wunused-variable]
+  uint8_t  i,j;
+             ^
+../src/nhc_amba.c: In function 'io_read3':
+../src/nhc_amba.c:1196:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c:1195:13: warning: unused variable 'j' [-Wunused-variable]
+  uint8_t  i,j;
+             ^
+../src/nhc_amba.c: At top level:
+../src/nhc_amba.c:1436:6: warning: conflicting types for 'send_axis_ack_1'
+ void send_axis_ack_1(uint8_t type,uint32_t addr,uint32_t len,uint8_t sts)
+      ^~~~~~~~~~~~~~~
+../src/nhc_amba.c:1092:5: note: previous implicit declaration of 'send_axis_ack_1' was here
+     send_axis_ack_1(0x02,addr,len/8192,sts);
+     ^~~~~~~~~~~~~~~
+../src/nhc_amba.c: In function 'send_axis_ack_1':
+../src/nhc_amba.c:1452:2: warning: implicit declaration of function 'TxSend_1'; did you mean 'TxSend'? [-Wimplicit-function-declaration]
+  TxSend_1(SourceBuffer,8);
+  ^~~~~~~~
+  TxSend
+'Finished building: ../src/nhc_amba.c'
+' '
+'Building file: ../src/platform.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/platform.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/platform.d" -MT"src/platform.o" -o "src/platform.o" "../src/platform.c"
+'Finished building: ../src/platform.c'
+' '
+'Building file: ../src/simple_dma.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/simple_dma.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/simple_dma.d" -MT"src/simple_dma.o" -o "src/simple_dma.o" "../src/simple_dma.c"
+In file included from ../src/cmd.h:4,
+                 from ../src/simple_dma.c:1:
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:120:2: warning: #warning The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert. [-Wcpp]
+ #warning  The xbasics_type.h file is deprecated and users should use xil_types.h and xil_assert.
+  ^~~~~~~
+../../dmauart_bsp/microblaze_1/include/xbasic_types.h:121:2: warning: #warning Please refer the Standalone BSP UG647 for further details [-Wcpp]
+ #warning  Please refer the Standalone BSP UG647 for further details
+  ^~~~~~~
+In file included from ../../dmauart_bsp/microblaze_1/include/xaxidma_bdring.h:82,
+                 from ../../dmauart_bsp/microblaze_1/include/xaxidma.h:488,
+                 from ../src/simple_dma.h:88,
+                 from ../src/simple_dma.c:2:
+../src/simple_dma.c: In function 'RxIntrHandler':
+../../dmauart_bsp/microblaze_1/include/xstatus.h:61:41: warning: 'return' with a value, in function returning void
+ #define XST_FAILURE                     1L
+                                         ^~
+../src/simple_dma.c:236:10: note: in expansion of macro 'XST_FAILURE'
+   return XST_FAILURE;
+          ^~~~~~~~~~~
+../src/simple_dma.c:177:6: note: declared here
+ void RxIntrHandler(void *Callback)
+      ^~~~~~~~~~~~~
+'Finished building: ../src/simple_dma.c'
+' '
+'Building file: ../src/sys.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/sys.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/sys.d" -MT"src/sys.o" -o "src/sys.o" "../src/sys.c"
+../src/sys.c: In function 'sys_msr_msp':
+../src/sys.c:318:5: warning: implicit declaration of function '__set_MSP' [-Wimplicit-function-declaration]
+     __set_MSP(addr);    /* …Ë÷√’ª∂•µÿ÷∑ */
+     ^~~~~~~~~
+In file included from ../src/sys.c:28:
+../src/sys.c: At top level:
+../src/sys.h:85:13: warning: 'sys_nvic_priority_group_config' declared 'static' but never defined [-Wunused-function]
+ static void sys_nvic_priority_group_config(uint8_t group);                      /* …Ë÷√NVIC∑÷◊È */
+             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'Finished building: ../src/sys.c'
+' '
+'Building file: ../src/time.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/time.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/time.d" -MT"src/time.o" -o "src/time.o" "../src/time.c"
+../src/time.c: In function 'TmrCtrSelfTestExample':
+../src/time.c:15:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+'Finished building: ../src/time.c'
+' '
+'Building file: ../src/uart.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/uart.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/uart.d" -MT"src/uart.o" -o "src/uart.o" "../src/uart.c"
+'Finished building: ../src/uart.c'
+' '
+'Building file: ../src/uart_get.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/uart_get.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/uart_get.d" -MT"src/uart_get.o" -o "src/uart_get.o" "../src/uart_get.c"
+../src/uart_get.c: In function 'mygets':
+../src/uart_get.c:17:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+'Finished building: ../src/uart_get.c'
+' '
+'Building file: ../src/xllfifo_polling_example.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xllfifo_polling_example.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/xllfifo_polling_example.d" -MT"src/xllfifo_polling_example.o" -o "src/xllfifo_polling_example.o" "../src/xllfifo_polling_example.c"
+'Finished building: ../src/xllfifo_polling_example.c'
+' '
+'Building file: ../src/xuartlite_intr_example.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xuartlite_intr_example.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/xuartlite_intr_example.d" -MT"src/xuartlite_intr_example.o" -o "src/xuartlite_intr_example.o" "../src/xuartlite_intr_example.c"
+'Finished building: ../src/xuartlite_intr_example.c'
+' '
+'Building file: ../src/xuartlite_polled_example.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/xuartlite_polled_example.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/xuartlite_polled_example.d" -MT"src/xuartlite_polled_example.o" -o "src/xuartlite_polled_example.o" "../src/xuartlite_polled_example.c"
+'Finished building: ../src/xuartlite_polled_example.c'
+' '
 'Building target: dmauart.elf'
 'Invoking: MicroBlaze gcc linker'
 mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../dmauart_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "dmauart.elf"  ./src/fat/diskio.o ./src/fat/ff.o ./src/fat/ffsystem.o ./src/fat/ffunicode.o  ./src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./src/7x_dma.o ./src/alloc.o ./src/check.o ./src/cmd.o ./src/main.o ./src/malloc.o ./src/mem_test.o ./src/nhc_amba.o ./src/platform.o ./src/simple_dma.o ./src/sys.o ./src/time.o ./src/uart.o ./src/uart_get.o ./src/xllfifo_polling_example.o ./src/xuartlite_intr_example.o ./src/xuartlite_polled_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
 'Finished building target: dmauart.elf'
 ' '
+make --no-print-directory post-build
+mb-objcopy -O srec dmauart.elf dmauart.srec
+' '
 'Invoking: MicroBlaze Print Size'
 mb-size dmauart.elf  |tee "dmauart.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 392844	   1988	 205364	 600196	  92884	dmauart.elf
+ 460732	   1988	 184272	 646992	  9df50	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
 
-19:29:00 Build Finished (took 1s.505ms)
+15:16:06 Build Finished (took 9s.305ms)
 

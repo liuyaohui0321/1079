@@ -40,6 +40,7 @@ dmauart.elf: $(OBJS) ../src/lscript.ld $(USER_OBJS)
 	mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../dmauart_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "dmauart.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
+	$(MAKE) --no-print-directory post-build
 
 dmauart.elf.size: dmauart.elf
 	@echo 'Invoking: MicroBlaze Print Size'
@@ -52,9 +53,13 @@ clean:
 	-$(RM) $(EXECUTABLES)$(OBJS)$(S_UPPER_DEPS)$(C_DEPS)$(ELFSIZE) dmauart.elf
 	-@echo ' '
 
+post-build:
+	-mb-objcopy -O srec dmauart.elf dmauart.srec
+	-@echo ' '
+
 secondary-outputs: $(ELFSIZE)
 
 .PHONY: all clean dependents
-.SECONDARY:
+.SECONDARY: post-build
 
 -include ../makefile.targets
