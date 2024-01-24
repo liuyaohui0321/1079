@@ -9140,3 +9140,294 @@ java.lang.NullPointerException
 
 !ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:15:19.196
 !MESSAGE XSCT command with result: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, ]. Thread: main
+!SESSION 2024-01-24 15:25:15.613 -----------------------------------------------
+eclipse.buildId=2019.1
+java.version=1.8.0_112
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2024-01-24 15:25:19.628
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-24 15:25:19.628
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2024-01-24 15:25:21.109
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-24 15:25:21.109
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:30.510
+!MESSAGE XSCT Command: [set sdk::sdk_chan tcfchan#0], Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:30.511
+!MESSAGE XSCT Command: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:30.524
+!MESSAGE XSCT Command: [::hsi::utils::init_repo], Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:30.526
+!MESSAGE XSCT command with result: [set sdk::sdk_chan tcfchan#0], Result: [null, tcfchan#0]. Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:30.529
+!MESSAGE XSCT Command: [setws C:/Users/liuyaohui/Desktop/0115_1x], Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.759
+!MESSAGE XSCT command with result: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.769
+!MESSAGE XSCT command with result: [::hsi::utils::init_repo], Result: [null, ]. Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.770
+!MESSAGE XSCT command with result: [setws C:/Users/liuyaohui/Desktop/0115_1x], Result: [null, ]. Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.773
+!MESSAGE XSCT Command: [::hsi::utils::add_repo ""], Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.786
+!MESSAGE XSCT command with result: [::hsi::utils::add_repo ""], Result: [null, ]. Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.788
+!MESSAGE XSCT Command: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.797
+!MESSAGE XSCT command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.797
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.799
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"procname": "microblaze_1",
+"osname": "standalone",
+"osver": "7.0",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.801
+!MESSAGE XSCT Command: [::hsi::utils::get_all_periphs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.806
+!MESSAGE XSCT command with result: [::hsi::utils::get_all_periphs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"axi_bram_ctrl_0": {"hier_name": "axi_bram_ctrl_0",
+"type": "axi_bram_ctrl",
+"version": "4.1",
+"ip_type": "MEMORY_CNTLR",
+},
+"axi_dma_0": {"hier_name": "axi_dma_0",
+"type": "axi_dma",
+"version": "7.1",
+"ip_type": "PERIPHERAL",
+},
+"axi_dma_1": {"hier_name": "axi_dma_1",
+"type": "axi_dma",
+"version": "7.1",
+"ip_type": "PERIPHERAL",
+},
+"axi_fifo_mm_s_0": {"hier_name": "axi_fifo_mm_s_0",
+"type": "axi_fifo_mm_s",
+"version": "4.2",
+"ip_type": "PERIPHERAL",
+},
+"axi_fifo_mm_s_1": {"hier_name": "axi_fifo_mm_s_1",
+"type": "axi_fifo_mm_s",
+"version": "4.2",
+"ip_type": "PERIPHERAL",
+},
+"axi_intc_0": {"hier_name": "axi_intc_0",
+"type": "axi_intc",
+"version": "4.1",
+"ip_type": "INTERRUPT_CNTLR",
+},
+"axi_interconnect_1": {"hier_name": "axi_interconnect_1",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_interconnect_2": {"hier_name": "axi_interconnect_2",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_interconnect_3": {"hier_name": "axi_interconnect_3",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_quad_spi_0": {"hier_name": "axi_quad_spi_0",
+"type": "axi_quad_spi",
+"version": "3.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"axi_timer_0": {"hier_name": "axi_timer_0",
+"type": "axi_timer",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"axi_uartlite_0": {"hier_name": "axi_uartlite_0",
+"type": "axi_uartlite",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"mdm_0": {"hier_name": "mdm_0",
+"type": "mdm",
+"version": "3.2",
+"ip_type": "DEBUG",
+},
+"microblaze_1": {"hier_name": "microblaze_1",
+"type": "microblaze",
+"version": "11.0",
+"ip_type": "PROCESSOR",
+},
+"microblaze_1_local_memory_dlmb_bram_if_cntlr": {"hier_name": "microblaze_1_local_memory_dlmb_bram_if_cntlr",
+"type": "lmb_bram_if_cntlr",
+"version": "4.0",
+"ip_type": "MEMORY_CNTLR",
+},
+"microblaze_1_local_memory_dlmb_v10": {"hier_name": "microblaze_1_local_memory_dlmb_v10",
+"type": "lmb_v10",
+"version": "3.0",
+"ip_type": "BUS",
+},
+"microblaze_1_local_memory_ilmb_bram_if_cntlr": {"hier_name": "microblaze_1_local_memory_ilmb_bram_if_cntlr",
+"type": "lmb_bram_if_cntlr",
+"version": "4.0",
+"ip_type": "MEMORY_CNTLR",
+},
+"microblaze_1_local_memory_ilmb_v10": {"hier_name": "microblaze_1_local_memory_ilmb_v10",
+"type": "lmb_v10",
+"version": "3.0",
+"ip_type": "BUS",
+},
+"microblaze_1_local_memory_lmb_bram": {"hier_name": "microblaze_1_local_memory_lmb_bram",
+"type": "blk_mem_gen",
+"version": "8.4",
+"ip_type": "MEMORY",
+},
+"mig_7series_0": {"hier_name": "mig_7series_0",
+"type": "mig_7series",
+"version": "4.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"mig_7series_1": {"hier_name": "mig_7series_1",
+"type": "mig_7series",
+"version": "4.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"rst_clk_wiz_0_100M": {"hier_name": "rst_clk_wiz_0_100M",
+"type": "proc_sys_reset",
+"version": "5.0",
+"ip_type": "PERIPHERAL",
+},
+"rst_mig_7series_0_200M": {"hier_name": "rst_mig_7series_0_200M",
+"type": "proc_sys_reset",
+"version": "5.0",
+"ip_type": "PERIPHERAL",
+},
+"system_ila_0": {"hier_name": "system_ila_0",
+"type": "system_ila",
+"version": "1.1",
+"ip_type": "MONITOR",
+},
+"uiFDMA_0": {"hier_name": "uiFDMA_0",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_1": {"hier_name": "uiFDMA_1",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_2": {"hier_name": "uiFDMA_2",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_3": {"hier_name": "uiFDMA_3",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"xlconcat_0": {"hier_name": "xlconcat_0",
+"type": "xlconcat",
+"version": "2.1",
+"ip_type": "PERIPHERAL",
+},
+"system_ila_0_g_inst": {"hier_name": "system_ila_0/system_ila_0_g_inst",
+"type": "gigantic_mux",
+"version": "1.0",
+"ip_type": "MONITOR",
+},
+"system_ila_0_ila_lib": {"hier_name": "system_ila_0/system_ila_0_ila_lib",
+"type": "ila",
+"version": "6.2",
+"ip_type": "PERIPHERAL",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.808
+!MESSAGE XSCT Command: [::hsi::utils::get_design_properties -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.809
+!MESSAGE XSCT command with result: [::hsi::utils::get_design_properties -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"device": "7vx690t",
+"family": "virtex7",
+"timestamp": "Wed Jan 17 17:23:06 2024",
+"vivado_version": "2019.1",
+"part": "xc7vx690tffg1927-2",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.811
+!MESSAGE XSCT Command: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:32.812
+!MESSAGE XSCT command with result: [::hsi::utils::closesw C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.371
+!MESSAGE XSCT Command: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.373
+!MESSAGE XSCT command with result: [ ::hsi::utils::set_current_hw_sw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss ], Result: [null, ]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.373
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.391
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_sw_details -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, {"procname": "microblaze_1",
+"osname": "standalone",
+"osver": "7.0",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.449
+!MESSAGE XSCT Command: [::hsi::utils::lg_init C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.451
+!MESSAGE XSCT command with result: [::hsi::utils::lg_init C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf C:/Users/liuyaohui/Desktop/0115_1x/dmauart_bsp/system.mss], Result: [null, lg1]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.452
+!MESSAGE XSCT Command: [::hsi::utils::lg_get_memories -json], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.453
+!MESSAGE XSCT command with result: [::hsi::utils::lg_get_memories -json], Result: [null, {"microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem": {"base_addr": "0x0",
+"size": "0x80000",
+},
+"axi_bram_ctrl_0_Mem0": {"base_addr": "0x45000000",
+"size": "0x1000",
+},
+"mig_7series_0_memaddr": {"base_addr": "0x80000000",
+"size": "0x80000000",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.457
+!MESSAGE XSCT Command: [::hsi::utils::lg_get_sections -json], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:34.461
+!MESSAGE XSCT command with result: [::hsi::utils::lg_get_sections -json], Result: [null, {"code_sections": ".text:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+"data_sections": ".rodata:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sdata2:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sbss2:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .data:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sdata:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .sbss:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr .bss:0x0::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+"stack_section": "stack:0x400::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+"heap_section": "heap:0x800::microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem:axi_bram_ctrl_0_Mem0:mig_7series_0_memaddr",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:43.922
+!MESSAGE XSCT Command: [::hsi::utils::lg_delete], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-24 15:25:43.924
+!MESSAGE XSCT command with result: [::hsi::utils::lg_delete], Result: [null, ]. Thread: main
