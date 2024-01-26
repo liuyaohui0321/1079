@@ -50,15 +50,15 @@ SECTIONS
    *(.text)
    *(.text.*)
    *(.gnu.linkonce.t.*)
-} > mig_7series_0_memaddr
+} > microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem
 
 .init : {
    KEEP (*(.init))
-} > mig_7series_0_memaddr
+} > microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem
 
 .fini : {
    KEEP (*(.fini))
-} > mig_7series_0_memaddr
+} > microblaze_1_local_memory_ilmb_bram_if_cntlr_Mem_microblaze_1_local_memory_dlmb_bram_if_cntlr_Mem
 
 .ctors : {
    __CTOR_LIST__ = .;

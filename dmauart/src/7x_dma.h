@@ -30,7 +30,7 @@
 #define TX_INTR_ID1				XPAR_AXI_INTC_0_AXI_DMA_1_MM2S_INTROUT_INTR
 #define MAX_PKT_LEN		0x100
 //
-static XAxiDma AxiDma1;
+XAxiDma AxiDma1;
 static XIntc Intc1;
 volatile int TxDone1;
 volatile int RxDone1;

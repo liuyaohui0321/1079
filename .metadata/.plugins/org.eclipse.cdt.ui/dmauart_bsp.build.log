@@ -1,4 +1,4 @@
-15:12:31 **** Auto Build of project dmauart_bsp ****
+19:32:56 **** Build of project dmauart_bsp ****
 make -k all 
 "Running Make include in microblaze_1/libsrc/axidma_v9_9/src"
 make -C microblaze_1/libsrc/axidma_v9_9/src -s include  "SHELL=CMD" "COMPILER=mb-gcc" "ARCHIVER=mb-ar" "COMPILER_FLAGS=  -O2 -c -mcpu=v11.0 -mlittle-endian -mxl-soft-mul" "EXTRA_COMPILER_FLAGS=-ffunction-sections -fdata-sections -Wall -Wextra -g"
@@ -50,5 +50,5 @@ make -C microblaze_1/libsrc/uartlite_v3_2/src -s libs  "SHELL=CMD" "COMPILER=mb-
 "Compiling uartlite"
 'Finished building libraries'
 
-15:12:37 Build Finished (took 6s.220ms)
+19:33:04 Build Finished (took 8s.35ms)
 

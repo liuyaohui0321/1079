@@ -1228,7 +1228,6 @@ int run_cmd_a202(StructMsg *pMsg)
         ack_HandID=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
         i+=4;
         ack_PackNum=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
-
         switch(ack_HandType)
         {
            case 0xA2:
