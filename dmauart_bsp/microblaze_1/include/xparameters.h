@@ -503,7 +503,8 @@
 
 #define STDIN_BASEADDRESS 0x41400000
 #define STDOUT_BASEADDRESS 0x41400000
-
+//#define STDIN_BASEADDRESS XPAR_UARTLITE_0_BASEADDR
+//#define STDOUT_BASEADDRESS XPAR_UARTLITE_0_BASEADDR
 /******************************************************************/
 
 /* Platform specific definitions */

@@ -18,6 +18,7 @@
 		<item value="false" key="caseSensitive"/>
 		<item value="227191" key="searchFlags"/>
 		<list key="previousPatterns">
+			<item value="0x40600000"/>
 			<item value="uint16"/>
 			<item value="Nose"/>
 			<item value="BOOL"/>

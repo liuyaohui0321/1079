@@ -24,6 +24,7 @@ extern uint32_t  cmd_len;
 extern uint32_t  len;
 extern uint32_t  buff,buff_r,buff1;
 extern uint32_t  packnum;
+extern uint8_t   cancel;
 ///********************读盘存盘数据参数*******************/
 //uint32_t  buff,buff_r;
 //uint32_t  packnum;        // lyh 2023.8.28
@@ -225,9 +226,9 @@ void cmd_type_id_parse(StructMsg *pMsg)
 								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
 							}
 						break;
-						case 0x2:
-
-						break;
+//						case 0x2:
+//
+//						break;
 //						case 0x3:
 //							for(i=0; i < TMsg.DataLen; i++)
 //							{
@@ -246,12 +247,12 @@ void cmd_type_id_parse(StructMsg *pMsg)
 //								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
 //							}
 //						break;
-						case 0x6:
-							for(i=0; i < TMsg.DataLen; i++)
-							{
-								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
-							}
-						break;
+//						case 0x6:
+//							for(i=0; i < TMsg.DataLen; i++)
+//							{
+//								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
+//							}
+//						break;
 						case 0x7:
 							for(i=0; i < TMsg.DataLen; i++)
 							{
@@ -263,6 +264,10 @@ void cmd_type_id_parse(StructMsg *pMsg)
 							{
 								TMsg.MsgData[i] = CmdRxBufferPtr[i+24];
 							}
+						break;
+						case 0x9:
+							//写取消标志位置1
+							cancel=1;
 						break;
 						case 0xA:
 							for(i=0; i < TMsg.DataLen; i++)
@@ -333,10 +338,12 @@ void ConvertReverse(u16 *str)   // 数组里类似0x3000的数,转换成0x0030
 {
 	int x=0;
 	u8 STR=0;
+	u8 STR1=0;
 	for(x=0;;x++)
 	{
 		STR=str[x]>>8;
-		if(STR<=0x7E)
+		STR1=str[x];
+		if((STR<=0x7E)&&(STR1==0))
 		{
 			//按字节倒置
 			str[x]>>=8;
@@ -2522,8 +2529,28 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		xil_printf(" Open ok!\r\n");
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
+		while(1)
+		{
+			int count=3;
+			for(int i=0;i<3;i++)
+			{
+				sleep(1);
+				xil_printf("Loading......! %d \r\n",count);
+				count--;
+			}
+
+			if(cancel==1)
+			{
+				xil_printf("cancel write!\r\n");
+				cancel=0;
+				return 0;
+			}
+			else
+				break;
+		}
 		while (1)
 		{
+			xil_printf("Start Write!\r\n");
 			if (RxReceive(DestinationBuffer,&cmd_len) == XST_SUCCESS)
 			{
 

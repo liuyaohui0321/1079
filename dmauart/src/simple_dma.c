@@ -1,7 +1,7 @@
 #include "cmd.h"
 #include "simple_dma.h"
 
-
+//extern int rxflag;
 int SimpleDmaInit()
 {
 	int Status;
@@ -228,6 +228,7 @@ void RxIntrHandler(void *Callback)
 	}
 	xil_printf("--- begin parsing of cmd --- \r\n");
 	cmd_parse();//parse recv cmd from uper   //wfeng
+//	rxflag=1;
 	xil_printf("--- cmd_parse complete --- \r\n");
 	//rx re enable
 	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) CmdRxBufferPtr,

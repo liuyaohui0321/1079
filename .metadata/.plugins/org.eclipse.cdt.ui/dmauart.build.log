@@ -1,4 +1,4 @@
-20:21:45 **** Auto Build of configuration Debug for project dmauart ****
+13:52:02 **** Auto Build of configuration Debug for project dmauart ****
 make all 
 'Building file: ../src/main.c'
 'Invoking: MicroBlaze gcc compiler'
@@ -29,7 +29,7 @@ In file included from ../src/main.c:5:
  uint32_t  buff1= (void *)(MEM_DDR3_BASE);
                   ^
 ../src/main.c: In function 'main':
-../src/main.c:191:12: warning: implicit declaration of function 'run_cmd_d20A'; did you mean 'run_cmd_d206'? [-Wimplicit-function-declaration]
+../src/main.c:193:12: warning: implicit declaration of function 'run_cmd_d20A'; did you mean 'run_cmd_d206'? [-Wimplicit-function-declaration]
             run_cmd_d20A(&CurMsg);
             ^~~~~~~~~~~~
             run_cmd_d206
@@ -64,9 +64,9 @@ mb-objcopy -O srec dmauart.elf dmauart.srec
 'Invoking: MicroBlaze Print Size'
 mb-size dmauart.elf  |tee "dmauart.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 441144	   1988	 184008	 627140	  991c4	dmauart.elf
+ 460408	   1988	 184288	 646684	  9de1c	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
 
-20:21:46 Build Finished (took 673ms)
+13:52:02 Build Finished (took 931ms)
 
