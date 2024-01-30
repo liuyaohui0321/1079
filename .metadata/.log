@@ -11063,3 +11063,463 @@ java.lang.IllegalStateException: Need an underlying widget to be able to set the
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+!SESSION 2024-01-30 16:25:30.063 -----------------------------------------------
+eclipse.buildId=2019.1
+java.version=1.8.0_112
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2024-01-30 16:25:54.637
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-30 16:25:54.637
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2024-01-30 16:25:55.740
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-30 16:25:55.740
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:07.362
+!MESSAGE XSCT Command: [::hsi::utils::init_repo], Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:07.362
+!MESSAGE XSCT Command: [set sdk::sdk_chan tcfchan#0], Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.722
+!MESSAGE XSCT command with result: [::hsi::utils::init_repo], Result: [null, ]. Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.722
+!MESSAGE XSCT command with result: [set sdk::sdk_chan tcfchan#0], Result: [null, tcfchan#0]. Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.722
+!MESSAGE XSCT Command: [setws C:/Users/liuyaohui/Desktop/0115_1x], Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.722
+!MESSAGE XSCT command with result: [setws C:/Users/liuyaohui/Desktop/0115_1x], Result: [null, ]. Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.737
+!MESSAGE XSCT Command: [::hsi::utils::add_repo ""], Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.753
+!MESSAGE XSCT command with result: [::hsi::utils::add_repo ""], Result: [null, ]. Thread: Worker-0
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:09.753
+!MESSAGE XSCT Command: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: Worker-1
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:26:13.009
+!MESSAGE XSCT command with result: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, ]. Thread: Worker-1
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.741
+!MESSAGE XSCT Command: [::hsi::utils::get_design_properties -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.744
+!MESSAGE XSCT command with result: [::hsi::utils::get_design_properties -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"device": "7vx690t",
+"family": "virtex7",
+"timestamp": "Wed Jan 17 17:23:06 2024",
+"vivado_version": "2019.1",
+"part": "xc7vx690tffg1927-2",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.746
+!MESSAGE XSCT Command: [::hsi::utils::get_all_periphs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.753
+!MESSAGE XSCT command with result: [::hsi::utils::get_all_periphs -json C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, {"axi_bram_ctrl_0": {"hier_name": "axi_bram_ctrl_0",
+"type": "axi_bram_ctrl",
+"version": "4.1",
+"ip_type": "MEMORY_CNTLR",
+},
+"axi_dma_0": {"hier_name": "axi_dma_0",
+"type": "axi_dma",
+"version": "7.1",
+"ip_type": "PERIPHERAL",
+},
+"axi_dma_1": {"hier_name": "axi_dma_1",
+"type": "axi_dma",
+"version": "7.1",
+"ip_type": "PERIPHERAL",
+},
+"axi_fifo_mm_s_0": {"hier_name": "axi_fifo_mm_s_0",
+"type": "axi_fifo_mm_s",
+"version": "4.2",
+"ip_type": "PERIPHERAL",
+},
+"axi_fifo_mm_s_1": {"hier_name": "axi_fifo_mm_s_1",
+"type": "axi_fifo_mm_s",
+"version": "4.2",
+"ip_type": "PERIPHERAL",
+},
+"axi_intc_0": {"hier_name": "axi_intc_0",
+"type": "axi_intc",
+"version": "4.1",
+"ip_type": "INTERRUPT_CNTLR",
+},
+"axi_interconnect_1": {"hier_name": "axi_interconnect_1",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_interconnect_2": {"hier_name": "axi_interconnect_2",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_interconnect_3": {"hier_name": "axi_interconnect_3",
+"type": "axi_interconnect",
+"version": "2.1",
+"ip_type": "BUS",
+},
+"axi_quad_spi_0": {"hier_name": "axi_quad_spi_0",
+"type": "axi_quad_spi",
+"version": "3.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"axi_timer_0": {"hier_name": "axi_timer_0",
+"type": "axi_timer",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"axi_uartlite_0": {"hier_name": "axi_uartlite_0",
+"type": "axi_uartlite",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"mdm_0": {"hier_name": "mdm_0",
+"type": "mdm",
+"version": "3.2",
+"ip_type": "DEBUG",
+},
+"microblaze_1": {"hier_name": "microblaze_1",
+"type": "microblaze",
+"version": "11.0",
+"ip_type": "PROCESSOR",
+},
+"microblaze_1_local_memory_dlmb_bram_if_cntlr": {"hier_name": "microblaze_1_local_memory_dlmb_bram_if_cntlr",
+"type": "lmb_bram_if_cntlr",
+"version": "4.0",
+"ip_type": "MEMORY_CNTLR",
+},
+"microblaze_1_local_memory_dlmb_v10": {"hier_name": "microblaze_1_local_memory_dlmb_v10",
+"type": "lmb_v10",
+"version": "3.0",
+"ip_type": "BUS",
+},
+"microblaze_1_local_memory_ilmb_bram_if_cntlr": {"hier_name": "microblaze_1_local_memory_ilmb_bram_if_cntlr",
+"type": "lmb_bram_if_cntlr",
+"version": "4.0",
+"ip_type": "MEMORY_CNTLR",
+},
+"microblaze_1_local_memory_ilmb_v10": {"hier_name": "microblaze_1_local_memory_ilmb_v10",
+"type": "lmb_v10",
+"version": "3.0",
+"ip_type": "BUS",
+},
+"microblaze_1_local_memory_lmb_bram": {"hier_name": "microblaze_1_local_memory_lmb_bram",
+"type": "blk_mem_gen",
+"version": "8.4",
+"ip_type": "MEMORY",
+},
+"mig_7series_0": {"hier_name": "mig_7series_0",
+"type": "mig_7series",
+"version": "4.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"mig_7series_1": {"hier_name": "mig_7series_1",
+"type": "mig_7series",
+"version": "4.2",
+"ip_type": "MEMORY_CNTLR",
+},
+"rst_clk_wiz_0_100M": {"hier_name": "rst_clk_wiz_0_100M",
+"type": "proc_sys_reset",
+"version": "5.0",
+"ip_type": "PERIPHERAL",
+},
+"rst_mig_7series_0_200M": {"hier_name": "rst_mig_7series_0_200M",
+"type": "proc_sys_reset",
+"version": "5.0",
+"ip_type": "PERIPHERAL",
+},
+"system_ila_0": {"hier_name": "system_ila_0",
+"type": "system_ila",
+"version": "1.1",
+"ip_type": "MONITOR",
+},
+"uiFDMA_0": {"hier_name": "uiFDMA_0",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_1": {"hier_name": "uiFDMA_1",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_2": {"hier_name": "uiFDMA_2",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"uiFDMA_3": {"hier_name": "uiFDMA_3",
+"type": "uiFDMA",
+"version": "2.0",
+"ip_type": "PERIPHERAL",
+},
+"xlconcat_0": {"hier_name": "xlconcat_0",
+"type": "xlconcat",
+"version": "2.1",
+"ip_type": "PERIPHERAL",
+},
+"system_ila_0_g_inst": {"hier_name": "system_ila_0/system_ila_0_g_inst",
+"type": "gigantic_mux",
+"version": "1.0",
+"ip_type": "MONITOR",
+},
+"system_ila_0_ila_lib": {"hier_name": "system_ila_0/system_ila_0_ila_lib",
+"type": "ila",
+"version": "6.2",
+"ip_type": "PERIPHERAL",
+},
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.899
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_ENABLED], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.900
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_ENABLED], Result: [null, 1]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.901
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_PROFILE_SIZE], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.902
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_DEBUG_PROFILE_SIZE], Result: [null, 0]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.903
+!MESSAGE XSCT Command: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_FREQ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 16:30:10.919
+!MESSAGE XSCT command with result: [::hsi::utils::get_hw_param_value C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf microblaze_1 C_FREQ], Result: [null, 100000000]. Thread: main
+
+!ENTRY org.eclipse.ui.ide 4 4 2024-01-30 16:30:29.258
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2024-01-30 16:30:29.259
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2024-01-30 16:30:29.259
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:51)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1739)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1199)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2283)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$4.run(IDEWorkbenchAdvisor.java:456)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+!SESSION 2024-01-30 17:46:01.628 -----------------------------------------------
+eclipse.buildId=2019.1
+java.version=1.8.0_112
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2024-01-30 17:46:22.277
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-30 17:46:22.277
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY org.eclipse.ui 2 0 2024-01-30 17:46:23.838
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-01-30 17:46:23.838
+!MESSAGE Commands should really have a category: plug-in='com.xilinx.sdk.appwiz', id='com.xilinx.sdk.app.commands.ChangeAtfBuiltReferences', categoryId='com.xilinx.sdk.app.commands.category'
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.188
+!MESSAGE XSCT Command: [::hsi::utils::init_repo], Thread: Worker-7
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.188
+!MESSAGE XSCT Command: [set sdk::sdk_chan tcfchan#0], Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.272
+!MESSAGE XSCT command with result: [::hsi::utils::init_repo], Result: [null, ]. Thread: Worker-7
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.272
+!MESSAGE XSCT command with result: [set sdk::sdk_chan tcfchan#0], Result: [null, tcfchan#0]. Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.272
+!MESSAGE XSCT Command: [setws C:/Users/liuyaohui/Desktop/0115_1x], Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.272
+!MESSAGE XSCT command with result: [setws C:/Users/liuyaohui/Desktop/0115_1x], Result: [null, ]. Thread: Thread-16
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.287
+!MESSAGE XSCT Command: [::hsi::utils::add_repo ""], Thread: Worker-7
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.287
+!MESSAGE XSCT command with result: [::hsi::utils::add_repo ""], Result: [null, ]. Thread: Worker-7
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:32.303
+!MESSAGE XSCT Command: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Thread: Worker-2
+
+!ENTRY com.xilinx.sdk.utils 0 0 2024-01-30 17:46:34.434
+!MESSAGE XSCT command with result: [::hsi::utils::openhw C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/system.hdf], Result: [null, ]. Thread: Worker-2
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 18:25:48.666
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 18:46:06.024
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 21:00:14.020
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 21:07:41.296
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 21:27:52.289
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 21:33:33.133
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 21:39:31.284
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.resources 4 568 2024-01-30 21:57:59.218
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:45)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:41)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1768)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1852)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1224)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1165)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui.ide 4 4 2024-01-30 21:59:40.244
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2024-01-30 21:59:40.244
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2024-01-30 21:59:40.244
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\liuyaohui\Desktop\0115_1x\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:51)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1657)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1739)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1199)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2283)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$4.run(IDEWorkbenchAdvisor.java:456)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)

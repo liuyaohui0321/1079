@@ -352,6 +352,32 @@ void ConvertReverse(u16 *str)   // 数组里类似0x3000的数,转换成0x0030
 	}
 }
 
+void Reverse_u8(u8 *ARR,int n)
+{
+		u8 count=0;
+		u16 a=0;
+		int i=n;
+		int temp=n;
+		while(1)
+		{
+			a=(ARR[i++]|ARR[i++]<<8);
+			if(a=='\0')  break;
+			count++;
+		}
+		u8 *arr=(u8 *)wjq_malloc_t(sizeof(u8)*count*2);
+
+		for(int j=0;j<count*2;j++)
+		{
+			arr[j]=ARR[temp+j];
+		}
+
+		for(int j=0;j<count;j++)
+		{
+			ARR[temp+2*j]=arr[2*(count-j-1)];
+			ARR[temp+2*j+1]=arr[2*(count-j)-1];
+		}
+}
+
 void InitTimeList(void)
 {
 	 CreateTimelist= (CreateTimeNode *)wjq_malloc_t(sizeof(CreateTimeNode));    // 分配一个头结点
@@ -811,6 +837,8 @@ int run_cmd_a201(StructMsg *pMsg)
 	int ret=0,i=0,x=0,temp=0,h=0;
 	u16 unicode_u16=0;
 	u32 file_cmd=0;
+//	u8 count=0;
+//	u16 a=0;
 	WCHAR cmd_str_1[1024]={0},cmd_str_2[1024]={0};
 	BYTE  cmd_str_11[100]={0},cmd_str_21[100]={0};
 	FRESULT fr1;
@@ -823,6 +851,26 @@ int run_cmd_a201(StructMsg *pMsg)
 	i=i+4;
 	temp=i;   // 9.7 LYH
 	xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,file_cmd);
+
+//	while(1)
+//	{
+//		a=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+//		if(a=='\0')  break;
+//		count++;
+//	}
+//	u8 *arr=(u8 *)wjq_malloc_t(sizeof(u8)*count*2);
+//
+//	for(int j=0;j<count*2;j++)
+//	{
+//		arr[j]=pMsg->MsgData[temp+j];
+//	}
+//
+//	for(int j=0;j<count;j++)
+//	{
+//		pMsg->MsgData[temp+2*j]=arr[2*(count-j-1)];
+//		pMsg->MsgData[temp+2*j+1]=arr[2*(count-j)-1];
+//	}
+
 	for (x = 0; x < 1024; x++)
 	{
 			unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);

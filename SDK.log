@@ -25372,3 +25372,19 @@ con
 11:31:51 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
 13:50:12 INFO  : Inferring section assignments and sizes from elf file: C:\Users\liuyaohui\Desktop\0115_1x\dmauart\Debug\dmauart.elf
 13:51:22 INFO  : Inferring section assignments and sizes from elf file: C:\Users\liuyaohui\Desktop\0115_1x\dmauart\Debug\dmauart.elf
+16:26:01 INFO  : Registering command handlers for SDK TCF services
+16:26:02 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+16:26:07 INFO  : XSCT server has started successfully.
+16:26:09 INFO  : Successfully done setting XSCT server connection channel  
+16:26:09 INFO  : Successfully done setting SDK workspace  
+16:26:09 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+16:26:09 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+17:46:30 INFO  : Registering command handlers for SDK TCF services
+17:46:31 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+17:46:32 INFO  : XSCT server has started successfully.
+17:46:32 INFO  : Successfully done setting XSCT server connection channel  
+17:46:32 INFO  : Successfully done setting SDK workspace  
+17:46:32 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+17:46:32 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
