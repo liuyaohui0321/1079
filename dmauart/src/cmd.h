@@ -81,9 +81,13 @@ extern XAxiDma AxiDma;
 #define COPY_FOLDER			12
 #define GET_DIR				13
 
-#define DISK_FORMAT			0X01
-#define DISK_REMOUNT		0X02
-#define DISK_UNMOUNT		0X03
+//#define DISK_FORMAT			0X01
+//#define DISK_REMOUNT		0X02
+//#define DISK_UNMOUNT		0X03
+
+#define DISK_FORMAT			1
+#define DISK_REMOUNT		2
+#define DISK_UNMOUNT		3
 
 #define FILE_ATTRIBUTE		0X0
 #define FOLDER_ATTRIBUTE	0X01
@@ -176,7 +180,8 @@ int cmd_reply_a203_to_f201(u32 packnum, u32 type, u32 id, u32 result);
 
 int cmd_reply_a206(StructMsg *pMsg, const BYTE* path);
 int cmd_reply_a207(StructMsg *pMsg, const BYTE* path);
-int cmd_reply_a208(StructMsg *pMsg, BYTE* path);
+//int cmd_reply_a208(StructMsg *pMsg, BYTE* path);
+int cmd_reply_a208(BYTE* path);
 int run_reply_d207(StructMsg *pMsg);
 int run_reply_d208(StructMsg *pMsg);
 int cmd_reply_health_f201(void);
@@ -187,7 +192,7 @@ int run_cmd_a201(StructMsg *pMsg);
 int run_cmd_a202(StructMsg *pMsg);
 int run_cmd_a204(StructMsg *pMsg);
 int run_cmd_a205(StructMsg *pMsg);
-int run_cmd_a208(StructMsg *pMsg);
+//int run_cmd_a208(StructMsg *pMsg);
 int run_cmd_b201(StructMsg *pMsg);
 
 int run_cmd_d201(StructMsg *pMsg);

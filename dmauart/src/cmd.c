@@ -1250,9 +1250,16 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 /***************************************************************************************/
 
-		case GET_DIR:   // 获取目录中的文件和子目录列表
+		case GET_DIR:   // 返回目录中的文件和子目录列表
+			ret = cmd_reply_a208(cmd_str_11);
+			if (ret != FR_OK)
+			{
+				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);
+				return -1;
+			}
+			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+#if 0  	// 1.31注释掉，因为客户想用该命令执行cmd_reply_a208这个指令
 			ret = scan_files(cmd_str_11);
-//			ret = scan_files("0:");
 			if (ret != FR_OK)
 			{
 				xil_printf("Get Directory List Failed! ret=%d\r\n", ret);
@@ -1268,6 +1275,7 @@ int run_cmd_a201(StructMsg *pMsg)
 			//更新扫描的目录的访问时间
 			AccessTimeNode_Modify(AccessTimelist,cmd_str_11,"new_time",1);
 			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+#endif
 		break;
 
 		default:
@@ -1306,10 +1314,10 @@ int run_cmd_a202(StructMsg *pMsg)
                       	xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a205);
                      break;
 
-                     case  0x08:
-                    	 cmd_reply_a203_to_a208(ack_PackNum, ack_HandType, ack_HandID, result_a208);
-                    	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a208);
-                     break;
+//                     case  0x08:
+//                    	 cmd_reply_a203_to_a208(ack_PackNum, ack_HandType, ack_HandID, result_a208);
+//                    	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a208);
+//                     break;
 
                      default:
                          return 0;
@@ -2107,32 +2115,32 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 //				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 //				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 
-		sprintf(CreateTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(CreateTime1,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间
 		convert(ReplyStructA206Ack.CreateTime1,CreateTime1);
 
-		sprintf(CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(CreateTime2,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间
 		convert(ReplyStructA206Ack.CreateTime2,CreateTime2);
 
-		sprintf(ChangeTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(ChangeTime1,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA206Ack.ChangeTime1,ChangeTime1);
 
-		sprintf(ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(ChangeTime2,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA206Ack.ChangeTime2,ChangeTime2);
 
-		sprintf(AccessTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(AccessTime1,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA206Ack.AccessTime1,AccessTime1);
 
-		sprintf(AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(AccessTime2,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA206Ack.AccessTime2,AccessTime2);
@@ -2221,33 +2229,33 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 //		sprintf(ReplyStructA207Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 //				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 //				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
-		sprintf(CreateTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(CreateTime1,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
 		convert(ReplyStructA207Ack.CreateTime1,CreateTime1);
 //		ConvertReverse(ReplyStructA207Ack.CreateTime1);
 
-		sprintf(CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(CreateTime2,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
 		convert(ReplyStructA207Ack.CreateTime2,CreateTime2);
 
-		sprintf(ChangeTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(ChangeTime1,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA207Ack.ChangeTime1,ChangeTime1);
 
-		sprintf(ChangeTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(ChangeTime2,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA207Ack.ChangeTime2,ChangeTime2);
 
-		sprintf(AccessTime1,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(AccessTime1,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA207Ack.AccessTime1,AccessTime1);
 
-		sprintf(AccessTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
+		sprintf(AccessTime2,"%u.%02u.%02u,%02u.%02u.%02u",
 				(fno.fdate >> 9) + 1980,fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 				fno.ftime >> 5 & 63,fno.ftime*2);  //修改时间     // 11.21 tested by lyh: have some problems
 		convert(ReplyStructA207Ack.AccessTime2,AccessTime2);
@@ -2286,37 +2294,38 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 //		return 0;
 }
 
-int run_cmd_a208(StructMsg *pMsg)
-{
-	    int file_cmd=0,ret=0,i=0,x = 0,temp=0,h=0;
-		u16 unicode_u16=0;
-		WCHAR cmd_str_1[1024]={0};
-		BYTE cmd_str_11[100]={0};
-//		DIR dir;
-//		FIL file;
-//		file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
-//		i=i+4;
-//		temp=i;
-		for (x = 0; x < 1024; x++)
-		{
-			 unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
-			 cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
-			 if(cmd_str_1[x]<=0x7E)
-			 {
-				 cmd_str_11[h++]=cmd_str_1[x];
-			 }
-			 else
-			 {
-				 cmd_str_11[h++]=(cmd_str_1[x]>>8);
-				 cmd_str_11[h++]=cmd_str_1[x];
-			 }
-			 if (cmd_str_1[x] == '\0') break;
-		}
-		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
-		cmd_reply_a208(pMsg, cmd_str_11);
-//		cmd_reply_a208(pMsg, "0:");
-	    return 0;
-}
+//int run_cmd_a208(StructMsg *pMsg)  // 1.31注释掉
+//{
+//	    int file_cmd=0,ret=0,i=0,x = 0,temp=0,h=0;
+//		u16 unicode_u16=0;
+//		WCHAR cmd_str_1[1024]={0};
+//		BYTE cmd_str_11[100]={0};
+////		DIR dir;
+////		FIL file;
+////		file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+////		i=i+4;
+////		temp=i;
+//		for (x = 0; x < 1024; x++)
+//		{
+//			 unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
+//			 cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+//			 if(cmd_str_1[x]<=0x7E)
+//			 {
+//				 cmd_str_11[h++]=cmd_str_1[x];
+//			 }
+//			 else
+//			 {
+//				 cmd_str_11[h++]=(cmd_str_1[x]>>8);
+//				 cmd_str_11[h++]=cmd_str_1[x];
+//			 }
+//			 if (cmd_str_1[x] == '\0') break;
+//		}
+//		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
+//		cmd_reply_a208(pMsg, cmd_str_11);
+////		cmd_reply_a208(pMsg, "0:");
+//	    return 0;
+//}
+
 //初始化链表
 static LinkedList InitList(void)
 {
@@ -2333,7 +2342,8 @@ static LinkedList InitList(void)
 }
 
 // 返回目录中的文件和子目录列表 	存储组件->主控组件
-int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
+//int cmd_reply_a208(StructMsg *pMsg,BYTE* path)   //1.31注释
+int cmd_reply_a208(BYTE* path)
 {
 		int Status;
 		uint32_t TotalFileNum=0,TotaldirNum=0;
@@ -2434,7 +2444,6 @@ int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
 		wjq_free_m(ReplyStructA208Ack.message); 	// 释放内存
 		LinkList=NULL;
 		return 0;
-
 }
 
 

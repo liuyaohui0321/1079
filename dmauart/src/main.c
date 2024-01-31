@@ -133,12 +133,12 @@ mount:	ret = f_mount (&fs, "", 1);
     							run_cmd_a205(&CurMsg);
     							xil_printf("------commands executing complete!------\r\n");
     						break;
-    						case 0x8:
-								xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
-								xil_printf("------Start executing commands!------\r\n");
-								run_cmd_a208(&CurMsg);
-								xil_printf("------commands executing complete!------\r\n");
-							break;
+//    						case 0x8:
+//								xil_printf("%s %d  CurMsg.HandType:0x%x CurMsg.HandId:0x%x\r\n", __FUNCTION__, __LINE__,CurMsg.HandType,CurMsg.HandId);
+//								xil_printf("------Start executing commands!------\r\n");
+//								run_cmd_a208(&CurMsg);
+//								xil_printf("------commands executing complete!------\r\n");
+//							break;
     						default:
     						break;
     					}
