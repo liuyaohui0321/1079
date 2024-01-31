@@ -7,6 +7,9 @@
 #include "stdio.h"
 /************2023.9.11 加**************/
 #include "xparameters.h"
+#include "simple_dma.h"
+
+extern XAxiDma AxiDma;
 
 #define OFFSET_SIZE             2*2*2*2*2*1024*1024   // 32M
 #define SRC_ID		0x0  //
@@ -50,19 +53,33 @@
 #define		MSG_QUERY		12	 //wfeng
 
 
-#define NEW_FILE			0X01
-#define NEW_FOLDER			0X02
-#define DEL_FILE			0X03
-#define DEL_FOLDER			0X04
-#define RENAME_FILE			0X05
-#define RENAME_FOLDER		0X06
-#define MOVE_FOLDER			0X07
-#define MOVE_FILE			0X08
-#define OPEN_FILE			0X09
-#define CLOSE_FILE			0X10
-#define COPY_FILE			0X11
-#define COPY_FOLDER			0X12
-#define GET_DIR				0X13
+//#define NEW_FILE			0X01
+//#define NEW_FOLDER			0X02
+//#define DEL_FILE			0X03
+//#define DEL_FOLDER			0X04
+//#define RENAME_FILE			0X05
+//#define RENAME_FOLDER		0X06
+//#define MOVE_FOLDER			0X07
+//#define MOVE_FILE			0X08
+//#define OPEN_FILE			0X09
+//#define CLOSE_FILE			0X10
+//#define COPY_FILE			0X11
+//#define COPY_FOLDER			0X12
+//#define GET_DIR				0X13
+
+#define NEW_FILE			1   //1.31号改   客户要把16进制数改成10进制数
+#define NEW_FOLDER			2
+#define DEL_FILE			3
+#define DEL_FOLDER			4
+#define RENAME_FILE			5
+#define RENAME_FOLDER		6
+#define MOVE_FOLDER			7
+#define MOVE_FILE			8
+#define OPEN_FILE			9
+#define CLOSE_FILE			10
+#define COPY_FILE			11
+#define COPY_FOLDER			12
+#define GET_DIR				13
 
 #define DISK_FORMAT			0X01
 #define DISK_REMOUNT		0X02
@@ -240,6 +257,7 @@ typedef struct
 	u32		AckHandType;
 	u32		AckHandId;
 	u32		AckResult;
+	u32		backups[4];       // 1.31按照客户协议增加
 	u32		CheckCode;
 	u32		Tail;
 }__attribute__((__packed__))  StructA203Ack;
@@ -273,6 +291,7 @@ typedef struct
 	u16		AccessTime2[24];
 	u32		RWCtrl;
 	u32		DisplayCtrl;
+	u32		backups[12];       // 1.31按照客户协议增加
 	u32		CheckCode;
 	u32		Tail;
 }__attribute__((__packed__))  StructA206Ack;
@@ -306,6 +325,7 @@ typedef struct
 	u16		AccessTime2[24];
 	u32		RWCtrl;
 	u32		DisplayCtrl;
+	u32		backups;       // 1.31按照客户协议增加
 	u32		CheckCode;
 	u32		Tail;
 }__attribute__((__packed__))  StructA207Ack;

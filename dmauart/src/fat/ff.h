@@ -343,7 +343,7 @@ FRESULT f_setcp (WORD cp);											/* Set current code page */
 //单个文件或文件夹目录信息数据结构
 typedef struct
 {
-	u32  type;
+	u64  type;    	// 1.31按照客户协议改
 	u64  size;
 	u16  name[512];
 	u16	 ChangeTime1[24];

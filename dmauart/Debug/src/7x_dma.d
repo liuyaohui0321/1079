@@ -21,7 +21,8 @@ src/7x_dma.o src/7x_dma.o: ../src/7x_dma.c ../src/7x_dma.h \
  ../../dmauart_bsp/microblaze_1/include/xdebug.h ../src/cmd.h \
  ../../dmauart_bsp/microblaze_1/include/xbasic_types.h \
  ../../dmauart_bsp/microblaze_1/include/xil_types.h ../src/fat/ff.h \
- ../src/fat/ffconf.h ../../dmauart_bsp/microblaze_1/include/xintc.h \
+ ../src/fat/ffconf.h ../src/simple_dma.h \
+ ../../dmauart_bsp/microblaze_1/include/xintc.h \
  ../../dmauart_bsp/microblaze_1/include/xintc_l.h
 
 ../src/7x_dma.h:
@@ -75,6 +76,8 @@ src/7x_dma.o src/7x_dma.o: ../src/7x_dma.c ../src/7x_dma.h \
 ../src/fat/ff.h:
 
 ../src/fat/ffconf.h:
+
+../src/simple_dma.h:
 
 ../../dmauart_bsp/microblaze_1/include/xintc.h:
 
