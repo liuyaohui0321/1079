@@ -95,7 +95,7 @@ mount:	ret = f_mount (&fs, "", 1);
 		}
 		xil_printf(" Init All ok!\r\n");
 #endif
-//		cmd_reply_a203_to_a201(0,0,0,0);
+
 #if  1
    #if  1 //recv
 		while(1)

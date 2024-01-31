@@ -891,8 +891,8 @@ int run_cmd_a201(StructMsg *pMsg)
     switch(file_cmd)
     {
 		case NEW_FILE:       //新建文件
-//			ret = f_open (&file, cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE);
-			ret = f_open (&file, "abc", FA_CREATE_ALWAYS | FA_WRITE);
+			ret = f_open (&file, cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE);
+//			ret = f_open (&file, "abc", FA_CREATE_ALWAYS | FA_WRITE);
 			if (ret != FR_OK) {
 				xil_printf("f_open Failed! ret=%d\r\n", ret);
 			  //cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
@@ -925,8 +925,8 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 /***************************************************************************************/
 		case NEW_FOLDER:    //新建文件夹
-//			ret =f_mkdir(cmd_str_11);
-			ret =f_mkdir("bcd");
+			ret =f_mkdir(cmd_str_11);
+//			ret =f_mkdir("bcd");
 			if (ret != FR_OK) {
 				xil_printf("f_mkdir  Failed! ret=%d\r", ret);
 				if(ret==8) xil_printf("Failed reason:FR_EXIST\n");
@@ -1251,8 +1251,8 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 
 		case GET_DIR:   // 获取目录中的文件和子目录列表
-//			ret = scan_files(cmd_str_11);
-			ret = scan_files("0:");
+			ret = scan_files(cmd_str_11);
+//			ret = scan_files("0:");
 			if (ret != FR_OK)
 			{
 				xil_printf("Get Directory List Failed! ret=%d\r\n", ret);
@@ -2313,8 +2313,8 @@ int run_cmd_a208(StructMsg *pMsg)
 			 if (cmd_str_1[x] == '\0') break;
 		}
 		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
-//		cmd_reply_a208(pMsg, cmd_str_11);
-		cmd_reply_a208(pMsg, "0:");
+		cmd_reply_a208(pMsg, cmd_str_11);
+//		cmd_reply_a208(pMsg, "0:");
 	    return 0;
 }
 //初始化链表
@@ -2387,22 +2387,44 @@ int cmd_reply_a208(StructMsg *pMsg,BYTE* path)
         	if(r==NULL)
         		break;
         }
-//		printf("sizeof(StructA208Ack):%d",sizeof(StructA208Ack));
+		printf("sizeof(StructA208Ack):%d",sizeof(StructA208Ack));
 
 		AxiDma.TxBdRing.HasDRE=1;
 		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA208Ack,
-        					sizeof(StructA208Ack), XAXIDMA_DMA_TO_DEVICE);
+        					56, XAXIDMA_DMA_TO_DEVICE);
 		if (Status != XST_SUCCESS) {
 			return XST_FAILURE;
 		}
 
+		AxiDma.TxBdRing.HasDRE=1;
+		for(int i=1;i<sum+1;i++)
+		{
+				Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA208Ack.message[i],
+						sizeof(SingleFileOrDir), XAXIDMA_DMA_TO_DEVICE);
+				if (Status != XST_SUCCESS) {
+					return XST_FAILURE;
+				}
+		}
 
+		AxiDma.TxBdRing.HasDRE=1;
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA208Ack.CheckCode,
+							4, XAXIDMA_DMA_TO_DEVICE);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+
+		AxiDma.TxBdRing.HasDRE=1;
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA208Ack.Tail,
+							4, XAXIDMA_DMA_TO_DEVICE);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
 
 //  *************************************************  //
 		// 打印一下每个文件和目录的结构体信息
 		for(int i=1;i<sum+1;i++)
 		{
-			printf("Type:%u,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
+			printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
 		}
 
 //  *************************************************  //
