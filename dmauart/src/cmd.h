@@ -391,6 +391,7 @@ typedef struct
 
 //#define CW32(a,b,c,d) ((uint32_t)((((uint32_t)(a))<<24) | (((uint32_t)b)<<16)| (((uint32_t)c)<<8)| ((uint32_t)d)))     //改之前
 #define CW32(a,b,c,d) ((uint32_t)((((uint32_t)(a))) | (((uint32_t)b)<<8)| (((uint32_t)c)<<16)| ((uint32_t)d)<<24))   //改之后
+
 #define SW16(x) ((uint16_t)((((uint16_t)(x)&0x00ffU)<<8) | \
 							(((uint16_t)(x)&0xff00U)>>8) ))
 
@@ -399,6 +400,14 @@ typedef struct
 							(uint32_t)((x&0xff0000)>>8)|\
 							(uint32_t)((x&0xff000000)>>24))
 
+#define SW64(x) ((uint64_t)((x&0xff)<<56)|\
+							(uint64_t)((x&0xff00)<<40)|\
+							(uint64_t)((x&0xff0000)<<24)|\
+							(uint64_t)((x&0xff000000)<<8)|\
+							(uint64_t)((x&0xff00000000)>>8)|\
+							(uint64_t)((x&0xff0000000000)>>24)|\
+							(uint64_t)((x&0xff000000000000)>>40)|\
+							(uint64_t)((x&0xff00000000000000)>>56))   //1.31写
 
 
 #endif

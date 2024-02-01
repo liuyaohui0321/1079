@@ -845,7 +845,7 @@ int run_cmd_a201(StructMsg *pMsg)
 	FILINFO fno1;
 	CreateTimeNode CreateTimenode;
 	ChangeTimeNode ChangeTimenode;
-	AccessTimeNode AccessTimenode;
+	AccessTimeNode AccessTimenode;//003A0030 8FBE96F7
 	xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
 	file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
 	i=i+4;
@@ -1251,7 +1251,8 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 
 		case GET_DIR:   // 返回目录中的文件和子目录列表
-			ret = cmd_reply_a208(cmd_str_11);
+//			ret = cmd_reply_a208(cmd_str_11);
+			ret = cmd_reply_a208("0:");
 			if (ret != FR_OK)
 			{
 				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);
@@ -2349,6 +2350,9 @@ int cmd_reply_a208(BYTE* path)
 		uint32_t TotalFileNum=0,TotaldirNum=0;
 		LinkedList LinkList=NULL;     //12.21写
 		uint32_t sum=0;
+		u8 dat[1024]={0};
+		int k=0;
+		int h=0;
 		LinkList=InitList();
 		if(LinkList==NULL)
 		{
@@ -2359,13 +2363,15 @@ int cmd_reply_a208(BYTE* path)
 		ReplyStructA208Ack.Head=0x55555555;
 		ReplyStructA208Ack.SrcId=SRC_ID;
 		ReplyStructA208Ack.DestId=DEST_ID;
+#if 0
 		ReplyStructA208Ack.HandType=0xA2;
 		ReplyStructA208Ack.HandId=0x08;
 		ReplyStructA208Ack.PackNum=0;
 //		ReplyStructA208Ack.AckHandType=pMsg->HandType;
 //		ReplyStructA208Ack.AckHandId=pMsg->HandId;
-		ReplyStructA208Ack.AckHandType=0;
-		ReplyStructA208Ack.AckHandId=0;
+		ReplyStructA208Ack.AckHandType=0xA2;
+		ReplyStructA208Ack.AckHandId=0x01;
+#endif
 
 		Status = Num_of_Dir_and_File(path,&TotalFileNum,&TotaldirNum,1);
 		if (Status != FR_OK) {
@@ -2374,15 +2380,26 @@ int cmd_reply_a208(BYTE* path)
 		}
 		ReplyStructA208Ack.FileNum=TotalFileNum; //文件总个数
 		ReplyStructA208Ack.DirNum=TotaldirNum;   //文件夹总个数
-//		ReplyStructA208Ack.CheckCode
-		ReplyStructA208Ack.Tail=0xAAAAAAAA;
 		sum=TotalFileNum+TotaldirNum;
+
+#if 1    // 改变字节序
+		ReplyStructA208Ack.HandType=SW32(0xA2);
+		ReplyStructA208Ack.HandId=SW32(0x08);
+		ReplyStructA208Ack.PackNum=SW32(0);
+		ReplyStructA208Ack.AckHandType=SW32(0xA2);
+		ReplyStructA208Ack.AckHandId=SW32(0x01);
+		ReplyStructA208Ack.FileNum=SW32(ReplyStructA208Ack.FileNum);
+		ReplyStructA208Ack.DirNum=SW32(ReplyStructA208Ack.DirNum);
+#endif
+
 #if 0
 		ReplyStructA208Ack.SubpackNum;		//子包序号
 		ReplyStructA208Ack.LastPack;		//最后一包标识
 		ReplyStructA208Ack.SubpackFileNum;	//子包文件个数（N个）
 		ReplyStructA208Ack.SubpackDirNum;	//子包文件夹个数（N个）
 #endif
+		ReplyStructA208Ack.CheckCode=0x0;
+		ReplyStructA208Ack.Tail=0xAAAAAAAA;
 		// 循环N个单个文件或文件夹目录信息
 		// 1.19号之前的代码，客户不想展示每一层文件夹下的内容，只想显示一层，因此1.19号之后用另一套代码
 		record_struct_of_Dir_and_File(path,LinkList);
@@ -2397,7 +2414,31 @@ int cmd_reply_a208(BYTE* path)
         	if(r==NULL)
         		break;
         }
-		printf("sizeof(StructA208Ack):%d",sizeof(StructA208Ack));
+//		printf("sizeof(StructA208Ack):%d",sizeof(StructA208Ack));
+
+		for(int i=1;i<sum+1;i++)
+		{
+			while(1)
+			{
+				dat[k]=ReplyStructA208Ack.message[i].name[k/2]&0xff;
+				dat[k+1]=((ReplyStructA208Ack.message[i].name[k/2]&0xff00)>>8);
+				if( dat[k]==0 && dat[k+1]==0 )   break;
+				k+=2;
+			}
+			k=0;
+			while(1)
+			{
+				if(dat[k]>=0x80 && dat[k+1]>=0x80)
+					ReplyStructA208Ack.message[i].name[h++]=CW16(dat[k],dat[k+1]);
+				else
+					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k]<<8);
+					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k+1]<<8);
+				if(dat[k]==0 && dat[k+1]==0)   break;
+				k+=2;
+			}
+			k=0;
+			h=0;
+		}
 
 		AxiDma.TxBdRing.HasDRE=1;
 		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR) &ReplyStructA208Ack,
@@ -2986,13 +3027,15 @@ int cmd_reply_a203_to_a201(u32 packnum, u32 type, u32 id, u32 result)
 		ReplyStructA203Ack.Head = 0x55555555;
 		ReplyStructA203Ack.SrcId = SRC_ID;
 		ReplyStructA203Ack.DestId = DEST_ID;
+#if   0
 		ReplyStructA203Ack.HandType = 0xA2;
 		ReplyStructA203Ack.HandId = 0x3;
 		ReplyStructA203Ack.PackNum = 0;   //need change
-
+#endif
 		ReplyStructA203Ack.AckPackNum = packnum;
 		ReplyStructA203Ack.AckHandType = type;
 		ReplyStructA203Ack.AckHandId = id;
+
 	/***************lyh 2023.8.15 改******************************/
 		if(result_a201==result)
 			ReplyStructA203Ack.AckResult = result_a201;
@@ -3006,6 +3049,17 @@ int cmd_reply_a203_to_a201(u32 packnum, u32 type, u32 id, u32 result)
 				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
 				ReplyStructA203Ack.AckResult;
 		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+
+#if 1    // 改变字节序
+		ReplyStructA203Ack.HandType = SW32(0xA2);
+		ReplyStructA203Ack.HandId =  SW32(0x3);
+		ReplyStructA203Ack.PackNum = SW32(0x0);   //need change
+		ReplyStructA203Ack.AckPackNum = SW32(ReplyStructA203Ack.AckPackNum);
+		ReplyStructA203Ack.AckHandType = SW32(ReplyStructA203Ack.AckHandType);
+		ReplyStructA203Ack.AckHandId = SW32(ReplyStructA203Ack.AckHandId);
+		ReplyStructA203Ack.CheckCode = SW32(ReplyStructA203Ack.CheckCode);
+		ReplyStructA203Ack.AckResult = SW32(ReplyStructA203Ack.AckResult);
+#endif
 //		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
 	//	Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
 	//				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
@@ -3014,8 +3068,9 @@ int cmd_reply_a203_to_a201(u32 packnum, u32 type, u32 id, u32 result)
 		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
 
 
-		*CmdTxBufferPtr='h';
-		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)CmdTxBufferPtr,
+//		*CmdTxBufferPtr='h';
+		AxiDma.TxBdRing.HasDRE=1;
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
 				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
 //		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
 		if (Status != XST_SUCCESS) {
