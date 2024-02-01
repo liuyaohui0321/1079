@@ -3019,6 +3019,113 @@ int run_reply_d208(StructMsg *pMsg)
 		   return 0;
 }
 
+
+int cmd_reply_a203(u32 packnum, u32 type, u32 id, u32 result)
+{
+		int Status;
+		StructA203Ack ReplyStructA203Ack;
+//		xil_printf("%s %d\r\n", __FUNCTION__, __LINE__);
+		ReplyStructA203Ack.Head = 0x55555555;
+		ReplyStructA203Ack.SrcId = SRC_ID;
+		ReplyStructA203Ack.DestId = DEST_ID;
+#if   0
+		ReplyStructA203Ack.HandType = 0xA2;
+		ReplyStructA203Ack.HandId = 0x3;
+		ReplyStructA203Ack.PackNum = 0;
+#endif
+		switch(type)
+		{
+			case  0xA2:
+				switch(id)
+				{
+					case  0x01:
+						if(result_a201==result)
+							ReplyStructA203Ack.AckResult = result_a201;
+						else
+							result_a201=result;
+							ReplyStructA203Ack.AckResult = result_a201;
+					break;
+
+					case  0x04:
+						if(result_a204==result)
+							ReplyStructA203Ack.AckResult = result_a204;
+						else
+							result_a204=result;
+							ReplyStructA203Ack.AckResult = result_a204;
+					break;
+
+					case  0x05:
+						if(result_a205==result)
+							ReplyStructA203Ack.AckResult = result_a205;
+						else
+							result_a205=result;
+							ReplyStructA203Ack.AckResult = result_a205;
+					break;
+					default:
+					break;
+				}
+			break;
+
+			case  0xB2:
+				if(result_b201==result)
+					ReplyStructA203Ack.AckResult = result_b201;
+				else
+					result_b201=result;
+					ReplyStructA203Ack.AckResult = result_b201;
+			break;
+
+			case  0xD2:
+				if(result_d201==result)
+					ReplyStructA203Ack.AckResult = result_d201;
+				else
+					result_d201=result;
+					ReplyStructA203Ack.AckResult = result_d201;
+			break;
+
+			case  0xF2:
+				if(result_f201==result)
+					ReplyStructA203Ack.AckResult = result_f201;
+				else
+					result_f201=result;
+					ReplyStructA203Ack.AckResult = result_f201;
+			break;
+
+			default:
+			break;
+		}
+		ReplyStructA203Ack.AckPackNum = packnum;
+		ReplyStructA203Ack.AckHandType = type;
+		ReplyStructA203Ack.AckHandId = id;
+
+		ReplyStructA203Ack.CheckCode = ReplyStructA203Ack.AckPackNum + \
+				ReplyStructA203Ack.AckHandType +ReplyStructA203Ack.AckHandId + \
+				ReplyStructA203Ack.AckResult;
+		ReplyStructA203Ack.Tail = 0xAAAAAAAA;
+
+#if 1    // 改变字节序
+		ReplyStructA203Ack.HandType = SW32(0xA2);
+		ReplyStructA203Ack.HandId =  SW32(0x03);
+		ReplyStructA203Ack.PackNum = SW32(0x0);   //need change
+		ReplyStructA203Ack.AckPackNum = SW32(ReplyStructA203Ack.AckPackNum);
+		ReplyStructA203Ack.AckHandType = SW32(ReplyStructA203Ack.AckHandType);
+		ReplyStructA203Ack.AckHandId = SW32(ReplyStructA203Ack.AckHandId);
+		ReplyStructA203Ack.CheckCode = SW32(ReplyStructA203Ack.CheckCode);
+		ReplyStructA203Ack.AckResult = SW32(ReplyStructA203Ack.AckResult);
+#endif
+		xil_printf("%s %d  sizeof(StructA203Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA203Ack));
+
+		AxiDma.TxBdRing.HasDRE=1;
+		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA203Ack,
+				sizeof(StructA203Ack), XAXIDMA_DMA_TO_DEVICE);
+
+		if (Status != XST_SUCCESS)
+		{
+			return XST_FAILURE;
+		}       //  a202 会卡住
+		xil_printf("%s %d result:0x%x\r\n", __FUNCTION__, __LINE__,result_a201);
+		return 0;
+}
+
 int cmd_reply_a203_to_a201(u32 packnum, u32 type, u32 id, u32 result)
 {
 		int Status;
