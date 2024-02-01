@@ -1,4 +1,4 @@
-19:56:48 **** Auto Build of configuration Debug for project dmauart ****
+23:57:57 **** Auto Build of configuration Debug for project dmauart ****
 make all 
 'Building file: ../src/cmd.c'
 'Invoking: MicroBlaze gcc compiler'
@@ -1511,7 +1511,11 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:928:17: warning: pointer targets in passing argument 1 of 'f_mkdir' differ in signedness [-Wpointer-sign]
+../src/cmd.c:923:4: warning: implicit declaration of function 'cmd_reply_a203'; did you mean 'cmd_reply_a208'? [-Wimplicit-function-declaration]
+    cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+    ^~~~~~~~~~~~~~
+    cmd_reply_a208
+../src/cmd.c:929:17: warning: pointer targets in passing argument 1 of 'f_mkdir' differ in signedness [-Wpointer-sign]
     ret =f_mkdir(cmd_str_11);
                  ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1519,7 +1523,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:321:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_mkdir (const TCHAR* path);        /* Create a sub directory */
          ^~~~~~~
-../src/cmd.c:937:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:938:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(CreateTimenode.data.name,cmd_str_11);
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1534,7 +1538,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:937:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:938:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(CreateTimenode.data.name,cmd_str_11);
                                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1549,7 +1553,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:938:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:939:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(CreateTimenode.data.time,"default_dir");
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1564,7 +1568,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:941:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:942:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(ChangeTimenode.data.name,cmd_str_11);
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1579,7 +1583,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:941:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:942:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(ChangeTimenode.data.name,cmd_str_11);
                                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1594,7 +1598,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:942:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:943:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(ChangeTimenode.data.time,"default_dir");
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1609,7 +1613,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:945:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:946:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(AccessTimenode.data.name,cmd_str_11);
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1624,7 +1628,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:945:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:946:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(AccessTimenode.data.name,cmd_str_11);
                                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1639,7 +1643,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:946:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:947:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(AccessTimenode.data.time,"default_dir");
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1654,7 +1658,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:957:17: warning: pointer targets in passing argument 1 of 'f_stat' differ in signedness [-Wpointer-sign]
+../src/cmd.c:959:17: warning: pointer targets in passing argument 1 of 'f_stat' differ in signedness [-Wpointer-sign]
     fr1 = f_stat(cmd_str_11, &fno1);    //lyh 9.4改
                  ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1662,7 +1666,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:324:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_stat (const TCHAR* path, FILINFO* fno);     /* Get file status */
          ^~~~~~
-../src/cmd.c:965:24: warning: pointer targets in passing argument 1 of 'f_unlink' differ in signedness [-Wpointer-sign]
+../src/cmd.c:967:24: warning: pointer targets in passing argument 1 of 'f_unlink' differ in signedness [-Wpointer-sign]
         ret = f_unlink (cmd_str_11); // LYH 2023.9.4
                         ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1670,10 +1674,10 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:322:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_unlink (const TCHAR* path);        /* Delete an existing file or directory */
          ^~~~~~~~
-../src/cmd.c:1009:36: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1013:36: warning: operation on 'i' may be undefined [-Wsequence-point]
         unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                    ~^~
-../src/cmd.c:1024:20: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1028:20: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename (cmd_str_11, cmd_str_21);
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1681,7 +1685,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1024:32: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1028:32: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename (cmd_str_11, cmd_str_21);
                                 ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1689,10 +1693,10 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1044:36: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1049:36: warning: operation on 'i' may be undefined [-Wsequence-point]
         unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                    ~^~
-../src/cmd.c:1058:20: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1063:20: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename (cmd_str_11, cmd_str_21);
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1700,7 +1704,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1058:32: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1063:32: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename (cmd_str_11, cmd_str_21);
                                 ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1708,10 +1712,10 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1083:36: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1089:36: warning: operation on 'i' may be undefined [-Wsequence-point]
         unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                    ~^~
-../src/cmd.c:1098:19: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1104:19: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename(cmd_str_11, cmd_str_21);
                    ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1719,7 +1723,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1098:31: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1104:31: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename(cmd_str_11, cmd_str_21);
                                ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1727,10 +1731,10 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1122:36: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1129:36: warning: operation on 'i' may be undefined [-Wsequence-point]
         unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                    ~^~
-../src/cmd.c:1137:19: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1144:19: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename(cmd_str_11, cmd_str_21);
                    ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1738,7 +1742,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1137:31: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1144:31: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
     ret = f_rename(cmd_str_11, cmd_str_21);
                                ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1746,7 +1750,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1153:25: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1161:25: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
     ret = f_open (&file, cmd_str_11, FA_OPEN_EXISTING| FA_WRITE|FA_READ);
                          ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1754,16 +1758,16 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:1160:52: warning: pointer targets in passing argument 3 of 'AccessTimeNode_Modify' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1168:52: warning: pointer targets in passing argument 3 of 'AccessTimeNode_Modify' differ in signedness [-Wpointer-sign]
     AccessTimeNode_Modify(AccessTimelist,cmd_str_11,"new_time",1);
                                                     ^~~~~~~~~~
 ../src/cmd.c:611:6: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'char *'
  void AccessTimeNode_Modify(AccessTimeList AccessTimelist,BYTE *str1,BYTE *str2,u8 mode)
       ^~~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:1182:35: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1192:35: warning: operation on 'i' may be undefined [-Wsequence-point]
        unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                   ~^~
-../src/cmd.c:1197:19: warning: pointer targets in passing argument 1 of 'my_fcopy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1207:19: warning: pointer targets in passing argument 1 of 'my_fcopy' differ in signedness [-Wpointer-sign]
     ret =my_fcopy (cmd_str_11,cmd_str_21,0);
                    ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1771,7 +1775,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:360:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT my_fcopy (TCHAR *psrc,TCHAR *pdst,u8 fwmode);            /* copy file */
          ^~~~~~~~
-../src/cmd.c:1197:30: warning: pointer targets in passing argument 2 of 'my_fcopy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1207:30: warning: pointer targets in passing argument 2 of 'my_fcopy' differ in signedness [-Wpointer-sign]
     ret =my_fcopy (cmd_str_11,cmd_str_21,0);
                               ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1779,7 +1783,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:360:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT my_fcopy (TCHAR *psrc,TCHAR *pdst,u8 fwmode);            /* copy file */
          ^~~~~~~~
-../src/cmd.c:1204:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1214:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(CreateTimenode.data.name,cmd_str_21);
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1794,7 +1798,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:1204:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1214:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(CreateTimenode.data.name,cmd_str_21);
                                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1809,7 +1813,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:1206:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1216:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(ChangeTimenode.data.name,cmd_str_21);
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1824,7 +1828,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:1206:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1216:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(ChangeTimenode.data.name,cmd_str_21);
                                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1839,7 +1843,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:1208:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1218:30: warning: pointer targets in passing argument 1 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(AccessTimenode.data.name,cmd_str_21);
            ~~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1854,7 +1858,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:1208:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1218:36: warning: pointer targets in passing argument 2 of 'strcpy' differ in signedness [-Wpointer-sign]
     strcpy(AccessTimenode.data.name,cmd_str_21);
                                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1869,7 +1873,7 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:38:8: note: expected 'const char * restrict' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  char  *strcpy (char *__restrict, const char *__restrict);
         ^~~~~~
-../src/cmd.c:1221:16: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1232:16: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
     temp=strlen(cmd_str_11);
                 ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -1884,10 +1888,10 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:41:9: note: expected 'const char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  size_t  strlen (const char *);
          ^~~~~~
-../src/cmd.c:1223:35: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1234:35: warning: operation on 'i' may be undefined [-Wsequence-point]
        unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                   ~^~
-../src/cmd.c:1237:20: warning: pointer targets in passing argument 1 of 'my_dcopy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1248:20: warning: pointer targets in passing argument 1 of 'my_dcopy' differ in signedness [-Wpointer-sign]
     ret = my_dcopy (cmd_str_11,cmd_str_21,0);
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1895,7 +1899,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:361:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode);           /* copy directory */
          ^~~~~~~~
-../src/cmd.c:1237:31: warning: pointer targets in passing argument 2 of 'my_dcopy' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1248:31: warning: pointer targets in passing argument 2 of 'my_dcopy' differ in signedness [-Wpointer-sign]
     ret = my_dcopy (cmd_str_11,cmd_str_21,0);
                                ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1903,49 +1907,49 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:361:9: note: expected 'TCHAR *' {aka 'char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode);           /* copy directory */
          ^~~~~~~~
-../src/cmd.c:1255:25: warning: pointer targets in passing argument 1 of 'cmd_reply_a208' differ in signedness [-Wpointer-sign]
-    ret = cmd_reply_a208("0:");
+../src/cmd.c:1267:25: warning: pointer targets in passing argument 1 of 'cmd_reply_a208' differ in signedness [-Wpointer-sign]
+    ret = cmd_reply_a208("0:");//ff_oem2uni
                          ^~~~
 In file included from ../src/cmd.c:1:
 ../src/cmd.h:184:5: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'char *'
  int cmd_reply_a208(BYTE* path);
      ^~~~~~~~~~~~~~
 ../src/cmd.c: In function 'run_cmd_a202':
-../src/cmd.c:1291:10: warning: unused variable 'ret' [-Wunused-variable]
+../src/cmd.c:1304:10: warning: unused variable 'ret' [-Wunused-variable]
       int ret=0,i=0;
           ^~~
 ../src/cmd.c: In function 'run_cmd_a204':
-../src/cmd.c:1383:20: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1401:20: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x0=((file_cmd>>0)&0x1==1)?1:0;   //x0=1修改文件属性,x0=0不修改文件属性
                     ^
-../src/cmd.c:1384:20: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1402:20: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x1=((file_cmd>>4)&0x1==1)?1:0;   //x1=1修改文件读写控制,x1=0不修改文件读写控制
                     ^
-../src/cmd.c:1385:20: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1403:20: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x2=((file_cmd>>8)&0x1==1)?1:0;   //x2=1修改文件显示控制,x2=0不修改文件显示控制
                     ^
-../src/cmd.c:1386:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1404:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x3=((file_cmd>>12)&0x1==1)?1:0;  //x3=1对文件进行操作,x3=0不对文件进行操作
                      ^
-../src/cmd.c:1388:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1406:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x4=((file_cmd>>16)&0x1==1)?1:0;  //x4=1修改文件夹属性,x4=0不修改文件夹属性
                      ^
-../src/cmd.c:1389:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1407:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x5=((file_cmd>>20)&0x1==1)?1:0;  //x5=1修改文件夹读写控制,x5=0不修改文件夹读写控制
                      ^
-../src/cmd.c:1390:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1408:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x6=((file_cmd>>24)&0x1==1)?1:0;  //x6=1修改文件夹显示控制,x6=0不修改文件夹显示控制
                      ^
-../src/cmd.c:1391:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+../src/cmd.c:1409:21: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
    x7=((file_cmd>>28)&0x1==1)?1:0;  //x7=1对文件夹进行操作,x7=0不对文件夹进行操作
                      ^
-../src/cmd.c:1398:33: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1416:33: warning: operation on 'i' may be undefined [-Wsequence-point]
      unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                 ~^~
-../src/cmd.c:1423:36: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1441:36: warning: operation on 'i' may be undefined [-Wsequence-point]
         unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                    ~^~
-../src/cmd.c:1439:18: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1457:18: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
      ret=f_rename(cmd_str_11,cmd_str_21);
                   ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1953,7 +1957,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1439:29: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1457:29: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
      ret=f_rename(cmd_str_11,cmd_str_21);
                              ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1961,7 +1965,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1460:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1478:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_21,AM_RDO,AM_RDO );        //  文件设成只读
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1969,7 +1973,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1468:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1486:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_11,AM_RDO,AM_RDO );         //  文件设成只读
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1977,7 +1981,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1479:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1497:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_21,0, AM_RDO);    //  文件取消只读
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1985,7 +1989,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1487:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1505:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_11,0,AM_RDO);         //  文件取消只读
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -1993,7 +1997,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1503:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1521:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_21,AM_HID,AM_HID );
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2001,7 +2005,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1511:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1529:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_11,AM_HID,AM_HID);         //  文件设成隐藏
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2009,7 +2013,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1522:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1540:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_21,0,AM_HID);
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2017,7 +2021,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1530:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1548:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_11,0,AM_HID);         //  文件取消隐藏
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2025,10 +2029,10 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1549:33: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1567:33: warning: operation on 'i' may be undefined [-Wsequence-point]
      unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                 ~^~
-../src/cmd.c:1575:20: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1593:20: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness [-Wpointer-sign]
      i=temp+(strlen(cmd_str_31)+1)*2;
                     ^~~~~~~~~~
 In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
@@ -2043,10 +2047,10 @@ In file included from ../../dmauart_bsp/microblaze_1/include/xil_printf.h:9,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\string.h:41:9: note: expected 'const char *' but argument is of type 'BYTE *' {aka 'unsigned char *'}
  size_t  strlen (const char *);
          ^~~~~~
-../src/cmd.c:1579:34: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:1597:34: warning: operation on 'i' may be undefined [-Wsequence-point]
       unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                  ~^~
-../src/cmd.c:1600:18: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1618:18: warning: pointer targets in passing argument 1 of 'f_rename' differ in signedness [-Wpointer-sign]
      ret=f_rename(cmd_str_31,cmd_str_41);
                   ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2054,7 +2058,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1600:29: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1618:29: warning: pointer targets in passing argument 2 of 'f_rename' differ in signedness [-Wpointer-sign]
      ret=f_rename(cmd_str_31,cmd_str_41);
                              ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2062,7 +2066,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:323:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_rename (const TCHAR* path_old, const TCHAR* path_new); /* Rename/Move a file or directory */
          ^~~~~~~~
-../src/cmd.c:1620:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1638:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_41,AM_RDO,AM_RDO );
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2070,7 +2074,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1628:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1646:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_31,AM_RDO,AM_RDO );     //  文件夹设成只读
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2078,7 +2082,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1639:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1657:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_41,0, AM_RDO);
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2086,7 +2090,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1647:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1665:20: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
         ret=f_chmod(cmd_str_31,0, AM_RDO);     //  文件夹取消只读
                     ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2094,7 +2098,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1663:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1681:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
            ret=f_chmod(cmd_str_41,AM_HID,AM_HID );
                        ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2102,7 +2106,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1671:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1689:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
            ret=f_chmod(cmd_str_31,AM_HID,AM_HID );     //  文件夹设成隐藏
                        ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2110,7 +2114,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1682:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1700:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
            ret=f_chmod(cmd_str_41,0, AM_HID);
                        ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2118,7 +2122,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1690:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
+../src/cmd.c:1708:23: warning: pointer targets in passing argument 1 of 'f_chmod' differ in signedness [-Wpointer-sign]
            ret=f_chmod(cmd_str_31,0, AM_HID);     //  文件夹取消隐藏
                        ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2126,24 +2130,24 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:325:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);   /* Change attribute of a file/dir */
          ^~~~~~~
-../src/cmd.c:1374:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:1392:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:1373:7: warning: unused variable 'dir' [-Wunused-variable]
+../src/cmd.c:1391:7: warning: unused variable 'dir' [-Wunused-variable]
    DIR dir;
        ^~~
 ../src/cmd.c: In function 'run_cmd_a205':
-../src/cmd.c:2025:35: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2044:35: warning: operation on 'i' may be undefined [-Wsequence-point]
        unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                   ~^~
-../src/cmd.c:2046:34: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2071:34: warning: operation on 'i' may be undefined [-Wsequence-point]
       unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                  ~^~
-../src/cmd.c:2011:19: warning: unused variable 'ret' [-Wunused-variable]
+../src/cmd.c:2029:19: warning: unused variable 'ret' [-Wunused-variable]
     int file_cmd=0,ret=0,i=0,x = 0,temp=0,h=0;
                    ^~~
 ../src/cmd.c: In function 'cmd_reply_a206':
-../src/cmd.c:2083:17: warning: pointer targets in passing argument 1 of 'f_stat' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2117:17: warning: pointer targets in passing argument 1 of 'f_stat' differ in signedness [-Wpointer-sign]
      fr = f_stat(path, &fno);
                  ^~~~
 In file included from ../src/cmd.h:6,
@@ -2151,13 +2155,13 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:324:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
  FRESULT f_stat (const TCHAR* path, FILINFO* fno);     /* Get file status */
          ^~~~~~
-../src/cmd.c:2103:38: warning: pointer targets in passing argument 2 of 'convert' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2141:38: warning: pointer targets in passing argument 2 of 'convert' differ in signedness [-Wpointer-sign]
    convert(ReplyStructA206Ack.Name,fno.fname);      //add   by lyh on the 1.22
                                    ~~~^~~~~~
 ../src/cmd.c:299:6: note: expected 'u8 *' {aka 'unsigned char *'} but argument is of type 'TCHAR *' {aka 'char *'}
  void convert(u16 *str1,u8 *str2) //add by lyh on 1.22  单字节字符的ASCLL码后补零凑成16位,16位GB2312保持不变
       ^~~~~~~
-../src/cmd.c:2105:18: warning: passing argument 1 of 'get_path_dname' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+../src/cmd.c:2143:18: warning: passing argument 1 of 'get_path_dname' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
    get_path_dname(path,ReplyStructA206Ack.Dir);
                   ^~~~
 In file included from ../src/cmd.h:6,
@@ -2165,7 +2169,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:369:27: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
  void get_path_dname(BYTE* path,u8* des);
                      ~~~~~~^~~~
-../src/cmd.c:2105:41: warning: passing argument 2 of 'get_path_dname' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2143:41: warning: passing argument 2 of 'get_path_dname' from incompatible pointer type [-Wincompatible-pointer-types]
    get_path_dname(path,ReplyStructA206Ack.Dir);
                        ~~~~~~~~~~~~~~~~~~^~~~
 In file included from ../src/cmd.h:6,
@@ -2173,7 +2177,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:369:36: note: expected 'u8 *' {aka 'unsigned char *'} but argument is of type 'u16 *' {aka 'short unsigned int *'}
  void get_path_dname(BYTE* path,u8* des);
                                 ~~~~^~~
-../src/cmd.c:2119:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2163:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(CreateTime1,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2181,7 +2185,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2124:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2168:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(CreateTime2,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2189,7 +2193,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2129:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2173:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(ChangeTime1,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2197,7 +2201,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2134:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2178:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(ChangeTime2,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2205,7 +2209,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2139:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2183:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(AccessTime1,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2213,7 +2217,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2144:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2188:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(AccessTime2,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2221,11 +2225,11 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2167:2: warning: multi-line comment [-Wcomment]
+../src/cmd.c:2211:2: warning: multi-line comment [-Wcomment]
   // ReplyStructA206Ack.CheckCode = ReplyStructA206Ack.AckPackNum + \
   ^
 ../src/cmd.c: In function 'cmd_reply_a207':
-../src/cmd.c:2198:15: warning: pointer targets in passing argument 1 of 'f_stat' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2242:15: warning: pointer targets in passing argument 1 of 'f_stat' differ in signedness [-Wpointer-sign]
    fr = f_stat(path, &fno);
                ^~~~
 In file included from ../src/cmd.h:6,
@@ -2233,7 +2237,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:324:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
  FRESULT f_stat (const TCHAR* path, FILINFO* fno);     /* Get file status */
          ^~~~~~
-../src/cmd.c:2199:24: warning: passing argument 1 of 'Num_of_Dir_and_File' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+../src/cmd.c:2243:24: warning: passing argument 1 of 'Num_of_Dir_and_File' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
    Num_of_Dir_and_File (path,&nfile,&ndir,0);
                         ^~~~
 In file included from ../src/cmd.h:6,
@@ -2241,7 +2245,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:367:36: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
  FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode); /* 分别获取目录中子目录和文件个数 */
                               ~~~~~~^~~~
-../src/cmd.c:2199:29: warning: passing argument 2 of 'Num_of_Dir_and_File' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2243:29: warning: passing argument 2 of 'Num_of_Dir_and_File' from incompatible pointer type [-Wincompatible-pointer-types]
    Num_of_Dir_and_File (path,&nfile,&ndir,0);
                              ^~~~~~
 In file included from ../src/cmd.h:6,
@@ -2249,7 +2253,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:367:48: note: expected 'DWORD *' {aka 'long unsigned int *'} but argument is of type 'int *'
  FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode); /* 分别获取目录中子目录和文件个数 */
                                          ~~~~~~~^~~~~~~~
-../src/cmd.c:2199:36: warning: passing argument 3 of 'Num_of_Dir_and_File' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2243:36: warning: passing argument 3 of 'Num_of_Dir_and_File' from incompatible pointer type [-Wincompatible-pointer-types]
    Num_of_Dir_and_File (path,&nfile,&ndir,0);
                                     ^~~~~
 In file included from ../src/cmd.h:6,
@@ -2257,7 +2261,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:367:64: note: expected 'DWORD *' {aka 'long unsigned int *'} but argument is of type 'int *'
  FRESULT Num_of_Dir_and_File (BYTE *path,DWORD *file_num,DWORD *dir_num,uint8_t mode); /* 分别获取目录中子目录和文件个数 */
                                                          ~~~~~~~^~~~~~~
-../src/cmd.c:2221:18: warning: passing argument 1 of 'get_path_dname' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+../src/cmd.c:2265:18: warning: passing argument 1 of 'get_path_dname' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
    get_path_dname(path,ReplyStructA207Ack.Dir);
                   ^~~~
 In file included from ../src/cmd.h:6,
@@ -2265,7 +2269,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:369:27: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'const BYTE *' {aka 'const unsigned char *'}
  void get_path_dname(BYTE* path,u8* des);
                      ~~~~~~^~~~
-../src/cmd.c:2221:41: warning: passing argument 2 of 'get_path_dname' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2265:41: warning: passing argument 2 of 'get_path_dname' from incompatible pointer type [-Wincompatible-pointer-types]
    get_path_dname(path,ReplyStructA207Ack.Dir);
                        ~~~~~~~~~~~~~~~~~~^~~~
 In file included from ../src/cmd.h:6,
@@ -2273,7 +2277,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:369:36: note: expected 'u8 *' {aka 'unsigned char *'} but argument is of type 'u16 *' {aka 'short unsigned int *'}
  void get_path_dname(BYTE* path,u8* des);
                                 ~~~~^~~
-../src/cmd.c:2223:34: warning: passing argument 1 of 'get_Dir_size' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2267:34: warning: passing argument 1 of 'get_Dir_size' from incompatible pointer type [-Wincompatible-pointer-types]
    get_Dir_size(ReplyStructA207Ack.Name,&ReplyStructA207Ack.Size);
                 ~~~~~~~~~~~~~~~~~~^~~~~
 In file included from ../src/cmd.h:6,
@@ -2281,13 +2285,13 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:368:28: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'u16 *' {aka 'short unsigned int *'}
  FRESULT get_Dir_size(BYTE *path,uint64_t*size);                  /* 获取目录的大小 */
                       ~~~~~~^~~~
-../src/cmd.c:2224:38: warning: pointer targets in passing argument 2 of 'convert' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2268:38: warning: pointer targets in passing argument 2 of 'convert' differ in signedness [-Wpointer-sign]
    convert(ReplyStructA207Ack.Name,fno.fname);     //add   by lyh on the 1.22
                                    ~~~^~~~~~
 ../src/cmd.c:299:6: note: expected 'u8 *' {aka 'unsigned char *'} but argument is of type 'TCHAR *' {aka 'char *'}
  void convert(u16 *str1,u8 *str2) //add by lyh on 1.22  单字节字符的ASCLL码后补零凑成16位,16位GB2312保持不变
       ^~~~~~~
-../src/cmd.c:2233:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2277:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(CreateTime1,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2295,7 +2299,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2239:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2283:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(CreateTime2,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2303,7 +2307,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2244:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2288:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(ChangeTime1,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2311,7 +2315,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2249:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2293:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(ChangeTime2,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2319,7 +2323,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2254:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2298:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(AccessTime1,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2327,7 +2331,7 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2259:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2303:11: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness [-Wpointer-sign]
    sprintf(AccessTime2,"%u.%02u.%02u,%02u.%02u.%02u",
            ^~~~~~~~~~~
 In file included from ../src/cmd.h:7,
@@ -2335,49 +2339,49 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:244:5: note: expected 'char * restrict' but argument is of type 'u8 *' {aka 'unsigned char *'}
  int sprintf (char *__restrict, const char *__restrict, ...)
      ^~~~~~~
-../src/cmd.c:2282:2: warning: multi-line comment [-Wcomment]
+../src/cmd.c:2326:2: warning: multi-line comment [-Wcomment]
   // ReplyStructA207Ack.CheckCode = ReplyStructA206Ack.AckPackNum + \
   ^
-../src/cmd.c:2189:14: warning: unused variable 'temp2' [-Wunused-variable]
+../src/cmd.c:2233:14: warning: unused variable 'temp2' [-Wunused-variable]
    int temp1, temp2;
               ^~~~~
-../src/cmd.c:2189:7: warning: unused variable 'temp1' [-Wunused-variable]
+../src/cmd.c:2233:7: warning: unused variable 'temp1' [-Wunused-variable]
    int temp1, temp2;
        ^~~~~
 ../src/cmd.c: In function 'InitList':
-../src/cmd.c:2335:30: warning: implicit declaration of function 'wjq_malloc_m'; did you mean '_malloc_r'? [-Wimplicit-function-declaration]
+../src/cmd.c:2379:30: warning: implicit declaration of function 'wjq_malloc_m'; did you mean '_malloc_r'? [-Wimplicit-function-declaration]
    LinkedList List= (Node * ) wjq_malloc_m (sizeof(Node));    // 分配一个头结点
                               ^~~~~~~~~~~~
                               _malloc_r
-../src/cmd.c:2338:11: warning: returning 'int' from a function with return type 'LinkedList' {aka 'struct Node *'} makes pointer from integer without a cast [-Wint-conversion]
+../src/cmd.c:2382:11: warning: returning 'int' from a function with return type 'LinkedList' {aka 'struct Node *'} makes pointer from integer without a cast [-Wint-conversion]
     return -1;
            ^
 ../src/cmd.c: In function 'cmd_reply_a208':
-../src/cmd.c:2433:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:2477:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
      else
      ^~~~
-../src/cmd.c:2435:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:2479:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
       ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k+1]<<8);
       ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:2478:32: warning: unknown conversion type character '8' in format [-Wformat=]
+../src/cmd.c:2522:32: warning: unknown conversion type character '8' in format [-Wformat=]
     printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
                                 ^
-../src/cmd.c:2478:50: warning: format '%s' expects argument of type 'char *', but argument 3 has type 'u64' {aka 'long long unsigned int'} [-Wformat=]
+../src/cmd.c:2522:50: warning: format '%s' expects argument of type 'char *', but argument 3 has type 'u64' {aka 'long long unsigned int'} [-Wformat=]
     printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
                                                ~~~^                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                                %16lld
-../src/cmd.c:2478:11: warning: too many arguments for format [-Wformat-extra-args]
+../src/cmd.c:2522:11: warning: too many arguments for format [-Wformat-extra-args]
     printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:2485:3: warning: implicit declaration of function 'wjq_free_m'; did you mean '_free_r'? [-Wimplicit-function-declaration]
+../src/cmd.c:2529:3: warning: implicit declaration of function 'wjq_free_m'; did you mean '_free_r'? [-Wimplicit-function-declaration]
    wjq_free_m(ReplyStructA208Ack.message);  // 释放内存
    ^~~~~~~~~~
    _free_r
 ../src/cmd.c: In function 'run_cmd_d201':
-../src/cmd.c:2554:32: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2599:32: warning: operation on 'i' may be undefined [-Wsequence-point]
     unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                ~^~
-../src/cmd.c:2575:23: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2620:23: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
    ret =f_open(&file1, cmd_str_11,  FA_OPEN_EXISTING |FA_READ);
                        ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2385,17 +2389,17 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:2551:9: warning: unused variable 'cmd_char_str1' [-Wunused-variable]
+../src/cmd.c:2596:9: warning: unused variable 'cmd_char_str1' [-Wunused-variable]
    BYTE *cmd_char_str1;
          ^~~~~~~~~~~~~
-../src/cmd.c:2544:7: warning: unused variable 'file_cmd' [-Wunused-variable]
+../src/cmd.c:2589:7: warning: unused variable 'file_cmd' [-Wunused-variable]
    int file_cmd=0,ret=0,i=0,x=0,h=0;
        ^~~~~~~~
 ../src/cmd.c: In function 'run_cmd_d20A':
-../src/cmd.c:2638:32: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2684:32: warning: operation on 'i' may be undefined [-Wsequence-point]
     unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                ~^~
-../src/cmd.c:2654:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2700:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
    ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
                       ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2403,11 +2407,11 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:2669:5: warning: implicit declaration of function 'sleep'; did you mean 'strsep'? [-Wimplicit-function-declaration]
+../src/cmd.c:2715:5: warning: implicit declaration of function 'sleep'; did you mean 'strsep'? [-Wimplicit-function-declaration]
      sleep(1);
      ^~~~~
      strsep
-../src/cmd.c:2694:6: warning: passing argument 2 of 'f_write1' makes pointer from integer without a cast [-Wint-conversion]
+../src/cmd.c:2740:6: warning: passing argument 2 of 'f_write1' makes pointer from integer without a cast [-Wint-conversion]
       buff,   /* Data to be written */
       ^~~~
 In file included from ../src/cmd.h:6,
@@ -2415,7 +2419,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:312:40: note: expected 'const void *' but argument is of type 'uint32_t' {aka 'long unsigned int'}
  FRESULT f_write1 (FIL* fp, const void* buff, UINT btw, UINT* bw);
                             ~~~~~~~~~~~~^~~~
-../src/cmd.c:2696:6: warning: pointer targets in passing argument 4 of 'f_write1' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2742:6: warning: pointer targets in passing argument 4 of 'f_write1' differ in signedness [-Wpointer-sign]
       &bw    /* Number of bytes written */
       ^~~
 In file included from ../src/cmd.h:6,
@@ -2423,7 +2427,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:312:9: note: expected 'UINT *' {aka 'unsigned int *'} but argument is of type 'int *'
  FRESULT f_write1 (FIL* fp, const void* buff, UINT btw, UINT* bw);
          ^~~~~~~~
-../src/cmd.c:2743:11: warning: passing argument 1 of 'fclose' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2789:11: warning: passing argument 1 of 'fclose' from incompatible pointer type [-Wincompatible-pointer-types]
     fclose(&file);
            ^~~~~
 In file included from ../src/cmd.h:7,
@@ -2431,30 +2435,30 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:191:13: note: expected 'FILE *' {aka 'struct __sFILE *'} but argument is of type 'FIL *' {aka 'struct <anonymous> *'}
  int fclose (FILE *);
              ^~~~~~
-../src/cmd.c:2630:7: warning: unused variable 'file_cmd' [-Wunused-variable]
+../src/cmd.c:2676:7: warning: unused variable 'file_cmd' [-Wunused-variable]
    u32 file_cmd=0;
        ^~~~~~~~
-../src/cmd.c:2629:7: warning: unused variable 'Status' [-Wunused-variable]
+../src/cmd.c:2675:7: warning: unused variable 'Status' [-Wunused-variable]
    int Status,bw;
        ^~~~~~
 ../src/cmd.c: In function 'run_cmd_d204':
-../src/cmd.c:2760:37: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2806:37: warning: operation on 'i' may be undefined [-Wsequence-point]
          unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                     ~^~
-../src/cmd.c:2756:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:2802:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:2752:17: warning: variable 'Read_speed' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:2798:17: warning: variable 'Read_speed' set but not used [-Wunused-but-set-variable]
    int Read_mode,Read_speed;
                  ^~~~~~~~~~
-../src/cmd.c:2751:17: warning: unused variable 'ret' [-Wunused-variable]
+../src/cmd.c:2797:17: warning: unused variable 'ret' [-Wunused-variable]
       int temp=0,ret=0,i=0,x=0,h=0;
                  ^~~
 ../src/cmd.c: In function 'run_cmd_d205':
-../src/cmd.c:2865:33: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2911:33: warning: operation on 'i' may be undefined [-Wsequence-point]
      unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                 ~^~
-../src/cmd.c:2880:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2926:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
    ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
                       ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2462,7 +2466,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:2893:8: warning: passing argument 2 of 'f_read1' makes pointer from integer without a cast [-Wint-conversion]
+../src/cmd.c:2939:8: warning: passing argument 2 of 'f_read1' makes pointer from integer without a cast [-Wint-conversion]
         buff_r,
         ^~~~~~
 In file included from ../src/cmd.h:6,
@@ -2470,7 +2474,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:310:33: note: expected 'void *' but argument is of type 'uint32_t' {aka 'long unsigned int'}
  FRESULT f_read1 (FIL* fp, void* buff, UINT btr, UINT* br);   /* Read data from the file */
                            ~~~~~~^~~~
-../src/cmd.c:2895:8: warning: pointer targets in passing argument 4 of 'f_read1' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2941:8: warning: pointer targets in passing argument 4 of 'f_read1' differ in signedness [-Wpointer-sign]
         &br
         ^~~
 In file included from ../src/cmd.h:6,
@@ -2478,112 +2482,112 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:310:9: note: expected 'UINT *' {aka 'unsigned int *'} but argument is of type 'int *'
  FRESULT f_read1 (FIL* fp, void* buff, UINT btr, UINT* br);   /* Read data from the file */
          ^~~~~~~
-../src/cmd.c:2931:15: warning: implicit declaration of function 'XAxiDma1_tx'; did you mean 'XAxiDma_Busy'? [-Wimplicit-function-declaration]
+../src/cmd.c:2977:15: warning: implicit declaration of function 'XAxiDma1_tx'; did you mean 'XAxiDma_Busy'? [-Wimplicit-function-declaration]
       Status = XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
                ^~~~~~~~~~~
                XAxiDma_Busy
-../src/cmd.c:2942:3: warning: implicit declaration of function 'cleanup_platform' [-Wimplicit-function-declaration]
+../src/cmd.c:2988:3: warning: implicit declaration of function 'cleanup_platform' [-Wimplicit-function-declaration]
    cleanup_platform();
    ^~~~~~~~~~~~~~~~
-../src/cmd.c:2858:7: warning: variable 'file_cmd' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:2904:7: warning: variable 'file_cmd' set but not used [-Wunused-but-set-variable]
    u32 file_cmd=0;
        ^~~~~~~~
 ../src/cmd.c: In function 'run_reply_d207':
-../src/cmd.c:2972:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3018:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandId;
            ^~~~~~~~~~~~
-../src/cmd.c:2971:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3017:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandType;
            ^~~~~~~~~~~~~~
-../src/cmd.c:2970:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3016:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
    int32_t reply_Handpocket_num;          //包序列号
            ^~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:2969:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:3015:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:2968:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
+../src/cmd.c:3014:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
    WCHAR cmd_str_1[1024];
          ^~~~~~~~~
-../src/cmd.c:2967:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
+../src/cmd.c:3013:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
    u16 unicode_u16=0;
        ^~~~~~~~~~~
-../src/cmd.c:2966:14: warning: unused variable 'x' [-Wunused-variable]
+../src/cmd.c:3012:14: warning: unused variable 'x' [-Wunused-variable]
       int i=0,x=0;
               ^
 ../src/cmd.c: In function 'run_reply_d208':
-../src/cmd.c:3001:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3047:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandId;
            ^~~~~~~~~~~~
-../src/cmd.c:3000:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3046:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandType;
            ^~~~~~~~~~~~~~
-../src/cmd.c:2999:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3045:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
    int32_t reply_Handpocket_num;          //包序列号
            ^~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:2998:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:3044:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:2997:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
+../src/cmd.c:3043:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
    WCHAR cmd_str_1[1024];
          ^~~~~~~~~
-../src/cmd.c:2996:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
+../src/cmd.c:3042:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
    u16 unicode_u16=0;
        ^~~~~~~~~~~
-../src/cmd.c:2995:11: warning: unused variable 'x' [-Wunused-variable]
+../src/cmd.c:3041:11: warning: unused variable 'x' [-Wunused-variable]
    int i=0,x=0;
            ^
 ../src/cmd.c: In function 'cmd_reply_a203':
-../src/cmd.c:3044:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3090:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
        else
        ^~~~
-../src/cmd.c:3046:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3092:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
         ReplyStructA203Ack.AckResult = result_a201;
         ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3052:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3098:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
        else
        ^~~~
-../src/cmd.c:3054:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3100:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
         ReplyStructA203Ack.AckResult = result_a204;
         ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3060:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3106:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
        else
        ^~~~
-../src/cmd.c:3062:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3108:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
         ReplyStructA203Ack.AckResult = result_a205;
         ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3072:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3118:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
      else
      ^~~~
-../src/cmd.c:3074:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3120:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
       ReplyStructA203Ack.AckResult = result_b201;
       ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3080:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3126:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
      else
      ^~~~
-../src/cmd.c:3082:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3128:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
       ReplyStructA203Ack.AckResult = result_d201;
       ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3088:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3134:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
      else
      ^~~~
-../src/cmd.c:3090:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3136:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
       ReplyStructA203Ack.AckResult = result_f201;
       ^~~~~~~~~~~~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a201':
-../src/cmd.c:3149:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3195:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3151:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3197:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_a201;
     ^~~~~~~~~~~~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a204':
-../src/cmd.c:3209:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3255:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3211:7: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3257:7: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
        ReplyStructA203Ack.AckResult = result_a204;
        ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3223:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3269:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2593,13 +2597,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a205':
-../src/cmd.c:3253:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3299:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3255:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3301:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_a205;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3267:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3313:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2609,13 +2613,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a208':
-../src/cmd.c:3296:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3342:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3298:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3344:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_a208;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3310:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3356:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2625,13 +2629,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_b201':
-../src/cmd.c:3339:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3385:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3341:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3387:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_b201;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3353:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3399:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2641,13 +2645,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_d201':
-../src/cmd.c:3382:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3428:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3384:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3430:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_d201;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3396:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3442:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2706,19 +2710,11 @@ In file included from ../src/simple_dma.h:88,
       sprintf(STR2,"%s/%s",str2,fno.fname);
       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ../src/cmd.c: In function 'run_cmd_a204':
-../src/cmd.c:1702:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-../src/cmd.c: In function 'cmd_reply_a206':
-../src/cmd.c:2181:1: warning: control reaches end of non-void function [-Wreturn-type]
- }
- ^
-../src/cmd.c: In function 'cmd_reply_a207':
-../src/cmd.c:2296:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/cmd.c:1720:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
 ../src/cmd.c: In function 'run_cmd_f201':
-../src/cmd.c:3417:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/cmd.c:3463:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
 In file included from ../src/cmd.h:10,
@@ -2740,9 +2736,9 @@ mb-objcopy -O srec dmauart.elf dmauart.srec
 'Invoking: MicroBlaze Print Size'
 mb-size dmauart.elf  |tee "dmauart.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 462204	   1984	 183996	 648184	  9e3f8	dmauart.elf
+ 462168	   1988	 183996	 648152	  9e3d8	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
 
-19:56:50 Build Finished (took 1s.790ms)
+23:57:59 Build Finished (took 1s.744ms)
 

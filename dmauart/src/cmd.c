@@ -919,7 +919,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
 			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
 			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 
 /***************************************************************************************/
@@ -948,7 +949,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
 			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
 			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 
 /***************************************************************************************/
@@ -972,7 +974,8 @@ int run_cmd_a201(StructMsg *pMsg)
 				CreateTimeNode_Delete(CreateTimelist,cmd_str_11);
 				ChangeTimeNode_Delete(ChangeTimelist,cmd_str_11);
 				AccessTimeNode_Delete(AccessTimelist,cmd_str_11);
-				cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//				cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+				cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 			    break;
 			    case FR_NO_FILE:
 			    	xil_printf("%s is not exist.\r\n", cmd_str_11);// LYH 2023.9.4
@@ -996,7 +999,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			xil_printf("DEL_FOLDER Command Success! folder name:%s\r\n",cmd_str_11);
 			/*同时也递归删除名称目录下所有文件在时间链表里的记录*/
 
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1031,7 +1035,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			CreateTimeNode_Modify(CreateTimelist,cmd_str_11,cmd_str_21,0);
 			ChangeTimeNode_Modify(ChangeTimelist,cmd_str_11,cmd_str_21,0);
 			AccessTimeNode_Modify(AccessTimelist,cmd_str_11,cmd_str_21,0);
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1070,7 +1075,8 @@ int run_cmd_a201(StructMsg *pMsg)
 				return -1;
 			}
 
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1109,7 +1115,8 @@ int run_cmd_a201(StructMsg *pMsg)
 				xil_printf("Modify TimeNode Failed! ret=%d\r\n", ret);
 				return -1;
 			}
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1144,7 +1151,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			CreateTimeNode_Modify(CreateTimelist,cmd_str_11,cmd_str_21,0);
 			ChangeTimeNode_Modify(ChangeTimelist,cmd_str_11,cmd_str_21,0);
 			AccessTimeNode_Modify(AccessTimelist,cmd_str_11,cmd_str_21,0);
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1158,7 +1166,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			xil_printf("OPEN_FILE Command Success! file name:%s\r\n",cmd_str_11);
 			/*更新该名称在访问时间链表里的信息*/
 			AccessTimeNode_Modify(AccessTimelist,cmd_str_11,"new_time",1);
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1169,7 +1178,8 @@ int run_cmd_a201(StructMsg *pMsg)
 				xil_printf("f_close  Failed! ret=%d\r\n", ret);
 //			   	return -1;
 			}
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1209,7 +1219,8 @@ int run_cmd_a201(StructMsg *pMsg)
 			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
 			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
 			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
@@ -1245,20 +1256,22 @@ int run_cmd_a201(StructMsg *pMsg)
 				xil_printf("Insert Time Node Failed! ret=%d\r\n", ret);
 				return -1;
 			}
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
 /***************************************************************************************/
 
 		case GET_DIR:   // 返回目录中的文件和子目录列表
 //			ret = cmd_reply_a208(cmd_str_11);
-			ret = cmd_reply_a208("0:");
+			ret = cmd_reply_a208("0:");//ff_oem2uni
 			if (ret != FR_OK)
 			{
 				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);
 				return -1;
 			}
-			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 #if 0  	// 1.31注释掉，因为客户想用该命令执行cmd_reply_a208这个指令
 			ret = scan_files(cmd_str_11);
 			if (ret != FR_OK)
@@ -1295,24 +1308,28 @@ int run_cmd_a202(StructMsg *pMsg)
         ack_HandID=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
         i+=4;
         ack_PackNum=CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
+
         switch(ack_HandType)
         {
            case 0xA2:
                  switch(ack_HandID)
                 {
                      case  0x01:
-                    	 cmd_reply_a203_to_a201(ack_PackNum, ack_HandType, ack_HandID, result_a201);
+                    	 cmd_reply_a203(ack_PackNum,ack_HandType,ack_HandID,result_a201);
+//                    	 cmd_reply_a203_to_a201(ack_PackNum, ack_HandType, ack_HandID, result_a201);
                     	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a201);
                      break;
 
                      case  0x04:
-                    	 cmd_reply_a203_to_a204(ack_PackNum, ack_HandType, ack_HandID, result_a204);
+                    	 cmd_reply_a203(ack_PackNum,ack_HandType,ack_HandID,result_a204);
+//                    	 cmd_reply_a203_to_a204(ack_PackNum, ack_HandType, ack_HandID, result_a204);
                     	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a204);
                      break;
 
                      case  0x05:
-                      	 cmd_reply_a203_to_a205(ack_PackNum, ack_HandType, ack_HandID, result_a205);
-                      	xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a205);
+                    	 cmd_reply_a203(ack_PackNum,ack_HandType,ack_HandID,result_a205);
+//                       cmd_reply_a203_to_a205(ack_PackNum, ack_HandType, ack_HandID, result_a205);
+                      	 xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_a205);
                      break;
 
 //                     case  0x08:
@@ -1329,7 +1346,8 @@ int run_cmd_a202(StructMsg *pMsg)
         	   switch(ack_HandID)
 			  {
 				   case  0x01:
-					    cmd_reply_a203_to_d201(ack_PackNum, ack_HandType, ack_HandID, result_d201);
+//					    cmd_reply_a203_to_d201(ack_PackNum, ack_HandType, ack_HandID, result_d201);
+					    cmd_reply_a203(ack_PackNum, ack_HandType, ack_HandID, result_d201);
 					    xil_printf("ack_HandType:%x ack_HandID:%d result:0x%x \r\n", ack_HandType, ack_HandID,result_d201);
 
 				   break;
@@ -1697,8 +1715,8 @@ int run_cmd_a204(StructMsg *pMsg)   //增加了协议内容
 
 			}
 		}//if(x7==1)
-
-        cmd_reply_a203_to_a204(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+		cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+//        cmd_reply_a203_to_a204(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 }
 
 //int run_cmd_a204(StructMsg *pMsg)   //按甲方协议写的
@@ -2010,6 +2028,7 @@ int run_cmd_a205(StructMsg *pMsg)
 {
 		 int file_cmd=0,ret=0,i=0,x = 0,temp=0,h=0;
 		 u16 unicode_u16=0;
+		 int res;
 		 WCHAR cmd_str_1[1024]={0},cmd_str_2[1024]={0};
 		 BYTE cmd_str_11[100]={0},cmd_str_21[100]={0};
 //		 DIR dir;
@@ -2036,7 +2055,13 @@ int run_cmd_a205(StructMsg *pMsg)
 					 if (cmd_str_1[x] == '\0') break;
 				}
 				xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
-				cmd_reply_a206(pMsg, cmd_str_11);
+				res=cmd_reply_a206(pMsg, cmd_str_11);
+				if(res!=0)
+				{
+					xil_printf("Failed to get file attributes! res=%d\r\n",res);
+					cmd_reply_a203(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+					return -1;
+				}
 				break;
 
 			case FOLDER_ATTRIBUTE:
@@ -2057,13 +2082,22 @@ int run_cmd_a205(StructMsg *pMsg)
 					if (cmd_str_2[x] == '\0') break;
 				}
 				xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_21);
-				cmd_reply_a207(pMsg, cmd_str_21);
+				res=cmd_reply_a207(pMsg, cmd_str_21);
+				if(res!=0)
+				{
+					xil_printf("Failed to get folder properties! res=%d\r\n",res);
+					cmd_reply_a203(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+					return -1;
+				}
 				break;
 			default:       // 操作失败通过a203进行回复
-				xil_printf("command failed!r\n");
-				cmd_reply_a203_to_a205(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+				xil_printf("command failed!\r\n");
+//				cmd_reply_a203_to_a205(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+				cmd_reply_a203(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
+				return -1;
 				break;
 		 }
+		 cmd_reply_a203(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
     return 0;
 }
 
@@ -2096,14 +2130,24 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 		ReplyStructA206Ack.Head = 0x55555555;
 		ReplyStructA206Ack.SrcId = SRC_ID;
 		ReplyStructA206Ack.DestId = DEST_ID;
+#if  0
 		ReplyStructA206Ack.HandType = 0xA2;
 		ReplyStructA206Ack.HandId = 0x6;
+		ReplyStructA206Ack.PackNum=0x0;
+#endif
+
 //		sprintf(ReplyStructA206Ack.Name,"%s",(char *)fno.fname);
 //		strcpy((u8 *)ReplyStructA206Ack.Name,(char *)fno.fname);  //noted by lyh on the 1.22
 		convert(ReplyStructA206Ack.Name,fno.fname);				  //add   by lyh on the 1.22
 
 		get_path_dname(path,ReplyStructA206Ack.Dir);
 		ReplyStructA206Ack.Size = fno.fsize;
+#if  1   //改变字节顺序
+		ReplyStructA206Ack.HandType = SW32(0xA2);
+		ReplyStructA206Ack.HandId = SW32(0x6);
+		ReplyStructA206Ack.PackNum=SW32(0x0);
+		ReplyStructA206Ack.Size = SW64(ReplyStructA206Ack.Size);
+#endif
 //		sprintf(ReplyStructA206Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 //				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 //				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间   // 11.21 tested by lyh: have some problems
@@ -2177,7 +2221,7 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 			xil_printf("SimpleTransfer failed!\r\n");
 			return XST_FAILURE;
 		}
-//		return 0;
+		return 0;
 }
 
 // 文件夹属性获取应答  存储组件——>主控组件
@@ -2292,7 +2336,7 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 			xil_printf("SimpleTransfer failed!\r\n");
 			return XST_FAILURE;
 		}
-//		return 0;
+		return 0;
 }
 
 //int run_cmd_a208(StructMsg *pMsg)  // 1.31注释掉
@@ -2506,9 +2550,9 @@ int run_cmd_b201(StructMsg *pMsg)
 				{
 						xil_printf("f_mkfs  Failed! ret=%d\r\n", ret);
 					//	cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
-						return 0;
+						return -1;
 				}
-				cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+//				cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 		break;
 
 		case DISK_REMOUNT:
@@ -2517,9 +2561,9 @@ int run_cmd_b201(StructMsg *pMsg)
 				{
 						xil_printf("f_remount  Failed! ret=%d\r\n", ret);
 					//	cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
-						return 0;
+						return -1;
 				}
-				cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+//				cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 		break;
 
 		case DISK_UNMOUNT:
@@ -2528,14 +2572,15 @@ int run_cmd_b201(StructMsg *pMsg)
 				{
 						xil_printf("f_unmount  Failed! ret=%d\r\n", ret);
 					//	cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
-						return 0;
+						return -1;
 				}
-				cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+//				cmd_reply_a203_to_b201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 		break;
 
 		default:
 			break;
 	}
+	cmd_reply_a203(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 	return 0;
 }
 
@@ -2589,7 +2634,7 @@ int run_cmd_d201(StructMsg *pMsg)
 					   return -1;
 				   }
 				   f_close(&file1);
-				   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+//				   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 			   break;
 
 			   case   SEEK_CUR:
@@ -2601,7 +2646,7 @@ int run_cmd_d201(StructMsg *pMsg)
 					   return -1;
 				   }
 				   f_close(&file1);
-				   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+//				   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 			   break;
 
 			   case  SEEK_END:
@@ -2612,12 +2657,13 @@ int run_cmd_d201(StructMsg *pMsg)
 					   return -1;
 				   }
 				   f_close(&file1);
-				   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
+//				   cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 			   break;
 			   default:
 			   //cmd_reply_a203_to_d201(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x10);
 			   break;
 		}
+		 cmd_reply_a203(pMsg->PackNum,pMsg->HandType, pMsg->HandId, 0x11);
 		 return 0;
 }
 
