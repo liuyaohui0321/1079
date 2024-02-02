@@ -1,4 +1,4 @@
-23:57:57 **** Auto Build of configuration Debug for project dmauart ****
+11:28:36 **** Auto Build of configuration Debug for project dmauart ****
 make all 
 'Building file: ../src/cmd.c'
 'Invoking: MicroBlaze gcc compiler'
@@ -1908,7 +1908,7 @@ In file included from ../src/cmd.h:6,
  FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode);           /* copy directory */
          ^~~~~~~~
 ../src/cmd.c:1267:25: warning: pointer targets in passing argument 1 of 'cmd_reply_a208' differ in signedness [-Wpointer-sign]
-    ret = cmd_reply_a208("0:");//ff_oem2uni
+    ret = cmd_reply_a208("0:");
                          ^~~~
 In file included from ../src/cmd.c:1:
 ../src/cmd.h:184:5: note: expected 'BYTE *' {aka 'unsigned char *'} but argument is of type 'char *'
@@ -2357,31 +2357,34 @@ d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h
     return -1;
            ^
 ../src/cmd.c: In function 'cmd_reply_a208':
-../src/cmd.c:2477:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-     else
-     ^~~~
-../src/cmd.c:2479:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-      ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k+1]<<8);
-      ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:2522:32: warning: unknown conversion type character '8' in format [-Wformat=]
+../src/cmd.c:2474:32: warning: unknown conversion type character '8' in format [-Wformat=]
     printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
                                 ^
-../src/cmd.c:2522:50: warning: format '%s' expects argument of type 'char *', but argument 3 has type 'u64' {aka 'long long unsigned int'} [-Wformat=]
+../src/cmd.c:2474:50: warning: format '%s' expects argument of type 'char *', but argument 3 has type 'u64' {aka 'long long unsigned int'} [-Wformat=]
     printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
                                                ~~~^                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                                %16lld
-../src/cmd.c:2522:11: warning: too many arguments for format [-Wformat-extra-args]
+../src/cmd.c:2474:11: warning: too many arguments for format [-Wformat-extra-args]
     printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:2529:3: warning: implicit declaration of function 'wjq_free_m'; did you mean '_free_r'? [-Wimplicit-function-declaration]
+../src/cmd.c:2628:3: warning: implicit declaration of function 'wjq_free_m'; did you mean '_free_r'? [-Wimplicit-function-declaration]
    wjq_free_m(ReplyStructA208Ack.message);  // 释放内存
    ^~~~~~~~~~
    _free_r
+../src/cmd.c:2407:7: warning: unused variable 'ret' [-Wunused-variable]
+   u16 ret[512]={0};
+       ^~~
+../src/cmd.c:2405:7: warning: unused variable 'name' [-Wunused-variable]
+   u16 name[512]={0x3a30,0x312f,0xc032,0xb4d7,0x00ef}; //0:/12雷达
+       ^~~~
+../src/cmd.c:2402:7: warning: unused variable 'i' [-Wunused-variable]
+   int i=0;
+       ^
 ../src/cmd.c: In function 'run_cmd_d201':
-../src/cmd.c:2599:32: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2698:32: warning: operation on 'i' may be undefined [-Wsequence-point]
     unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                ~^~
-../src/cmd.c:2620:23: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2719:23: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
    ret =f_open(&file1, cmd_str_11,  FA_OPEN_EXISTING |FA_READ);
                        ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2389,17 +2392,17 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:2596:9: warning: unused variable 'cmd_char_str1' [-Wunused-variable]
+../src/cmd.c:2695:9: warning: unused variable 'cmd_char_str1' [-Wunused-variable]
    BYTE *cmd_char_str1;
          ^~~~~~~~~~~~~
-../src/cmd.c:2589:7: warning: unused variable 'file_cmd' [-Wunused-variable]
+../src/cmd.c:2688:7: warning: unused variable 'file_cmd' [-Wunused-variable]
    int file_cmd=0,ret=0,i=0,x=0,h=0;
        ^~~~~~~~
 ../src/cmd.c: In function 'run_cmd_d20A':
-../src/cmd.c:2684:32: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2783:32: warning: operation on 'i' may be undefined [-Wsequence-point]
     unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                ~^~
-../src/cmd.c:2700:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2799:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
    ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
                       ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2407,11 +2410,11 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:2715:5: warning: implicit declaration of function 'sleep'; did you mean 'strsep'? [-Wimplicit-function-declaration]
+../src/cmd.c:2814:5: warning: implicit declaration of function 'sleep'; did you mean 'strsep'? [-Wimplicit-function-declaration]
      sleep(1);
      ^~~~~
      strsep
-../src/cmd.c:2740:6: warning: passing argument 2 of 'f_write1' makes pointer from integer without a cast [-Wint-conversion]
+../src/cmd.c:2839:6: warning: passing argument 2 of 'f_write1' makes pointer from integer without a cast [-Wint-conversion]
       buff,   /* Data to be written */
       ^~~~
 In file included from ../src/cmd.h:6,
@@ -2419,7 +2422,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:312:40: note: expected 'const void *' but argument is of type 'uint32_t' {aka 'long unsigned int'}
  FRESULT f_write1 (FIL* fp, const void* buff, UINT btw, UINT* bw);
                             ~~~~~~~~~~~~^~~~
-../src/cmd.c:2742:6: warning: pointer targets in passing argument 4 of 'f_write1' differ in signedness [-Wpointer-sign]
+../src/cmd.c:2841:6: warning: pointer targets in passing argument 4 of 'f_write1' differ in signedness [-Wpointer-sign]
       &bw    /* Number of bytes written */
       ^~~
 In file included from ../src/cmd.h:6,
@@ -2427,7 +2430,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:312:9: note: expected 'UINT *' {aka 'unsigned int *'} but argument is of type 'int *'
  FRESULT f_write1 (FIL* fp, const void* buff, UINT btw, UINT* bw);
          ^~~~~~~~
-../src/cmd.c:2789:11: warning: passing argument 1 of 'fclose' from incompatible pointer type [-Wincompatible-pointer-types]
+../src/cmd.c:2888:11: warning: passing argument 1 of 'fclose' from incompatible pointer type [-Wincompatible-pointer-types]
     fclose(&file);
            ^~~~~
 In file included from ../src/cmd.h:7,
@@ -2435,30 +2438,30 @@ In file included from ../src/cmd.h:7,
 d:\vivado2019\sdk\2019.1\gnu\microblaze\nt\microblaze-xilinx-elf\include\stdio.h:191:13: note: expected 'FILE *' {aka 'struct __sFILE *'} but argument is of type 'FIL *' {aka 'struct <anonymous> *'}
  int fclose (FILE *);
              ^~~~~~
-../src/cmd.c:2676:7: warning: unused variable 'file_cmd' [-Wunused-variable]
+../src/cmd.c:2775:7: warning: unused variable 'file_cmd' [-Wunused-variable]
    u32 file_cmd=0;
        ^~~~~~~~
-../src/cmd.c:2675:7: warning: unused variable 'Status' [-Wunused-variable]
+../src/cmd.c:2774:7: warning: unused variable 'Status' [-Wunused-variable]
    int Status,bw;
        ^~~~~~
 ../src/cmd.c: In function 'run_cmd_d204':
-../src/cmd.c:2806:37: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:2905:37: warning: operation on 'i' may be undefined [-Wsequence-point]
          unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                     ~^~
-../src/cmd.c:2802:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:2901:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:2798:17: warning: variable 'Read_speed' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:2897:17: warning: variable 'Read_speed' set but not used [-Wunused-but-set-variable]
    int Read_mode,Read_speed;
                  ^~~~~~~~~~
-../src/cmd.c:2797:17: warning: unused variable 'ret' [-Wunused-variable]
+../src/cmd.c:2896:17: warning: unused variable 'ret' [-Wunused-variable]
       int temp=0,ret=0,i=0,x=0,h=0;
                  ^~~
 ../src/cmd.c: In function 'run_cmd_d205':
-../src/cmd.c:2911:33: warning: operation on 'i' may be undefined [-Wsequence-point]
+../src/cmd.c:3010:33: warning: operation on 'i' may be undefined [-Wsequence-point]
      unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
                                 ~^~
-../src/cmd.c:2926:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
+../src/cmd.c:3025:22: warning: pointer targets in passing argument 2 of 'f_open' differ in signedness [-Wpointer-sign]
    ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
                       ^~~~~~~~~~
 In file included from ../src/cmd.h:6,
@@ -2466,7 +2469,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:307:9: note: expected 'const TCHAR *' {aka 'const char *'} but argument is of type 'BYTE *' {aka 'unsigned char *'}
  FRESULT f_open (FIL* fp, const TCHAR* path, BYTE mode);    /* Open or create a file */
          ^~~~~~
-../src/cmd.c:2939:8: warning: passing argument 2 of 'f_read1' makes pointer from integer without a cast [-Wint-conversion]
+../src/cmd.c:3038:8: warning: passing argument 2 of 'f_read1' makes pointer from integer without a cast [-Wint-conversion]
         buff_r,
         ^~~~~~
 In file included from ../src/cmd.h:6,
@@ -2474,7 +2477,7 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:310:33: note: expected 'void *' but argument is of type 'uint32_t' {aka 'long unsigned int'}
  FRESULT f_read1 (FIL* fp, void* buff, UINT btr, UINT* br);   /* Read data from the file */
                            ~~~~~~^~~~
-../src/cmd.c:2941:8: warning: pointer targets in passing argument 4 of 'f_read1' differ in signedness [-Wpointer-sign]
+../src/cmd.c:3040:8: warning: pointer targets in passing argument 4 of 'f_read1' differ in signedness [-Wpointer-sign]
         &br
         ^~~
 In file included from ../src/cmd.h:6,
@@ -2482,112 +2485,75 @@ In file included from ../src/cmd.h:6,
 ../src/fat/ff.h:310:9: note: expected 'UINT *' {aka 'unsigned int *'} but argument is of type 'int *'
  FRESULT f_read1 (FIL* fp, void* buff, UINT btr, UINT* br);   /* Read data from the file */
          ^~~~~~~
-../src/cmd.c:2977:15: warning: implicit declaration of function 'XAxiDma1_tx'; did you mean 'XAxiDma_Busy'? [-Wimplicit-function-declaration]
+../src/cmd.c:3076:15: warning: implicit declaration of function 'XAxiDma1_tx'; did you mean 'XAxiDma_Busy'? [-Wimplicit-function-declaration]
       Status = XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
                ^~~~~~~~~~~
                XAxiDma_Busy
-../src/cmd.c:2988:3: warning: implicit declaration of function 'cleanup_platform' [-Wimplicit-function-declaration]
+../src/cmd.c:3087:3: warning: implicit declaration of function 'cleanup_platform' [-Wimplicit-function-declaration]
    cleanup_platform();
    ^~~~~~~~~~~~~~~~
-../src/cmd.c:2904:7: warning: variable 'file_cmd' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3003:7: warning: variable 'file_cmd' set but not used [-Wunused-but-set-variable]
    u32 file_cmd=0;
        ^~~~~~~~
 ../src/cmd.c: In function 'run_reply_d207':
-../src/cmd.c:3018:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3117:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandId;
            ^~~~~~~~~~~~
-../src/cmd.c:3017:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3116:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandType;
            ^~~~~~~~~~~~~~
-../src/cmd.c:3016:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3115:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
    int32_t reply_Handpocket_num;          //包序列号
            ^~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:3015:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:3114:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:3014:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
+../src/cmd.c:3113:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
    WCHAR cmd_str_1[1024];
          ^~~~~~~~~
-../src/cmd.c:3013:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
+../src/cmd.c:3112:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
    u16 unicode_u16=0;
        ^~~~~~~~~~~
-../src/cmd.c:3012:14: warning: unused variable 'x' [-Wunused-variable]
+../src/cmd.c:3111:14: warning: unused variable 'x' [-Wunused-variable]
       int i=0,x=0;
               ^
 ../src/cmd.c: In function 'run_reply_d208':
-../src/cmd.c:3047:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3146:11: warning: variable 'reply_HandId' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandId;
            ^~~~~~~~~~~~
-../src/cmd.c:3046:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3145:11: warning: variable 'reply_HandType' set but not used [-Wunused-but-set-variable]
    int32_t reply_HandType;
            ^~~~~~~~~~~~~~
-../src/cmd.c:3045:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
+../src/cmd.c:3144:11: warning: variable 'reply_Handpocket_num' set but not used [-Wunused-but-set-variable]
    int32_t reply_Handpocket_num;          //包序列号
            ^~~~~~~~~~~~~~~~~~~~
-../src/cmd.c:3044:7: warning: unused variable 'file' [-Wunused-variable]
+../src/cmd.c:3143:7: warning: unused variable 'file' [-Wunused-variable]
    FIL file;
        ^~~~
-../src/cmd.c:3043:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
+../src/cmd.c:3142:9: warning: unused variable 'cmd_str_1' [-Wunused-variable]
    WCHAR cmd_str_1[1024];
          ^~~~~~~~~
-../src/cmd.c:3042:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
+../src/cmd.c:3141:7: warning: unused variable 'unicode_u16' [-Wunused-variable]
    u16 unicode_u16=0;
        ^~~~~~~~~~~
-../src/cmd.c:3041:11: warning: unused variable 'x' [-Wunused-variable]
+../src/cmd.c:3140:11: warning: unused variable 'x' [-Wunused-variable]
    int i=0,x=0;
            ^
-../src/cmd.c: In function 'cmd_reply_a203':
-../src/cmd.c:3090:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-       else
-       ^~~~
-../src/cmd.c:3092:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-        ReplyStructA203Ack.AckResult = result_a201;
-        ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3098:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-       else
-       ^~~~
-../src/cmd.c:3100:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-        ReplyStructA203Ack.AckResult = result_a204;
-        ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3106:7: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-       else
-       ^~~~
-../src/cmd.c:3108:8: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-        ReplyStructA203Ack.AckResult = result_a205;
-        ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3118:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-     else
-     ^~~~
-../src/cmd.c:3120:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-      ReplyStructA203Ack.AckResult = result_b201;
-      ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3126:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-     else
-     ^~~~
-../src/cmd.c:3128:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-      ReplyStructA203Ack.AckResult = result_d201;
-      ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3134:5: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
-     else
-     ^~~~
-../src/cmd.c:3136:6: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
-      ReplyStructA203Ack.AckResult = result_f201;
-      ^~~~~~~~~~~~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a201':
-../src/cmd.c:3195:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3318:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3197:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3320:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_a201;
     ^~~~~~~~~~~~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a204':
-../src/cmd.c:3255:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3378:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3257:7: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3380:7: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
        ReplyStructA203Ack.AckResult = result_a204;
        ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3269:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3392:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2597,13 +2563,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a205':
-../src/cmd.c:3299:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3422:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3301:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3424:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_a205;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3313:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3436:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2613,13 +2579,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_a208':
-../src/cmd.c:3342:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3465:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3344:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3467:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_a208;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3356:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3479:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2629,13 +2595,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_b201':
-../src/cmd.c:3385:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3508:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3387:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3510:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_b201;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3399:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3522:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2645,13 +2611,13 @@ In file included from ../src/simple_dma.h:88,
  u32 XAxiDma_SimpleTransfer(XAxiDma *InstancePtr, UINTPTR BuffAddr, u32 Length,
                                                   ~~~~~~~~^~~~~~~~
 ../src/cmd.c: In function 'cmd_reply_a203_to_d201':
-../src/cmd.c:3428:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
+../src/cmd.c:3551:3: warning: this 'else' clause does not guard... [-Wmisleading-indentation]
    else
    ^~~~
-../src/cmd.c:3430:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
+../src/cmd.c:3553:4: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'else'
     ReplyStructA203Ack.AckResult = result_d201;
     ^~~~~~~~~~~~~~~~~~
-../src/cmd.c:3442:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
+../src/cmd.c:3565:43: warning: passing argument 2 of 'XAxiDma_SimpleTransfer' makes integer from pointer without a cast [-Wint-conversion]
    Status = XAxiDma_SimpleTransfer(&AxiDma,CmdTxBufferPtr,
                                            ^~~~~~~~~~~~~~
 In file included from ../src/simple_dma.h:88,
@@ -2714,7 +2680,7 @@ In file included from ../src/simple_dma.h:88,
  }
  ^
 ../src/cmd.c: In function 'run_cmd_f201':
-../src/cmd.c:3463:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/cmd.c:3586:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
 In file included from ../src/cmd.h:10,
@@ -2736,9 +2702,9 @@ mb-objcopy -O srec dmauart.elf dmauart.srec
 'Invoking: MicroBlaze Print Size'
 mb-size dmauart.elf  |tee "dmauart.elf.size"
    text	   data	    bss	    dec	    hex	filename
- 462168	   1988	 183996	 648152	  9e3d8	dmauart.elf
+ 463952	   1988	 184000	 649940	  9ead4	dmauart.elf
 'Finished building: dmauart.elf.size'
 ' '
 
-23:57:59 Build Finished (took 1s.744ms)
+11:28:37 Build Finished (took 993ms)
 

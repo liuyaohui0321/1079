@@ -1264,7 +1264,7 @@ int run_cmd_a201(StructMsg *pMsg)
 
 		case GET_DIR:   // 返回目录中的文件和子目录列表
 //			ret = cmd_reply_a208(cmd_str_11);
-			ret = cmd_reply_a208("0:");//ff_oem2uni
+			ret = cmd_reply_a208("0:");
 			if (ret != FR_OK)
 			{
 				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);
@@ -2394,9 +2394,18 @@ int cmd_reply_a208(BYTE* path)
 		uint32_t TotalFileNum=0,TotaldirNum=0;
 		LinkedList LinkList=NULL;     //12.21写
 		uint32_t sum=0;
+
 		u8 dat[1024]={0};
+		u8 flag=0;
 		int k=0;
 		int h=0;
+		int i=0;
+//		u16 data[512]={0x0030,0x003A,0x002f,0xC0D7,0xB4EF};
+//		u16 name[512]={0x3a30,0xc031,0xb4d7,0x00ef}; //0:1雷达
+		u16 name[512]={0x3a30,0x312f,0xc032,0xb4d7,0x00ef}; //0:/12雷达
+		u16 data=0;
+		u16 ret[512]={0};
+
 		LinkList=InitList();
 		if(LinkList==NULL)
 		{
@@ -2458,7 +2467,76 @@ int cmd_reply_a208(BYTE* path)
         	if(r==NULL)
         		break;
         }
+//  *************************************************  //
+		// 打印一下每个文件和目录的结构体信息
+		for(int i=1;i<sum+1;i++)
+		{
+			printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
+		}
+
+//  *************************************************  //
 //		printf("sizeof(StructA208Ack):%d",sizeof(StructA208Ack));
+//		cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
+
+//		for(int i=1;i<sum+1;i++)
+//		{
+////			ReplyStructA208Ack.message[i].name[k]=data;
+//
+//			ret[k]=ff_oem2uni(data[k],FF_CODE_PAGE);
+//			k++;
+//		}
+
+//		for(int i=1;i<sum+1;i++)
+//		{
+//			while(1)
+//			{
+//				dat[k]=name[k/2]&0xff;
+//				dat[k+1]=((name[k/2]&0xff00)>>8);
+//				if( dat[k]==0 && dat[k+1]==0 )   break;
+//				k+=2;
+//			}
+//			k=0;
+//			while(1)
+//			{
+//				if(dat[k]>=0x80 && dat[k+1]>=0x80)
+//				{
+//					name[h++]=CW16(dat[k],dat[k+1]);
+//				}
+//				else if(dat[k] < 0x80 && dat[k + 1] < 0x80)
+//				{
+//					name[h++]=(u16)(dat[k]<<8);
+//					name[h++]=(u16)(dat[k+1]<<8);
+//				}
+//				else
+//				{
+//					name[h++]=(u16)(dat[k] << 8);
+//					flag = 1;
+//				}
+//				if(dat[k]==0 && dat[k+1]==0)   break;
+//				if (flag == 1)
+//				{
+//					k+=1;
+//					flag = 0;
+//				}
+//				else
+//				{
+//					k+=2;
+//				}
+//			}
+//			k=0;
+//			h=0;
+//			ConvertReverse(name);
+//			while(1)
+//			{
+//				data=name[k];
+//				ret[k]=ff_oem2uni(data,FF_CODE_PAGE);
+//				if(ret[k]==0)   break;
+//				ret[k]=SW16(ret[k]);
+//				k++;
+//			}
+//			k=0;
+//			h=0;
+//		}
 
 		for(int i=1;i<sum+1;i++)
 		{
@@ -2473,12 +2551,40 @@ int cmd_reply_a208(BYTE* path)
 			while(1)
 			{
 				if(dat[k]>=0x80 && dat[k+1]>=0x80)
+				{
 					ReplyStructA208Ack.message[i].name[h++]=CW16(dat[k],dat[k+1]);
-				else
+				}
+				else if(dat[k] < 0x80 && dat[k + 1] < 0x80)
+				{
 					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k]<<8);
 					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k+1]<<8);
+				}
+				else
+				{
+					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k] << 8);
+					flag = 1;
+				}
 				if(dat[k]==0 && dat[k+1]==0)   break;
-				k+=2;
+				if (flag == 1)
+				{
+					k+=1;
+					flag = 0;
+				}
+				else
+				{
+					k+=2;
+				}
+			}
+			k=0;
+			h=0;
+			ConvertReverse(ReplyStructA208Ack.message[i].name);
+			while(1)
+			{
+				data=ReplyStructA208Ack.message[i].name[k];
+				ReplyStructA208Ack.message[i].name[k]=ff_oem2uni(data,FF_CODE_PAGE);
+		        if(ReplyStructA208Ack.message[i].name[k]==0)   break;
+		        ReplyStructA208Ack.message[i].name[k]=SW16(ReplyStructA208Ack.message[i].name[k]);
+				k++;
 			}
 			k=0;
 			h=0;
@@ -2515,14 +2621,7 @@ int cmd_reply_a208(BYTE* path)
 			return XST_FAILURE;
 		}
 
-//  *************************************************  //
-		// 打印一下每个文件和目录的结构体信息
-		for(int i=1;i<sum+1;i++)
-		{
-			printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
-		}
 
-//  *************************************************  //
 		//销毁链表
 		DestroyList(LinkList);
 //		wjq_free_t(ReplyStructA208Ack.message); 	// 释放内存
@@ -3086,26 +3185,38 @@ int cmd_reply_a203(u32 packnum, u32 type, u32 id, u32 result)
 				{
 					case  0x01:
 						if(result_a201==result)
+						{
 							ReplyStructA203Ack.AckResult = result_a201;
+						}
 						else
+						{
 							result_a201=result;
 							ReplyStructA203Ack.AckResult = result_a201;
+						}
 					break;
 
 					case  0x04:
 						if(result_a204==result)
+						{
 							ReplyStructA203Ack.AckResult = result_a204;
+						}
 						else
+						{
 							result_a204=result;
 							ReplyStructA203Ack.AckResult = result_a204;
+						}
 					break;
 
 					case  0x05:
 						if(result_a205==result)
+						{
 							ReplyStructA203Ack.AckResult = result_a205;
+						}
 						else
+						{
 							result_a205=result;
 							ReplyStructA203Ack.AckResult = result_a205;
+						}
 					break;
 					default:
 					break;
@@ -3114,26 +3225,38 @@ int cmd_reply_a203(u32 packnum, u32 type, u32 id, u32 result)
 
 			case  0xB2:
 				if(result_b201==result)
+				{
 					ReplyStructA203Ack.AckResult = result_b201;
+				}
 				else
+				{
 					result_b201=result;
 					ReplyStructA203Ack.AckResult = result_b201;
+				}
 			break;
 
 			case  0xD2:
 				if(result_d201==result)
+				{
 					ReplyStructA203Ack.AckResult = result_d201;
+				}
 				else
+				{
 					result_d201=result;
 					ReplyStructA203Ack.AckResult = result_d201;
+				}
 			break;
 
 			case  0xF2:
 				if(result_f201==result)
+				{
 					ReplyStructA203Ack.AckResult = result_f201;
+				}
 				else
+				{
 					result_f201=result;
 					ReplyStructA203Ack.AckResult = result_f201;
+				}
 			break;
 
 			default:
