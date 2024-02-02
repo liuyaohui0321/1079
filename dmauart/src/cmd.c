@@ -378,6 +378,64 @@ void Reverse_u8(u8 *ARR,int n)
 		}
 }
 
+void Convert_GB2312_to_UTF16LE(u16 *name)
+{
+		u8 dat[1024]={0};
+		u8 flag=0;
+		int k=0;
+		int h=0;
+		u16 data=0;
+		while(1)
+		{
+			dat[k]=name[k/2]&0xff;
+			dat[k+1]=((name[k/2]&0xff00)>>8);
+			if( dat[k]==0 && dat[k+1]==0 )   break;
+			k+=2;
+		}
+		k=0;
+		while(1)
+		{
+			if(dat[k]>=0x80 && dat[k+1]>=0x80)
+			{
+				name[h++]=CW16(dat[k],dat[k+1]);
+			}
+			else if(dat[k] < 0x80 && dat[k + 1] < 0x80)
+			{
+				name[h++]=(u16)(dat[k]<<8);
+				name[h++]=(u16)(dat[k+1]<<8);
+			}
+			else
+			{
+				name[h++]=(u16)(dat[k] << 8);
+				flag = 1;
+			}
+			if(dat[k]==0 && dat[k+1]==0)   break;
+			if (flag == 1)
+			{
+				k+=1;
+				flag = 0;
+			}
+			else
+			{
+				k+=2;
+			}
+		}
+		k=0;
+		h=0;
+		ConvertReverse(name);
+		while(1)
+		{
+			data=name[k];
+			name[k]=ff_oem2uni(data,FF_CODE_PAGE);
+			if(name[k]==0)   break;
+			name[k]=SW16(name[k]);
+			k++;
+		}
+		k=0;
+		h=0;
+}
+
+
 void InitTimeList(void)
 {
 	 CreateTimelist= (CreateTimeNode *)wjq_malloc_t(sizeof(CreateTimeNode));    // 分配一个头结点
@@ -1263,8 +1321,7 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 
 		case GET_DIR:   // 返回目录中的文件和子目录列表
-//			ret = cmd_reply_a208(cmd_str_11);
-			ret = cmd_reply_a208("0:");
+			ret = cmd_reply_a208(cmd_str_11);
 			if (ret != FR_OK)
 			{
 				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);
@@ -2055,7 +2112,8 @@ int run_cmd_a205(StructMsg *pMsg)
 					 if (cmd_str_1[x] == '\0') break;
 				}
 				xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
-				res=cmd_reply_a206(pMsg, cmd_str_11);
+//				res=cmd_reply_a206(pMsg, cmd_str_11);
+				res=cmd_reply_a206(pMsg, "abc");
 				if(res!=0)
 				{
 					xil_printf("Failed to get file attributes! res=%d\r\n",res);
@@ -2137,10 +2195,12 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 #endif
 
 //		sprintf(ReplyStructA206Ack.Name,"%s",(char *)fno.fname);
-//		strcpy((u8 *)ReplyStructA206Ack.Name,(char *)fno.fname);  //noted by lyh on the 1.22
-		convert(ReplyStructA206Ack.Name,fno.fname);				  //add   by lyh on the 1.22
+		strcpy(ReplyStructA206Ack.Name,(char *)fno.fname);  //noted by lyh on the 1.22
+//		convert(ReplyStructA206Ack.Name,fno.fname);				  //add   by lyh on the 1.22
+		Convert_GB2312_to_UTF16LE(ReplyStructA206Ack.Name);       //add   by lyh on the 2.02
 
 		get_path_dname(path,ReplyStructA206Ack.Dir);
+		Convert_GB2312_to_UTF16LE(ReplyStructA206Ack.Dir);        //add   by lyh on the 2.02
 		ReplyStructA206Ack.Size = fno.fsize;
 #if  1   //改变字节顺序
 		ReplyStructA206Ack.HandType = SW32(0xA2);
@@ -2212,6 +2272,8 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 	//			ReplyStructA206Ack.AckHandType +ReplyStructA206Ack.AckHandId + \
 	//			ReplyStructA206Ack.AckResult;
 		ReplyStructA206Ack.Tail = 0xAAAAAAAA;
+		ReplyStructA206Ack.RWCtrl=SW32(ReplyStructA206Ack.RWCtrl);
+		ReplyStructA206Ack.DisplayCtrl=SW32(ReplyStructA206Ack.DisplayCtrl);
 		AxiDma.TxBdRing.HasDRE=1;
 		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)(&ReplyStructA206Ack),
 					sizeof(StructA206Ack), XAXIDMA_DMA_TO_DEVICE);
@@ -2221,6 +2283,7 @@ int cmd_reply_a206(StructMsg *pMsg, const BYTE* path)
 			xil_printf("SimpleTransfer failed!\r\n");
 			return XST_FAILURE;
 		}
+		xil_printf("%s %d  sizeof(StructA206Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA206Ack));
 		return 0;
 }
 
@@ -2257,20 +2320,35 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 		ReplyStructA207Ack.Head = 0x55555555;
 		ReplyStructA207Ack.SrcId = SRC_ID;
 		ReplyStructA207Ack.DestId = DEST_ID;
+#if  0
 		ReplyStructA207Ack.HandType = 0xA2;
-	//	ReplyStructA207Ack.HandId = 0x6;
 		ReplyStructA207Ack.HandId = 0x7;     // lyh 203.8.11改
+#endif
+#if  1   //改变字节顺序
+		ReplyStructA207Ack.HandType = SW32(0xA2);
+		ReplyStructA207Ack.HandId = SW32(0x7);
+		ReplyStructA207Ack.PackNum=SW32(0x0);
+#endif
 
 		strcpy((char *)ReplyStructA207Ack.Name, (char *)fno.fname);
+
+
 		get_path_dname(path,ReplyStructA207Ack.Dir);
 //		ReplyStructA207Ack.Size =fno.fsize;
 		get_Dir_size(ReplyStructA207Ack.Name,&ReplyStructA207Ack.Size);
-		convert(ReplyStructA207Ack.Name,fno.fname);     //add   by lyh on the 1.22
+
+//		convert(ReplyStructA207Ack.Name,fno.fname);     //add   by lyh on the 1.22
 //		reverse_u16(ReplyStructA207Ack.Name,a);
 //		ConvertReverse(ReplyStructA207Ack.Name);
-
+		Convert_GB2312_to_UTF16LE(ReplyStructA207Ack.Name);
+		Convert_GB2312_to_UTF16LE(ReplyStructA207Ack.Dir);
 		ReplyStructA207Ack.SubFolderNum =ndir;
 		ReplyStructA207Ack.SubFileNum =nfile;
+#if 1
+		ReplyStructA207Ack.Size=SW64(ReplyStructA207Ack.Size);
+		ReplyStructA207Ack.SubFolderNum =SW32(ReplyStructA207Ack.SubFolderNum);
+		ReplyStructA207Ack.SubFileNum=SW32(ReplyStructA207Ack.SubFileNum);
+#endif
 //		sprintf(ReplyStructA207Ack.CreateTime2,"%u年.%02u月.%02u日,%02u时.%02u分.%02u秒",
 //				(fno.fdate >> 9) + 1980, fno.fdate >> 5 & 15, fno.fdate & 31,fno.ftime >> 11,
 //				fno.ftime >> 5 & 63,fno.ftime*2);  //创建时间     //
@@ -2327,6 +2405,9 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 	//			ReplyStructA206Ack.AckHandType +ReplyStructA206Ack.AckHandId + \
 	//			ReplyStructA206Ack.AckResult;
 		ReplyStructA207Ack.Tail = 0xAAAAAAAA;
+		ReplyStructA207Ack.RWCtrl=SW32(ReplyStructA207Ack.RWCtrl);
+		ReplyStructA207Ack.DisplayCtrl=SW32(ReplyStructA207Ack.DisplayCtrl);
+
 		AxiDma.TxBdRing.HasDRE=1;
 		Status = XAxiDma_SimpleTransfer(&AxiDma,(UINTPTR)&ReplyStructA207Ack,
 					sizeof(StructA207Ack), XAXIDMA_DMA_TO_DEVICE);
@@ -2336,6 +2417,7 @@ int cmd_reply_a207(StructMsg *pMsg, const BYTE* path)
 			xil_printf("SimpleTransfer failed!\r\n");
 			return XST_FAILURE;
 		}
+		xil_printf("%s %d  sizeof(StructA207Ack)=%d\r\n", __FUNCTION__, __LINE__,sizeof(StructA207Ack));
 		return 0;
 }
 
@@ -2394,18 +2476,9 @@ int cmd_reply_a208(BYTE* path)
 		uint32_t TotalFileNum=0,TotaldirNum=0;
 		LinkedList LinkList=NULL;     //12.21写
 		uint32_t sum=0;
-
-		u8 dat[1024]={0};
-		u8 flag=0;
-		int k=0;
-		int h=0;
-		int i=0;
 //		u16 data[512]={0x0030,0x003A,0x002f,0xC0D7,0xB4EF};
 //		u16 name[512]={0x3a30,0xc031,0xb4d7,0x00ef}; //0:1雷达
-		u16 name[512]={0x3a30,0x312f,0xc032,0xb4d7,0x00ef}; //0:/12雷达
-		u16 data=0;
-		u16 ret[512]={0};
-
+//		u16 name[512]={0x3a30,0x312f,0xc032,0xb4d7,0x00ef}; //0:/12雷达
 		LinkList=InitList();
 		if(LinkList==NULL)
 		{
@@ -2475,119 +2548,10 @@ int cmd_reply_a208(BYTE* path)
 		}
 
 //  *************************************************  //
-//		printf("sizeof(StructA208Ack):%d",sizeof(StructA208Ack));
-//		cmd_str_1[x] = ff_uni2oem(unicode_u16,FF_CODE_PAGE);
-
-//		for(int i=1;i<sum+1;i++)
-//		{
-////			ReplyStructA208Ack.message[i].name[k]=data;
-//
-//			ret[k]=ff_oem2uni(data[k],FF_CODE_PAGE);
-//			k++;
-//		}
-
-//		for(int i=1;i<sum+1;i++)
-//		{
-//			while(1)
-//			{
-//				dat[k]=name[k/2]&0xff;
-//				dat[k+1]=((name[k/2]&0xff00)>>8);
-//				if( dat[k]==0 && dat[k+1]==0 )   break;
-//				k+=2;
-//			}
-//			k=0;
-//			while(1)
-//			{
-//				if(dat[k]>=0x80 && dat[k+1]>=0x80)
-//				{
-//					name[h++]=CW16(dat[k],dat[k+1]);
-//				}
-//				else if(dat[k] < 0x80 && dat[k + 1] < 0x80)
-//				{
-//					name[h++]=(u16)(dat[k]<<8);
-//					name[h++]=(u16)(dat[k+1]<<8);
-//				}
-//				else
-//				{
-//					name[h++]=(u16)(dat[k] << 8);
-//					flag = 1;
-//				}
-//				if(dat[k]==0 && dat[k+1]==0)   break;
-//				if (flag == 1)
-//				{
-//					k+=1;
-//					flag = 0;
-//				}
-//				else
-//				{
-//					k+=2;
-//				}
-//			}
-//			k=0;
-//			h=0;
-//			ConvertReverse(name);
-//			while(1)
-//			{
-//				data=name[k];
-//				ret[k]=ff_oem2uni(data,FF_CODE_PAGE);
-//				if(ret[k]==0)   break;
-//				ret[k]=SW16(ret[k]);
-//				k++;
-//			}
-//			k=0;
-//			h=0;
-//		}
 
 		for(int i=1;i<sum+1;i++)
 		{
-			while(1)
-			{
-				dat[k]=ReplyStructA208Ack.message[i].name[k/2]&0xff;
-				dat[k+1]=((ReplyStructA208Ack.message[i].name[k/2]&0xff00)>>8);
-				if( dat[k]==0 && dat[k+1]==0 )   break;
-				k+=2;
-			}
-			k=0;
-			while(1)
-			{
-				if(dat[k]>=0x80 && dat[k+1]>=0x80)
-				{
-					ReplyStructA208Ack.message[i].name[h++]=CW16(dat[k],dat[k+1]);
-				}
-				else if(dat[k] < 0x80 && dat[k + 1] < 0x80)
-				{
-					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k]<<8);
-					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k+1]<<8);
-				}
-				else
-				{
-					ReplyStructA208Ack.message[i].name[h++]=(u16)(dat[k] << 8);
-					flag = 1;
-				}
-				if(dat[k]==0 && dat[k+1]==0)   break;
-				if (flag == 1)
-				{
-					k+=1;
-					flag = 0;
-				}
-				else
-				{
-					k+=2;
-				}
-			}
-			k=0;
-			h=0;
-			ConvertReverse(ReplyStructA208Ack.message[i].name);
-			while(1)
-			{
-				data=ReplyStructA208Ack.message[i].name[k];
-				ReplyStructA208Ack.message[i].name[k]=ff_oem2uni(data,FF_CODE_PAGE);
-		        if(ReplyStructA208Ack.message[i].name[k]==0)   break;
-		        ReplyStructA208Ack.message[i].name[k]=SW16(ReplyStructA208Ack.message[i].name[k]);
-				k++;
-			}
-			k=0;
-			h=0;
+			Convert_GB2312_to_UTF16LE(ReplyStructA208Ack.message[i].name);
 		}
 
 		AxiDma.TxBdRing.HasDRE=1;
@@ -2605,6 +2569,7 @@ int cmd_reply_a208(BYTE* path)
 				if (Status != XST_SUCCESS) {
 					return XST_FAILURE;
 				}
+				xil_printf("%s %d  sizeof(SingleFileOrDir)=%d\r\n", __FUNCTION__, __LINE__,sizeof(SingleFileOrDir));
 		}
 
 		AxiDma.TxBdRing.HasDRE=1;
