@@ -7569,11 +7569,11 @@ FRESULT scan_files(
 					sprintf(&path[i], "/%s", fno.fname);
 					res = scan_files(path);                    /* Enter the directory */
 					if (res != FR_OK) break;
-					printf("directory name is:%s\n", path);
+					xil_printf("directory name is:%s\n", path);
 					path[i] = 0;
 				}
 				else {                                       /* It is a file. */
-					printf("file name is:%s/%s\n", path, fno.fname);
+					xil_printf("file name is:%s/%s\n", path, fno.fname);
 				}
 			}
 			f_closedir(&dir);
@@ -7707,7 +7707,7 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 //				res = record_struct_of_Dir_and_File(path,LinkList);  /* Enter the directory */
 //				if (res != FR_OK) break;
 //				printf("directory name is:%s\n", path);
-//				path[i] = 0;
+				path[i] = 0;
 			}
 			else {                                       /* It is a file. */
 //				printf("file name is:%s/%s\n", path, fno.fname);

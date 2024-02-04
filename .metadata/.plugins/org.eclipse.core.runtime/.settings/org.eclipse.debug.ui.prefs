@@ -1,13 +1,13 @@
 eclipse.preferences.version=1
 org.eclipse.debug.ui.ExpressionView+org.eclipse.debug.ui.ToggleObjectBrowsersAction=true
-org.eclipse.debug.ui.MemoryView.RenderingViewPane.1=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<persistedMemoryRenderings>\r\n<memoryRendering memoryBlock\="1611647837" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1241420309" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1071145237" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="205868130" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n</persistedMemoryRenderings>\r\n
+org.eclipse.debug.ui.MemoryView.RenderingViewPane.1=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<persistedMemoryRenderings>\r\n<memoryRendering memoryBlock\="591907450" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1534842193" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1422214053" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="348609711" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="164511831" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="203087202" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1916567343" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1555068899" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n</persistedMemoryRenderings>\r\n
 org.eclipse.debug.ui.MemoryView.RenderingViewPane.2=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<persistedMemoryRenderings>\r\n<memoryRendering memoryBlock\="136873702" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n<memoryRendering memoryBlock\="1396409921" renderingId\="org.eclipse.debug.ui.rendering.hexint"/>\r\n</persistedMemoryRenderings>\r\n
 org.eclipse.debug.ui.MemoryView.orientation=0
 org.eclipse.debug.ui.MemoryView.orientation.org.eclipse.debug.ui.MemoryView.0=0
 org.eclipse.debug.ui.MemoryView.viewPanesVisibility=org.eclipse.debug.ui.MemoryView.MemoryBlocksTreeViewPane,org.eclipse.debug.ui.MemoryView.RenderingViewPane.1,
 org.eclipse.debug.ui.MemoryView.viewPanesVisibility.org.eclipse.debug.ui.MemoryView.0=org.eclipse.debug.ui.MemoryView.MemoryBlocksTreeViewPane,org.eclipse.debug.ui.MemoryView.RenderingViewPane.1,
 org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n
-org.eclipse.debug.ui.memory.columnSize\:org.eclipse.tcf.debug=4
+org.eclipse.debug.ui.memory.columnSize\:org.eclipse.tcf.debug=1
 org.eclipse.debug.ui.memory.rowSize\:org.eclipse.tcf.debug=16
 org.eclipse.debug.ui.switch_perspective_on_suspend=always
 org.eclipse.debug.ui.switch_to_perspective=always

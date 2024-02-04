@@ -2112,8 +2112,8 @@ int run_cmd_a205(StructMsg *pMsg)
 					 if (cmd_str_1[x] == '\0') break;
 				}
 				xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
-//				res=cmd_reply_a206(pMsg, cmd_str_11);
-				res=cmd_reply_a206(pMsg, "abc");
+				res=cmd_reply_a206(pMsg, cmd_str_11);
+//				res=cmd_reply_a206(pMsg, "abc");
 				if(res!=0)
 				{
 					xil_printf("Failed to get file attributes! res=%d\r\n",res);
@@ -2542,10 +2542,10 @@ int cmd_reply_a208(BYTE* path)
         }
 //  *************************************************  //
 		// 打印一下每个文件和目录的结构体信息
-		for(int i=1;i<sum+1;i++)
-		{
-			printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
-		}
+//		for(int i=1;i<sum+1;i++)
+//		{
+//			printf("Type:%llu,  Size:%ll8u Byte,  Name:%16s,  Changtime:default.\r\n",ReplyStructA208Ack.message[i].type,ReplyStructA208Ack.message[i].size,ReplyStructA208Ack.message[i].name);
+//		}
 
 //  *************************************************  //
 
@@ -3257,6 +3257,7 @@ int cmd_reply_a203(u32 packnum, u32 type, u32 id, u32 result)
 			return XST_FAILURE;
 		}       //  a202 会卡住
 		xil_printf("%s %d result:0x%x\r\n", __FUNCTION__, __LINE__,result_a201);
+
 		return 0;
 }
 
