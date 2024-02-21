@@ -3,9 +3,9 @@
 	<section name="org.eclipse.tcf.internal.cdt.ui.breakpoints.TCFThreadFilterEditor">
 	</section>
 	<section name="org.eclipse.tcf.internal.cdt.ui.hover.ExpressionInformationControlCreator$ExpressionInformationControl">
-		<item value="733" key="SashWeightTree"/>
-		<item value="266" key="SashWeightDetails"/>
+		<item value="784" key="SashWeightTree"/>
+		<item value="215" key="SashWeightDetails"/>
 		<item value="920" key="WIDTH"/>
-		<item value="678" key="HEIGHT"/>
+		<item value="357" key="HEIGHT"/>
 	</section>
 </section>

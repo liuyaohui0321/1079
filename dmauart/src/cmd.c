@@ -321,35 +321,35 @@ void convert(u16 *str1,u8 *str2)	//add by lyh on 1.22  单字节字符的ASCLL码后补零
 
 void reverse_u16(u16 *str1,u16 *str2)	//数组中,双字节数据按字节倒置     例如0xB7D6->0xD6B7
 {
-	int i=0;
-	u8  STR;
-	for(i=0;;i++)
-	{
-		STR=str1[i];
-		str2[i]=STR;
-		str2[i]<<=8;
-		STR=(str1[i]>>8);
-		str2[i]|=STR;
-		if(str1[i+1]=='\0') break;
-	}
+		int i=0;
+		u8  STR;
+		for(i=0;;i++)
+		{
+			STR=str1[i];
+			str2[i]=STR;
+			str2[i]<<=8;
+			STR=(str1[i]>>8);
+			str2[i]|=STR;
+			if(str1[i+1]=='\0') break;
+		}
 }
 
 void ConvertReverse(u16 *str)   // 数组里类似0x3000的数,转换成0x0030
 {
-	int x=0;
-	u8 STR=0;
-	u8 STR1=0;
-	for(x=0;;x++)
-	{
-		STR=str[x]>>8;
-		STR1=str[x];
-		if((STR<=0x7E)&&(STR1==0))
+		int x=0;
+		u8 STR=0;
+		u8 STR1=0;
+		for(x=0;;x++)
 		{
-			//按字节倒置
-			str[x]>>=8;
+			STR=str[x]>>8;
+			STR1=str[x];
+			if((STR<=0x7E)&&(STR1==0))
+			{
+				//按字节倒置
+				str[x]>>=8;
+			}
+			if(str[x+1]=='\0')  break;
 		}
-		if(str[x+1]=='\0')  break;
-	}
 }
 
 void Reverse_u8(u8 *ARR,int n)
@@ -2792,7 +2792,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		while (1)
 		{
-			xil_printf("Start Write!\r\n");
+//			xil_printf("Start Write!\r\n");
 			if (RxReceive(DestinationBuffer,&cmd_len) == XST_SUCCESS)
 			{
 
@@ -2984,10 +2984,11 @@ int run_cmd_d205(StructMsg *pMsg)
 				 cmd_str_11[h++]=cmd_str_1[x];
 			 }
 			 if (cmd_str_1[x] == '\0') break;
-	 }      // 文件路径
+	 }       // 文件路径
 	 xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 
 	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
+//	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ);
 	 if (ret != FR_OK)
 	 {
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -2997,6 +2998,7 @@ int run_cmd_d205(StructMsg *pMsg)
      //  分包数据传输
 	 while(1)
 	 {
+//		 	 xil_printf("Start Read!\r\n");
 			 len= OFFSET_SIZE;
 			 ret = f_read1(
 							&file,

@@ -95,10 +95,10 @@ mount:	ret = f_mount (&fs, "", 1);
 		}
 		xil_printf(" Init All ok!\r\n");
 #endif
-		cmd_reply_a203(0,0xA2,0x1,0x11);
-		cmd_reply_a208("0:");
-		cmd_reply_a206(0,"0:/abc");
-		cmd_reply_a207(0,"0:/bcd");
+//		cmd_reply_a203(0,0xA2,0x1,0x11);
+//		cmd_reply_a208("0:");
+//		cmd_reply_a206(0,"0:/abc");
+//		cmd_reply_a207(0,"0:/bcd");
 #if  1
    #if  1 //recv
 		while(1)
