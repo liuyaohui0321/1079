@@ -2833,7 +2833,14 @@ int run_cmd_d20A(StructMsg *pMsg)
 					}while(sts == 0x01);
 				}
 			}
-			if(cmd_write_cnt>100)
+//			if(cmd_write_cnt>15)    // д256M
+//			if(cmd_write_cnt>31)   	// д512M
+//			if(cmd_write_cnt>127)  	// д2G
+//			if(cmd_write_cnt>159)  	// д2.56G
+//			if(cmd_write_cnt>191)  	// д3G
+//			if(cmd_write_cnt>223) 	// д3.58G
+//			if(cmd_write_cnt>255) 	// д4G
+			if(cmd_write_cnt>319) 	// д5G
 			{
 				xil_printf("I/O Write Finish!\r\n");
 				xil_printf("w_count = %u\r\n",cmd_write_cnt);
@@ -2987,6 +2994,7 @@ int run_cmd_d205(StructMsg *pMsg)
 	 }       // �ļ�·��
 	 xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 
+//	 f_close(&file);
 	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
 //	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ);
 	 if (ret != FR_OK)
@@ -3026,7 +3034,14 @@ int run_cmd_d205(StructMsg *pMsg)
 						}while(sts == 0x01);
 					}
 			 }
-			 if(r_count>250)
+
+//			 if(r_count>15)   		// д512M
+//	 		 if(r_count>63)  		// д2G
+//	 		 if(r_count>79)  		// д2.56G
+//	 		 if(r_count>95)  		// д3G
+//	 		 if(r_count>111) 		// д3.58G
+//			 if(r_count>127) 		// д4G
+	 		 if(r_count>159)		// д5G
 			 {
 					xil_printf("I/O Read or Write Test Finish!\r\n");
 					xil_printf("r_count=%u\r\n",r_count);
