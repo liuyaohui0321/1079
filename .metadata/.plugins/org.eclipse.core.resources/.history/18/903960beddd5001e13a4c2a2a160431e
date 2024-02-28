@@ -1321,8 +1321,7 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 
 		case GET_DIR:   // 返回目录中的文件和子目录列表
-//			ret = cmd_reply_a208(cmd_str_11);
-			ret = cmd_reply_a208("0:");
+			ret = cmd_reply_a208(cmd_str_11);
 			if (ret != FR_OK)
 			{
 				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);
@@ -3056,12 +3055,12 @@ int run_cmd_d205(StructMsg *pMsg)
 						}
 					}
 //					f_close(&file);
-//					Status = XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
-//					if (Status != XST_SUCCESS)
-//					{
-//						 xil_printf("XAxiDma1 Failed\r\n");
-//						 return XST_FAILURE;
-//					}
+					Status = XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
+					if (Status != XST_SUCCESS)
+					{
+						 xil_printf("XAxiDma1 Failed\r\n");
+						 return XST_FAILURE;
+					}
 					break;
 			}
 

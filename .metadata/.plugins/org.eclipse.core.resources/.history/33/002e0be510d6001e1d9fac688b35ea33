@@ -7731,7 +7731,7 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 }
 
 //获取目录的大小
-FRESULT get_Dir_size(BYTE *path,uint64_t*size)
+FRESULT get_Dir_size(volatile BYTE *path,uint64_t*size)
 {
 	FRESULT res;
 	DIR dir;

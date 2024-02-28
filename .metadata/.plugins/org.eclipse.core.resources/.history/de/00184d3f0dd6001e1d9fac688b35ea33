@@ -7682,14 +7682,13 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 	DIR dir;
 	UINT i;
 	static FILINFO fno;
-	Node NODE;
 	char filename[1024]={0};
-
+	Node node;
 
 	res = f_opendir(&dir, path);                       /* Open the directory */
 	if (res == FR_OK) {
 		for (;;) {
-			memset(&NODE,0,sizeof(Node));
+			memset(&node,0,sizeof(Node));
 			res = f_readdir(&dir, &fno);                   /* Read a directory item */
 			if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
 			if (fno.fattrib & AM_DIR) {                    /* It is a directory */
@@ -7697,13 +7696,13 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 				sprintf(&path[i], "/%s", fno.fname);
 #if 1   		// 之前用动态链表存储的方法，缺点：占用堆空间，后来用内存池存放动态数据
 				//节点赋值
-				NODE.data.type=1;		//文件：0，文件夹：1
-				get_Dir_size(path,&NODE.data.size);
-				strcpy(NODE.data.name,path);
+				node.data.type=1;		//文件：0，文件夹：1
+				get_Dir_size(path,&node.data.size);
+				strcpy(node.data.name,path);
 //				node.data.ChangeTime1
 
 				//节点入队
-				List_TailInsert(LinkList,NODE);
+				List_TailInsert(LinkList,node);
 #endif
 //				res = record_struct_of_Dir_and_File(path,LinkList);  /* Enter the directory */
 //				if (res != FR_OK) break;
@@ -7715,13 +7714,13 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 				sprintf(filename,"%s/%s", path, fno.fname);
 #if 1   		//之前用动态链表存储的方法，缺点：占用堆空间，后来用内存池存放动态数据
 				//节点赋值
-				NODE.data.type=0;		//文件：0，文件夹：1
-				NODE.data.size=fno.fsize;
-				strcpy(NODE.data.name,filename);
+				node.data.type=0;		//文件：0，文件夹：1
+				node.data.size=fno.fsize;
+				strcpy(node.data.name,filename);
 //				node.data.ChangeTime1
 
 				//节点入队
-				List_TailInsert(LinkList,NODE);
+				List_TailInsert(LinkList,node);
 #endif
 			}
 		}
