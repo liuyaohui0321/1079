@@ -950,7 +950,7 @@ int run_cmd_a201(StructMsg *pMsg)
     {
 		case NEW_FILE:       //新建文件
 			ret = f_open (&file, cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE);
-//			ret = f_open (&file, "abc", FA_CREATE_ALWAYS | FA_WRITE);
+			ret = f_open (&file, "abc", FA_CREATE_ALWAYS | FA_WRITE);
 			if (ret != FR_OK) {
 				xil_printf("f_open Failed! ret=%d\r\n", ret);
 			  //cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
@@ -984,8 +984,8 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 /***************************************************************************************/
 		case NEW_FOLDER:    //新建文件夹
-			ret =f_mkdir(cmd_str_11);
-//			ret =f_mkdir("bcd");
+//			ret =f_mkdir(cmd_str_11);
+			ret =f_mkdir("bcd");
 			if (ret != FR_OK) {
 				xil_printf("f_mkdir  Failed! ret=%d\r", ret);
 				if(ret==8) xil_printf("Failed reason:FR_EXIST\n");
@@ -1321,8 +1321,8 @@ int run_cmd_a201(StructMsg *pMsg)
 /***************************************************************************************/
 
 		case GET_DIR:   // 返回目录中的文件和子目录列表
-			ret = cmd_reply_a208(cmd_str_11);
-//			ret = cmd_reply_a208("0:");
+//			ret = cmd_reply_a208(cmd_str_11);
+			ret = cmd_reply_a208("0:");
 			if (ret != FR_OK)
 			{
 				xil_printf("Returns Directory List Failed! ret=%d\r\n", ret);

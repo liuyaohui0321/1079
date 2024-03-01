@@ -35750,3 +35750,613 @@ con
 09:05:23 INFO  : Restoring global repository preferences: 
 		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
 09:05:23 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+09:49:36 INFO  : Registering command handlers for SDK TCF services
+09:49:37 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+09:49:39 INFO  : XSCT server has started successfully.
+09:49:39 INFO  : Successfully done setting XSCT server connection channel  
+09:49:39 INFO  : Successfully done setting SDK workspace  
+09:49:39 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+09:49:39 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+09:52:01 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+09:52:01 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+09:52:01 INFO  : 'jtag frequency' command is executed.
+09:52:01 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+09:52:18 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+09:52:18 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+09:52:18 INFO  : Context for processor 'microblaze_1' is selected.
+09:52:18 INFO  : System reset is completed.
+09:52:21 INFO  : 'after 3000' command is executed.
+09:52:21 INFO  : Context for processor 'microblaze_1' is selected.
+09:52:24 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+09:52:24 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+09:52:24 INFO  : Memory regions updated for context PA
+09:52:24 INFO  : Memory regions updated for context PA
+09:52:24 INFO  : Context for processor 'microblaze_1' is selected.
+09:52:24 INFO  : 'con' command is executed.
+09:52:24 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+09:52:24 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+09:52:50 INFO  : Disconnected from the channel tcfchan#1.
+09:52:51 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+09:52:51 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+09:52:51 INFO  : 'jtag frequency' command is executed.
+09:52:51 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+09:53:08 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+09:53:08 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+09:53:08 INFO  : Context for processor 'microblaze_1' is selected.
+09:53:08 INFO  : System reset is completed.
+09:53:11 INFO  : 'after 3000' command is executed.
+09:53:11 INFO  : Context for processor 'microblaze_1' is selected.
+09:53:13 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+09:53:13 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+09:53:14 INFO  : Memory regions updated for context PA
+09:53:14 INFO  : Memory regions updated for context PA
+09:53:14 INFO  : Context for processor 'microblaze_1' is selected.
+09:53:14 INFO  : 'con' command is executed.
+09:53:14 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+09:53:14 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+09:54:11 INFO  : Disconnected from the channel tcfchan#2.
+09:54:12 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+09:54:12 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+09:54:12 INFO  : 'jtag frequency' command is executed.
+09:54:12 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+09:54:29 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+09:54:29 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+09:54:29 INFO  : Context for processor 'microblaze_1' is selected.
+09:54:29 INFO  : System reset is completed.
+09:54:32 INFO  : 'after 3000' command is executed.
+09:54:32 INFO  : Context for processor 'microblaze_1' is selected.
+09:54:35 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+09:54:35 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+09:54:35 INFO  : Memory regions updated for context PA
+09:54:35 INFO  : Memory regions updated for context PA
+09:54:35 INFO  : Context for processor 'microblaze_1' is selected.
+09:54:35 INFO  : 'con' command is executed.
+09:54:35 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+09:54:35 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+09:56:14 INFO  : Disconnected from the channel tcfchan#3.
+09:56:15 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+09:56:16 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+09:56:16 INFO  : 'jtag frequency' command is executed.
+09:56:16 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+09:56:32 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+09:56:32 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+09:56:32 INFO  : Context for processor 'microblaze_1' is selected.
+09:56:33 INFO  : System reset is completed.
+09:56:36 INFO  : 'after 3000' command is executed.
+09:56:36 INFO  : Context for processor 'microblaze_1' is selected.
+09:56:38 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+09:56:38 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+09:56:38 INFO  : Memory regions updated for context PA
+09:56:38 INFO  : Memory regions updated for context PA
+09:56:39 INFO  : Context for processor 'microblaze_1' is selected.
+09:56:40 INFO  : 'con' command is executed.
+09:56:40 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+09:56:40 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+09:57:12 INFO  : Disconnected from the channel tcfchan#4.
+09:57:13 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+09:57:13 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+09:57:13 INFO  : 'jtag frequency' command is executed.
+09:57:13 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+09:57:30 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+09:57:30 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+09:57:30 INFO  : Context for processor 'microblaze_1' is selected.
+09:57:30 INFO  : System reset is completed.
+09:57:33 INFO  : 'after 3000' command is executed.
+09:57:33 INFO  : Context for processor 'microblaze_1' is selected.
+09:57:35 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+09:57:35 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+09:57:35 INFO  : Memory regions updated for context PA
+09:57:35 INFO  : Memory regions updated for context PA
+09:57:35 INFO  : Context for processor 'microblaze_1' is selected.
+09:57:35 INFO  : 'con' command is executed.
+09:57:35 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+09:57:35 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:01:42 INFO  : Disconnected from the channel tcfchan#5.
+10:01:43 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:01:43 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:01:43 INFO  : 'jtag frequency' command is executed.
+10:01:43 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:02:00 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+10:02:00 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:02:00 INFO  : Context for processor 'microblaze_1' is selected.
+10:02:00 INFO  : System reset is completed.
+10:02:03 INFO  : 'after 3000' command is executed.
+10:02:03 INFO  : Context for processor 'microblaze_1' is selected.
+10:02:06 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:02:06 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:02:06 INFO  : Memory regions updated for context PA
+10:02:06 INFO  : Memory regions updated for context PA
+10:02:06 INFO  : Context for processor 'microblaze_1' is selected.
+10:02:06 INFO  : 'con' command is executed.
+10:02:06 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:02:06 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:03:43 INFO  : Disconnected from the channel tcfchan#6.
+10:03:44 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:03:44 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:03:44 INFO  : 'jtag frequency' command is executed.
+10:03:45 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:04:01 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+10:04:01 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:04:01 INFO  : Context for processor 'microblaze_1' is selected.
+10:04:01 INFO  : System reset is completed.
+10:04:04 INFO  : 'after 3000' command is executed.
+10:04:04 INFO  : Context for processor 'microblaze_1' is selected.
+10:04:07 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:04:07 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:04:07 INFO  : Memory regions updated for context PA
+10:04:07 INFO  : Memory regions updated for context PA
+10:04:07 INFO  : Context for processor 'microblaze_1' is selected.
+10:04:07 INFO  : 'con' command is executed.
+10:04:07 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:04:07 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:06:13 INFO  : Disconnected from the channel tcfchan#7.
+10:06:14 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:06:14 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:06:14 INFO  : 'jtag frequency' command is executed.
+10:06:14 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:06:18 ERROR : 'fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit' is cancelled.
+10:06:18 INFO  : Issued abort command to xsdb.
+10:06:18 ERROR : Exception occured while running Program FPGA.
+java.lang.RuntimeException: 'fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit' is cancelled.
+10:06:18 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+10:06:33 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:06:33 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:06:33 INFO  : 'jtag frequency' command is executed.
+10:06:33 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:06:49 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+10:06:49 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:06:50 INFO  : Context for processor 'microblaze_1' is selected.
+10:06:50 INFO  : System reset is completed.
+10:06:53 INFO  : 'after 3000' command is executed.
+10:06:53 INFO  : Context for processor 'microblaze_1' is selected.
+10:06:55 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:06:55 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:06:56 INFO  : Memory regions updated for context PA
+10:06:56 INFO  : Memory regions updated for context PA
+10:06:56 INFO  : Context for processor 'microblaze_1' is selected.
+10:06:56 INFO  : 'con' command is executed.
+10:06:56 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:06:56 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:09:27 INFO  : Disconnected from the channel tcfchan#8.
+10:09:28 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:09:28 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:09:28 INFO  : 'jtag frequency' command is executed.
+10:09:28 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:09:44 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:09:44 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:09:44 INFO  : Context for processor 'microblaze_1' is selected.
+10:09:45 INFO  : System reset is completed.
+10:09:48 INFO  : 'after 3000' command is executed.
+10:09:48 INFO  : Context for processor 'microblaze_1' is selected.
+10:09:50 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:09:50 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:09:50 INFO  : Memory regions updated for context PA
+10:09:50 INFO  : Memory regions updated for context PA
+10:09:51 INFO  : Context for processor 'microblaze_1' is selected.
+10:09:51 INFO  : 'con' command is executed.
+10:09:51 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:09:51 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:10:05 INFO  : Disconnected from the channel tcfchan#9.
+10:10:06 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:10:07 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:10:07 INFO  : 'jtag frequency' command is executed.
+10:10:07 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:10:23 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:10:23 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:10:23 INFO  : Context for processor 'microblaze_1' is selected.
+10:10:24 INFO  : System reset is completed.
+10:10:27 INFO  : 'after 3000' command is executed.
+10:10:27 INFO  : Context for processor 'microblaze_1' is selected.
+10:10:29 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:10:29 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:10:29 INFO  : Memory regions updated for context PA
+10:10:29 INFO  : Memory regions updated for context PA
+10:10:29 INFO  : Context for processor 'microblaze_1' is selected.
+10:10:29 INFO  : 'con' command is executed.
+10:10:29 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:10:29 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:11:51 INFO  : Disconnected from the channel tcfchan#10.
+10:11:52 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:11:52 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:11:52 INFO  : 'jtag frequency' command is executed.
+10:11:52 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:12:08 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:12:08 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:12:08 INFO  : Context for processor 'microblaze_1' is selected.
+10:12:08 INFO  : System reset is completed.
+10:12:11 INFO  : 'after 3000' command is executed.
+10:12:11 INFO  : Context for processor 'microblaze_1' is selected.
+10:12:14 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:12:14 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:12:14 INFO  : Memory regions updated for context PA
+10:12:14 INFO  : Memory regions updated for context PA
+10:12:14 INFO  : Context for processor 'microblaze_1' is selected.
+10:12:14 INFO  : 'con' command is executed.
+10:12:14 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:12:14 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:12:48 INFO  : Disconnected from the channel tcfchan#11.
+10:12:49 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:12:50 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:12:50 INFO  : 'jtag frequency' command is executed.
+10:12:50 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:13:06 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+10:13:06 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:13:06 INFO  : Context for processor 'microblaze_1' is selected.
+10:13:06 INFO  : System reset is completed.
+10:13:09 INFO  : 'after 3000' command is executed.
+10:13:09 INFO  : Context for processor 'microblaze_1' is selected.
+10:13:12 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:13:12 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:13:12 INFO  : Memory regions updated for context PA
+10:13:12 INFO  : Memory regions updated for context PA
+10:13:12 INFO  : Context for processor 'microblaze_1' is selected.
+10:13:12 INFO  : 'con' command is executed.
+10:13:12 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:13:12 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:14:18 INFO  : Disconnected from the channel tcfchan#12.
+10:14:19 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:14:20 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:14:20 INFO  : 'jtag frequency' command is executed.
+10:14:20 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:14:36 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:14:36 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:14:36 INFO  : Context for processor 'microblaze_1' is selected.
+10:14:36 INFO  : System reset is completed.
+10:14:39 INFO  : 'after 3000' command is executed.
+10:14:39 INFO  : Context for processor 'microblaze_1' is selected.
+10:14:42 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:14:42 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:14:42 INFO  : Memory regions updated for context PA
+10:14:42 INFO  : Memory regions updated for context PA
+10:14:42 INFO  : Context for processor 'microblaze_1' is selected.
+10:14:42 INFO  : 'con' command is executed.
+10:14:42 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:14:42 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:17:09 INFO  : Disconnected from the channel tcfchan#13.
+10:17:10 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:17:10 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:17:10 INFO  : 'jtag frequency' command is executed.
+10:17:10 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:17:26 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:17:27 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:17:27 INFO  : Context for processor 'microblaze_1' is selected.
+10:17:27 INFO  : System reset is completed.
+10:17:30 INFO  : 'after 3000' command is executed.
+10:17:30 INFO  : Context for processor 'microblaze_1' is selected.
+10:17:32 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:17:32 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:17:33 INFO  : Memory regions updated for context PA
+10:17:33 INFO  : Memory regions updated for context PA
+10:17:33 INFO  : Context for processor 'microblaze_1' is selected.
+10:17:33 INFO  : 'con' command is executed.
+10:17:33 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:17:33 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:19:03 INFO  : Disconnected from the channel tcfchan#14.
+10:19:04 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:19:04 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:19:04 INFO  : 'jtag frequency' command is executed.
+10:19:05 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:19:09 ERROR : 'fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit' is cancelled.
+10:19:09 INFO  : Issued abort command to xsdb.
+10:19:09 ERROR : Exception occured while running Program FPGA.
+java.lang.RuntimeException: 'fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit' is cancelled.
+10:19:09 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+----------------End of Script----------------
+
+10:19:17 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:19:17 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:19:17 INFO  : 'jtag frequency' command is executed.
+10:19:17 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:19:33 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:19:33 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:19:33 INFO  : Context for processor 'microblaze_1' is selected.
+10:19:33 INFO  : System reset is completed.
+10:19:36 INFO  : 'after 3000' command is executed.
+10:19:36 INFO  : Context for processor 'microblaze_1' is selected.
+10:19:39 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:19:39 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:19:39 INFO  : Memory regions updated for context PA
+10:19:39 INFO  : Memory regions updated for context PA
+10:19:39 INFO  : Context for processor 'microblaze_1' is selected.
+10:19:39 INFO  : 'con' command is executed.
+10:19:39 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:19:39 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:26:18 INFO  : Disconnected from the channel tcfchan#15.
+10:26:19 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:26:19 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:26:19 INFO  : 'jtag frequency' command is executed.
+10:26:19 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:26:36 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit"
+10:26:36 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:26:36 INFO  : Context for processor 'microblaze_1' is selected.
+10:26:36 INFO  : System reset is completed.
+10:26:39 INFO  : 'after 3000' command is executed.
+10:26:39 INFO  : Context for processor 'microblaze_1' is selected.
+10:26:41 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:26:41 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:26:42 INFO  : Memory regions updated for context PA
+10:26:42 INFO  : Memory regions updated for context PA
+10:26:42 INFO  : Context for processor 'microblaze_1' is selected.
+10:26:42 INFO  : 'con' command is executed.
+10:26:42 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:26:42 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:27:45 INFO  : Disconnected from the channel tcfchan#16.
+10:27:46 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+10:27:46 INFO  : Jtag cable 'Digilent JTAG-SMT2 SULEE2306662' is selected.
+10:27:46 INFO  : 'jtag frequency' command is executed.
+10:27:46 INFO  : 'targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0' command is executed.
+10:28:03 INFO  : FPGA configured successfully with bitstream "C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit"
+10:28:03 INFO  : 'configparams mdm-detect-bscan-mask 2' command is executed.
+10:28:03 INFO  : Context for processor 'microblaze_1' is selected.
+10:28:03 INFO  : System reset is completed.
+10:28:06 INFO  : 'after 3000' command is executed.
+10:28:06 INFO  : Context for processor 'microblaze_1' is selected.
+10:28:09 INFO  : The application 'C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf' is downloaded to processor 'microblaze_1'.
+10:28:09 INFO  : ----------------XSDB Script----------------
+connect -url tcp:127.0.0.1:3121
+targets -set -filter {jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662" && level==0} -index 0
+fpga -file C:/Users/liuyaohui/Desktop/0115_1x/nhc_amba_core_V3_hw_platform_0/nhc_amba_core0201a.bit
+configparams mdm-detect-bscan-mask 2
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+rst -system
+after 3000
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+dow C:/Users/liuyaohui/Desktop/0115_1x/dmauart/Debug/dmauart.elf
+----------------End of Script----------------
+
+10:28:09 INFO  : Memory regions updated for context PA
+10:28:09 INFO  : Memory regions updated for context PA
+10:28:09 INFO  : Context for processor 'microblaze_1' is selected.
+10:28:09 INFO  : 'con' command is executed.
+10:28:09 INFO  : ----------------XSDB Script (After Launch)----------------
+targets -set -nocase -filter {name =~ "microblaze*#0" && bscan=="USER2"  && jtag_cable_name =~ "Digilent JTAG-SMT2 SULEE2306662"} -index 0
+con
+----------------End of Script----------------
+
+10:28:09 INFO  : Launch script is exported to file 'C:\Users\liuyaohui\Desktop\0115_1x\.sdk\launch_scripts\xilinx_c-c++_application_(system_debugger)\system_debugger_on_local.tcl'
+10:31:06 INFO  : Disconnected from the channel tcfchan#17.
