@@ -7684,7 +7684,7 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 	static FILINFO fno;
 	Node NODE;
 	char filename[1024]={0};
-
+	memset(&dir,0,sizeof(DIR));
 
 	res = f_opendir(&dir, path);                       /* Open the directory */
 	if (res == FR_OK) {
@@ -7731,16 +7731,16 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 }
 
 //获取目录的大小
-FRESULT get_Dir_size(BYTE *path,uint64_t*size)
+FRESULT get_Dir_size(TCHAR *path,uint64_t*size)
 {
 	FRESULT res;
 	DIR dir;
 //	FIL file;
 	FILINFO fno;
 	int i=0;
-	char filename[1024]={0};
+	char filename[100]={0};
 
-	res = f_opendir(&dir, path);                       /* Open the directory */
+	res = f_opendir(&dir,path);                       /* Open the directory */
 	if (res == FR_OK) {
 		for (;;) {
 			res = f_readdir(&dir, &fno);                   /* Read a directory item */

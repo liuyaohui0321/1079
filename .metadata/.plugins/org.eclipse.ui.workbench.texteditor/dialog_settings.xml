@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="cmd_reply_a203_to_a204" key="selection"/>
+		<item value="get_Dir_size" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="get_Dir_size"/>
 			<item value="cmd_reply_a203_to_a204"/>
 			<item value="run_cmd_a208"/>
 			<item value="C0D7"/>
@@ -15,7 +16,6 @@
 			<item value="0x40600000"/>
 			<item value="tchar"/>
 			<item value="LinkList"/>
-			<item value="my"/>
 		</list>
 		<list key="replacehistory">
 			<item value="BYTE"/>
