@@ -2736,15 +2736,16 @@ int run_cmd_d201(StructMsg *pMsg)
 // 流写入指令
 int run_cmd_d20A(StructMsg *pMsg)
 {
-		int ret=0,i=0,x=0,h=0;
+		uint32_t ret=0,i=0,x=0,h=0;
 		u16 unicode_u16=0;
-		int Status,bw;
+		uint32_t Status=0,bw=0;
+		XLlFifo Fifo;
+		Fifo=Fifo0;
 		u32 file_cmd=0;
 		uint8_t sts;
 		WCHAR cmd_str_1[1024]={0};
 		BYTE cmd_str_11[100]={0};
 		uint32_t cmd_write_cnt=0;
-
 		for (x = 0; x < 1024; x++)
 		{
 			unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
@@ -2763,8 +2764,8 @@ int run_cmd_d20A(StructMsg *pMsg)
 		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 
           // 获取并解析从DMA0传过来的文件路径
-		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
-//		ret = f_open(&file,"B", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+//		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+		ret = f_open(&file,"B", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -2792,6 +2793,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 			else
 				break;
 		}
+		Fifo0=Fifo;
 		while (1)
 		{
 //			xil_printf("Start Write!\r\n");
@@ -2842,7 +2844,12 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			if(cmd_write_cnt>191)  	// 写3G
 //			if(cmd_write_cnt>223) 	// 写3.58G
 //			if(cmd_write_cnt>255) 	// 写4G
-			if(cmd_write_cnt>319) 	// 写5G
+//			if(cmd_write_cnt>319) 	// 写5G
+
+//写盘256M
+//			if(cmd_write_cnt>15)  // 写2G
+			if(cmd_write_cnt>23)  // 写3G
+//			if(cmd_write_cnt>39)  // 写5G
 			{
 				xil_printf("I/O Write Finish!\r\n");
 				xil_printf("w_count = %u\r\n",cmd_write_cnt);
@@ -2859,8 +2866,9 @@ int run_cmd_d20A(StructMsg *pMsg)
 				break;
 			}
 		 }   // while
-		 fclose(&file);
+//		 fclose(&file);
 //		 cleanup_platform();
+//		 run_cmd_d205(0);
 		 return 0;
 }
 
@@ -2970,8 +2978,11 @@ int run_cmd_d204(StructMsg *pMsg)
 int run_cmd_d205(StructMsg *pMsg)
 {
 	 int i=0,x=0,Status,ret,h=0;
+	 int Checknum=0,Sign=0;
 	 u16 unicode_u16=0;
 	 uint8_t sts;
+	 XLlFifo Fifo;
+	 Fifo=Fifo1;
 	 WCHAR cmd_str_1[1024]={0};
 	 BYTE cmd_str_11[100]={0};
 	 u32 file_cmd=0;
@@ -2995,16 +3006,17 @@ int run_cmd_d205(StructMsg *pMsg)
 			 if (cmd_str_1[x] == '\0') break;
 	 }       // 文件路径
 	 xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
-
-//	 f_close(&file);
-	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
-//	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ);
+	 sleep(1);
+	 f_close(&file);
+//	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
+	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ);
 	 if (ret != FR_OK)
 	 {
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
 			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
 			return ret;
 	  }
+	 Fifo1=Fifo;
      //  分包数据传输
 	 while(1)
 	 {
@@ -3021,12 +3033,79 @@ int run_cmd_d205(StructMsg *pMsg)
 					xil_printf("f_read Failed! ret=%d\r\n", ret);
 					return ret;
 			 }
-			 r_count++;
-			 xil_printf("r_count=%d\r\n",r_count);
-			 if (buff_r < (DDR3_END_ADDR-OFFSET_SIZE))
-				  buff_r += OFFSET_SIZE;
-			 else
-				  buff_r = MEM_DDR3_BASE+(512*3*1024*1024);
+//			 r_count++;
+//			 xil_printf("r_count=%d\r\n",r_count);
+//			 if (buff_r < (DDR3_END_ADDR-OFFSET_SIZE))
+//				  buff_r += OFFSET_SIZE;
+//			 else
+//				  buff_r = MEM_DDR3_BASE+(512*3*1024*1024);
+#if   0   // 回读存放的地址，为固定0xE0000000开始的32M区域
+			uint32_t last=(void *)(0xE2000000);
+			int32_t check_block_size=0x100000;
+			if(CheckOut_HeadTail((uint32_t *)buff_r,(uint32_t *)last,check_block_size)!=0)
+			{
+				xil_printf("check error!\r\n");
+//					return 1;
+			}
+			Checknum++;
+			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
+			r_count++;
+//						if(r_count==105)
+//						{
+//							xil_printf("here!\r\n");
+//						}
+			DestinationBuffer_1[0]=buff_r;
+			DestinationBuffer_1[1]=len;
+			ret = TxSend_1(DestinationBuffer_1,8);
+			if (ret != XST_SUCCESS)
+			{
+				 xil_printf("TxSend Failed! ret=%d\r\n", ret);
+				 return ret;
+			}
+			XLLFIFO_SysInit();
+#endif
+
+#if   1   // 回读存放的地址为:0xE0000000~0xFFFFFFFF
+			len=OFFSET_SIZE;
+			uint32_t last=(void *)(0xE2000000+Sign*len);
+			if (buff_r == MEM_DDR3_BASE+(512*3*1024*1024))
+			{
+				last = 0xE2000000;
+				Sign=0;
+			}
+			else if(buff_r == 0xFE000000)
+			{
+				last = 0xFFFFFFFF;
+			}
+			int32_t check_block_size=0x100000;
+			if(CheckOut_HeadTail((uint32_t *)buff_r,(uint32_t *)last,check_block_size)!=0)
+			{
+				xil_printf("check error!\r\n");
+//					return 1;
+			}
+			Checknum++;
+			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
+			r_count++;
+			DestinationBuffer_1[0]=buff_r;
+			DestinationBuffer_1[1]=len;
+			XLLFIFO_SysInit();
+			ret = TxSend_1(DestinationBuffer_1,8);
+			if (ret != XST_SUCCESS)
+			{
+				 xil_printf("TxSend Failed! ret=%d\r\n", ret);
+				 return ret;
+			}
+
+			if (buff_r <(DDR3_END_ADDR-OFFSET_SIZE))
+			{
+				buff_r += OFFSET_SIZE;
+			}
+			else
+			{
+				buff_r = MEM_DDR3_BASE+(512*3*1024*1024);
+			}
+			Sign++;
+#endif
 			 for(i=0;i<NHC_NUM;i++)
 			 {
 					while (nhc_queue_ept(i) == 0)
@@ -3040,10 +3119,10 @@ int run_cmd_d205(StructMsg *pMsg)
 //			 if(r_count>15)   		// 写512M
 //	 		 if(r_count>63)  		// 写2G
 //	 		 if(r_count>79)  		// 写2.56G
-//	 		 if(r_count>95)  		// 写3G
+	 		 if(r_count>95)  		// 写3G
 //	 		 if(r_count>111) 		// 写3.58G
 //			 if(r_count>127) 		// 写4G
-	 		 if(r_count>159)		// 写5G
+//	 		 if(r_count>159)		// 写5G
 			 {
 					xil_printf("I/O Read or Write Test Finish!\r\n");
 					xil_printf("r_count=%u\r\n",r_count);
@@ -3056,13 +3135,6 @@ int run_cmd_d205(StructMsg *pMsg)
 							}while(sts == 0x01);
 						}
 					}
-//					f_close(&file);
-//					Status = XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
-//					if (Status != XST_SUCCESS)
-//					{
-//						 xil_printf("XAxiDma1 Failed\r\n");
-//						 return XST_FAILURE;
-//					}
 					break;
 			}
 

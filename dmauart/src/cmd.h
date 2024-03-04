@@ -8,9 +8,10 @@
 /************2023.9.11 ¼Ó**************/
 #include "xparameters.h"
 #include "simple_dma.h"
-
+#include "xllfifo.h"
 extern XAxiDma AxiDma;
-
+extern XLlFifo Fifo0;
+extern XLlFifo Fifo1;
 #define OFFSET_SIZE             2*2*2*2*2*1024*1024   // 32M
 #define SRC_ID		0x0  //
 #define DEST_ID		0x0

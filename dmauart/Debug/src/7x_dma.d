@@ -23,7 +23,10 @@ src/7x_dma.o src/7x_dma.o: ../src/7x_dma.c ../src/7x_dma.h \
  ../../dmauart_bsp/microblaze_1/include/xil_types.h ../src/fat/ff.h \
  ../src/fat/ffconf.h ../src/simple_dma.h \
  ../../dmauart_bsp/microblaze_1/include/xintc.h \
- ../../dmauart_bsp/microblaze_1/include/xintc_l.h
+ ../../dmauart_bsp/microblaze_1/include/xintc_l.h \
+ ../../dmauart_bsp/microblaze_1/include/xllfifo.h \
+ ../../dmauart_bsp/microblaze_1/include/xstreamer.h \
+ ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h
 
 ../src/7x_dma.h:
 
@@ -82,3 +85,9 @@ src/7x_dma.o src/7x_dma.o: ../src/7x_dma.c ../src/7x_dma.h \
 ../../dmauart_bsp/microblaze_1/include/xintc.h:
 
 ../../dmauart_bsp/microblaze_1/include/xintc_l.h:
+
+../../dmauart_bsp/microblaze_1/include/xllfifo.h:
+
+../../dmauart_bsp/microblaze_1/include/xstreamer.h:
+
+../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h:
