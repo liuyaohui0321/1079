@@ -9,7 +9,9 @@
 #include "xparameters.h"
 #include "simple_dma.h"
 #include "xllfifo.h"
+#include "7x_dma.h"
 extern XAxiDma AxiDma;
+extern XAxiDma AxiDma1;
 extern XLlFifo Fifo0;
 extern XLlFifo Fifo1;
 #define OFFSET_SIZE             2*2*2*2*2*1024*1024   // 32M

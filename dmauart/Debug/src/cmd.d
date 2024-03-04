@@ -25,8 +25,8 @@ src/cmd.o src/cmd.o: ../src/cmd.c ../src/cmd.h \
  ../../dmauart_bsp/microblaze_1/include/xintc_l.h \
  ../../dmauart_bsp/microblaze_1/include/xllfifo.h \
  ../../dmauart_bsp/microblaze_1/include/xstreamer.h \
- ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h ../src/xllfifo_drv.h \
- ../src/nhc_amba.h ../src/mem_test.h
+ ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h ../src/7x_dma.h \
+ ../src/xllfifo_drv.h ../src/nhc_amba.h ../src/mem_test.h
 
 ../src/cmd.h:
 
@@ -89,6 +89,8 @@ src/cmd.o src/cmd.o: ../src/cmd.c ../src/cmd.h \
 ../../dmauart_bsp/microblaze_1/include/xstreamer.h:
 
 ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h:
+
+../src/7x_dma.h:
 
 ../src/xllfifo_drv.h:
 

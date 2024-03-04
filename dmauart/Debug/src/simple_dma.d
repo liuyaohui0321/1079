@@ -25,7 +25,7 @@ src/simple_dma.o src/simple_dma.o: ../src/simple_dma.c ../src/cmd.h \
  ../../dmauart_bsp/microblaze_1/include/xintc_l.h \
  ../../dmauart_bsp/microblaze_1/include/xllfifo.h \
  ../../dmauart_bsp/microblaze_1/include/xstreamer.h \
- ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h
+ ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h ../src/7x_dma.h
 
 ../src/cmd.h:
 
@@ -88,3 +88,5 @@ src/simple_dma.o src/simple_dma.o: ../src/simple_dma.c ../src/cmd.h \
 ../../dmauart_bsp/microblaze_1/include/xstreamer.h:
 
 ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h:
+
+../src/7x_dma.h:

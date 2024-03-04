@@ -38,6 +38,8 @@ volatile int Error1;
 
 u8 *CmdTxBufferPtr1;
 u8 *CmdRxBufferPtr1;
+u64 *TxBufferPtr1;
+u64 *RxBufferPtr1;
 int XAxiDma1_tx_rx(u16 DeviceId);
 static void TxIntrHandler1(void *Callback);
 static void RxIntrHandler1(void *Callback);

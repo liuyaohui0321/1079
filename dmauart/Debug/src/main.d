@@ -27,12 +27,12 @@ src/main.o src/main.o: ../src/main.c ../src/platform.h \
  ../../dmauart_bsp/microblaze_1/include/xil_types.h ../src/fat/ff.h \
  ../src/fat/ffconf.h ../../dmauart_bsp/microblaze_1/include/xllfifo.h \
  ../../dmauart_bsp/microblaze_1/include/xstreamer.h \
- ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h ../src/nhc_amba.h \
- ../src/mem_test.h ../src/uart_get.h \
+ ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h ../src/7x_dma.h \
+ ../src/nhc_amba.h ../src/mem_test.h ../src/uart_get.h \
  ../../dmauart_bsp/microblaze_1/include/xil_io.h ../src/xllfifo_drv.h \
  ../../dmauart_bsp/microblaze_1/include/xstatus.h ../src/fat/diskio.h \
- ../src/fat/ffconf.h ../src/7x_dma.h \
- ../../dmauart_bsp/microblaze_1/include/xil_cache.h ../src/check.h
+ ../src/fat/ffconf.h ../../dmauart_bsp/microblaze_1/include/xil_cache.h \
+ ../src/check.h
 
 ../src/platform.h:
 
@@ -102,6 +102,8 @@ src/main.o src/main.o: ../src/main.c ../src/platform.h \
 
 ../../dmauart_bsp/microblaze_1/include/xllfifo_hw.h:
 
+../src/7x_dma.h:
+
 ../src/nhc_amba.h:
 
 ../src/mem_test.h:
@@ -117,8 +119,6 @@ src/main.o src/main.o: ../src/main.c ../src/platform.h \
 ../src/fat/diskio.h:
 
 ../src/fat/ffconf.h:
-
-../src/7x_dma.h:
 
 ../../dmauart_bsp/microblaze_1/include/xil_cache.h:
 

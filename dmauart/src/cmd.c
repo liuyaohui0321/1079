@@ -2736,8 +2736,6 @@ int run_cmd_d20A(StructMsg *pMsg)
 		uint32_t ret=0,i=0,x=0,h=0;
 		u16 unicode_u16=0;
 		uint32_t Status=0,bw=0;
-		XLlFifo Fifo;
-		Fifo=Fifo0;
 		u32 file_cmd=0;
 		uint8_t sts;
 		WCHAR cmd_str_1[1024]={0};
@@ -2790,7 +2788,6 @@ int run_cmd_d20A(StructMsg *pMsg)
 			else
 				break;
 		}
-		Fifo0=Fifo;
 		while (1)
 		{
 //			xil_printf("Start Write!\r\n");
@@ -2975,11 +2972,10 @@ int run_cmd_d204(StructMsg *pMsg)
 int run_cmd_d205(StructMsg *pMsg)
 {
 	 int i=0,x=0,Status,ret,h=0;
+//	 int value=0;
 	 int Checknum=0,Sign=0;
 	 u16 unicode_u16=0;
 	 uint8_t sts;
-	 XLlFifo Fifo;
-	 Fifo=Fifo1;
 	 WCHAR cmd_str_1[1024]={0};
 	 BYTE cmd_str_11[100]={0};
 	 u32 file_cmd=0;
@@ -3013,7 +3009,8 @@ int run_cmd_d205(StructMsg *pMsg)
 			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
 			return ret;
 	  }
-	 Fifo1=Fifo;
+
+	 XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
      //  分包数据传输
 	 while(1)
 	 {
