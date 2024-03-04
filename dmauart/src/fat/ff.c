@@ -7684,7 +7684,7 @@ FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList LinkList)
 	static FILINFO fno;
 	Node NODE;
 	char filename[1024]={0};
-	memset(&dir,0,sizeof(DIR));
+//	memset(&dir,0,sizeof(DIR));
 
 	res = f_opendir(&dir, path);                       /* Open the directory */
 	if (res == FR_OK) {

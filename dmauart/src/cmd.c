@@ -989,24 +989,24 @@ int run_cmd_a201(StructMsg *pMsg)
 			if (ret != FR_OK) {
 				xil_printf("f_mkdir  Failed! ret=%d\r", ret);
 				if(ret==8) xil_printf("Failed reason:FR_EXIST\n");
-//				return -1;
+				return -1;
 			}
 			xil_printf("NEW_FOLDER Command Success! folder name:%s\r\n",cmd_str_11);
-			CreateTimenode.data.type=1;
-			strcpy(CreateTimenode.data.name,cmd_str_11);
-			strcpy(CreateTimenode.data.time,"default_dir");
-
-			ChangeTimenode.data.type=1;
-			strcpy(ChangeTimenode.data.name,cmd_str_11);
-			strcpy(ChangeTimenode.data.time,"default_dir");
-
-			AccessTimenode.data.type=1;
-			strcpy(AccessTimenode.data.name,cmd_str_11);
-			strcpy(AccessTimenode.data.time,"default_dir");
-
-			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
-			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
-			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
+//			CreateTimenode.data.type=1;
+//			strcpy(CreateTimenode.data.name,cmd_str_11);
+//			strcpy(CreateTimenode.data.time,"default_dir");
+//
+//			ChangeTimenode.data.type=1;
+//			strcpy(ChangeTimenode.data.name,cmd_str_11);
+//			strcpy(ChangeTimenode.data.time,"default_dir");
+//
+//			AccessTimenode.data.type=1;
+//			strcpy(AccessTimenode.data.name,cmd_str_11);
+//			strcpy(AccessTimenode.data.time,"default_dir");
+//
+//			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
+//			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
+//			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
 //			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
@@ -1224,7 +1224,7 @@ int run_cmd_a201(StructMsg *pMsg)
 			xil_printf("OPEN_FILE Command Success! file name:%s\r\n",cmd_str_11);
 			/*更新该名称在访问时间链表里的信息*/
 			AccessTimeNode_Modify(AccessTimelist,cmd_str_11,"new_time",1);
-//			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
+////			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
 /***************************************************************************************/
@@ -1234,7 +1234,7 @@ int run_cmd_a201(StructMsg *pMsg)
 			ret = f_close(&file);
 			if (ret != FR_OK) {
 				xil_printf("f_close  Failed! ret=%d\r\n", ret);
-//			   	return -1;
+			   	return -1;
 			}
 //			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
@@ -2478,9 +2478,6 @@ int cmd_reply_a208(BYTE* path)
 		uint32_t TotalFileNum=0,TotaldirNum=0;
 		LinkedList LinkList=NULL;     //12.21写
 		uint32_t sum=0;
-//		u16 data[512]={0x0030,0x003A,0x002f,0xC0D7,0xB4EF};
-//		u16 name[512]={0x3a30,0xc031,0xb4d7,0x00ef}; //0:1雷达
-//		u16 name[512]={0x3a30,0x312f,0xc032,0xb4d7,0x00ef}; //0:/12雷达
 		LinkList=InitList();
 		if(LinkList==NULL)
 		{
