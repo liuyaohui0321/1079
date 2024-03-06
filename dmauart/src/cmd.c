@@ -2741,6 +2741,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 		WCHAR cmd_str_1[1024]={0};
 		BYTE cmd_str_11[100]={0};
 		uint32_t cmd_write_cnt=0;
+		uint8_t wbuff[4096]={0};
 		for (x = 0; x < 1024; x++)
 		{
 			unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
@@ -2761,6 +2762,7 @@ int run_cmd_d20A(StructMsg *pMsg)
           // 获取并解析从DMA0传过来的文件路径
 //		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 		ret = f_open(&file,"B", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+//		ret = f_open(&file,"B", FA_OPEN_EXISTING | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -2769,6 +2771,25 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		xil_printf(" Open ok!\r\n");
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
+//		for(int i=0;i<4096;i++)
+//		{
+//			wbuff[i]=i;
+//		}
+
+//		ret = f_write1(
+//						&file,			/* Open file to be written */
+//						wbuff,			/* Data to be written */
+//						4096,			/* Number of bytes to write */
+//						&bw				/* Number of bytes written */
+//		);
+//		if (ret != FR_OK)
+//		{
+//			 xil_printf(" f_write Failed! %d\r\n",ret);
+//			 f_close(&file);
+//			 return ret;
+//		}
+		f_close(&file);
+#if  0
 		while(1)
 		{
 			int count=3;
@@ -2864,6 +2885,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 //		 cleanup_platform();
 //		 run_cmd_d205(0);
 		 return 0;
+#endif
 }
 
 //////******读文件命令*******//////
@@ -2972,7 +2994,7 @@ int run_cmd_d204(StructMsg *pMsg)
 int run_cmd_d205(StructMsg *pMsg)
 {
 	 int i=0,x=0,Status,ret,h=0;
-//	 int value=0;
+	 int value=0;
 	 int Checknum=0,Sign=0;
 	 u16 unicode_u16=0;
 	 uint8_t sts;
@@ -3002,7 +3024,7 @@ int run_cmd_d205(StructMsg *pMsg)
 	 sleep(1);
 	 f_close(&file);
 //	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
-	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ);
+	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
 	 if (ret != FR_OK)
 	 {
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -3080,6 +3102,10 @@ int run_cmd_d205(StructMsg *pMsg)
 			Checknum++;
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
 			r_count++;
+			for(int k=0;k<4096;k++)
+			{
+				Xil_Out32(buff_r+k*4,value++);
+			}
 			DestinationBuffer_1[0]=buff_r;
 			DestinationBuffer_1[1]=len;
 			XLLFIFO_SysInit();

@@ -60,9 +60,9 @@ int main()
 		MsgQueryInit();         // Queue初始化
 		InitTimeList();
 		XLLFIFO_SysInit();		// Sfifo初始化
-		XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
+//		XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
 
-#if   0//format the filesysterm
+#if   10//format the filesysterm
 		ret = f_mkfs(
 			"",	/* Logical drive number */
 			0,			/* Format option  FM_EXFAT*/

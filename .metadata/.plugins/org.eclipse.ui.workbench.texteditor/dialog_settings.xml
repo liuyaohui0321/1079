@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="get_Dir_size" key="selection"/>
+		<item value="buff" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
-		<item value="false" key="wholeword"/>
+		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="buff"/>
+			<item value="dir_register"/>
+			<item value="ET_STREAM"/>
 			<item value="get_Dir_size"/>
 			<item value="cmd_reply_a203_to_a204"/>
 			<item value="run_cmd_a208"/>
 			<item value="C0D7"/>
 			<item value="0x41400000"/>
-			<item value="0x40600000"/>
-			<item value="tchar"/>
-			<item value="LinkList"/>
 		</list>
 		<list key="replacehistory">
 			<item value="BYTE"/>
@@ -27,7 +27,7 @@
 		<item value="405" key="DIALOG_WIDTH"/>
 		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
 		<item value="511" key="DIALOG_HEIGHT"/>
-		<item value="624" key="DIALOG_X_ORIGIN"/>
-		<item value="520" key="DIALOG_Y_ORIGIN"/>
+		<item value="1309" key="DIALOG_X_ORIGIN"/>
+		<item value="248" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
