@@ -40,7 +40,7 @@ int  Status;
 char input_string[10];
 uint fnum;
 BYTE WriteBuffer[4096];
-uint32_t wbuff[4096];
+uint8_t wbuff[4096];
 uint32_t  cmd_len;
 uint32_t  len;
 uint32_t  buff = (void *)(MEM_DDR3_BASE);

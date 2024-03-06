@@ -3022,7 +3022,7 @@ int run_cmd_d205(StructMsg *pMsg)
 	 }       // ÎÄ¼þÂ·¾¶
 	 xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 	 sleep(1);
-//	 f_close(&file);
+	 f_close(&file);
 //	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
 	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
 	 if (ret != FR_OK)

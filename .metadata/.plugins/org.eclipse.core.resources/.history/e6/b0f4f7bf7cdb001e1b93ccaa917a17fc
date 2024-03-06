@@ -40,7 +40,7 @@ int  Status;
 char input_string[10];
 uint fnum;
 BYTE WriteBuffer[4096];
-uint32_t wbuff[4096];
+
 uint32_t  cmd_len;
 uint32_t  len;
 uint32_t  buff = (void *)(MEM_DDR3_BASE);
@@ -61,12 +61,8 @@ int main()
 		InitTimeList();
 		XLLFIFO_SysInit();		// Sfifo初始化
 //		XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
-		for(int i=0;i<4096;i++)
-		{
-			wbuff[i]=i;
-		}
 
-#if   0//format the filesysterm
+#if   10//format the filesysterm
 		ret = f_mkfs(
 			"",	/* Logical drive number */
 			0,			/* Format option  FM_EXFAT*/

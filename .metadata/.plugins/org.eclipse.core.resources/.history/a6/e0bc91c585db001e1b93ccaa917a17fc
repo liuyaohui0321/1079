@@ -2741,7 +2741,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 		WCHAR cmd_str_1[1024]={0};
 		BYTE cmd_str_11[100]={0};
 		uint32_t cmd_write_cnt=0;
-//		uint8_t wbuff[4096]={0};
+		uint8_t wbuff[4096]={0};
 		for (x = 0; x < 1024; x++)
 		{
 			unicode_u16=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
@@ -2771,15 +2771,15 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		xil_printf(" Open ok!\r\n");
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
-//		for(int i=0;i<4096;i++)
-//		{
-//			wbuff[i]=i;
-//		}
+		for(int i=0;i<4096;i++)
+		{
+			wbuff[i]=i;
+		}
 
 		ret = f_write1(
 						&file,			/* Open file to be written */
 						wbuff,			/* Data to be written */
-						4096*4,			/* Number of bytes to write */
+						4096,			/* Number of bytes to write */
 						&bw				/* Number of bytes written */
 		);
 		if (ret != FR_OK)
@@ -3022,7 +3022,7 @@ int run_cmd_d205(StructMsg *pMsg)
 	 }       // 文件路径
 	 xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 	 sleep(1);
-//	 f_close(&file);
+	 f_close(&file);
 //	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
 	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
 	 if (ret != FR_OK)
@@ -3082,7 +3082,7 @@ int run_cmd_d205(StructMsg *pMsg)
 #endif
 
 #if   1   // 回读存放的地址为:0xE0000000~0xFFFFFFFF
-//			len=OFFSET_SIZE;
+			len=OFFSET_SIZE;
 			uint32_t last=(void *)(0xE2000000+Sign*len);
 			if (buff_r == MEM_DDR3_BASE+(512*3*1024*1024))
 			{
@@ -3102,10 +3102,10 @@ int run_cmd_d205(StructMsg *pMsg)
 			Checknum++;
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
 			r_count++;
-//			for(int k=0;k<4096;k++)
-//			{
-//				Xil_Out32(buff_r+k*4,value++);
-//			}
+			for(int k=0;k<4096;k++)
+			{
+				Xil_Out32(buff_r+k*4,value++);
+			}
 			DestinationBuffer_1[0]=buff_r;
 			DestinationBuffer_1[1]=len;
 			XLLFIFO_SysInit();
