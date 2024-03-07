@@ -2771,23 +2771,19 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		xil_printf(" Open ok!\r\n");
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
-//		for(int i=0;i<4096;i++)
-//		{
-//			wbuff[i]=i;
-//		}
 
-		ret = f_write1(
-						&file,			/* Open file to be written */
-						wbuff,			/* Data to be written */
-						4096*4,			/* Number of bytes to write */
-						&bw				/* Number of bytes written */
-		);
-		if (ret != FR_OK)
-		{
-			 xil_printf(" f_write Failed! %d\r\n",ret);
-			 f_close(&file);
-			 return ret;
-		}
+//		ret = f_write1(
+//						&file,			/* Open file to be written */
+//						wbuff,			/* Data to be written */
+//						4096*4,			/* Number of bytes to write */
+//						&bw				/* Number of bytes written */
+//		);
+//		if (ret != FR_OK)
+//		{
+//			 xil_printf(" f_write Failed! %d\r\n",ret);
+//			 f_close(&file);
+//			 return ret;
+//		}
 		f_close(&file);
 #if  0
 		while(1)
@@ -3102,12 +3098,12 @@ int run_cmd_d205(StructMsg *pMsg)
 			Checknum++;
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
 			r_count++;
-//			for(int k=0;k<4096;k++)
-//			{
-//				Xil_Out32(buff_r+k*4,value++);
-//			}
+			for(int k=0;k<4096;k++)
+			{
+				Xil_Out32(buff_r+k*4,value++);
+			}
 			DestinationBuffer_1[0]=buff_r;
-			DestinationBuffer_1[1]=len;
+			DestinationBuffer_1[1]=len/128/1024;
 			XLLFIFO_SysInit();
 			ret = TxSend_1(DestinationBuffer_1,8);
 			if (ret != XST_SUCCESS)
