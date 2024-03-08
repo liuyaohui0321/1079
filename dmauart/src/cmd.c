@@ -2735,6 +2735,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 {
 		uint32_t ret=0,i=0,x=0,h=0;
 		u16 unicode_u16=0;
+		int k=0;
 		uint32_t Status=0,bw=0;
 		u32 file_cmd=0;
 		uint8_t sts;
@@ -2779,11 +2780,19 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
 //			return ret;
 //		}
-
+		while(1)
+		{
+			Xil_Out32((UINTPTR*)(0x80000000+4*k),k*4);
+			k++;
+			if(k==0x1000000)
+			{
+				break;
+			}
+		}
 		ret = f_write1(
 						&file,			/* Open file to be written */
-						wbuff,			/* Data to be written */
-						4096*4,			/* Number of bytes to write */
+						0x80000000,			/* Data to be written */
+						0x4000000,			/* Number of bytes to write */
 						&bw				/* Number of bytes written */
 		);
 		if (ret != FR_OK)
@@ -3107,10 +3116,10 @@ int run_cmd_d205(StructMsg *pMsg)
 			Checknum++;
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
 			r_count++;
-			for(int k=0;k<4096*4;k++)
-			{
-				Xil_Out32(buff_r+k*4,value++);
-			}
+//			for(int k=0;k<4096*4;k++)
+//			{
+//				Xil_Out32(buff_r+k*4,value++);
+//			}
 			DestinationBuffer_1[0]=buff_r;
 			DestinationBuffer_1[1]=len/128/1024;
 			XLLFIFO_SysInit();
