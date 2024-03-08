@@ -1,6 +1,6 @@
-16:14:57 **** Incremental Build of configuration Debug for project dmauart ****
+09:08:10 **** Incremental Build of configuration Debug for project dmauart ****
 make all 
 make: Nothing to be done for 'all'.
 
-16:14:57 Build Finished (took 172ms)
+09:08:10 Build Finished (took 178ms)
 

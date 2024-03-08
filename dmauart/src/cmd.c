@@ -2772,18 +2772,26 @@ int run_cmd_d20A(StructMsg *pMsg)
 		xil_printf(" Open ok!\r\n");
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
 
-//		ret = f_write1(
-//						&file,			/* Open file to be written */
-//						wbuff,			/* Data to be written */
-//						4096*4,			/* Number of bytes to write */
-//						&bw				/* Number of bytes written */
-//		);
+//		ret = f_lseek(&file, f_size(&file));
 //		if (ret != FR_OK)
 //		{
-//			 xil_printf(" f_write Failed! %d\r\n",ret);
-//			 f_close(&file);
-//			 return ret;
+//			xil_printf("f_lseek Failed! ret=%d\r\n", ret);
+//			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+//			return ret;
 //		}
+
+		ret = f_write1(
+						&file,			/* Open file to be written */
+						wbuff,			/* Data to be written */
+						4096*4,			/* Number of bytes to write */
+						&bw				/* Number of bytes written */
+		);
+		if (ret != FR_OK)
+		{
+			 xil_printf(" f_write Failed! %d\r\n",ret);
+			 f_close(&file);
+			 return ret;
+		}
 		f_close(&file);
 #if  0
 		while(1)
@@ -2858,8 +2866,9 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			if(cmd_write_cnt>319) 	// д5G
 
 //д��256M
+			if(cmd_write_cnt>7)  // д1G
 //			if(cmd_write_cnt>15)  // д2G
-			if(cmd_write_cnt>23)  // д3G
+//			if(cmd_write_cnt>23)  // д3G
 //			if(cmd_write_cnt>39)  // д5G
 			{
 				xil_printf("I/O Write Finish!\r\n");
@@ -2877,7 +2886,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 				break;
 			}
 		 }   // while
-//		 fclose(&file);
+		 f_close(&file);
 //		 cleanup_platform();
 //		 run_cmd_d205(0);
 		 return 0;
@@ -3098,7 +3107,7 @@ int run_cmd_d205(StructMsg *pMsg)
 			Checknum++;
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
 			r_count++;
-			for(int k=0;k<4096;k++)
+			for(int k=0;k<4096*4;k++)
 			{
 				Xil_Out32(buff_r+k*4,value++);
 			}
