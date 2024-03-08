@@ -916,8 +916,8 @@ uint8_t io_write2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, 
 		cmd_cdw[4]  = 0x0;
 		cmd_cdw[5]  = 0x0;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*U_BLK_SIZE/nhc_num;   // 9.27¸Ä
-		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
-//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
+//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
+		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len;
 //		cmd_cdw[6]  = addr + i*len/nhc_num;
 		cmd_cdw[7]  = 0x0; // Non-zero if use 64bit memory address
@@ -1127,8 +1127,8 @@ uint8_t io_read2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		cmd_cdw[4]  = 0x0;
 		cmd_cdw[5]  = 0x0;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*U_BLK_SIZE/nhc_num;   // 9.27¸Ä
-		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
-//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
+//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
+		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len;
 		cmd_cdw[6]  = addr + i*len/nhc_num;
 		cmd_cdw[7]  = 0x0; // Non-zero if use 64bit memory address
