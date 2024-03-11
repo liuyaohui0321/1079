@@ -742,7 +742,7 @@ uint8_t io_write(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 	uint8_t  sts;
 	uint8_t  i,j;
 	static uint32_t full_wr_cnt = 0;
-	slba = slba/512/nhc_num;
+	slba = 2*slba/512/nhc_num;
 //	xil_printf("io_write addr=0x%x slba=%u  ", addr, slba);
 //	xil_printf("len=%lu\n", len);
 	for(i=0;i<nhc_num;i++)
@@ -755,7 +755,7 @@ uint8_t io_write(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		cmd_cdw[4]  = 0x0;
 		cmd_cdw[5]  = 0x0;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*U_BLK_SIZE/nhc_num;   // 9.27改
-		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
+		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
 //		cmd_cdw[6]  = addr + i*len/nhc_num;
 		cmd_cdw[7]  = 0x0; // Non-zero if use 64bit memory address
 		cmd_cdw[8]  = 0x0;
@@ -901,8 +901,8 @@ uint8_t io_write2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, 
 	uint8_t  sts;
 	uint8_t  i,j;
 	static uint32_t full_wr_cnt = 0;
-//	slba = slba/512/nhc_num;
-	slba = slba/512;
+	slba = slba/512/nhc_num*2;
+//	slba = slba/512;
 //	j=0;  //j代表总包数
 //	xil_printf("io_write addr=0x%x slba=%u  ", addr, slba);
 //	xil_printf("len=%lu\n", len);
@@ -916,18 +916,18 @@ uint8_t io_write2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, 
 		cmd_cdw[4]  = 0x0;
 		cmd_cdw[5]  = 0x0;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*U_BLK_SIZE/nhc_num;   // 9.27改
-//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
-		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
+		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
+//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len;
-//		cmd_cdw[6]  = addr + i*len/nhc_num;
+//		cmd_cdw[6]  = addr + i*len/nhc_num;		// 3.9
 		cmd_cdw[7]  = 0x0; // Non-zero if use 64bit memory address
 		cmd_cdw[8]  = 0x0;
 		cmd_cdw[9]  = 0x0;
 		cmd_cdw[10] = (uint32_t) (slba >> 0);
 		cmd_cdw[11] = (uint32_t) (slba >> 32);
-//		cmd_cdw[12] = len/512/nhc_num;
-		cmd_cdw[12] = len/512/nhc_num*2*2;
-//		cmd_cdw[12] = len/512/nhc_num*2;
+//		cmd_cdw[12] = len/512/nhc_num;  	// 3.9
+//		cmd_cdw[12] = len/512/nhc_num*2*2;
+		cmd_cdw[12] = len/512/nhc_num*2;
 	//			cmd_cdw[12] = 64;
 		cmd_cdw[13] = dsm & 0xFF;
 		cmd_cdw[14] = 0x0;
@@ -963,8 +963,8 @@ uint8_t io_read(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, ui
 	u32 read_dataaddr;
 	static uint32_t full_rd_cnt = 0;
 
-//	slba = slba/512/nhc_num;
-	slba = slba/512;
+	slba = 2*slba/512/nhc_num;
+//	slba = slba/512;
 	for(i=0;i<nhc_num;i++)
 	{
 //		if (i == 0)
@@ -985,8 +985,8 @@ uint8_t io_read(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, ui
 		cmd_cdw[10] = (uint32_t) (slba >> 0);
 		cmd_cdw[11] = (uint32_t) (slba >> 32);
 //		cmd_cdw[12] = len/512/nhc_num;
-		cmd_cdw[12] = len/512/nhc_num*2*2;   // 9.25
-//		cmd_cdw[12] = len/512/nhc_num*2;
+//		cmd_cdw[12] = len/512/nhc_num*2*2;   // 9.25
+		cmd_cdw[12] = len/512/nhc_num*2;
 //		cmd_cdw[12] = U_BLK_SIZE/512/nhc_num;
 		cmd_cdw[13] = dsm & 0xFF;
 		cmd_cdw[14] = 0x0;
@@ -1113,8 +1113,8 @@ uint8_t io_read2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 	u32 read_dataaddr;
 	static uint32_t full_rd_cnt = 0;
 
-//	slba = slba/512/nhc_num;
-	slba = slba/512;
+	slba = slba/512/nhc_num*2;
+//	slba = slba/512;
 	for(i=0;i<nhc_num;)
 	{
 //		if (i == 0)
@@ -1127,18 +1127,17 @@ uint8_t io_read2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		cmd_cdw[4]  = 0x0;
 		cmd_cdw[5]  = 0x0;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*U_BLK_SIZE/nhc_num;   // 9.27改
-//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
-		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
+		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len*2/nhc_num;
+//		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len/nhc_num;
 //		cmd_cdw[6]  = addr + (i%(nhc_num/DDR_NUM))*len;
-		cmd_cdw[6]  = addr + i*len/nhc_num;
 		cmd_cdw[7]  = 0x0; // Non-zero if use 64bit memory address
 		cmd_cdw[8]  = 0x0;
 		cmd_cdw[9]  = 0x0;
 		cmd_cdw[10] = (uint32_t) (slba >> 0);
 		cmd_cdw[11] = (uint32_t) (slba >> 32);
-		cmd_cdw[12] = len/512/nhc_num;
-		cmd_cdw[12] = len/512/nhc_num*2*2;   // 9.25
-//		cmd_cdw[12] = len/512/nhc_num*2;
+//		cmd_cdw[12] = len/512/nhc_num;
+//		cmd_cdw[12] = len/512/nhc_num*2*2;   // 9.25
+		cmd_cdw[12] = len/512/nhc_num*2;
 //		cmd_cdw[12] = U_BLK_SIZE/512/nhc_num;
 		cmd_cdw[13] = dsm & 0xFF;
 		cmd_cdw[14] = 0x0;
