@@ -198,7 +198,7 @@ mount:	ret = f_mount (&fs, "", 1);
 					xil_printf("I/O Read Failed!\r\n");
 				}
 				sleep(1);
-				uint32_t last=(void *)(0xE2000000);
+				uint32_t last=(void *)(0xE1000000);
 				uint32_t check_block_size=0x100000;
 
 //				if(CheckOut_HeadTail((uint32_t *)buff_r,(uint32_t *)last,check_block_size)!=0)
@@ -236,7 +236,7 @@ mount:	ret = f_mount (&fs, "", 1);
 			//写盘32M
 //			if(r_count>7||cmd_write_cnt>15)    // 写256M
 //			if(r_count>15||cmd_write_cnt>31)   // 写512M
-//			if(r_count>63||cmd_write_cnt>127)  // 写2G
+			if(r_count>63||cmd_write_cnt>127)  // 写2G
 //			if(r_count>79||cmd_write_cnt>159)  // 写2.56G
 //			if(r_count>95||cmd_write_cnt>191)  // 写3G
 //			if(r_count>111||cmd_write_cnt>223) // 写3.58G
@@ -245,7 +245,7 @@ mount:	ret = f_mount (&fs, "", 1);
 //			if(r_count>191||cmd_write_cnt>383) // 写6G
 
 			//写盘256M
-			if(r_count>0||cmd_write_cnt>0)  // 写1次
+//			if(r_count>0||cmd_write_cnt>0)  // 写1次
 //			if(r_count>63||cmd_write_cnt>15)  // 写2G
 //			if(r_count>95||cmd_write_cnt>23)  // 写3G
 			{
