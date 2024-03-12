@@ -2741,7 +2741,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 		uint8_t sts;
 		WCHAR cmd_str_1[1024]={0};
 		BYTE cmd_str_11[100]={0};
-		uint32_t cmd_write_cnt=0;
+		uint32_t cmd_write_cnt=0,cmd_len=0;
 //		uint8_t wbuff[4096]={0};
 		for (x = 0; x < 1024; x++)
 		{
@@ -2780,29 +2780,29 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
 //			return ret;
 //		}
-		while(1)
-		{
-			Xil_Out32((UINTPTR*)(0x80000000+4*k),k*4);
-			k++;
-			if(k==0x1000000)
-			{
-				break;
-			}
-		}
-		ret = f_write1(
-						&file,			/* Open file to be written */
-						0x80000000,			/* Data to be written */
-						0x4000000,			/* Number of bytes to write */
-						&bw				/* Number of bytes written */
-		);
-		if (ret != FR_OK)
-		{
-			 xil_printf(" f_write Failed! %d\r\n",ret);
-			 f_close(&file);
-			 return ret;
-		}
-		f_close(&file);
-#if  0
+//		while(1)
+//		{
+//			Xil_Out32((UINTPTR*)(0x80000000+4*k),k*4);
+//			k++;
+//			if(k==0x1000000)
+//			{
+//				break;
+//			}
+//		}
+//		ret = f_write1(
+//						&file,			/* Open file to be written */
+//						0x80000000,			/* Data to be written */
+//						0x4000000,			/* Number of bytes to write */
+//						&bw				/* Number of bytes written */
+//		);
+//		if (ret != FR_OK)
+//		{
+//			 xil_printf(" f_write Failed! %d\r\n",ret);
+//			 f_close(&file);
+//			 return ret;
+//		}
+//		f_close(&file);
+#if  1
 		while(1)
 		{
 			int count=3;
@@ -2865,7 +2865,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 					}while(sts == 0x01);
 				}
 			}
-//			if(cmd_write_cnt>15)    // Ð´256M
+			if(cmd_write_cnt>15)    // Ð´256M
 //			if(cmd_write_cnt>31)   	// Ð´512M
 //			if(cmd_write_cnt>127)  	// Ð´2G
 //			if(cmd_write_cnt>159)  	// Ð´2.56G
@@ -2875,7 +2875,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			if(cmd_write_cnt>319) 	// Ð´5G
 
 //Ð´ÅÌ256M
-			if(cmd_write_cnt>7)  // Ð´1G
+//			if(cmd_write_cnt>7)  // Ð´1G
 //			if(cmd_write_cnt>15)  // Ð´2G
 //			if(cmd_write_cnt>23)  // Ð´3G
 //			if(cmd_write_cnt>39)  // Ð´5G
@@ -3046,7 +3046,7 @@ int run_cmd_d205(StructMsg *pMsg)
 			return ret;
 	  }
 
-	 XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
+//	 XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
      //  ·Ö°üÊý¾Ý´«Êä
 	 while(1)
 	 {
@@ -3097,13 +3097,13 @@ int run_cmd_d205(StructMsg *pMsg)
 
 #if   1   // »Ø¶Á´æ·ÅµÄµØÖ·Îª:0xE0000000~0xFFFFFFFF
 //			len=OFFSET_SIZE;
-			uint32_t last=(void *)(0xE2000000+Sign*len);
+			uint32_t last=(void *)(0xE1000000+Sign*len);
 			if (buff_r == MEM_DDR3_BASE+(512*3*1024*1024))
 			{
-				last = 0xE2000000;
+				last = 0xE1000000;
 				Sign=0;
 			}
-			else if(buff_r == 0xFE000000)
+			else if(buff_r == 0xFF000000)
 			{
 				last = 0xFFFFFFFF;
 			}

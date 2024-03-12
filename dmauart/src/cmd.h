@@ -14,7 +14,7 @@ extern XAxiDma AxiDma;
 extern XAxiDma AxiDma1;
 extern XLlFifo Fifo0;
 extern XLlFifo Fifo1;
-extern uint32_t wbuff[4096];
+//extern uint32_t wbuff[4096];
 #define OFFSET_SIZE             2*2*2*2*1024*1024   // 32M
 #define SRC_ID		0x0  //
 #define DEST_ID		0x0
