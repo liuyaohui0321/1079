@@ -2762,7 +2762,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 
           // 获取并解析从DMA0传过来的文件路径
 //		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
-		ret = f_open(&file,"B", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+		ret = f_open(&file,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 //		ret = f_open(&file,"B", FA_OPEN_EXISTING | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
@@ -3038,7 +3038,7 @@ int run_cmd_d205(StructMsg *pMsg)
 	 sleep(1);
 //	 f_close(&file);
 //	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
-	 ret = f_open(&file,"B", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
+	 ret = f_open(&file,"A", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
 	 if (ret != FR_OK)
 	 {
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -3149,11 +3149,11 @@ int run_cmd_d205(StructMsg *pMsg)
 						}while(sts == 0x01);
 					}
 			 }
-
+			 if(r_count>127)  		// 写2G
 //			 if(r_count>15)   		// 写512M
 //	 		 if(r_count>63)  		// 写2G
 //	 		 if(r_count>79)  		// 写2.56G
-	 		 if(r_count>95)  		// 写3G
+//	 		 if(r_count>95)  		// 写3G
 //	 		 if(r_count>111) 		// 写3.58G
 //			 if(r_count>127) 		// 写4G
 //	 		 if(r_count>159)		// 写5G

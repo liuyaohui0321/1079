@@ -1,6 +1,66 @@
-13:25:35 **** Incremental Build of configuration Debug for project dmauart ****
+10:26:12 **** Auto Build of configuration Debug for project dmauart ****
 make all 
-make: Nothing to be done for 'all'.
+'Building file: ../src/nhc_amba.c'
+'Invoking: MicroBlaze gcc compiler'
+mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/nhc_amba.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/nhc_amba.d" -MT"src/nhc_amba.o" -o "src/nhc_amba.o" "../src/nhc_amba.c"
+../src/nhc_amba.c: In function 'io_write2':
+../src/nhc_amba.c:902:13: warning: unused variable 'j' [-Wunused-variable]
+  uint8_t  i,j;
+             ^
+../src/nhc_amba.c: In function 'io_read':
+../src/nhc_amba.c:963:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c: In function 'io_read1':
+../src/nhc_amba.c:1092:5: warning: implicit declaration of function 'send_axis_ack_1'; did you mean 'send_axis_ack'? [-Wimplicit-function-declaration]
+     send_axis_ack_1(0x02,addr,len/8192,sts);
+     ^~~~~~~~~~~~~~~
+     send_axis_ack
+../src/nhc_amba.c:1039:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c: In function 'io_read2':
+../src/nhc_amba.c:1113:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c:1112:13: warning: unused variable 'j' [-Wunused-variable]
+  uint8_t  i,j;
+             ^
+../src/nhc_amba.c: In function 'io_read3':
+../src/nhc_amba.c:1195:6: warning: unused variable 'read_dataaddr' [-Wunused-variable]
+  u32 read_dataaddr;
+      ^~~~~~~~~~~~~
+../src/nhc_amba.c:1194:13: warning: unused variable 'j' [-Wunused-variable]
+  uint8_t  i,j;
+             ^
+../src/nhc_amba.c: At top level:
+../src/nhc_amba.c:1434:6: warning: conflicting types for 'send_axis_ack_1'
+ void send_axis_ack_1(uint8_t type,uint32_t addr,uint32_t len,uint8_t sts)
+      ^~~~~~~~~~~~~~~
+../src/nhc_amba.c:1092:5: note: previous implicit declaration of 'send_axis_ack_1' was here
+     send_axis_ack_1(0x02,addr,len/8192,sts);
+     ^~~~~~~~~~~~~~~
+../src/nhc_amba.c: In function 'send_axis_ack_1':
+../src/nhc_amba.c:1450:2: warning: implicit declaration of function 'TxSend_1'; did you mean 'TxSend'? [-Wimplicit-function-declaration]
+  TxSend_1(SourceBuffer,8);
+  ^~~~~~~~
+  TxSend
+'Finished building: ../src/nhc_amba.c'
+' '
+'Building target: dmauart.elf'
+'Invoking: MicroBlaze gcc linker'
+mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../dmauart_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "dmauart.elf"  ./src/fat/diskio.o ./src/fat/ff.o ./src/fat/ffsystem.o ./src/fat/ffunicode.o  ./src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./src/7x_dma.o ./src/alloc.o ./src/check.o ./src/cmd.o ./src/main.o ./src/malloc.o ./src/mem_test.o ./src/nhc_amba.o ./src/platform.o ./src/simple_dma.o ./src/sys.o ./src/time.o ./src/uart.o ./src/uart_get.o ./src/xllfifo_polling_example.o ./src/xuartlite_intr_example.o ./src/xuartlite_polled_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: dmauart.elf'
+' '
+make --no-print-directory post-build
+mb-objcopy -O srec dmauart.elf dmauart.srec
+' '
+'Invoking: MicroBlaze Print Size'
+mb-size dmauart.elf  |tee "dmauart.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+ 464800	   1988	 195252	 662040	  a1a18	dmauart.elf
+'Finished building: dmauart.elf.size'
+' '
 
-13:25:35 Build Finished (took 158ms)
+10:26:13 Build Finished (took 739ms)
 

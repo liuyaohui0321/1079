@@ -56,8 +56,8 @@ DRESULT disk_read (
 	UINT count		/* Number of sectors to read    读扇区数 一个扇区 4096字节*/
 )
 {
-	uint64_t slba=sector*SECTORSIZE*2;
-	uint32_t len=count*SECTORSIZE*2;
+	uint64_t slba=sector*SECTORSIZE;
+	uint32_t len=count*SECTORSIZE;
 //	if(io_read2(NHC_NUM, 0x1, buff, sector*SECTORSIZE, count*SECTORSIZE, 0x0) != 0x2)
 	if(io_read2(NHC_NUM,0x1, buff,slba, (uint32_t)len, 0x0) != 0x2)
 	{
@@ -78,8 +78,8 @@ DRESULT disk_read1 (
 	UINT count		/* Number of sectors to read    读扇区数 一个扇区 4096字节*/
 )
 {
-	uint64_t slba=sector*SECTORSIZE*2;
-	uint32_t len=count*SECTORSIZE*2;
+	uint64_t slba=sector*SECTORSIZE;
+	uint32_t len=count*SECTORSIZE;
 //	if(io_read3(NHC_NUM,0x1, buff,sector*SECTORSIZE, (UINT)(count*SECTORSIZE), 0x0) != 0x2)
 	if(io_read3(NHC_NUM,0x1, buff,slba, (uint32_t)len, 0x0) != 0x2)
 	{
@@ -104,29 +104,28 @@ DRESULT disk_write (
 {
 	//sector lba
 //	if(io_write(NHC_NUM,0x1, buff,sector*SECTORSIZE, (uint32_t)(count*SECTORSIZE*2), 0x0) != 0x2)//wfeng
-//	if(io_write2(NHC_NUM,0x1, buff,sector*SECTORSIZE, (uint32_t)(count*SECTORSIZE), 0x0) != 0x2)//lyh
-	if(io_write2(NHC_NUM,0x1, buff,sector*SECTORSIZE*2, (uint32_t)(count*SECTORSIZE*2), 0x0) != 0x2)//lyh
+	if(io_write2(NHC_NUM,0x1, buff,sector*SECTORSIZE, (uint32_t)(count*SECTORSIZE), 0x0) != 0x2)//lyh
 	{
 		xil_printf("I/O Write Failed!\n\n");
 	}
 	return RES_OK;
 }
 
-DRESULT disk_write1 (
-	BYTE pdrv,			/* Physical drive nmuber to identify the drive */
-	const BYTE *buff,	/* Data to be written */
-	LBA_t sector,		/* Start sector in LBA */
-	UINT count			/* Number of sectors to write */
-)
-{
-	//sector lba
-//	if(io_write2(NHC_NUM,0x1, buff,(uint32_t)(sector*SECTORSIZE), (uint32_t)(count*SECTORSIZE), 0x0) != 0x2)//wfeng
-	if(io_write2(NHC_NUM,0x1, buff,(uint32_t)(sector*SECTORSIZE*2), (uint32_t)(count*SECTORSIZE*2), 0x0) != 0x2)//wfeng
-	{
-		xil_printf("I/O Write Failed!\n\n");
-	}
-	return RES_OK;
-}
+//DRESULT disk_write1 (
+//	BYTE pdrv,			/* Physical drive nmuber to identify the drive */
+//	const BYTE *buff,	/* Data to be written */
+//	LBA_t sector,		/* Start sector in LBA */
+//	UINT count			/* Number of sectors to write */
+//)
+//{
+//	//sector lba
+////	if(io_write2(NHC_NUM,0x1, buff,(uint32_t)(sector*SECTORSIZE), (uint32_t)(count*SECTORSIZE), 0x0) != 0x2)//wfeng
+//	if(io_write2(NHC_NUM,0x1, buff,(uint32_t)(sector*SECTORSIZE*2), (uint32_t)(count*SECTORSIZE*2), 0x0) != 0x2)//wfeng
+//	{
+//		xil_printf("I/O Write Failed!\n\n");
+//	}
+//	return RES_OK;
+//}
 #endif
 
 

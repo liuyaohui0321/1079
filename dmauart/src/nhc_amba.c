@@ -1195,8 +1195,7 @@ uint8_t io_read3(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 	u32 read_dataaddr;
 	static uint32_t full_rd_cnt = 0;
 
-//	slba = slba/512/nhc_num;
-	slba = slba/512;
+	slba = 2*slba/512/nhc_num;
 	for(i=0;i<nhc_num;)
 	{
 //		if (i == 0)
@@ -1218,8 +1217,8 @@ uint8_t io_read3(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		cmd_cdw[10] = (uint32_t) (slba >> 0);
 		cmd_cdw[11] = (uint32_t) (slba >> 32);
 //		cmd_cdw[12] = len/512/nhc_num;
-		cmd_cdw[12] = len/512/nhc_num*2*2;   // 9.25
-//		cmd_cdw[12] = len/512/nhc_num*2;
+//		cmd_cdw[12] = len/512/nhc_num*2*2;   // 9.25
+		cmd_cdw[12] = len/512/nhc_num*2;
 //		cmd_cdw[12] = U_BLK_SIZE/512/nhc_num;
 		cmd_cdw[13] = dsm & 0xFF;
 		cmd_cdw[14] = 0x0;
