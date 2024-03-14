@@ -2760,26 +2760,57 @@ int run_cmd_d20A(StructMsg *pMsg)
 		}
 		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 
-          // 获取并解析从DMA0传过来的文件路径
+
+#if   0	//覆盖写入
+		// 获取并解析从DMA0传过来的文件路径
 //		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 		ret = f_open(&file,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
-//		ret = f_open(&file,"B", FA_OPEN_EXISTING | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
 			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
 			return ret;
 		}
-		xil_printf(" Open ok!\r\n");
-		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
 
-//		ret = f_lseek(&file, f_size(&file));
-//		if (ret != FR_OK)
-//		{
-//			xil_printf("f_lseek Failed! ret=%d\r\n", ret);
-//			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
-//			return ret;
-//		}
+		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
+#endif
+
+#if   1    //不覆盖写入
+		// 获取并解析从DMA0传过来的文件路径
+		ret = f_open(&file,"A", FA_OPEN_EXISTING| FA_WRITE |FA_READ);
+//		ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING| FA_WRITE |FA_READ);
+		if(ret ==FR_NO_FILE)
+		{
+
+//		    ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+			ret = f_open(&file,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+			if (ret != FR_OK)
+			{
+				xil_printf("f_open Failed! ret=%d\r\n", ret);
+				//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+				return ret;
+			}
+			xil_printf(" Open ok!\r\n");
+		}
+		else if(ret ==FR_OK)
+		{
+			xil_printf(" Open ok!\r\n");
+		}
+		else
+		{
+			xil_printf("f_open Failed! ret=%d\r\n", ret);
+			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+			return ret;
+		}
+		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
+		ret = f_lseek(&file, f_size(&file));
+		if (ret != FR_OK)
+		{
+			xil_printf("f_lseek Failed! ret=%d\r\n", ret);
+			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
+			return ret;
+		}
+#endif
 //		while(1)
 //		{
 //			Xil_Out32((UINTPTR*)(0x80000000+4*k),k*4);
@@ -2865,6 +2896,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 					}while(sts == 0x01);
 				}
 			}
+//写盘32M
 			if(cmd_write_cnt>15)    // 写256M
 //			if(cmd_write_cnt>31)   	// 写512M
 //			if(cmd_write_cnt>127)  	// 写2G
