@@ -9,5 +9,5 @@ com.xilinx.sdk.linkgen.prefs.dmauart\:.text=microblaze_1_local_memory_ilmb_bram_
 com.xilinx.sdk.linkgen.prefs.dmauart\:heap=mig_7series_0_memaddr
 com.xilinx.sdk.linkgen.prefs.dmauart\:heap-size=1024
 com.xilinx.sdk.linkgen.prefs.dmauart\:stack=mig_7series_0_memaddr
-com.xilinx.sdk.linkgen.prefs.dmauart\:stack-size=1024
+com.xilinx.sdk.linkgen.prefs.dmauart\:stack-size=16348
 eclipse.preferences.version=1

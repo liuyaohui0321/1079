@@ -18,11 +18,13 @@ int result_b201=0x11;
 int result_d201=0x11;
 int result_f201=0x11;
 extern FIL file;
+extern FIL wfile;
+extern FIL rfile;
 DIR dir;
 uint32_t nf=0,nd=0;
-extern uint32_t  cmd_len;
-extern uint32_t  len;
-extern uint32_t  buff,buff_r,buff1;
+//extern uint32_t  cmd_len;
+//extern uint32_t  len;
+//extern uint32_t  buff,buff_r,buff1;
 extern uint32_t  packnum;
 extern uint8_t   cancel;
 ///********************读盘存盘数据参数*******************/
@@ -2742,6 +2744,8 @@ int run_cmd_d20A(StructMsg *pMsg)
 		WCHAR cmd_str_1[1024]={0};
 		BYTE cmd_str_11[100]={0};
 		uint32_t cmd_write_cnt=0,cmd_len=0;
+		uint32_t  len;
+		uint32_t  buff = (void *)(MEM_DDR3_BASE);
 //		uint8_t wbuff[4096]={0};
 		for (x = 0; x < 1024; x++)
 		{
@@ -2761,10 +2765,10 @@ int run_cmd_d20A(StructMsg *pMsg)
 		xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 
 
-#if   0	//覆盖写入
+#if   10	//覆盖写入
 		// 获取并解析从DMA0传过来的文件路径
-//		ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
-		ret = f_open(&file,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+//		ret = f_open(&wfile,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+		ret = f_open(&wfile,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 		if (ret != FR_OK)
 		{
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -2775,15 +2779,15 @@ int run_cmd_d20A(StructMsg *pMsg)
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
 #endif
 
-#if   1    //不覆盖写入
+#if   0    //不覆盖写入
 		// 获取并解析从DMA0传过来的文件路径
-		ret = f_open(&file,"A", FA_OPEN_EXISTING| FA_WRITE |FA_READ);
-//		ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING| FA_WRITE |FA_READ);
+		ret = f_open(&wfile,"A", FA_OPEN_EXISTING| FA_WRITE |FA_READ);
+//		ret = f_open(&wfile,cmd_str_11, FA_OPEN_EXISTING| FA_WRITE |FA_READ);
 		if(ret ==FR_NO_FILE)
 		{
 
-//		    ret = f_open(&file,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
-			ret = f_open(&file,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+//		    ret = f_open(&wfile,cmd_str_11, FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
+			ret = f_open(&wfile,"A", FA_CREATE_ALWAYS | FA_WRITE |FA_READ);
 			if (ret != FR_OK)
 			{
 				xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -2803,7 +2807,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 			return ret;
 		}
 		xil_printf("Waiting FPGA Vio Ctrl Read Write Start\r\n");
-		ret = f_lseek(&file, f_size(&file));
+		ret = f_lseek(&wfile, f_size(&wfile));
 		if (ret != FR_OK)
 		{
 			xil_printf("f_lseek Failed! ret=%d\r\n", ret);
@@ -2832,7 +2836,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			 f_close(&file);
 //			 return ret;
 //		}
-//		f_close(&file);
+//		f_close(&wfile);
 #if  1
 		while(1)
 		{
@@ -2863,7 +2867,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 				len  =DestinationBuffer[1];  // 写入数据的长度
 
 				ret = f_write1(
-					&file,			/* Open file to be written */
+					&wfile,			/* Open file to be written */
 					buff,			/* Data to be written */
 					len,			/* Number of bytes to write */
 					&bw				/* Number of bytes written */
@@ -2871,7 +2875,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 				if (ret != FR_OK)
 				{
 					 xil_printf(" f_write Failed! %d\r\n",ret);
-					 f_close(&file);
+					 f_close(&wfile);
 					 return ret;
 				}
 				cmd_write_cnt += 1;
@@ -2896,8 +2900,18 @@ int run_cmd_d20A(StructMsg *pMsg)
 					}while(sts == 0x01);
 				}
 			}
+//			if(cmd_write_cnt==255)
+//			{
+////				xil_printf("HERE");
+////				f_close(&wfile);fs->win
+//
+//				disk_read(fs.pdrv, (BYTE *)(0xA0001000), 0x2200, 1);
+//				Xil_L1DCacheFlush();
+////				memcpy(fs.win,(BYTE *)(0xA0001000),SECTORSIZE*1);
+////				memcpy((BYTE *)(0xA0001000),fs.win,4096);
+//			}
 //写盘32M
-			if(cmd_write_cnt>15)    // 写256M
+//			if(cmd_write_cnt>15)    // 写256M
 //			if(cmd_write_cnt>31)   	// 写512M
 //			if(cmd_write_cnt>127)  	// 写2G
 //			if(cmd_write_cnt>159)  	// 写2.56G
@@ -2905,12 +2919,15 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			if(cmd_write_cnt>223) 	// 写3.58G
 //			if(cmd_write_cnt>255) 	// 写4G
 //			if(cmd_write_cnt>319) 	// 写5G
+//			if(cmd_write_cnt>260) 	// 写
 
 //写盘256M
 //			if(cmd_write_cnt>7)  // 写1G
 //			if(cmd_write_cnt>15)  // 写2G
 //			if(cmd_write_cnt>23)  // 写3G
-//			if(cmd_write_cnt>39)  // 写5G
+
+//			if(cmd_write_cnt>32)  // 写
+			if(cmd_write_cnt>39)  // 写5G
 			{
 				xil_printf("I/O Write Finish!\r\n");
 				xil_printf("w_count = %u\r\n",cmd_write_cnt);
@@ -2927,7 +2944,9 @@ int run_cmd_d20A(StructMsg *pMsg)
 				break;
 			}
 		 }   // while
-		 f_close(&file);
+//		 memcpy(fs.win,(BYTE *)(0xA0001000),4096);
+//		 memset((BYTE *)(0xA0001000),0,4096);
+		 f_close(&wfile);
 //		 cleanup_platform();
 //		 run_cmd_d205(0);
 		 return 0;
@@ -3049,6 +3068,8 @@ int run_cmd_d205(StructMsg *pMsg)
 	 u32 file_cmd=0;
 	 int br;
 	 uint32_t r_count=0;
+	 uint32_t  len;
+	 uint32_t  buff_r=(void *)(MEM_DDR3_BASE+(3*512*1024*1024));
 	 file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
 	 i=i+4;
      for (x = 0; x < 1024; x++)
@@ -3068,9 +3089,9 @@ int run_cmd_d205(StructMsg *pMsg)
 	 }       // 文件路径
 	 xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_11);
 	 sleep(1);
-//	 f_close(&file);
-//	 ret = f_open(&file,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
-	 ret = f_open(&file,"A", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
+
+//	 ret = f_open(&rfile,cmd_str_11, FA_OPEN_EXISTING |FA_READ);
+	 ret = f_open(&rfile,"A", FA_OPEN_EXISTING |FA_READ|FA_WRITE);
 	 if (ret != FR_OK)
 	 {
 			xil_printf("f_open Failed! ret=%d\r\n", ret);
@@ -3085,7 +3106,7 @@ int run_cmd_d205(StructMsg *pMsg)
 //		 	 xil_printf("Start Read!\r\n");
 			 len= OFFSET_SIZE;
 			 ret = f_read1(
-							&file,
+							&rfile,
 							buff_r,
 							len,
 							&br
@@ -3154,7 +3175,8 @@ int run_cmd_d205(StructMsg *pMsg)
 //			}
 			DestinationBuffer_1[0]=buff_r;
 			DestinationBuffer_1[1]=len/128/1024;
-			XLLFIFO_SysInit();
+//			XLLFIFO_SysInit();
+			XLLFIFO1_SysInit();
 			ret = TxSend_1(DestinationBuffer_1,8);
 			if (ret != XST_SUCCESS)
 			{
@@ -3181,6 +3203,7 @@ int run_cmd_d205(StructMsg *pMsg)
 						}while(sts == 0x01);
 					}
 			 }
+//			 if(r_count>1)  		//
 			 if(r_count>127)  		// 写2G
 //			 if(r_count>15)   		// 写512M
 //	 		 if(r_count>63)  		// 写2G
@@ -3205,7 +3228,7 @@ int run_cmd_d205(StructMsg *pMsg)
 			}
 
 	 }  //while
-	 f_close(&file);
+	 f_close(&rfile);
 //	 cleanup_platform();
 	 return 0;
 }

@@ -137,6 +137,12 @@ int XLLFIFO_SysInit(void)
 	XLlFifoInit(&Fifo1,FIFO_RECV_DEV_ID_1);
 	return 0;
 }
+
+int XLLFIFO1_SysInit(void)
+{
+	XLlFifoInit(&Fifo1,FIFO_RECV_DEV_ID_1);
+	return 0;
+}
 /*****************************************************************************/
 /**
 *
