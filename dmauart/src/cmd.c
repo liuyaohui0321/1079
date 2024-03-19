@@ -2815,48 +2815,27 @@ int run_cmd_d20A(StructMsg *pMsg)
 			return ret;
 		}
 #endif
+
+#if  1
 //		while(1)
 //		{
-//			Xil_Out32((UINTPTR*)(0x80000000+4*k),k*4);
-//			k++;
-//			if(k==0x1000000)
+//			int count=3;
+//			for(int i=0;i<3;i++)
 //			{
-//				break;
+//				sleep(1);
+//				xil_printf("Loading......! %d \r\n",count);
+//				count--;
 //			}
+//
+//			if(cancel==1)
+//			{
+//				xil_printf("cancel write!\r\n");
+//				cancel=0;
+//				return 0;
+//			}
+//			else
+//				break;
 //		}
-//		ret = f_write1(
-//						&file,			/* Open file to be written */
-//						0x80000000,			/* Data to be written */
-//						0x4000000,			/* Number of bytes to write */
-//						&bw				/* Number of bytes written */
-//		);
-//		if (ret != FR_OK)
-//		{
-//			 xil_printf(" f_write Failed! %d\r\n",ret);
-//			 f_close(&file);
-//			 return ret;
-//		}
-//		f_close(&wfile);
-#if  1
-		while(1)
-		{
-			int count=3;
-			for(int i=0;i<3;i++)
-			{
-				sleep(1);
-				xil_printf("Loading......! %d \r\n",count);
-				count--;
-			}
-
-			if(cancel==1)
-			{
-				xil_printf("cancel write!\r\n");
-				cancel=0;
-				return 0;
-			}
-			else
-				break;
-		}
 		while (1)
 		{
 //			xil_printf("Start Write!\r\n");
@@ -2865,6 +2844,22 @@ int run_cmd_d20A(StructMsg *pMsg)
 
 				buff =DestinationBuffer[0];  // 保存写入数据的DDR地址
 				len  =DestinationBuffer[1];  // 写入数据的长度
+
+				if(buff==0)		// 3.19号改 by lyh
+				{
+					xil_printf("I/O Write Finish!\r\n");
+					xil_printf("w_count = %u\r\n",cmd_write_cnt);
+					for(i=0;i<NHC_NUM;i++)
+					{
+						while (nhc_queue_ept(i) == 0)
+						{
+							do {
+								sts = nhc_cmd_sts(i);
+							}while(sts == 0x01);
+						}
+					}
+					break;
+				}
 
 				ret = f_write1(
 					&wfile,			/* Open file to be written */
@@ -2900,16 +2895,7 @@ int run_cmd_d20A(StructMsg *pMsg)
 					}while(sts == 0x01);
 				}
 			}
-//			if(cmd_write_cnt==255)
-//			{
-////				xil_printf("HERE");
-////				f_close(&wfile);fs->win
-//
-//				disk_read(fs.pdrv, (BYTE *)(0xA0001000), 0x2200, 1);
-//				Xil_L1DCacheFlush();
-////				memcpy(fs.win,(BYTE *)(0xA0001000),SECTORSIZE*1);
-////				memcpy((BYTE *)(0xA0001000),fs.win,4096);
-//			}
+
 //写盘32M
 //			if(cmd_write_cnt>15)    // 写256M
 //			if(cmd_write_cnt>31)   	// 写512M
@@ -2927,28 +2913,25 @@ int run_cmd_d20A(StructMsg *pMsg)
 //			if(cmd_write_cnt>23)  // 写3G
 
 //			if(cmd_write_cnt>32)  // 写
-			if(cmd_write_cnt>39)  // 写5G
-			{
-				xil_printf("I/O Write Finish!\r\n");
-				xil_printf("w_count = %u\r\n",cmd_write_cnt);
-				for(i=0;i<NHC_NUM;i++)
-				{
-					while (nhc_queue_ept(i) == 0)
-					{
-						do {
-							sts = nhc_cmd_sts(i);
-						}while(sts == 0x01);
-					}
-				}
-//				return 0;       // 2023.8.21
-				break;
-			}
+//			if(cmd_write_cnt>39)  // 写5G
+//			{
+//				xil_printf("I/O Write Finish!\r\n");
+//				xil_printf("w_count = %u\r\n",cmd_write_cnt);
+//				for(i=0;i<NHC_NUM;i++)
+//				{
+//					while (nhc_queue_ept(i) == 0)
+//					{
+//						do {
+//							sts = nhc_cmd_sts(i);
+//						}while(sts == 0x01);
+//					}
+//				}
+////				return 0;       // 2023.8.21
+//				break;
+//			}
 		 }   // while
-//		 memcpy(fs.win,(BYTE *)(0xA0001000),4096);
-//		 memset((BYTE *)(0xA0001000),0,4096);
 		 f_close(&wfile);
 //		 cleanup_platform();
-//		 run_cmd_d205(0);
 		 return 0;
 #endif
 }
@@ -3059,15 +3042,15 @@ int run_cmd_d204(StructMsg *pMsg)
 int run_cmd_d205(StructMsg *pMsg)
 {
 	 int i=0,x=0,Status,ret,h=0;
-	 int value=0;
 	 int Checknum=0,Sign=0;
 	 u16 unicode_u16=0;
 	 uint8_t sts;
 	 WCHAR cmd_str_1[1024]={0};
 	 BYTE cmd_str_11[100]={0};
 	 u32 file_cmd=0;
+	 int64_t size=0;
 	 int br;
-	 uint32_t r_count=0;
+	 uint32_t  r_count=0;
 	 uint32_t  len;
 	 uint32_t  buff_r=(void *)(MEM_DDR3_BASE+(3*512*1024*1024));
 	 file_cmd = CW32(pMsg->MsgData[i+0],pMsg->MsgData[i+1],pMsg->MsgData[i+2],pMsg->MsgData[i+3]);
@@ -3098,7 +3081,7 @@ int run_cmd_d205(StructMsg *pMsg)
 			//cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x10);  // lyh 2023.8.15
 			return ret;
 	  }
-
+	  size=f_size(&rfile);
 //	 XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
      //  分包数据传输
 	 while(1)
@@ -3116,12 +3099,7 @@ int run_cmd_d205(StructMsg *pMsg)
 					xil_printf("f_read Failed! ret=%d\r\n", ret);
 					return ret;
 			 }
-//			 r_count++;
-//			 xil_printf("r_count=%d\r\n",r_count);
-//			 if (buff_r < (DDR3_END_ADDR-OFFSET_SIZE))
-//				  buff_r += OFFSET_SIZE;
-//			 else
-//				  buff_r = MEM_DDR3_BASE+(512*3*1024*1024);
+
 #if   0   // 回读存放的地址，为固定0xE0000000开始的32M区域
 			uint32_t last=(void *)(0xE2000000);
 			int32_t check_block_size=0x100000;
@@ -3149,7 +3127,6 @@ int run_cmd_d205(StructMsg *pMsg)
 #endif
 
 #if   1   // 回读存放的地址为:0xE0000000~0xFFFFFFFF
-//			len=OFFSET_SIZE;
 			uint32_t last=(void *)(0xE1000000+Sign*len);
 			if (buff_r == MEM_DDR3_BASE+(512*3*1024*1024))
 			{
@@ -3160,6 +3137,7 @@ int run_cmd_d205(StructMsg *pMsg)
 			{
 				last = 0xFFFFFFFF;
 			}
+#if   0   //是否加校验
 			int32_t check_block_size=0x100000;
 			if(CheckOut_HeadTail((uint32_t *)buff_r,(uint32_t *)last,check_block_size)!=0)
 			{
@@ -3168,11 +3146,9 @@ int run_cmd_d205(StructMsg *pMsg)
 			}
 			Checknum++;
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
+#endif
 			r_count++;
-//			for(int k=0;k<4096*4;k++)
-//			{
-//				Xil_Out32(buff_r+k*4,value++);
-//			}
+
 			DestinationBuffer_1[0]=buff_r;
 			DestinationBuffer_1[1]=len/128/1024;
 //			XLLFIFO_SysInit();
@@ -3203,15 +3179,17 @@ int run_cmd_d205(StructMsg *pMsg)
 						}while(sts == 0x01);
 					}
 			 }
-//			 if(r_count>1)  		//
-			 if(r_count>127)  		// 写2G
-//			 if(r_count>15)   		// 写512M
-//	 		 if(r_count>63)  		// 写2G
-//	 		 if(r_count>79)  		// 写2.56G
-//	 		 if(r_count>95)  		// 写3G
-//	 		 if(r_count>111) 		// 写3.58G
-//			 if(r_count>127) 		// 写4G
-//	 		 if(r_count>159)		// 写5G
+			 size-=len;
+			 if(size<=0)
+////			 if(r_count>1)  		//
+//			 if(r_count>127)  		// 写2G
+////			 if(r_count>15)   		// 写512M
+////	 		 if(r_count>63)  		// 写2G
+////	 		 if(r_count>79)  		// 写2.56G
+////	 		 if(r_count>95)  		// 写3G
+////	 		 if(r_count>111) 		// 写3.58G
+////			 if(r_count>127) 		// 写4G
+////	 		 if(r_count>159)		// 写5G
 			 {
 					xil_printf("I/O Read or Write Test Finish!\r\n");
 					xil_printf("r_count=%u\r\n",r_count);
