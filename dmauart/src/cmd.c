@@ -3082,12 +3082,13 @@ int run_cmd_d205(StructMsg *pMsg)
 			return ret;
 	  }
 	  size=f_size(&rfile);
+	  len= OFFSET_SIZE;
 //	 XAxiDma1_tx(XPAR_AXIDMA_1_DEVICE_ID);
      //  分包数据传输
 	 while(1)
 	 {
 //		 	 xil_printf("Start Read!\r\n");
-			 len= OFFSET_SIZE;
+//			 len= OFFSET_SIZE;
 			 ret = f_read1(
 							&rfile,
 							buff_r,
@@ -3148,9 +3149,13 @@ int run_cmd_d205(StructMsg *pMsg)
 			xil_printf("                                                                          Checknum:%d\r\n",Checknum);
 #endif
 			r_count++;
+//			if(r_count==341)
+//			{
+//				xil_printf("here");
+//			}
 
 			DestinationBuffer_1[0]=buff_r;
-			DestinationBuffer_1[1]=len/128/1024;
+			DestinationBuffer_1[1]=len/4096;
 //			XLLFIFO_SysInit();
 			XLLFIFO1_SysInit();
 			ret = TxSend_1(DestinationBuffer_1,8);
@@ -3180,7 +3185,12 @@ int run_cmd_d205(StructMsg *pMsg)
 					}
 			 }
 			 size-=len;
-			 if(size<=0)
+			 if((size<OFFSET_SIZE)&&(size>0))
+			 {
+				 len=size;
+//				 xil_printf("into");
+			 }
+			 else if(size<=0)
 ////			 if(r_count>1)  		//
 //			 if(r_count>127)  		// 写2G
 ////			 if(r_count>15)   		// 写512M

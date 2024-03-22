@@ -18,6 +18,8 @@
 		<item value="false" key="caseSensitive"/>
 		<item value="227191" key="searchFlags"/>
 		<list key="previousPatterns">
+			<item value="xstreamerh"/>
+			<item value="Xil_In32"/>
 			<item value="ff_memalloc"/>
 			<item value="FF_LBA64"/>
 			<item value="buff"/>

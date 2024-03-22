@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="FF_FS_LOCK" key="selection"/>
+		<item value="XPAR_AXI_FIFO_0_DEVICE_ID" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
+			<item value="XPAR_AXI_FIFO_0_DEVICE_ID"/>
+			<item value="switch"/>
 			<item value="FF_FS_LOCK"/>
 			<item value="buff"/>
 			<item value="dir_register"/>
 			<item value="ET_STREAM"/>
 			<item value="get_Dir_size"/>
 			<item value="cmd_reply_a203_to_a204"/>
-			<item value="run_cmd_a208"/>
-			<item value="C0D7"/>
 		</list>
 		<list key="replacehistory">
 			<item value="BYTE"/>

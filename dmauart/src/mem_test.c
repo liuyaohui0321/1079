@@ -1,6 +1,6 @@
 
 #include "xil_printf.h"
-#include "xil_io.h"
+//#include "xil_io.h"
 #include "mem_test.h"
 
 uint8_t mem_data_clr(uint32_t *Addr, uint32_t Words)
