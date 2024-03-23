@@ -791,7 +791,31 @@ uint8_t io_write(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 	 	full_wr_cnt = full_wr_cnt + 1;
 //		xil_printf("Have write full ddr area.full write cnt is %d.\n",full_wr_cnt);
 	}
-
+// Command Status
+	while (queue_rptr != queue_wptr)
+	{
+		sts = nhc_cmd_sts(0);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue2_rptr != queue2_wptr)
+	{
+		sts = nhc_cmd_sts(1);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue3_rptr != queue3_wptr)
+	{
+		sts = nhc_cmd_sts(2);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue4_rptr != queue4_wptr)
+	{
+		sts = nhc_cmd_sts(3);
+		if (sts == 3)
+			return sts;
+	}
 	return 0x02;
 }
 
@@ -948,7 +972,31 @@ uint8_t io_write2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, 
 	 	full_wr_cnt = full_wr_cnt + 1;
 //		xil_printf("Have write full ddr area.full write cnt is %d.\n",full_wr_cnt);
 	}
-
+// Command Status
+	while (queue_rptr != queue_wptr)
+	{
+		sts = nhc_cmd_sts(0);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue2_rptr != queue2_wptr)
+	{
+		sts = nhc_cmd_sts(1);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue3_rptr != queue3_wptr)
+	{
+		sts = nhc_cmd_sts(2);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue4_rptr != queue4_wptr)
+	{
+		sts = nhc_cmd_sts(3);
+		if (sts == 3)
+			return sts;
+	}
 	return 0x02;
 }
 // *********************************************************************************
@@ -1023,7 +1071,31 @@ uint8_t io_read(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, ui
 		full_rd_cnt = full_rd_cnt + 1;
 		xil_printf("Have read full ddr area.full read cnt is %d.\n",full_rd_cnt);
 	}
-
+// Command Status
+	while (queue_rptr != queue_wptr)
+	{
+		sts = nhc_cmd_sts(0);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue2_rptr != queue2_wptr)
+	{
+		sts = nhc_cmd_sts(1);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue3_rptr != queue3_wptr)
+	{
+		sts = nhc_cmd_sts(2);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue4_rptr != queue4_wptr)
+	{
+		sts = nhc_cmd_sts(3);
+		if (sts == 3)
+			return sts;
+	}
 	return 0x02;
 }
 
@@ -1099,7 +1171,31 @@ uint8_t io_read1(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		full_rd_cnt = full_rd_cnt + 1;
 		xil_printf("Have read full ddr area.full read cnt is %d.\n",full_rd_cnt);
 	}
-
+// Command Status
+	while (queue_rptr != queue_wptr)
+	{
+		sts = nhc_cmd_sts(0);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue2_rptr != queue2_wptr)
+	{
+		sts = nhc_cmd_sts(1);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue3_rptr != queue3_wptr)
+	{
+		sts = nhc_cmd_sts(2);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue4_rptr != queue4_wptr)
+	{
+		sts = nhc_cmd_sts(3);
+		if (sts == 3)
+			return sts;
+	}
 	return 0x02;
 }
 
@@ -1182,7 +1278,31 @@ uint8_t io_read2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		full_rd_cnt = full_rd_cnt + 1;
 		xil_printf("Have read full ddr area.full read cnt is %d.\n",full_rd_cnt);
 	}
-
+// Command Status
+	while (queue_rptr != queue_wptr)
+	{
+		sts = nhc_cmd_sts(0);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue2_rptr != queue2_wptr)
+	{
+		sts = nhc_cmd_sts(1);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue3_rptr != queue3_wptr)
+	{
+		sts = nhc_cmd_sts(2);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue4_rptr != queue4_wptr)
+	{
+		sts = nhc_cmd_sts(3);
+		if (sts == 3)
+			return sts;
+	}
 	return 0x02;
 }
 
@@ -1263,7 +1383,31 @@ uint8_t io_read3(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 		full_rd_cnt = full_rd_cnt + 1;
 		xil_printf("Have read full ddr area.full read cnt is %d.\n",full_rd_cnt);
 	}
-
+// Command Status
+	while (queue_rptr != queue_wptr)
+	{
+		sts = nhc_cmd_sts(0);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue2_rptr != queue2_wptr)
+	{
+		sts = nhc_cmd_sts(1);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue3_rptr != queue3_wptr)
+	{
+		sts = nhc_cmd_sts(2);
+		if (sts == 3)
+			return sts;
+	}
+	while (queue4_rptr != queue4_wptr)
+	{
+		sts = nhc_cmd_sts(3);
+		if (sts == 3)
+			return sts;
+	}
 	return 0x02;
 }
 // *********************************************************************************
