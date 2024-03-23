@@ -57554,3 +57554,11 @@ con
 12:38:35 INFO  : Restoring global repository preferences: 
 		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
 12:38:35 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
+13:11:06 INFO  : Registering command handlers for SDK TCF services
+13:11:06 INFO  : Launching XSCT server: xsct.bat -interactive C:\Users\liuyaohui\Desktop\0115_1x\temp_xsdb_launch_script.tcl
+13:11:07 INFO  : XSCT server has started successfully.
+13:11:07 INFO  : Successfully done setting XSCT server connection channel  
+13:11:07 INFO  : Successfully done setting SDK workspace  
+13:11:07 INFO  : Restoring global repository preferences: 
+		 E:\1079\ucos_v1_45\ucos_v1_45\ucos
+13:11:07 WARN  : Invalid repository path E:\1079\ucos_v1_45\ucos_v1_45\ucos.
