@@ -7417,9 +7417,10 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 	FRESULT res;
 	FIL *fsrc;// 将psrc文件复制到pdst文件
 	FIL *fdst;// fwmode写入模式 0:不覆盖原有文件 1:覆盖原有文件
-	u16 br=0;
-	u16 bw=0;
+	static u16 BW=0;
+	static u16 br=0;
 	u8 *fbuf=0;
+	uint64_t Size=0;
 //	fsrc=(FIL*)malloc(sizeof(FIL));//申请内存
 	fsrc=(FIL*)wjq_malloc_m(sizeof(FIL));//申请内存
 //	fdst=(FIL*)malloc(sizeof(FIL));
@@ -7436,15 +7437,34 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 			 fwmode=FA_CREATE_ALWAYS;   //覆盖
 	     res=f_open(fsrc,(const TCHAR*)psrc,FA_READ|FA_OPEN_EXISTING); //打开只读文件
 	     if(res==0)
+	    	   Size=fsrc->obj.objsize;
 	    	   res=f_open(fdst,(const TCHAR*)pdst,FA_WRITE|fwmode);
 			   if(res==0)
 			   {
 					while(res==0)
 				   {
 						res=f_read1(fsrc,fbuf,4096,(UINT*)&br);
-						if(res||br==0)break;
-						res=f_write(fdst,fbuf,(UINT)br,(UINT*)&bw);
-						if(res||bw<br)break;
+//						if(res||br==0)
+						if(res)
+						{
+							xil_printf("Read failed! Res=%d\r\n",res);
+							break;
+						}
+//						usleep(1000);
+						Size-=br;
+						res=f_write1(fdst,fbuf,(UINT)br,(UINT*)&BW);
+//						if(res||bw<br)
+						if(res)
+						{
+
+							xil_printf("Write failed! Res=%d\r\n",res);
+							break;
+						}
+						if(Size<=0)
+						{
+							xil_printf("here");
+							break;
+						}
 				   }
 				   f_close(fsrc);
 				   f_close(fdst);

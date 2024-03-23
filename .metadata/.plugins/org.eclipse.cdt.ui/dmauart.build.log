@@ -1,24 +1,6 @@
-21:28:03 **** Auto Build of configuration Debug for project dmauart ****
+15:37:58 **** Incremental Build of configuration Debug for project dmauart ****
 make all 
-'Building file: ../src/mem_test.c'
-'Invoking: MicroBlaze gcc compiler'
-mb-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/mem_test.o" -I../../dmauart_bsp/microblaze_1/include -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -ffunction-sections -fdata-sections -MMD -MP -MF"src/mem_test.d" -MT"src/mem_test.o" -o "src/mem_test.o" "../src/mem_test.c"
-'Finished building: ../src/mem_test.c'
-' '
-'Building target: dmauart.elf'
-'Invoking: MicroBlaze gcc linker'
-mb-gcc -Wl,-T -Wl,../src/lscript.ld -L../../dmauart_bsp/microblaze_1/lib -mlittle-endian -mcpu=v11.0 -mxl-soft-mul -Wl,--no-relax -Wl,--gc-sections -o "dmauart.elf"  ./src/fat/diskio.o ./src/fat/ff.o ./src/fat/ffsystem.o ./src/fat/ffunicode.o  ./src/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./src/7x_dma.o ./src/alloc.o ./src/check.o ./src/cmd.o ./src/main.o ./src/malloc.o ./src/mem_test.o ./src/nhc_amba.o ./src/platform.o ./src/simple_dma.o ./src/sys.o ./src/time.o ./src/uart.o ./src/uart_get.o ./src/xllfifo_polling_example.o ./src/xuartlite_intr_example.o ./src/xuartlite_polled_example.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
-'Finished building target: dmauart.elf'
-' '
-make --no-print-directory post-build
-mb-objcopy -O srec dmauart.elf dmauart.srec
-' '
-'Invoking: MicroBlaze Print Size'
-mb-size dmauart.elf  |tee "dmauart.elf.size"
-   text	   data	    bss	    dec	    hex	filename
- 471316	   1980	 203636	 676932	  a5444	dmauart.elf
-'Finished building: dmauart.elf.size'
-' '
+make: Nothing to be done for 'all'.
 
-21:28:07 Build Finished (took 4s.198ms)
+15:37:59 Build Finished (took 191ms)
 

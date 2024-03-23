@@ -2143,8 +2143,8 @@ int run_cmd_a205(StructMsg *pMsg)
 					if (cmd_str_2[x] == '\0') break;
 				}
 				xil_printf("%s %d  %s\r\n", __FUNCTION__, __LINE__,cmd_str_21);
-//				res=cmd_reply_a207(pMsg, cmd_str_21);
-				res=cmd_reply_a207(pMsg, "bcd");
+				res=cmd_reply_a207(pMsg, cmd_str_21);
+//				res=cmd_reply_a207(pMsg, "bcd");
 				if(res!=0)
 				{
 					xil_printf("Failed to get folder properties! res=%d\r\n",res);
