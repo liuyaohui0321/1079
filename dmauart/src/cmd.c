@@ -911,25 +911,6 @@ int run_cmd_a201(StructMsg *pMsg)
 	i=i+4;
 	temp=i;   // 9.7 LYH
 	xil_printf("%s %d  file_cmd:0x%x\r\n", __FUNCTION__, __LINE__,file_cmd);
-
-//	while(1)
-//	{
-//		a=(pMsg->MsgData[i++]|pMsg->MsgData[i++]<<8);
-//		if(a=='\0')  break;
-//		count++;
-//	}
-//	u8 *arr=(u8 *)wjq_malloc_t(sizeof(u8)*count*2);
-//
-//	for(int j=0;j<count*2;j++)
-//	{
-//		arr[j]=pMsg->MsgData[temp+j];
-//	}
-//
-//	for(int j=0;j<count;j++)
-//	{
-//		pMsg->MsgData[temp+2*j]=arr[2*(count-j-1)];
-//		pMsg->MsgData[temp+2*j+1]=arr[2*(count-j)-1];
-//	}
 	i+=2;   // 1.31改   客户在文件名后加了两个字节的标志位
 	for (x = 0; x < 1024; x++)
 	{
@@ -1270,15 +1251,15 @@ int run_cmd_a201(StructMsg *pMsg)
 				return -1;
 			}
 
-			CreateTimenode=GetCreateTimeNode(cmd_str_11);
-			strcpy(CreateTimenode.data.name,cmd_str_21);
-			ChangeTimenode=GetChangeTimeNode(cmd_str_11);
-			strcpy(ChangeTimenode.data.name,cmd_str_21);
-			AccessTimenode=GetAccessTimeNode(cmd_str_11);
-			strcpy(AccessTimenode.data.name,cmd_str_21);
-			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
-			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
-			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
+//			CreateTimenode=GetCreateTimeNode(cmd_str_11);
+//			strcpy(CreateTimenode.data.name,cmd_str_21);
+//			ChangeTimenode=GetChangeTimeNode(cmd_str_11);
+//			strcpy(ChangeTimenode.data.name,cmd_str_21);
+//			AccessTimenode=GetAccessTimeNode(cmd_str_11);
+//			strcpy(AccessTimenode.data.name,cmd_str_21);
+//			CreateTimeNode_TailInsert(CreateTimelist,CreateTimenode);//插入创建时间链表
+//			ChangeTimeNode_TailInsert(ChangeTimelist,ChangeTimenode);//插入修改时间链表
+//			AccessTimeNode_TailInsert(AccessTimelist,AccessTimenode);//插入访问时间链表
 //			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;
@@ -1310,12 +1291,12 @@ int run_cmd_a201(StructMsg *pMsg)
 				xil_printf("Copy Directory Failed! ret=%d\r\n", ret);
 			   	return -1;
 			}
-			cmd_str_11[temp]='\0';
-			ret = Dir_TimeNodeInsert(cmd_str_11,cmd_str_21);
-			if (ret != FR_OK) {
-				xil_printf("Insert Time Node Failed! ret=%d\r\n", ret);
-				return -1;
-			}
+//			cmd_str_11[temp]='\0';
+//			ret = Dir_TimeNodeInsert(cmd_str_11,cmd_str_21);
+//			if (ret != FR_OK) {
+//				xil_printf("Insert Time Node Failed! ret=%d\r\n", ret);
+//				return -1;
+//			}
 //			cmd_reply_a203_to_a201(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 			cmd_reply_a203(pMsg->PackNum,pMsg->HandType,pMsg->HandId,0x11);
 		break;

@@ -1273,11 +1273,13 @@ uint8_t io_read2(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 	//send_axis_ack_1(0x02,addr,len/2,sts);
 	//send_axis_ack_1(0x02,0x0,sts);
 //	xil_printf("send_axis_ack is ok\n");
+	/*
 	if (addr == DDR3_START_ADDR)
 	{
 		full_rd_cnt = full_rd_cnt + 1;
 		xil_printf("Have read full ddr area.full read cnt is %d.\n",full_rd_cnt);
 	}
+	*/ //3.25×¢ÊÍ by lyh
 // Command Status
 	while (queue_rptr != queue_wptr)
 	{
@@ -1378,11 +1380,13 @@ uint8_t io_read3(uint8_t nhc_num, uint32_t nsid, uint32_t addr, uint64_t slba, u
 	//send_axis_ack_1(0x02,addr,len/2,sts);
 	//send_axis_ack_1(0x02,0x0,sts);
 //	xil_printf("send_axis_ack is ok\n");
+	/*
 	if (addr == DDR3_START_ADDR)
 	{
 		full_rd_cnt = full_rd_cnt + 1;
 		xil_printf("Have read full ddr area.full read cnt is %d.\n",full_rd_cnt);
 	}
+	*/  // 3.25×¢ÊÍ by lyh
 // Command Status
 	while (queue_rptr != queue_wptr)
 	{

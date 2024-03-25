@@ -24,6 +24,8 @@
 #include "diskio.h"		/* Declarations of device I/O functions */
 #include "xil_cache.h"
 #define MAX_PATHNAME_DEPTH  512+1 //
+static bw=0;
+static br=0;
 /*--------------------------------------------------------------------------
 
    Module Private Definitions
@@ -7417,8 +7419,8 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 	FRESULT res;
 	FIL *fsrc;// 将psrc文件复制到pdst文件
 	FIL *fdst;// fwmode写入模式 0:不覆盖原有文件 1:覆盖原有文件
-	static u16 BW=0;
-	static u16 br=0;
+	bw=0;
+	br=0;
 	u8 *fbuf=0;
 	uint64_t Size=0;
 //	fsrc=(FIL*)malloc(sizeof(FIL));//申请内存
@@ -7426,7 +7428,8 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 //	fdst=(FIL*)malloc(sizeof(FIL));
 	fdst=(FIL*)wjq_malloc_m(sizeof(FIL));
 //	fbuf=(u8*)malloc(4096);
-	fbuf=(u8*)wjq_malloc_m(4096);
+//	fbuf=(u8*)wjq_malloc_m(4096);
+	fbuf=(u8*)(0x80000000);
 	if(fsrc==NULL||fdst==NULL||fbuf==NULL)
 		res= FR_INVALID_PARAMETER;//
 	else
@@ -7443,16 +7446,19 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 			   {
 					while(res==0)
 				   {
-						res=f_read1(fsrc,fbuf,4096,(UINT*)&br);
+//						res=f_read1(fsrc,fbuf,4096,(UINT*)&br);
+						res=f_read1(fsrc,fbuf,0x100000,(UINT*)&br);
 //						if(res||br==0)
 						if(res)
 						{
 							xil_printf("Read failed! Res=%d\r\n",res);
 							break;
 						}
-//						usleep(1000);
+//						f_close(fsrc);
 						Size-=br;
-						res=f_write1(fdst,fbuf,(UINT)br,(UINT*)&BW);
+//						usleep(1000);
+//						res=f_write1(fdst,fbuf,(UINT)br,(UINT*)&bw);
+						res=f_write1(fdst,fbuf,(UINT)br,(UINT*)&bw);
 //						if(res||bw<br)
 						if(res)
 						{
@@ -7460,12 +7466,15 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 							xil_printf("Write failed! Res=%d\r\n",res);
 							break;
 						}
+//						f_close(fdst);
 						if(Size<=0)
 						{
 							xil_printf("here");
 							break;
 						}
-				   }
+//						res=f_open(fsrc,(const TCHAR*)psrc,FA_READ|FA_OPEN_EXISTING);
+//						res=f_open(fdst,(const TCHAR*)pdst,FA_WRITE|fwmode);
+				   }		//	while
 				   f_close(fsrc);
 				   f_close(fdst);
 			   }
