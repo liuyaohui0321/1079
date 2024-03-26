@@ -7428,8 +7428,8 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 //	fdst=(FIL*)malloc(sizeof(FIL));
 	fdst=(FIL*)wjq_malloc_m(sizeof(FIL));
 //	fbuf=(u8*)malloc(4096);
-//	fbuf=(u8*)wjq_malloc_m(4096);
-	fbuf=(u8*)(0x80000000);
+//	fbuf=(u8*)wjq_malloc_m(4096);  // 3.25号注释 by lyh
+	fbuf=(u8*)(0x80000000);		   // 3.25号改  by lyh
 	if(fsrc==NULL||fdst==NULL||fbuf==NULL)
 		res= FR_INVALID_PARAMETER;//
 	else
@@ -7454,10 +7454,8 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 							xil_printf("Read failed! Res=%d\r\n",res);
 							break;
 						}
-//						f_close(fsrc);
+
 						Size-=br;
-//						usleep(1000);
-//						res=f_write1(fdst,fbuf,(UINT)br,(UINT*)&bw);
 						res=f_write1(fdst,fbuf,(UINT)br,(UINT*)&bw);
 //						if(res||bw<br)
 						if(res)
@@ -7466,25 +7464,19 @@ FRESULT my_fcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
 							xil_printf("Write failed! Res=%d\r\n",res);
 							break;
 						}
-//						f_close(fdst);
 						if(Size<=0)
 						{
 							xil_printf("here");
 							break;
 						}
-//						res=f_open(fsrc,(const TCHAR*)psrc,FA_READ|FA_OPEN_EXISTING);
-//						res=f_open(fdst,(const TCHAR*)pdst,FA_WRITE|fwmode);
 				   }		//	while
 				   f_close(fsrc);
 				   f_close(fdst);
 			   }
 	}
-//		 free(fsrc);
-//		 free(fdst);
-//		 free(fbuf);
 		 wjq_free_m(fsrc);
 		 wjq_free_m(fdst);
-		 wjq_free_m(fbuf);
+//		 wjq_free_m(fbuf);
 		 return res;
 }
 
@@ -7578,37 +7570,39 @@ FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode)
         return res;
 }
 
-//list all the file and sub_directory of the directory
-FRESULT scan_files(
-	char* path        /* Start node to be scanned (***also used as work area***) */
-)
-{
-		FRESULT res;
-		DIR dir;
-		UINT i;
-		static FILINFO fno;
 
-		res = f_opendir(&dir, path);                       /* Open the directory */
-		if (res == FR_OK) {
-			for (;;) {
-				res = f_readdir(&dir, &fno);                   /* Read a directory item */
-				if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
-				if (fno.fattrib & AM_DIR) {                    /* It is a directory */
-					i = strlen(path);
-					sprintf(&path[i], "/%s", fno.fname);
-					res = scan_files(path);                    /* Enter the directory */
-					if (res != FR_OK) break;
-					xil_printf("directory name is:%s\n", path);
-					path[i] = 0;
-				}
-				else {                                       /* It is a file. */
-					xil_printf("file name is:%s/%s\n", path, fno.fname);
-				}
-			}
-			f_closedir(&dir);
-		}
-		return res;
-}
+//本此项目未使用到该功能，3.26号注释 by lyh
+////list all the file and sub_directory of the directory
+//FRESULT scan_files(
+//	char* path        /* Start node to be scanned (***also used as work area***) */
+//)
+//{
+//		FRESULT res;
+//		DIR dir;
+//		UINT i;
+//		static FILINFO fno;
+//
+//		res = f_opendir(&dir, path);                       /* Open the directory */
+//		if (res == FR_OK) {
+//			for (;;) {
+//				res = f_readdir(&dir, &fno);                   /* Read a directory item */
+//				if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
+//				if (fno.fattrib & AM_DIR) {                    /* It is a directory */
+//					i = strlen(path);
+//					sprintf(&path[i], "/%s", fno.fname);
+//					res = scan_files(path);                    /* Enter the directory */
+//					if (res != FR_OK) break;
+//					xil_printf("directory name is:%s\n", path);
+//					path[i] = 0;
+//				}
+//				else {                                       /* It is a file. */
+//					xil_printf("file name is:%s/%s\n", path, fno.fname);
+//				}
+//			}
+//			f_closedir(&dir);
+//		}
+//		return res;
+//}
 
 //节点入队，采用尾插法
 void List_TailInsert(LinkedList List,Node node)

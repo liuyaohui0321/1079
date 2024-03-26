@@ -28,7 +28,8 @@ _ALLOC_FIRST_FIT_ 首次适应法
 #endif
 
 #ifdef ALLOC_USE_ARRAY
-#define AllocArraySize (76*1024)
+//#define AllocArraySize (76*1024)
+#define AllocArraySize (4*76*1024)   //3.26改大 by lyh
 
 //__align(4) //保证内存池四字节对齐
 __attribute__ ((aligned(4))) //保证内存池四字节对齐

@@ -358,8 +358,8 @@ typedef struct Node
 
 FRESULT my_fcopy (TCHAR *psrc,TCHAR *pdst,u8 fwmode);        				/* copy file */
 FRESULT my_dcopy(TCHAR *psrc,TCHAR *pdst,u8 fwmode);      					/* copy directory */
-FRESULT scan_files(TCHAR* path);											/* 递归扫描目录下所有文件和文件夹，并打印 */
-//FRESULT delete_dir (TCHAR* path);                         				/* delete directory */
+//FRESULT scan_files(TCHAR* path);											/* 递归扫描目录下所有文件和文件夹，并打印 */
+FRESULT delete_dir (BYTE * path);                         				/* delete directory */
 void List_TailInsert(LinkedList List,Node node);							/* 尾插入队列 */
 void DestroyList(LinkedList List);											/* 销毁队列 */
 FRESULT record_struct_of_Dir_and_File(BYTE *path,LinkedList List);
